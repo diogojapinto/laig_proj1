@@ -7,7 +7,7 @@
 #include <exception>
 
 #include "CGFapplication.h"
-#include "DemoScene.h"
+#include "TPscene.h"
 
 using std::cout;
 using std::exception;
@@ -20,17 +20,17 @@ int main(int argc, char* argv[]) {
 	try {
 		app.init(&argc, argv);
 
-		app.setScene(new DemoScene());
+		app.setScene(new TPscene());
 		app.setInterface(new CGFinterface());
 		
 		app.run();
 	}
 	catch(GLexception& ex) {
-		cout << "Error: " << ex.what();
+		cout << "Erro: " << ex.what();
 		return -1;
 	}
 	catch(exception& ex) {
-		cout << "Unexpected error: " << ex.what();
+		cout << "Erro inesperado: " << ex.what();
 		return -1;
 	}
 
