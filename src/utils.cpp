@@ -14,7 +14,7 @@ double* getNewellsMethod(std::vector<double> x, std::vector<double> y, std::vect
 		return NULL;
 
 	double *normal = new double[3];
-	int nVertices = x.size();
+	unsigned int nVertices = x.size();
 	
 	for (unsigned int i = 0; i < 3; i++)
 	{
@@ -48,7 +48,7 @@ double* getNewellsMethodSecondForm(std::vector<double> x, std::vector<double> y,
 
 	std::vector <double> normais_x, normais_y, normais_z;
 	double *normal = new double[3];
-	int nVertices = x.size();
+	unsigned int nVertices = x.size();
 	
 	for (unsigned int i = 0; i < 3; i++)
 	{
@@ -91,7 +91,7 @@ double* getNewellsMethodAlternative(std::vector<double> x, std::vector<double> y
 		return NULL;
 
 	double *normal = new double[3];
-	int nVertices = x.size();
+	unsigned int nVertices = x.size();
 	
 	for (unsigned int i = 0; i < 3; i++)
 	{
