@@ -144,6 +144,7 @@ void LightingScene::display() {
 	glPushMatrix();
 	glTranslatef(10.0, 0.0, 10.0);
 	glScalef(20.0, 1.0, 20.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -153,6 +154,7 @@ void LightingScene::display() {
 	glTranslated(5.5, 2.5, 1.0);
 	glScaled(5.0, 5.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -160,6 +162,7 @@ void LightingScene::display() {
 	glTranslated(14.5, 2.5, 1.0);
 	glScaled(5.0, 5.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -167,6 +170,7 @@ void LightingScene::display() {
 	glTranslated(5.5, 6.5, 1.0);
 	glScaled(5.0, 3.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -174,6 +178,7 @@ void LightingScene::display() {
 	glTranslated(10.5, 6.5, 1.0);
 	glScaled(5.0, 3.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -181,6 +186,7 @@ void LightingScene::display() {
 	glTranslated(14.5, 6.5, 1.0);
 	glScaled(5.0, 3.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -190,6 +196,7 @@ void LightingScene::display() {
 	glTranslated(10.0, 2.5, 1.0);
 	glScaled(4.0, 5.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -199,6 +206,7 @@ void LightingScene::display() {
 	glTranslatef(10.0, 8.6, 0.0);
 	glRotatef(30.0, 1.0, 0.0, 0.0);
 	glScalef(15.0, 1.0, 5.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -209,6 +217,7 @@ void LightingScene::display() {
 	glScalef(1.0, 8.0, 1.0);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -226,6 +235,7 @@ void LightingScene::display() {
 	glScalef(1.0, 8.0, 1.0);
 	glRotatef(-90.0, 0.0, 1.0, 0.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -243,6 +253,7 @@ void LightingScene::display() {
 	glTranslatef(1.5, 1.5, 0.0);
 	glScalef(3.0, 3.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -250,6 +261,7 @@ void LightingScene::display() {
 	glTranslatef(18.5, 1.5, 0.0);
 	glScalef(3.0, 3.0, 1.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -258,6 +270,7 @@ void LightingScene::display() {
 	glScalef(1.0, 3.0, 20.0);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -266,6 +279,7 @@ void LightingScene::display() {
 	glScalef(1.0, 3.0, 20.0);
 	glRotatef(-90.0, 0.0, 1.0, 0.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(-90.0,1.0,0.0,0.0);
 	rect->draw();
 	glPopMatrix();
 
