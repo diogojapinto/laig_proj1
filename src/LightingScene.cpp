@@ -2,22 +2,14 @@
 #include "CGFaxis.h"
 #include "CGFapplication.h"
 
-#include "Plane.h"
-
 #include <math.h>
 
-float pi = acos(-1.0);
-float deg2rad = pi / 180.0;
-
-#define BOARD_HEIGHT 6.0
-#define BOARD_WIDTH 6.4
-
 // Positions for two lights
-float light0_pos[4] = { 4, 6.0, 5.0, 1.0 };
-float light1_pos[4] = { 10.5, 6.0, 5.0, 1.0 };
-
-float light2_pos[4] = { 10.5, 10.0, 9.0, 1.0 };
-float light3_pos[4] = { 4, 10.0, 9.0, 1.0 };
+float light0_pos[4] = { 5.5,6.0,1.1, 1.0 };
+float light1_pos[4] = { 14.5,6.0,1.1, 1.0 };
+float light2_pos[4] = { 6.5,8.0,22.0,1.0 };
+float light3_pos[4] = { 13.5,8.0,22.0, 1.0 };
+float light4_pos[4] = { 30.0, 30.0,30.0, 1.0 };
 
 // Global ambient light (do not confuse with ambient component of individual lights)
 float globalAmbientLight[4] = { 0, 0, 0, 0 };
@@ -50,8 +42,6 @@ float shininessR = 50.f;
 float ambientNull[4] = { 0, 0, 0, 1 };
 float yellow[4] = { 1, 1, 0, 1 };
 
-Plane p(100);
-
 void LightingScene::init() {
 	// Enables lighting computations
 	glEnable(GL_LIGHTING);
@@ -70,36 +60,36 @@ void LightingScene::init() {
 	light0->setAmbient(ambientNull);
 	light0->setSpecular(yellow);
 
-	//light0->disable();
-	light0->enable();
+	light0->disable();
+	//light0->enable();
 
 	light1 = new CGFlight(GL_LIGHT1, light1_pos);
 	light1->setAmbient(ambientNull);
 
-	//light1->disable();
-	light1->enable();
+	light1->disable();
+	//light1->enable();
 
 	light2 = new CGFlight(GL_LIGHT2, light2_pos);
 	light2->setAmbient(ambientNull);
-	light2->setKc(0);
-	light2->setKl(1.0);
-	light2->setKq(0);
 
 	//light2->disable();
 	light2->enable();
 
 	light3 = new CGFlight(GL_LIGHT3, light3_pos);
 	light3->setAmbient(ambientNull);
-	light3->setSpecular(yellow);
-	light3->setKc(0);
-	light3->setKl(0);
-	light3->setKq(0.2);
 
-	//light3->disable();
 	light3->enable();
+
+
+	light4 = new CGFlight(GL_LIGHT4, light4_pos);
+	light4->setAmbient(ambientNull);
+	light4->disable();
 
 	rect = new MyRectangle();
 	tri = new MyTriangle();
+	cyl = new MyCylinder();
+	sph = new MySphere();
+	tor = new MyTorus();
 
 	house_walls_appearence = new CGFappearance(ambHW, difHW, specHW,
 			shininessHW);
@@ -111,7 +101,7 @@ void LightingScene::init() {
 	door_appearence = new CGFappearance(ambD, difD, specD, shininessD);
 	door_appearence->setTexture("../data/door.jpg");
 	roof_appearence = new CGFappearance(ambR, difR, specR, shininessR);
-	//roof_appearence->setTexture("../data/roof.jpg");
+	roof_appearence->setTexture("../data/rooftop.jpg");
 
 	glShadeModel(GL_SMOOTH);
 }
@@ -271,6 +261,97 @@ void LightingScene::display() {
 	rect->draw();
 	glPopMatrix();
 
+	//Draw Table
+
+	glPushMatrix();
+	glTranslatef(4.0, 2.0, 10.0);
+	glScaled(5.0, 0.25, 5.0);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(4.0, 0.86, 10.0);
+	glScaled(1.5, 2.0, 1.5);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	// draw tree
+
+	glPushMatrix();
+	glTranslatef(16.0, 2.5, 13);
+	glScalef(2.0, 5.0, 2.0);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(16.0, 6.2, 13);
+	glScalef(9.0, 3.0, 9.0);
+	sph->draw();
+	glPopMatrix();
+
+	// draw swing
+	glPushMatrix();
+	glTranslatef(12.5, 4, 13.0);
+	glScaled(0.08, 5.0, 0.08);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(14.0, 4, 13.0);
+	glScaled(0.08, 5.0, 0.08);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(13.25,1.7,13);
+	glScalef(0.8,0.8,0.8);
+	glRotatef(90,1.0,0.0,0.0);
+	tor->draw();
+	glPopMatrix();
+
+	// draw light1
+	glPushMatrix();
+	glTranslatef(6.5, 4, 22.0);
+	glScaled(0.4,8.0,0.4);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(6.5, 8.0, 22.0);
+	glScalef(0.4,0.4,0.4);
+	glRotatef(90,1.0,0.0,0.0);
+	tor->draw();
+	glPopMatrix();
+
+
+	// draw light2
+	glPushMatrix();
+	glTranslatef(13.5, 4, 22.0);
+	glScaled(0.4,8.0,0.4);
+	glTranslated(0.0,-0.5,0.0);
+	glRotatef(-90,1.0,0.0,0.0);
+	cyl->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(13.5, 8.0, 22.0);
+	glScalef(0.4,0.4,0.4);
+	glRotatef(90,1.0,0.0,0.0);
+	tor->draw();
+	glPopMatrix();
+
 	// ---- END Primitive drawing section
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
@@ -282,6 +363,8 @@ void LightingScene::display() {
 LightingScene::~LightingScene() {
 	delete (light0);
 	delete (light1);
+	delete (light3);
+	delete (light4);
 	delete (house_walls_appearence);
 	delete (floor_appearence);
 	delete (fence_appearence);
@@ -289,5 +372,7 @@ LightingScene::~LightingScene() {
 	delete (roof_appearence);
 	delete (rect);
 	delete (tri);
-
+	delete (cyl);
+	delete (sph);
+	delete (tor);
 }
