@@ -11,6 +11,7 @@
 #include "MyPrimitive.h"
 
 class MyRectangle: public MyPrimitive {
+	int num_divisions;
 public:
 	MyRectangle();
 	void draw();
