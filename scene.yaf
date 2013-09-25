@@ -1,0 +1,349 @@
+<yaf>
+
+    <!-- bloco de configuracoes globais -->
+    <!-- a declaracao dos atributos deste bloco e' obrigatoria -->
+    <!-- Valores para draw mode: "fill" , "line", "point" -->
+    <!-- Valores para shading: "flat", "gouraud" ) -->
+    <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
+    <!-- Valores para cullorder : "CCW" ou "CW" -->
+    <globals background="0.25 0.73 0.92 1" drawmode="fill" shading="gouraud" cullface="back" cullorder="CCW" />
+    
+    <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial -->
+    <cameras initial="ss" >
+        <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
+
+        <perspective id="ss" near="ff" far="ff" angle="ff" pos="ff ff ff" target="ff ff ff" />
+        <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />
+
+    </cameras>
+  
+
+    <!-- bloco de iluminacao; segue os parametros do OpenGL -->
+    <lighting doublesided="true" local="true" <-????? enabled="true" ambient="0.0 0.0 0.0 0.0" >
+             <!-- Deve existir pelo menos um dos seguintes blocos: omin ou spot -->
+            <!-- Os identificadores "id" nao podem ser repetidos -->
+            <omni id="light0" enabled="false"
+                location="5.5 6.0 1.1"
+                ambient="0.0 0.0 0.0 1.0"
+                diffuse="ff ff ff ff"
+                specular="1.0 1.0 0.0 1.0"
+            />
+
+            <omni id="light1" enabled="false"
+                location="14.5 6.0 1.1"
+                ambient="0.0 0.0 0.0 1.0"
+                diffuse="ff ff ff ff" 
+                specular="ff ff ff ff"
+            />
+
+            <omni id="light2" enabled="enable"
+                location="6.5 8.0 22.0"
+                ambient="0.0 0.0 0.0 1.0"
+                diffuse="ff ff ff ff" 
+                specular="ff ff ff ff"
+            />
+
+            <omni id="light3" enabled="enable"
+                location="13.5 8.0 22.0"
+                ambient="0.0 0.0 0.0 1.0"
+                diffuse="ff ff ff ff" 
+                specular="ff ff ff ff"
+            />
+
+            <omni id="light4" enabled="false"
+                location="30.0 30.0 30.0"
+                ambient="0.0 0.0 0.0 1.0"
+                diffuse="ff ff ff ff" 
+                specular="ff ff ff ff"
+            />
+
+    </lighting>
+
+    <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+    <textures>       
+          <texture id="bush" file="bush.jpg" />
+          <texture id="door" file="door.jpg" />
+          <texture id="grass" file="grass.jpg" />
+          <texture id="lamp" file="lamp.jpg" />
+          <texture id="post" file="post.jpeg" />
+          <texture id="rooftop" file="rooftop.jpg" />
+          <texture id="rope" file="rope.png" />
+          <texture id="tableleg" file="tableleg.jpg" />
+          <texture id="tabletop" file="tabletop.jpg" />
+          <texture id="tire" file="tire.jpg" />
+          <texture id="tree" file="tree.jpg" />
+          <texture id="treetop" file="treetop.jpg" />
+          <texture id="wall" file="wall.jpg" />
+    </textures>
+
+    <!-- bloco de materiais; -->
+    <appearances>
+        <!-- deve existir um ou mais blocos "appearance" -->
+        <!-- IMPORTANTE: -->
+        <!--   textureref, texlength_s e textlength_t sao atributos -->
+        <!--   opcionais se for usada uma textura. -->
+        <!--   ver topico 'Notas finais' no enunciado sobre os -->
+        <!--   parametros texlength_...) --> 
+        <appearance id="house_walls_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="wall"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="floor_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="grass"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="fence_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="bush"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="door_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="door"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="roof_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="rooftop"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="table_top_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="tabletop"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="table_leg_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="tableleg"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="tree_trunk_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="tree"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="tree_leafs_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="treetop"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="rope_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="rope"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="swing_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="tire"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="light_body_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="post"
+            texlength_s="ff"
+            texlength_t="ff" />
+
+        <appearance id="light_bulb_appearence"
+            emissive="ff ff ff ff"
+            ambient="ff ff ff ff"
+            diffuse="ff ff ff ff"
+            specular="ff ff ff ff"
+            shininess="ff"
+            textureref="lamp"
+            texlength_s="ff"
+            texlength_t="ff" />
+    </appearances>
+
+    <!-- bloco do grafo; "rootid" identifica o no de raiz -->
+    <graph rootid="scene">
+
+        <!-- tem de existir, pelo menos, um bloco "node" -->
+        <node id="scene">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+                              
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="home" />
+                <noderef id="garden" />
+                <noderef id="street" />
+
+            </children>
+
+        <node id="home">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+                              
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wall" />
+                <noderef id="door" />
+
+            </children>
+
+        </node>
+
+        <node id="wall">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+                         
+            <appearanceref id="house_walls_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="section1" />
+                <noderef id="section2" />
+                <noderef id="section3" />
+                <noderef id="section4" />
+                <noderef id="section5" />
+
+            </children>
+
+        </node>
+
+        <node id="section1">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="90" />
+                <scale factor="5.0 5.0 1.0" />
+                <translate to="5.5 2.5 1.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <rectangle xy1="0.5 0.5" xy2="0.5 0.5" />
+
+            </children>
+
+        </node>
+
+        <node id="section2">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="90" />
+                <scale factor="5.0 5.0 1.0" />
+                <translate to="5.5 2.5 1.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+
+            </children>
+
+        </node>
+
+        <!-- tem de existir, pelo menos, um bloco "node" -->
+        <node id="ss">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <!-- deve conter transformacoes explicitas usando as instrucoes seguintes sem limite nem ordem -->
+                <!-- ex: bloco transforms pode ficar sem conteudo -->
+                <!-- ex: bloco transforms pode ser R,T (nao tem S) -->
+                <!-- ex: bloco transforms pode ser R,S,T,S -->
+                <translate to="ff ff ff" />
+                <rotate axis="ee" angle="ff" />
+                <scale factor="ff ff ff" />
+            </transforms>
+          
+            <!-- declaracao da aparencia a utilizar (pode ser omitida): -->
+            <!-- a) se declarada sobrepoe-se 'a aparencia do "pai" -->
+            <!-- b) se omitida, o no' mantem (herda) a aparencia do "pai" -->
+
+            <appearanceref id="ss" />
+                              
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <!-- deve existir no minimo uma primitiva, ou uma referencia a outros nos -->
+                <!-- podem existir varias primitivas e/ou referencias a outros nos -->
+
+                <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
+                <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
+                <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->            
+                <rectangle xy1="ff ff" xy2="ff ff" />
+                <triangle xyz1="ff ff ff" xyz2="ff ff ff" xyz3="ff ff ff" />
+                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" />      <!-- deve ter topos -->
+                <sphere radius="ff" slices="ii" stacks="ii" />
+                <torus inner="ff" outer="ff" slices="ii" loops="ii" />
+               
+                <!-- Referencia a outros elementos do grafo -->
+                <!-- (repetir o nº de vezes necessario) -->
+                <!-- LEMBRANDO: qualquer no' pode ser referenciado previamente 'a sua declaracao; isto -->
+                <!--            é, a ordem pela qual os nós são declarados é irrelevante -->
+
+                <noderef id="ss" />
+
+            </children>
+        </node>
+    </graph>
+</yaf> 
