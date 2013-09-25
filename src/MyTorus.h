@@ -9,12 +9,15 @@
 #define MYTORUS_H_
 
 #include "MyPrimitive.h"
+#include "CGFapplication.h"
 
 class MyTorus: public MyPrimitive {
 public:
 	MyTorus();
 	virtual ~MyTorus();
 	void draw();
+protected:
+	GLUquadric *q;
 };
 
 #endif /* MYTORUS_H_ */

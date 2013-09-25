@@ -6,17 +6,16 @@
  */
 
 #include "MySphere.h"
-#include "CGFapplication.h"
 
 MySphere::MySphere() {
-	// TODO Auto-generated constructor stub
-
+	q = gluNewQuadric();
+	gluQuadricTexture(q, true);
 }
 
 MySphere::~MySphere() {
-	// TODO Auto-generated destructor stub
+	gluDeleteQuadric(q);
 }
 
 void MySphere::draw() {
-	glutSolidSphere(0.5,10,10);
+	gluSphere(q, 0.5, 10, 10);
 }

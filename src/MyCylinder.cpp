@@ -14,6 +14,7 @@ float deg2rad = pi / 180.0;
 MyCylinder::MyCylinder() {
 
 	q = gluNewQuadric();
+	gluQuadricTexture(q,true);
 
 }
 
@@ -49,11 +50,13 @@ void MyCylinder::drawCircle() {
 	glBegin(GL_TRIANGLE_STRIP);
 
 		for (int i=0; i <= 10; i++) {
-			glVertex3f(cos(((i * ang_slice) + 90.0) * deg2rad) / 2.0, 0.0, sin(((i * ang_slice) + 90.0) * deg2rad) / 2.0);
+			float x = cos(((i * ang_slice) + 90.0) * deg2rad) / 2.0;
+			float y = sin(((i * ang_slice) + 90.0) * deg2rad) / 2.0;
+			glTexCoord2f(x + 0.5, y+ 0.5);
+			glVertex3f(x, 0.0, y);
+			glTexCoord2f(0.5,0.5);
 			glVertex3f(0.0,0.0,0.0);
 		}
-
 	glEnd();
-
 }
 

@@ -5,42 +5,31 @@
 #include <math.h>
 
 // Positions for two lights
-float light0_pos[4] = { 5.5,6.0,1.1, 1.0 };
-float light1_pos[4] = { 14.5,6.0,1.1, 1.0 };
-float light2_pos[4] = { 6.5,8.0,22.0,1.0 };
-float light3_pos[4] = { 13.5,8.0,22.0, 1.0 };
-float light4_pos[4] = { 30.0, 30.0,30.0, 1.0 };
+float light0_pos[4] = { 5.5, 6.0, 1.1, 1.0 };
+float light1_pos[4] = { 14.5, 6.0, 1.1, 1.0 };
+float light2_pos[4] = { 6.5, 8.0, 22.0, 1.0 };
+float light3_pos[4] = { 13.5, 8.0, 22.0, 1.0 };
+float light4_pos[4] = { 30.0, 30.0, 30.0, 1.0 };
 
 // Global ambient light (do not confuse with ambient component of individual lights)
 float globalAmbientLight[4] = { 0, 0, 0, 0 };
 
-float ambHW[3] = { 0.2, 0.2, 0.2 };
-float difHW[3] = { 1.0, 0.81, 0.0 };
-float specHW[3] = { 0.1, 0.1, 0.1 };
-float shininessHW = 20.f;
+float ambH[3] = { 0.8, 0.8, 0.8 };
+float difH[3] = { 0.7, 0.7, 0.7 };
+float specH[3] = { 0.1, 0.1, 0.1 };
+float shininessH = 20.f;
 
-float ambFl[3] = { 0.2, 0.2, 0.2 };
-float difFl[3] = { 0.0, 0.82, 0.0 };
-float specFl[3] = { 0.3, 0.3, 0.3 };
-float shininessFl = 40.f;
+float ambDif[3] = { 0.4, 0.4, 0.4 };
+float difDif[3] = { 0.8, 0.8, 0.8 };
+float specDif[3] = { 0.3, 0.3, 0.3 };
+float shininessDif = 60.f;
 
-float ambFe[3] = { 0.2, 0.2, 0.2 };
-float difFe[3] = { 0.0, 0.41, 0.0 };
-float specFe[3] = { 0.2, 0.2, 0.2 };
-float shininessFe = 30.f;
-
-float ambD[3] = { 0.2, 0.2, 0.2 };
-float difD[3] = { 0.82, 0.41, 0.0 };
-float specD[3] = { 0.1, 0.1, 0.1 };
-float shininessD = 20.f;
-
-float ambR[3] = { 0.2, 0.2, 0.2 };
-float difR[3] = { 0.9, 0.0, 0.0 };
-float specR[3] = { 0.5, 0.5, 0.5 };
-float shininessR = 50.f;
+float ambSpec[3] = { 0.4, 0.4, 0.4 };
+float difSpec[3] = { 0.6, 0.6, 0.6 };
+float specSpec[3] = { 0.8, 0.8, 0.8 };
+float shininessSpec = 120.f;
 
 float ambientNull[4] = { 0, 0, 0, 1 };
-float yellow[4] = { 1, 1, 0, 1 };
 
 void LightingScene::init() {
 	// Enables lighting computations
@@ -58,7 +47,6 @@ void LightingScene::init() {
 
 	light0 = new CGFlight(GL_LIGHT0, light0_pos);
 	light0->setAmbient(ambientNull);
-	light0->setSpecular(yellow);
 
 	light0->disable();
 	//light0->enable();
@@ -80,7 +68,6 @@ void LightingScene::init() {
 
 	light3->enable();
 
-
 	light4 = new CGFlight(GL_LIGHT4, light4_pos);
 	light4->setAmbient(ambientNull);
 	light4->disable();
@@ -91,17 +78,38 @@ void LightingScene::init() {
 	sph = new MySphere();
 	tor = new MyTorus();
 
-	house_walls_appearence = new CGFappearance(ambHW, difHW, specHW,
-			shininessHW);
+	house_walls_appearence = new CGFappearance(ambH, difH, specH, shininessH);
 	house_walls_appearence->setTexture("../data/wall.jpg");
-	floor_appearence = new CGFappearance(ambFl, difFl, specFl, shininessFl);
+	floor_appearence = new CGFappearance(ambDif, difDif, specDif, shininessDif);
 	floor_appearence->setTexture("../data/grass.jpg");
-	fence_appearence = new CGFappearance(ambFe, difFe, specFe, shininessFe);
+	fence_appearence = new CGFappearance(ambDif, difDif, specDif, shininessDif);
 	fence_appearence->setTexture("../data/bush.jpg");
-	door_appearence = new CGFappearance(ambD, difD, specD, shininessD);
+	door_appearence = new CGFappearance(ambH, difH, specH, shininessH);
 	door_appearence->setTexture("../data/door.jpg");
-	roof_appearence = new CGFappearance(ambR, difR, specR, shininessR);
+	roof_appearence = new CGFappearance(ambH, difH, specH, shininessH);
 	roof_appearence->setTexture("../data/rooftop.jpg");
+	table_top_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
+			shininessSpec);
+	table_top_appearence->setTexture("../data/tabletop.jpg");
+	table_leg_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
+			shininessSpec);
+	table_leg_appearence->setTexture("../data/tableleg.jpg");
+	tree_trunk_appearence = new CGFappearance(ambDif, difDif, specDif,
+			shininessDif);
+	tree_trunk_appearence->setTexture("../data/tree.jpg");
+	tree_leafs_appearence = new CGFappearance(ambDif, difDif, specDif,
+			shininessDif);
+	tree_leafs_appearence->setTexture("../data/treetop.jpeg");
+	rope_appearence = new CGFappearance(ambDif, difDif, specDif, shininessDif);
+	rope_appearence->setTexture("../data/rope.png");
+	swing_appearence = new CGFappearance(ambDif, difDif, specDif, shininessDif);
+	swing_appearence->setTexture("../data/tire.jpg");
+	light_body_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
+			shininessSpec);
+	//light_body_appearence->setTexture("../data/post.jpeg");
+	light_bulb_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
+			shininessSpec);
+	//light_bulb_appearence->setTexture("../data/lamp.jpg");
 
 	glShadeModel(GL_SMOOTH);
 }
@@ -266,16 +274,18 @@ void LightingScene::display() {
 	glPushMatrix();
 	glTranslatef(4.0, 2.0, 10.0);
 	glScaled(5.0, 0.25, 5.0);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	table_top_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(4.0, 0.86, 10.0);
 	glScaled(1.5, 2.0, 1.5);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	table_leg_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
@@ -284,14 +294,16 @@ void LightingScene::display() {
 	glPushMatrix();
 	glTranslatef(16.0, 2.5, 13);
 	glScalef(2.0, 5.0, 2.0);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	tree_trunk_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(16.0, 6.2, 13);
 	glScalef(9.0, 3.0, 9.0);
+	tree_leafs_appearence->apply();
 	sph->draw();
 	glPopMatrix();
 
@@ -299,56 +311,62 @@ void LightingScene::display() {
 	glPushMatrix();
 	glTranslatef(12.5, 4, 13.0);
 	glScaled(0.08, 5.0, 0.08);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	rope_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(14.0, 4, 13.0);
 	glScaled(0.08, 5.0, 0.08);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	rope_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(13.25,1.7,13);
-	glScalef(0.8,0.8,0.8);
-	glRotatef(90,1.0,0.0,0.0);
+	glTranslatef(13.25, 1.7, 13);
+	glScalef(0.8, 0.8, 0.8);
+	glRotatef(90, 1.0, 0.0, 0.0);
+	swing_appearence->apply();
 	tor->draw();
 	glPopMatrix();
 
 	// draw light1
 	glPushMatrix();
 	glTranslatef(6.5, 4, 22.0);
-	glScaled(0.4,8.0,0.4);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glScaled(0.4, 8.0, 0.4);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	light_body_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(6.5, 8.0, 22.0);
-	glScalef(0.4,0.4,0.4);
-	glRotatef(90,1.0,0.0,0.0);
+	glScalef(0.4, 0.4, 0.4);
+	glRotatef(90, 1.0, 0.0, 0.0);
+	light_bulb_appearence->apply();
 	tor->draw();
 	glPopMatrix();
-
 
 	// draw light2
 	glPushMatrix();
 	glTranslatef(13.5, 4, 22.0);
-	glScaled(0.4,8.0,0.4);
-	glTranslated(0.0,-0.5,0.0);
-	glRotatef(-90,1.0,0.0,0.0);
+	glScaled(0.4, 8.0, 0.4);
+	glTranslated(0.0, -0.5, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	light_body_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(13.5, 8.0, 22.0);
-	glScalef(0.4,0.4,0.4);
-	glRotatef(90,1.0,0.0,0.0);
+	glScalef(0.4, 0.4, 0.4);
+	glRotatef(90, 1.0, 0.0, 0.0);
+	light_bulb_appearence->apply();
 	tor->draw();
 	glPopMatrix();
 
@@ -370,6 +388,14 @@ LightingScene::~LightingScene() {
 	delete (fence_appearence);
 	delete (door_appearence);
 	delete (roof_appearence);
+	delete (table_top_appearence);
+	delete (table_leg_appearence);
+	delete (tree_trunk_appearence);
+	delete (tree_leafs_appearence);
+	delete (rope_appearence);
+	delete (swing_appearence);
+	delete (light_body_appearence);
+	delete (light_bulb_appearence);
 	delete (rect);
 	delete (tri);
 	delete (cyl);

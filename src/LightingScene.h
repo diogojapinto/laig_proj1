@@ -29,7 +29,9 @@ public:
 	MyTorus *tor;
 
 	CGFappearance *house_walls_appearence, *floor_appearence, *fence_appearence,
-				*door_appearence, *roof_appearence;
+				*door_appearence, *roof_appearence, *table_top_appearence, *table_leg_appearence,
+				*tree_trunk_appearence, *tree_leafs_appearence, *rope_appearence, *swing_appearence,
+				*light_body_appearence, *light_bulb_appearence;
 
 	~LightingScene();
 };
