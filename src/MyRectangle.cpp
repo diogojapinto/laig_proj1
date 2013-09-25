@@ -18,9 +18,23 @@ MyRectangle::~MyRectangle() {
 }
 
 void MyRectangle::draw() {
-	glNormal3f(0.0, 1.0, 0.0);
 	glPushMatrix();
-	glRotatef(-90.0,1.0,0.0,0.0);
-	glRectf(-0.5,-0.5,0.5,0.5);
+	glNormal3f(0.0, 1.0, 0.0);
+	glBegin(GL_TRIANGLES);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-0.5, 0.0, -0.5);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.5, 0.0, 0.5);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.5, 0.0, -0.5);
+	glEnd();
+	glBegin(GL_TRIANGLES);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.5, 0.0, 0.5);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.5, 0.0, 0.5);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.5, 0.0, -0.5);
+	glEnd();
 	glPopMatrix();
 }

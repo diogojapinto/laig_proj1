@@ -10,6 +10,10 @@ float deg2rad = pi / 180.0;
 
 CGFlight* light0;
 
+float difL0[4] = { 1.0, 1.0, 1.0, 1.0 };
+float specL0[4] = { 1.0, 1.0, 1.0, 1.0 };
+float ambientNull[4] = { 0.0, 0.0, 0.0, 1.0 };
+
 float ambHW[3] = { 0.2, 0.2, 0.2 };
 float difHW[3] = { 1.0, 0.81, 0.0 };
 float specHW[3] = { 0.1, 0.1, 0.1 };
@@ -46,20 +50,31 @@ void TPscene::init() {
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientLight); // Define ambient light
 
 	// Declares and enables a light
-	float light0_pos[4] = { 6.0, 4.0, 10.0, 1.0 };
+	float light0_pos[4] = { 6.0, 10.0, 10.0, 1.0 };
 	light0 = new CGFlight(GL_LIGHT0, light0_pos);
+	light0->setAmbient(ambientNull);
+	/*light0->setDiffuse(difL0);
+	 light0->setSpecular(specL0);
+	 light0->setKc(0.1);
+	 light0->setKl(0.1);
+	 light0->setKq(0.1);*/
 	light0->enable();
 
-	house_walls_appearence = new CGFappearance(ambHW,difHW,specHW,shininessHW);
-	floor_appearence = new CGFappearance(ambFl,difFl,specFl,shininessFl);
-	fence_appearence = new CGFappearance(ambFe,difFe,specFe,shininessFe);
-	door_appearence = new CGFappearance(ambD,difD,specD,shininessD);
-	roof_appearence = new CGFappearance(ambR,difR,specR,shininessR);
+	house_walls_appearence = new CGFappearance(ambHW, difHW, specHW,
+			shininessHW);
+	house_walls_appearence->setTexture("../data/wall.jpg");
+	floor_appearence = new CGFappearance(ambFl, difFl, specFl, shininessFl);
+	floor_appearence->setTexture("../data/grass.jpg");
+	fence_appearence = new CGFappearance(ambFe, difFe, specFe, shininessFe);
+	fence_appearence->setTexture("../data/bush.jpg");
+	door_appearence = new CGFappearance(ambD, difD, specD, shininessD);
+	door_appearence->setTexture("../data/door.jpg");
+	roof_appearence = new CGFappearance(ambR, difR, specR, shininessR);
+	//roof_appearence->setTexture("../data/door.jpg");
 
 	glEnable(GL_NORMALIZE);
 
-	glEnable(GL_SMOOTH);
-	glShadeModel(GL_SMOOTH);
+	glShadeModel(GL_FLAT);
 }
 
 void TPscene::display() {
@@ -126,8 +141,8 @@ void TPscene::display() {
 	// Draw door
 	door_appearence->apply();
 	glPushMatrix();
-	glTranslated(10.5, 2.5, 1.0);
-	glScaled(5.0, 5.0, 0.0);
+	glTranslated(10.0, 2.5, 1.0);
+	glScaled(4.0, 5.0, 0.0);
 	glRotatef(90, 1.0, 0.0, 0.0);
 	rect.draw();
 	glPopMatrix();
@@ -209,4 +224,13 @@ void TPscene::display() {
 	glPopMatrix();
 
 	glutSwapBuffers();
+}
+
+TPscene::~TPscene() {
+	delete(light0);
+	delete (house_walls_appearence);
+	delete (floor_appearence);
+	delete (fence_appearence);
+	delete(door_appearence);
+	delete(roof_appearence);
 }
