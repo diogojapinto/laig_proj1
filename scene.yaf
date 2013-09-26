@@ -243,6 +243,7 @@
 
                 <noderef id="wall" />
                 <noderef id="door" />
+                <noderef id="roof" />
 
             </children>
 
@@ -263,6 +264,10 @@
                 <noderef id="section3" />
                 <noderef id="section4" />
                 <noderef id="section5" />
+                <noderef id="section6" />
+                <noderef id="section7" />
+                <noderef id="section8" />
+                <noderef id="section9" />
 
             </children>
 
@@ -271,7 +276,6 @@
         <node id="section1">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="90" />
                 <scale factor="5.0 5.0 1.0" />
                 <translate to="5.5 2.5 1.0" />
             </transforms>
@@ -279,7 +283,7 @@
              <!-- bloco "children" obrigatorio -->
             <children>
 
-                <rectangle xy1="0.5 0.5" xy2="0.5 0.5" />
+                <noderef id="wallSquare" />
 
             </children>
 
@@ -288,9 +292,141 @@
         <node id="section2">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="90" />
                 <scale factor="5.0 5.0 1.0" />
-                <translate to="5.5 2.5 1.0" />
+                <translate to="14.5 2.5 1.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallSquare" />
+
+            </children>
+
+        </node>
+
+        <node id="section3">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="5.0 3.0 1.0" />
+                <translate to="5.5 6.5 1.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallSquare" />
+
+            </children>
+
+        </node>
+
+        <node id="section4">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="5.0 3.0 1.0" />
+                <translate to="10.5 6.5 1.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallSquare" />
+
+            </children>
+
+        </node>
+
+        <node id="section5">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="5.0 3.0 1.0" />
+                <translate to="14.5 6.5 1.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallSquare" />
+
+            </children>
+
+        </node>
+
+        <node id="section6">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="y" angle="90" />
+                <scale factor="1.0 8.0 1.0" />
+                <translate to="17.0 4.0 0.5" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallSquare" />
+
+            </children>
+
+        </node>
+
+        <node id="section7">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="y" angle="-90" />
+                <scale factor="1.0 8.0 1.0" />
+                <translate to="3.0 4.0 0.5" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallSquare" />
+
+            </children>
+
+        </node>
+
+        <node id="section8">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="90" />
+                <rotate axis="y" angle="90" />
+                <rotate axis="x" angle="90" />
+                <scale factor="1.0 0.6 1.0" />
+                <translate to="17.0 8.3 0.5" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallTriangle" />
+
+            </children>
+
+        </node>
+
+        <node id="section9">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="90" />
+                <rotate axis="y" angle="-90" />
+                <scale factor="1.0 0.6 1.0" />
+                <translate to="3.0 8.3 0.5" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="wallTriangle" />
+
+            </children>
+
+        </node>
+
+        <node id="wallSquare">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -298,6 +434,246 @@
 
                 <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
 
+            </children>
+
+        </node>
+
+        <node id="wallTriangle">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <triangle xyz1="-0.5 0.0 -0.5" xyz2="-0.5 0.0 0.5" xyz3="0.5 0.0 0.5" />
+
+            </children>
+
+        </node>
+
+        <node id="door">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="4.0 5.0 1.0" />
+                <translate to="10.0 2.5 1.0" />
+            </transforms>
+                         
+            <appearanceref id="door_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+
+            </children>
+
+        </node>
+
+        <node id="roof">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="-90" />
+                <scale factor="15.0 1.0 5.0" />
+                <rotate axis="x" angle="30" />
+                <translate to="10.0 8.6 0.0" />
+            </transforms>
+                         
+            <appearanceref id="roof_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                
+            </children>
+
+        </node>
+
+        <node id="garden">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+                              
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="brush" />
+                <noderef id="grass" />
+
+            </children>
+
+        </node>
+
+        <node id="brush">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+                         
+            <appearanceref id="fence_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="brush1" />
+                <noderef id="brush2" />
+                <noderef id="brush3" />
+                <noderef id="brush4" />
+                
+            </children>
+
+        </node>
+
+        <node id="brush1">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="3.0 3.0 1.0" />
+                <translate to="1.5 1.5 0.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="brushSquare" />
+            </children>
+
+        </node>
+
+        <node id="brush2">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="3.0 3.0 1.0" />
+                <translate to="18.5 1.5 0.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="brushSquare" />
+            </children>
+
+        </node>
+
+        <node id="brush3">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="y" angle="90" />
+                <scale factor="1.0 3.0 20.0" />
+                <translate to="0.0 1.5 10.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="brushSquare" />
+            </children>
+
+        </node>
+
+        <node id="brush4">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="y" angle="-90" />
+                <scale factor="1.0 3.0 20.0" />
+                <translate to="20.0 1.5 10.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="brushSquare" />
+            </children>
+
+        </node>
+
+        <node id="brushSquare">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+            </children>
+
+        </node>
+
+        <node id="grass">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="table" />
+                <noderef id="tree" />
+                <noderef id="grassSquare" />
+                
+            </children>
+
+        </node>
+
+        <node id="grassSquare">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="-90" />
+                <scale factor="20.0 1.0 20.0" />
+                <translate to="10.0 0.0 10.0" />
+            </transforms>
+
+            <appearanceref id="floor_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+            </children>
+
+        </node>
+
+        <node id="table">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+
+                <noderef id="tableTop" />
+                <noderef id="tableLeg" />
+                
+            </children>
+
+        </node>
+
+        <node id="tableTop">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="-90" />
+                <translate to="0.0 -0.5 0.0" />
+                <scale factor="5.0 0.25 5.0" />
+                <translate to="4.0 2.0 10.0" />
+            </transforms>
+
+            <appearanceref id="table_top_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <cylinder base="0.5" top="0.5" height="1" slices="10" stacks="10" />
+            </children>
+
+        </node>
+
+        <node id="tableLeg">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <rotate axis="x" angle="-90" />
+                <translate to="0.0 -0.5 0.0" />
+                <scale factor="1.5 2.0 1.5" />
+                <translate to="4.0 0.86 10.0" />
+            </transforms>
+
+            <appearanceref id="table_leg_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <cylinder base="0.5" top="0.5" height="1" slices="10" stacks="10" />
             </children>
 
         </node>
