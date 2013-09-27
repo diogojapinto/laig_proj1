@@ -277,8 +277,8 @@
         <node id="section1">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="5.0 5.0 1.0" />
                 <translate to="5.5 2.5 1.0" />
+                <scale factor="5.0 5.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -293,8 +293,8 @@
         <node id="section2">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="5.0 5.0 1.0" />
                 <translate to="14.5 2.5 1.0" />
+                <scale factor="5.0 5.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -309,8 +309,8 @@
         <node id="section3">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="5.0 3.0 1.0" />
                 <translate to="5.5 6.5 1.0" />
+                <scale factor="5.0 3.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -325,8 +325,8 @@
         <node id="section4">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="5.0 3.0 1.0" />
                 <translate to="10.5 6.5 1.0" />
+                <scale factor="5.0 3.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -341,8 +341,8 @@
         <node id="section5">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="5.0 3.0 1.0" />
                 <translate to="14.5 6.5 1.0" />
+                <scale factor="5.0 3.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -357,9 +357,9 @@
         <node id="section6">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="y" angle="90" />
-                <scale factor="1.0 8.0 1.0" />
                 <translate to="17.0 4.0 0.5" />
+                <scale factor="1.0 8.0 1.0" />
+                <rotate axis="y" angle="90" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -374,9 +374,9 @@
         <node id="section7">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="y" angle="-90" />
-                <scale factor="1.0 8.0 1.0" />
                 <translate to="3.0 4.0 0.5" />
+                <scale factor="1.0 8.0 1.0" />
+                <rotate axis="y" angle="-90" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -391,11 +391,11 @@
         <node id="section8">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
+                <translate to="17.0 8.3 0.5" />
+                <scale factor="1.0 0.6 1.0" />
                 <rotate axis="x" angle="90" />
                 <rotate axis="y" angle="90" />
                 <rotate axis="x" angle="90" />
-                <scale factor="1.0 0.6 1.0" />
-                <translate to="17.0 8.3 0.5" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -410,10 +410,10 @@
         <node id="section9">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="90" />
-                <rotate axis="y" angle="-90" />
-                <scale factor="1.0 0.6 1.0" />
                 <translate to="3.0 8.3 0.5" />
+                <scale factor="1.0 0.6 1.0" />
+                <rotate axis="y" angle="-90" />
+                <rotate axis="x" angle="90" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -456,8 +456,8 @@
         <node id="door">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="4.0 5.0 1.0" />
                 <translate to="10.0 2.5 1.0" />
+                <scale factor="4.0 5.0 1.0" />
             </transforms>
                          
             <appearanceref id="door_appearence" />
@@ -474,10 +474,10 @@
         <node id="roof">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="-90" />
-                <scale factor="15.0 1.0 5.0" />
-                <rotate axis="x" angle="30" />
                 <translate to="10.0 8.6 0.0" />
+                <rotate axis="x" angle="30" />
+                <scale factor="15.0 1.0 5.0" />
+                <rotate axis="x" angle="-90" />
             </transforms>
                          
             <appearanceref id="roof_appearence" />
@@ -528,8 +528,8 @@
         <node id="brush1">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="3.0 3.0 1.0" />
                 <translate to="1.5 1.5 0.0" />
+                <scale factor="3.0 3.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -542,8 +542,8 @@
         <node id="brush2">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <scale factor="3.0 3.0 1.0" />
                 <translate to="18.5 1.5 0.0" />
+                <scale factor="3.0 3.0 1.0" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -556,9 +556,9 @@
         <node id="brush3">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="y" angle="90" />
-                <scale factor="1.0 3.0 20.0" />
                 <translate to="0.0 1.5 10.0" />
+                <scale factor="1.0 3.0 20.0" />
+                <rotate axis="y" angle="90" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -571,9 +571,9 @@
         <node id="brush4">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="y" angle="-90" />
-                <scale factor="1.0 3.0 20.0" />
                 <translate to="20.0 1.5 10.0" />
+                <scale factor="1.0 3.0 20.0" />
+                <rotate axis="y" angle="-90" />
             </transforms>
 
              <!-- bloco "children" obrigatorio -->
@@ -614,9 +614,9 @@
         <node id="grassSquare">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="-90" />
-                <scale factor="20.0 1.0 20.0" />
                 <translate to="10.0 0.0 10.0" />
+                <scale factor="20.0 1.0 20.0" />
+                <rotate axis="x" angle="-90" />
             </transforms>
 
             <appearanceref id="floor_appearence" />
@@ -646,10 +646,10 @@
         <node id="tableTop">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="-90" />
-                <translate to="0.0 -0.5 0.0" />
-                <scale factor="5.0 0.25 5.0" />
                 <translate to="4.0 2.0 10.0" />
+                <scale factor="5.0 0.25 5.0" />
+                <translate to="0.0 -0.5 0.0" />
+                <rotate axis="x" angle="-90" />
             </transforms>
 
             <appearanceref id="table_top_appearence" />
@@ -664,10 +664,10 @@
         <node id="tableLeg">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <rotate axis="x" angle="-90" />
-                <translate to="0.0 -0.5 0.0" />
-                <scale factor="1.5 2.0 1.5" />
                 <translate to="4.0 0.86 10.0" />
+                <scale factor="1.5 2.0 1.5" />
+                <translate to="0.0 -0.5 0.0" />
+                <rotate axis="x" angle="-90" />
             </transforms>
 
             <appearanceref id="table_leg_appearence" />
@@ -679,48 +679,225 @@
 
         </node>
 
-        <!-- tem de existir, pelo menos, um bloco "node" -->
-        <node id="ss">
+        <node id="tree">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <!-- deve conter transformacoes explicitas usando as instrucoes seguintes sem limite nem ordem -->
-                <!-- ex: bloco transforms pode ficar sem conteudo -->
-                <!-- ex: bloco transforms pode ser R,T (nao tem S) -->
-                <!-- ex: bloco transforms pode ser R,S,T,S -->
-                <translate to="ff ff ff" />
-                <rotate axis="ee" angle="ff" />
-                <scale factor="ff ff ff" />
             </transforms>
-          
-            <!-- declaracao da aparencia a utilizar (pode ser omitida): -->
-            <!-- a) se declarada sobrepoe-se 'a aparencia do "pai" -->
-            <!-- b) se omitida, o no' mantem (herda) a aparencia do "pai" -->
 
-            <appearanceref id="ss" />
-                              
              <!-- bloco "children" obrigatorio -->
             <children>
-
-                <!-- deve existir no minimo uma primitiva, ou uma referencia a outros nos -->
-                <!-- podem existir varias primitivas e/ou referencias a outros nos -->
-
-                <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
-                <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
-                <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->            
-                <rectangle xy1="ff ff" xy2="ff ff" />
-                <triangle xyz1="ff ff ff" xyz2="ff ff ff" xyz3="ff ff ff" />
-                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" />      <!-- deve ter topos -->
-                <sphere radius="ff" slices="ii" stacks="ii" />
-                <torus inner="ff" outer="ff" slices="ii" loops="ii" />
-               
-                <!-- Referencia a outros elementos do grafo -->
-                <!-- (repetir o nº de vezes necessario) -->
-                <!-- LEMBRANDO: qualquer no' pode ser referenciado previamente 'a sua declaracao; isto -->
-                <!--            é, a ordem pela qual os nós são declarados é irrelevante -->
-
-                <noderef id="ss" />
-
+                <noderef id="treeTop" />
+                <noderef id="log" />
+                <noderef id="swing" />
             </children>
+
         </node>
+
+        <node id="treeTop">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="16.0 6.2 13.0" />
+                <scale factor="9.0 3.0 9.0" />
+            </transforms>
+
+            <appearanceref id="tree_leafs_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <sphere radius="0.5" slices="10" stacks="10" />
+            </children>
+
+        </node>
+
+        <node id="log">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="16.0 2.5 13.0" />
+                <scale factor="2.0 5.0 2.0" />
+                <translate to="0.0 -0.5 0.0" />
+                <rotate axis="x" angle="-90" />
+            </transforms>
+
+            <appearanceref id="tree_trunk_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <cylinder base="0.5" top="0.5" height="1" slices="10" stacks="10" />
+            </children>
+
+        </node>
+
+        <node id="swing">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="seat" />
+                <noderef id="rope" />
+            </children>
+
+        </node>
+
+        <node id="seat">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="13.25 1.7 13.0" />
+                <scale factor="0.8 0.8 0.8" />
+                <rotate axis="x" angle="90" />
+            </transforms>
+
+            <appearanceref id="swing_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <torus inner="0.5" outer="1.0" slices="10" loops="10" />
+            </children>
+
+        </node>
+
+        <node id="rope">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+            <appearanceref id="rope_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="rope1" />
+                <noderef id="rope2" />
+            </children>
+
+        </node>
+        
+        <node id="rope1">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="12.5 4.0 13.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="ropeCyl" />
+            </children>
+
+        </node>
+
+        <node id="rope2">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="14.0 4.0 13.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="ropeCyl" />
+            </children>
+
+        </node>
+
+        <node id="ropeCyl">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <scale factor="0.08 5.0 0.08" />
+                <translate to="0.0 -0.5 0.0" />
+                <rotate axis="x" angle="-90" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <cylinder base="0.5" top="0.5" height="1" slices="10" stacks="10" />
+            </children>
+
+        </node>
+
+        <node id="street">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="lamp1" />
+                <noderef id="lamp2" />
+            </children>
+
+        </node>
+
+        <node id="lamp1">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="6.5 0.0 22.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="lamp" />
+            </children>
+
+        </node>
+
+        <node id="lamp2">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="13.5 0.0 22.0" />
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="lamp" />
+            </children>
+
+        </node>
+
+        <node id="lamp">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+            </transforms>
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <noderef id="bulb" />
+                <noderef id="post" />
+            </children>
+
+        </node>
+
+        <node id="bulb">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="0.0 8.0 0.0" />
+                <scale factor="0.4 0.4 0.4" />
+                <rotate axis="x" angle="90" />
+            </transforms>
+
+            <appearanceref id="light_bulb_appearence" />
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <torus inner="0.5" outer="1.0" slices="10" loops="10" />
+            </children>
+
+        </node>
+
+        <node id="post">
+            <!-- bloco "transforms" obrigatorio -->
+            <transforms>
+                <translate to="0.0 4.0 0.0" />
+                <scale factor="0.4 8.0 0.4" />
+                <translate to="0.0 -0.5 0.0" />
+                <rotate axis="x" angle="-90" />
+            </transforms>
+
+            <appearanceref id="light_body_appearence" />
+
+             <!-- bloco "children" obrigatorio -->
+            <children>
+                <cylinder base="0.5" top="0.5" height="1" slices="10" stacks="10" />
+            </children>
+
+        </node>
+
     </graph>
 </yaf> 
