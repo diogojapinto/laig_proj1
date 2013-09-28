@@ -11,8 +11,8 @@ float light2_pos[4] = { 6.5, 8.0, 22.0, 1.0 };
 float light3_pos[4] = { 13.5, 8.0, 22.0, 1.0 };
 float light4_pos[4] = { 30.0, 30.0, 30.0, 1.0 };
 
-float light0_dir[3] = { 1.0, -0.5, 1.0};
-float light1_dir[3] = { -1.0, -0.5, 1.0};
+float light0_dir[3] = { 1.0, -0.5, 1.0 };
+float light1_dir[3] = { -1.0, -0.5, 1.0 };
 
 float light0_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
 float light1_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
@@ -27,24 +27,29 @@ float light3_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
 float light4_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
 
 // Global ambient light (do not confuse with ambient component of individual lights)
-float globalAmbientLight[4] = { 0.0, 0.0, 0.0, 0.0};
+float globalAmbientLight[4] = { 0.0, 0.0, 0.0, 0.0 };
 
-float ambH[3] = { 0.8, 0.8, 0.8 };
-float difH[3] = { 0.7, 0.7, 0.7 };
-float specH[3] = { 0.1, 0.1, 0.1 };
-float shininessH = 0.0;
+float ambH[4] = { 0.1, 0.1, 0.1, 1.0 };
+float difH[4] = { 0.1, 0.1, 0.1, 0.0 };
+float specH[4] = { 0.1, 0.1, 0.1, 0.0 };
+float shininessH = 10.0;
 
-float ambDif[3] = { 0.4, 0.4, 0.4 };
-float difDif[3] = { 0.8, 0.8, 0.8 };
-float specDif[3] = { 0.3, 0.3, 0.3 };
-float shininessDif = 60.f;
+float ambDif[3] = { 0.1, 0.12, 0.11 };
+float difDif[3] = { 0.1, 0.12, 0.11 };
+float specDif[3] = { 0.1, 0.12, 0.11 };
+float shininessDif = 60.0;
 
-float ambSpec[3] = { 0.4, 0.4, 0.4 };
-float difSpec[3] = { 0.6, 0.6, 0.6 };
-float specSpec[3] = { 0.8, 0.8, 0.8 };
-float shininessSpec = 120.f;
+float ambSpec[3] = { 0.1, 0.1, 0.1 };
+float difSpec[3] = { 0.2, 0.2, 0.2 };
+float specSpec[3] = { 0.4, 0.4, 0.4 };
+float shininessSpec = 120.0;
 
-float ambientNull[4] = { 0, 0, 0,  1};
+float ambT[4] = { 0.13, 0.13, 0.1, 1.0 };
+float difT[4] = { 0.13, 0.13, 0.1, 0.0 };
+float specT[4] = { 0.13, 0.13, 0.1, 0.0 };
+float shininessT = 10.0;
+
+float ambientNull[4] = { 0, 0, 0, 1 };
 
 void LightingScene::init() {
 	// Enables lighting computations
@@ -78,12 +83,13 @@ void LightingScene::init() {
 	light3->setAmbient(ambientNull);
 
 	light3->disable();
-	//light3->enable();
+	light3->enable();
 
 	//background light
 	light4 = new CGFlight(GL_LIGHT4, light4_pos);
 	light4->setAmbient(ambientNull);
 	light4->disable();
+	light4->enable();
 
 	rect = new MyRectangle();
 	tri = new MyTriangle();
@@ -107,19 +113,19 @@ void LightingScene::init() {
 	table_leg_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
 			shininessSpec);
 	table_leg_appearence->setTexture("../data/tableleg.jpg");
-	tree_trunk_appearence = new CGFappearance(ambDif, difDif, specDif,
-			shininessDif);
+	tree_trunk_appearence = new CGFappearance(ambT, difT, specT, shininessT);
 	tree_trunk_appearence->setTexture("../data/tree.jpg");
 	tree_leafs_appearence = new CGFappearance(ambDif, difDif, specDif,
 			shininessDif);
 	tree_leafs_appearence->setTexture("../data/treetop.jpeg");
-	rope_appearence = new CGFappearance(ambDif, difDif, specDif, shininessDif);
+	rope_appearence = new CGFappearance(ambT, difT, specT, shininessT);
 	rope_appearence->setTexture("../data/rope.png");
-	swing_appearence = new CGFappearance(ambDif, difDif, specDif, shininessDif);
+	swing_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
+			shininessSpec);
 	swing_appearence->setTexture("../data/tire.jpg");
 	light_body_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
 			shininessSpec);
-	//light_body_appearence->setTexture("../data/post.jpeg");
+	light_body_appearence->setTexture("../data/post.jpeg");
 	light_bulb_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
 			shininessSpec);
 	//light_bulb_appearence->setTexture("../data/lamp.jpg");
@@ -143,47 +149,47 @@ void LightingScene::display() {
 	// Apply transformations corresponding to the camera position relative to the origin
 
 	glViewport(0, 0, 600, 800);
-/*
- * Perspective
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(60, 0.75, 0.0001, 100);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(15, 20, 40, 10, 0, 10, 0, 1, 0); //CGFscene::activeCamera->applyView();
-*/
+	/*
+	 * Perspective
+	 glMatrixMode(GL_PROJECTION);
+	 glLoadIdentity();
+	 gluPerspective(60, 0.75, 0.0001, 100);
+	 glMatrixMode(GL_MODELVIEW);
+	 glLoadIdentity();
+	 gluLookAt(15, 20, 40, 10, 0, 10, 0, 1, 0); //CGFscene::activeCamera->applyView();
+	 */
 
 	/*
 	 * ortho
 	 */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60,0.75,0.0001,100);
+	gluPerspective(60, 0.75, 0.0001, 100);
 	//glOrtho(-10, 30, -5, 25, -1, 50);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(15,20,40,12,10,10,0,1,0);
+	gluLookAt(15, 20, 40, 12, 10, 10, 0, 1, 0);
 	//gluLookAt(15, 5, 40, 5, 0, 10, 0, 1, 0);
 
 	CGFscene::activeCamera->applyView();
 
 	glPushMatrix();
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos );
-	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light0_dir );
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light0_dir);
 	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 20); // angle is 0 to 180
 	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 20); // exponent is 0 to 128
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientNull );
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif );
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spec );
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientNull);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spec);
 
-	glLightfv(GL_LIGHT1, GL_POSITION, light1_pos );
-	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1_dir );
+	glLightfv(GL_LIGHT1, GL_POSITION, light1_pos);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1_dir);
 	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 20); // angle is 0 to 180
 	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 20); // exponent is 0 to 128
-	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientNull );
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif );
-	glLightfv(GL_LIGHT1, GL_SPECULAR, light1_spec );
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientNull);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light1_spec);
 	glPopMatrix();
 
 	//light0->draw();

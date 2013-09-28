@@ -43,14 +43,14 @@
                 direction="-1.0 -0.5 1.0"
             />
 
-            <omni id="light2" enabled="enable"
+            <omni id="light2" enabled="true"
                 location="6.5 8.0 22.0"
                 ambient="0.0 0.0 0.0 1.0"
                 diffuse="1.0 1.0 1.0 1.0" 
                 specular="1.0 1.0 1.0 1.0"
             />
 
-            <omni id="light3" enabled="enable"
+            <omni id="light3" enabled="true"
                 location="13.5 8.0 22.0"
                 ambient="0.0 0.0 0.0 1.0"
                 diffuse="1.0 1.0 1.0 1.0" 
@@ -93,133 +93,133 @@
         <!--   parametros texlength_...) --> 
         <appearance id="house_walls_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1, 0.1, 0.1, 1.0"
+            diffuse="0.1, 0.1, 0.1, 0.0"
+            specular="0.1, 0.1, 0.1, 0.0"
+            shininess="10.0"
             textureref="wall"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="1"
+            texlength_t="1" />
 
         <appearance id="floor_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1, 0.12, 0.11"
+            diffuse="0.1, 0.12, 0.11"
+            specular="0.1, 0.12, 0.11"
+            shininess="60"
             textureref="grass"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="5"
+            texlength_t="5" />
 
         <appearance id="fence_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1, 0.12, 0.11"
+            diffuse="0.1, 0.12, 0.11"
+            specular="0.1, 0.12, 0.11"
+            shininess="60"
             textureref="bush"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="10"
+            texlength_t="10" />
 
         <appearance id="door_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1, 0.1, 0.1, 1.0"
+            diffuse="0.1, 0.1, 0.1, 0.0"
+            specular="0.1, 0.1, 0.1, 0.0"
+            shininess="10.0"
             textureref="door"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="1"
+            texlength_t="1" />
 
         <appearance id="roof_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1, 0.1, 0.1, 1.0"
+            diffuse="0.1, 0.1, 0.1, 0.0"
+            specular="0.1, 0.1, 0.1, 0.0"
+            shininess="10.0"
             textureref="rooftop"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="5"
+            texlength_t="5" />
 
         <appearance id="table_top_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1 0.1 0.1 1.0"
+            diffuse="0.2 0.2 0.2 0.0"
+            specular="0.4 0.4 0.4 0.0"
+            shininess="120.0"
             textureref="tabletop"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="2"
+            texlength_t="2" />
 
         <appearance id="table_leg_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1 0.1 0.1 1.0"
+            diffuse="0.2 0.2 0.2 0.0"
+            specular="0.4 0.4 0.4 0.0"
+            shininess="120.0"
             textureref="tableleg"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="5"
+            texlength_t="5" />
 
         <appearance id="tree_trunk_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.13 0.13 0.1 1.0"
+            diffuse="0.13 0.13 0.1 0.0"
+            specular="0.13 0.13 0.1 0.0"
+            shininess="10.0"
             textureref="tree"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="3"
+            texlength_t="3" />
 
         <appearance id="tree_leafs_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1, 0.12, 0.11"
+            diffuse="0.1, 0.12, 0.11"
+            specular="0.1, 0.12, 0.11"
+            shininess="60"
             textureref="treetop"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="2"
+            texlength_t="2" />
 
         <appearance id="rope_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.13 0.13 0.1 1.0"
+            diffuse="0.13 0.13 0.1 0.0"
+            specular="0.13 0.13 0.1 0.0"
+            shininess="10.0"
             textureref="rope"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="5"
+            texlength_t="5" />
 
         <appearance id="swing_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1 0.1 0.1 1.0"
+            diffuse="0.2 0.2 0.2 0.0"
+            specular="0.4 0.4 0.4 0.0"
+            shininess="120.0"
             textureref="tire"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="5"
+            texlength_t="5" />
 
         <appearance id="light_body_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1 0.1 0.1 1.0"
+            diffuse="0.2 0.2 0.2 0.0"
+            specular="0.4 0.4 0.4 0.0"
+            shininess="120.0"
             textureref="post"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="5"
+            texlength_t="5" />
 
         <appearance id="light_bulb_appearence"
             emissive="ff ff ff ff"
-            ambient="ff ff ff ff"
-            diffuse="ff ff ff ff"
-            specular="ff ff ff ff"
-            shininess="ff"
+            ambient="0.1 0.1 0.1 1.0"
+            diffuse="0.2 0.2 0.2 0.0"
+            specular="0.4 0.4 0.4 0.0"
+            shininess="120.0"
             textureref="lamp"
-            texlength_s="ff"
-            texlength_t="ff" />
+            texlength_s="2"
+            texlength_t="2" />
     </appearances>
 
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
@@ -481,7 +481,7 @@
         <node id="roof">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
-                <translate to="10.0 8.6 0.0" />
+                <translate to="10.0 9.1 0.0" />
                 <rotate axis="x" angle="30" />
                 <scale factor="15.0 1.0 5.0" />
                 <rotate axis="x" angle="-90" />
