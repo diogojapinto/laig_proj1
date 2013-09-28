@@ -9,11 +9,12 @@
     <globals background="0.25 0.73 0.92 1" drawmode="fill" shading="gouraud" cullface="back" cullorder="CCW" />
     
     <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial -->
-    <cameras initial="ss" >
+    <cameras initial="frontView" >
         <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
 
-        <perspective id="ss" near="ff" far="ff" angle="ff" pos="ff ff ff" target="ff ff ff" />
-        <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />
+        <perspective id="frontView" near="0.0001" far="100" angle="60.0" pos="15.0 20.0 40.0" target="12.0 10.0 10.0" />
+        
+        <ortho id="obliqueView" near="-1.0" far="50.0" left="-10.0" right="30.0" top="25.0" bottom="-5.0" />
 
     </cameras>
   
@@ -22,39 +23,45 @@
     <lighting doublesided="true" local="true" enabled="true" ambient="0.0 0.0 0.0 0.0" >
              <!-- Deve existir pelo menos um dos seguintes blocos: omin ou spot -->
             <!-- Os identificadores "id" nao podem ser repetidos -->
-            <omni id="light0" enabled="false"
-                location="5.5 6.0 1.1"
+            <spot id="light0" enabled="true"
+                location="5.5 6.0 1.5"
                 ambient="0.0 0.0 0.0 1.0"
-                diffuse="ff ff ff ff"
-                specular="1.0 1.0 0.0 1.0"
+                diffuse="1.0 1.0 1.0 1.0"
+                specular="1.0 1.0 1.0 1.0"
+                angle="20.0"
+                exponent="20.0"
+                direction="1.0 -0.5 1.0"
             />
 
-            <omni id="light1" enabled="false"
-                location="14.5 6.0 1.1"
+            <spot id="light1" enabled="true"
+                location="14.5 6.0 1.5"
                 ambient="0.0 0.0 0.0 1.0"
-                diffuse="ff ff ff ff" 
-                specular="ff ff ff ff"
+                diffuse="1.0 1.0 1.0 1.0"
+                specular="1.0 1.0 1.0 1.0"
+                angle="20.0"
+                exponent="20.0"
+                direction="-1.0 -0.5 1.0"
             />
 
             <omni id="light2" enabled="enable"
                 location="6.5 8.0 22.0"
                 ambient="0.0 0.0 0.0 1.0"
-                diffuse="ff ff ff ff" 
-                specular="ff ff ff ff"
+                diffuse="1.0 1.0 1.0 1.0" 
+                specular="1.0 1.0 1.0 1.0"
             />
 
             <omni id="light3" enabled="enable"
                 location="13.5 8.0 22.0"
                 ambient="0.0 0.0 0.0 1.0"
-                diffuse="ff ff ff ff" 
-                specular="ff ff ff ff"
+                diffuse="1.0 1.0 1.0 1.0" 
+                specular="1.0 1.0 1.0 1.0"
             />
 
             <omni id="light4" enabled="false"
                 location="30.0 30.0 30.0"
                 ambient="0.0 0.0 0.0 1.0"
-                diffuse="ff ff ff ff" 
-                specular="ff ff ff ff"
+                diffuse="1.0 1.0 1.0 1.0" 
+                specular="1.0 1.0 1.0 1.0"
             />
 
     </lighting>

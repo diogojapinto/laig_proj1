@@ -5,19 +5,34 @@
 #include <math.h>
 
 // Positions for two lights
-float light0_pos[4] = { 5.5, 6.0, 1.1, 1.0 };
-float light1_pos[4] = { 14.5, 6.0, 1.1, 1.0 };
+float light0_pos[4] = { 5.5, 6.0, 1.5, 1.0 };
+float light1_pos[4] = { 14.5, 6.0, 1.5, 1.0 };
 float light2_pos[4] = { 6.5, 8.0, 22.0, 1.0 };
 float light3_pos[4] = { 13.5, 8.0, 22.0, 1.0 };
 float light4_pos[4] = { 30.0, 30.0, 30.0, 1.0 };
 
+float light0_dir[3] = { 1.0, -0.5, 1.0};
+float light1_dir[3] = { -1.0, -0.5, 1.0};
+
+float light0_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light1_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light2_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light3_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light4_dif[4] = { 1.0, 1.0, 1.0, 1.0 };
+
+float light0_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light1_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light2_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light3_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
+float light4_spec[4] = { 1.0, 1.0, 1.0, 1.0 };
+
 // Global ambient light (do not confuse with ambient component of individual lights)
-float globalAmbientLight[4] = { 0, 0, 0, 0 };
+float globalAmbientLight[4] = { 0.0, 0.0, 0.0, 0.0};
 
 float ambH[3] = { 0.8, 0.8, 0.8 };
 float difH[3] = { 0.7, 0.7, 0.7 };
 float specH[3] = { 0.1, 0.1, 0.1 };
-float shininessH = 20.f;
+float shininessH = 0.0;
 
 float ambDif[3] = { 0.4, 0.4, 0.4 };
 float difDif[3] = { 0.8, 0.8, 0.8 };
@@ -29,7 +44,7 @@ float difSpec[3] = { 0.6, 0.6, 0.6 };
 float specSpec[3] = { 0.8, 0.8, 0.8 };
 float shininessSpec = 120.f;
 
-float ambientNull[4] = { 0, 0, 0, 1 };
+float ambientNull[4] = { 0, 0, 0,  1};
 
 void LightingScene::init() {
 	// Enables lighting computations
@@ -45,29 +60,27 @@ void LightingScene::init() {
 
 	// Declares and enables two lights, with null ambient component
 
-	light0 = new CGFlight(GL_LIGHT0, light0_pos);
-	light0->setAmbient(ambientNull);
+	//house lights
 
-	light0->disable();
-	//light0->enable();
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 
-	light1 = new CGFlight(GL_LIGHT1, light1_pos);
-	light1->setAmbient(ambientNull);
-
-	light1->disable();
-	//light1->enable();
-
+	//street lights
 	light2 = new CGFlight(GL_LIGHT2, light2_pos);
 	light2->setAmbient(ambientNull);
+	light2->setDiffuse(light2_dif);
+	light2->setSpecular(light2_spec);
 
-	//light2->disable();
-	light2->enable();
+	light2->disable();
+	//light2->enable();
 
 	light3 = new CGFlight(GL_LIGHT3, light3_pos);
 	light3->setAmbient(ambientNull);
 
-	light3->enable();
+	light3->disable();
+	//light3->enable();
 
+	//background light
 	light4 = new CGFlight(GL_LIGHT4, light4_pos);
 	light4->setAmbient(ambientNull);
 	light4->disable();
@@ -145,16 +158,35 @@ void LightingScene::display() {
 	 */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//gluPerspective(60,0.75,0.0001,100);
-	glOrtho(-10, 30, -5, 25, -1, 50);
+	gluPerspective(60,0.75,0.0001,100);
+	//glOrtho(-10, 30, -5, 25, -1, 50);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(15, 5, 40, 5, 0, 10, 0, 1, 0);
-	//CGFscene::activeCamera->applyView();
+	gluLookAt(15,20,40,12,10,10,0,1,0);
+	//gluLookAt(15, 5, 40, 5, 0, 10, 0, 1, 0);
 
-	light0->draw();
-	light1->draw();
+	CGFscene::activeCamera->applyView();
+
+	glPushMatrix();
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos );
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light0_dir );
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 20); // angle is 0 to 180
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 20); // exponent is 0 to 128
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientNull );
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif );
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spec );
+
+	glLightfv(GL_LIGHT1, GL_POSITION, light1_pos );
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1_dir );
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 20); // angle is 0 to 180
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 20); // exponent is 0 to 128
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientNull );
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif );
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light1_spec );
+	glPopMatrix();
+
+	//light0->draw();
 	light2->draw();
 	light3->draw();
 
