@@ -112,6 +112,9 @@ void LightingScene::init() {
 	//light_bulb_appearence->setTexture("../data/lamp.jpg");
 
 	glShadeModel(GL_SMOOTH);
+	glutInitWindowSize(600, 800);
+	glutInitWindowPosition(500, 500);
+
 }
 
 void LightingScene::display() {
@@ -121,11 +124,34 @@ void LightingScene::display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Initialize Model-View matrix as identity (no transformation
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+
+	//gluLookAt(
 
 	// Apply transformations corresponding to the camera position relative to the origin
-	CGFscene::activeCamera->applyView();
+
+	glViewport(0, 0, 600, 800);
+/*
+ * Perspective
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60, 0.75, 0.0001, 100);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(15, 20, 40, 10, 0, 10, 0, 1, 0); //CGFscene::activeCamera->applyView();
+*/
+
+	/*
+	 * ortho
+	 */
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//gluPerspective(60,0.75,0.0001,100);
+	glOrtho(-10, 30, -5, 25, -1, 50);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(15, 5, 40, 5, 0, 10, 0, 1, 0);
+	//CGFscene::activeCamera->applyView();
 
 	light0->draw();
 	light1->draw();
@@ -144,7 +170,7 @@ void LightingScene::display() {
 	glPushMatrix();
 	glTranslatef(10.0, 0.0, 10.0);
 	glScalef(20.0, 1.0, 20.0);
-	glRotatef(-90.0,1.0,0.0,0.0);
+	glRotatef(-90.0, 1.0, 0.0, 0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -191,10 +217,10 @@ void LightingScene::display() {
 	// Draw roof
 	roof_appearence->apply();
 	glPushMatrix();
-	glTranslatef(10.0, 8.6, 0.0);
+	glTranslatef(10.0, 9.1, 0.0);
 	glRotatef(30.0, 1.0, 0.0, 0.0);
 	glScalef(15.0, 1.0, 5.0);
-	glRotatef(-90.0,1.0,0.0,0.0);
+	glRotatef(-90.0, 1.0, 0.0, 0.0);
 	rect->draw();
 	glPopMatrix();
 
@@ -365,6 +391,7 @@ void LightingScene::display() {
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer
 	// glutSwapBuffers() will swap pointers so that the back buffer becomes the front buffer and vice-versa
+
 	glutSwapBuffers();
 }
 
