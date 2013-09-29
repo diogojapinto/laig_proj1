@@ -77,18 +77,18 @@ void LightingScene::init() {
 	light2->setSpecular(light2_spec);
 
 	light2->disable();
-	//light2->enable();
+	light2->enable();
 
 	light3 = new CGFlight(GL_LIGHT3, light3_pos);
 	light3->setAmbient(ambientNull);
 
-	light3->disable();
+	//light3->disable();
 	light3->enable();
 
 	//background light
 	light4 = new CGFlight(GL_LIGHT4, light4_pos);
 	light4->setAmbient(ambientNull);
-	light4->disable();
+	//light4->disable();
 	light4->enable();
 
 	rect = new MyRectangle();
@@ -198,6 +198,12 @@ void LightingScene::display() {
 
 	// Draw axis
 	axis.draw();
+
+
+	//emissive
+	float emissive[4] = {0,0,0,0};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emissive);
+
 
 	// ---- END Background, camera and axis setup
 

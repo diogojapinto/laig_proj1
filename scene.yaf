@@ -92,7 +92,7 @@
         <!--   ver topico 'Notas finais' no enunciado sobre os -->
         <!--   parametros texlength_...) --> 
         <appearance id="house_walls_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1, 0.1, 0.1, 1.0"
             diffuse="0.1, 0.1, 0.1, 0.0"
             specular="0.1, 0.1, 0.1, 0.0"
@@ -102,7 +102,7 @@
             texlength_t="1" />
 
         <appearance id="floor_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1, 0.12, 0.11"
             diffuse="0.1, 0.12, 0.11"
             specular="0.1, 0.12, 0.11"
@@ -112,7 +112,7 @@
             texlength_t="5" />
 
         <appearance id="fence_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1, 0.12, 0.11"
             diffuse="0.1, 0.12, 0.11"
             specular="0.1, 0.12, 0.11"
@@ -122,7 +122,7 @@
             texlength_t="10" />
 
         <appearance id="door_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1, 0.1, 0.1, 1.0"
             diffuse="0.1, 0.1, 0.1, 0.0"
             specular="0.1, 0.1, 0.1, 0.0"
@@ -132,7 +132,7 @@
             texlength_t="1" />
 
         <appearance id="roof_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1, 0.1, 0.1, 1.0"
             diffuse="0.1, 0.1, 0.1, 0.0"
             specular="0.1, 0.1, 0.1, 0.0"
@@ -142,7 +142,7 @@
             texlength_t="5" />
 
         <appearance id="table_top_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1 0.1 0.1 1.0"
             diffuse="0.2 0.2 0.2 0.0"
             specular="0.4 0.4 0.4 0.0"
@@ -152,7 +152,7 @@
             texlength_t="2" />
 
         <appearance id="table_leg_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1 0.1 0.1 1.0"
             diffuse="0.2 0.2 0.2 0.0"
             specular="0.4 0.4 0.4 0.0"
@@ -162,7 +162,7 @@
             texlength_t="5" />
 
         <appearance id="tree_trunk_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.13 0.13 0.1 1.0"
             diffuse="0.13 0.13 0.1 0.0"
             specular="0.13 0.13 0.1 0.0"
@@ -172,7 +172,7 @@
             texlength_t="3" />
 
         <appearance id="tree_leafs_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1, 0.12, 0.11"
             diffuse="0.1, 0.12, 0.11"
             specular="0.1, 0.12, 0.11"
@@ -182,7 +182,7 @@
             texlength_t="2" />
 
         <appearance id="rope_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.13 0.13 0.1 1.0"
             diffuse="0.13 0.13 0.1 0.0"
             specular="0.13 0.13 0.1 0.0"
@@ -192,7 +192,7 @@
             texlength_t="5" />
 
         <appearance id="swing_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1 0.1 0.1 1.0"
             diffuse="0.2 0.2 0.2 0.0"
             specular="0.4 0.4 0.4 0.0"
@@ -202,7 +202,7 @@
             texlength_t="5" />
 
         <appearance id="light_body_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1 0.1 0.1 1.0"
             diffuse="0.2 0.2 0.2 0.0"
             specular="0.4 0.4 0.4 0.0"
@@ -212,7 +212,7 @@
             texlength_t="5" />
 
         <appearance id="light_bulb_appearence"
-            emissive="ff ff ff ff"
+            emissive="0.0 0.0 0.0 0.0"
             ambient="0.1 0.1 0.1 1.0"
             diffuse="0.2 0.2 0.2 0.0"
             specular="0.4 0.4 0.4 0.0"
