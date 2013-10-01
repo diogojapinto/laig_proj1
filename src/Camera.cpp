@@ -7,15 +7,44 @@
 
 #include "Camera.h"
 
-namespace std {
+using namespace std;
 
 Camera::Camera() {
-	// TODO Auto-generated constructor stub
+	id = "";
+	far = 0;
+	near = 0;
+}
+
+Camera::Camera(string id) {
+
+	this->id = id;
+	far = 0;
+	near = 0;
+}
+
+void Camera::setNear(float near) {
+	this->near = near;
+}
+
+void Camera::setFar(float far) {
+	this->far = far;
+}
+
+string Camera::getId() {
+	return id;
+}
+
+float Camera::getNear() {
+	return near;
+}
+
+float Camera::getFar() {
+	return far;
+}
+
+void Camera::setCamera() {
 
 }
 
 Camera::~Camera() {
-	// TODO Auto-generated destructor stub
 }
-
-} /* namespace std */

@@ -13,13 +13,20 @@
 using namespace std;
 
 class Camera {
-private:
+protected:
 	string id;
 	float near;
 	float far;
 
 public:
 	Camera();
+	Camera(string id);
+	void setNear(float near);
+	void setFar(float far);
+	string getId();
+	float getNear();
+	float getFar();
+	virtual void setCamera();
 	virtual ~Camera();
 };
 

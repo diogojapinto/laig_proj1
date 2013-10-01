@@ -164,15 +164,15 @@ void LightingScene::display() {
 	 */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60, 0.75, 0.0001, 100);
-	//glOrtho(-10, 30, -5, 25, -1, 50);
+	//gluPerspective(60, 0.75, 0.0001, 100);
+	glOrtho(-10, 30, -5, 25, -1, 50);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(15, 20, 40, 12, 10, 10, 0, 1, 0);
-	//gluLookAt(15, 5, 40, 5, 0, 10, 0, 1, 0);
+	//gluLookAt(15, 20, 40, 12, 10, 10, 0, 1, 0);
+	//gluLookAt(
 
-	CGFscene::activeCamera->applyView();
+	//CGFscene::activeCamera->applyView();
 
 	glPushMatrix();
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
