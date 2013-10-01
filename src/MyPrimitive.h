@@ -8,7 +8,9 @@
 #ifndef MYPRIMITIVE_H_
 #define MYPRIMITIVE_H_
 
-class MyPrimitive {
+#include "Node.h"
+
+class MyPrimitive: public Node {
 public:
 	MyPrimitive();
 	virtual void draw() = 0;

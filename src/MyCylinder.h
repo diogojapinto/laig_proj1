@@ -18,11 +18,9 @@ public:
 	virtual ~MyCylinder();
 	void draw();
 
-protected:
+private:
 	GLUquadric *q;
 	void drawCircle();
-
-
 };
 
 #endif /* MYCYLINDER_H_ */

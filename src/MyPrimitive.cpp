@@ -7,7 +7,7 @@
 
 #include "MyPrimitive.h"
 
-MyPrimitive::MyPrimitive() {
+MyPrimitive::MyPrimitive(){
 	// TODO Auto-generated constructor stub
 
 }
