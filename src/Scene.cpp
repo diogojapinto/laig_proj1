@@ -19,6 +19,14 @@ Scene::Scene() {
 	shading = "";
 	cullface = "";
 	cullorder = "";
+	doublesided = true;
+	local = true;
+	enabled = true;
+	amb_x = 0;
+	amb_y = 0;
+	amb_z = 0;
+	amb_a = 0;
+
 }
 
 void Scene::setBackground(float bckg_x, float bckg_y, float bckg_z,
@@ -45,12 +53,33 @@ void Scene::setCullorder(string cullorder) {
 	this->cullorder = cullorder;
 }
 
+void Scene::setRootId(string rootId) {
+	this->rootId = rootId;
+}
+
 void Scene::addLight(Lights* light) {
 	lights.push_back(light);
 }
 
 void Scene::addCamera(Camera* camera) {
 	cameras.push_back(camera);
+}
+
+void Scene::addNode(string key, Node* node) {
+	graph[key] = node;
+}
+
+void Scene::setLights(bool doublesided, bool local, bool enabled) {
+	this->doublesided = doublesided;
+	this->local = local;
+	this->enabled = enabled;
+}
+
+void Scene::setAmb(float amb_x, float amb_y, float amb_z, float amb_a) {
+	this->amb_x = amb_x;
+	this->amb_y = amb_y;
+	this->amb_z = amb_z;
+	this->amb_a = amb_a;
 }
 
 string Scene::getDrawmode() {
@@ -67,6 +96,10 @@ string Scene::getCullface() {
 
 string Scene::getCullorder() {
 	return cullorder;
+}
+
+string Scene::getRootId() {
+	return rootId;
 }
 
 Lights* Scene::getLight(int index) {
@@ -109,10 +142,13 @@ void applyCullface(string cullface) {
 void applyCullorder(string cullorder) {
 	if (cullorder == "CCW") {
 		glFrontFace(GL_CCW);
-	}
-	else {
+	} else {
 		glFrontFace(GL_CW);
 	}
+
+}
+
+void applyLights(bool doublesided, bool local, bool enabled, float amb_x, float amb_y, float amb_z, float amb_a) {
 
 }
 
@@ -127,6 +163,8 @@ void Scene::initScene() {
 	applyCullface(cullface);
 
 	applyCullorder(cullorder);
+
+	applyLights(doublesided, local, enabled, amb_x, amb_y, amb_z, amb_a);
 }
 
 Scene::~Scene() {
