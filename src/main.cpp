@@ -14,6 +14,8 @@ using std::exception;
 
 int main(int argc, char* argv[]) {
 
+	XMLScene scene("bin/scene.yaf");
+
 	CGFapplication app = CGFapplication();
 
 	try {
