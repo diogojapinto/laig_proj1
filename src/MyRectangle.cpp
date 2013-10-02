@@ -9,6 +9,8 @@
 #include "CGFapplication.h"
 #include "Scene.h"
 
+extern Scene *scene;
+
 MyRectangle::MyRectangle() {
 	x1 = 0;
 	y1 = 0;

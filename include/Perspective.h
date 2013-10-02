@@ -9,7 +9,6 @@
 #define PERSPECTIVE_H_
 
 #include "Camera.h"
-#include "Scene.h"
 #include <string>
 
 using namespace std;

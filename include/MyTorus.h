@@ -17,7 +17,6 @@ public:
 	virtual ~MyTorus();
 	void draw();
 protected:
-	GLUquadric *q;
 };
 
 #endif /* MYTORUS_H_ */

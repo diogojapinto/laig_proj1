@@ -3,9 +3,18 @@
  * a textura está definida e no final de se todos os nós foram definidos
  *
  * e se o ficheiro da textura existe
+ *
+ * e se noderef já tinha sido percorrido ou não
+ *
+ *
+ * conisses: usar excecões em vez de return _bool_ e usar queryBool
+ *
+ * confirmar com o Wilson o como ele pôs as primitivas no grafo : testar Node has already been processed
  */
 
 #include "XMLScene.h"
+#include <iostream>
+#include <algorithm>
 
 #define MAX_STRING_LEN 256
 
@@ -80,29 +89,30 @@ XMLScene::XMLScene(char *filename) {
 
 	printf("\n\n");
 
+	if (!parseGraph())
+		exit(-1);
+
+	printf("\n\n");
 }
 
 XMLScene::~XMLScene() {
 	delete (doc);
 }
 
-//-------------------------------------------------------
-
 TiXmlElement *XMLScene::findChildByAttribute(TiXmlElement *parent,
-        const char * attr, const char *val)
-// Searches within descendants of a parent for a node that has an attribute _attr_ (e.g. an id) with the value _val_
-// A more elaborate version of this would rely on XPath expressions
-        {
+        const char * attr, const char *val) {
 	TiXmlElement *child = parent->FirstChildElement();
-	int found = 0;
+	bool found = false;
 
 	while (child && !found)
 		if (child->Attribute(attr) && strcmp(child->Attribute(attr), val) == 0)
-			found = 1;
+			found = true;
 		else
 			child = child->NextSiblingElement();
-
-	return child;
+	if (!found)
+		return NULL;
+	else
+		return child;
 }
 
 bool XMLScene::parseGlobals() {
@@ -204,8 +214,9 @@ bool XMLScene::parseCameras() {
 			printf(
 			        "Perspective camera.\nid: %s\nnear: %f\nfar: %f\nangle: %f\npos: (%f,%f,%f)\ntarget: (%f,%f,%f)\n\n",
 			        persp_cam_id, persp_cam_near, persp_cam_far,
-			        persp_cam_pos_x, persp_cam_pos_y, persp_cam_pos_z,
-			        persp_cam_targ_x, persp_cam_targ_y, persp_cam_targ_z);
+			        persp_cam_angle, persp_cam_pos_x, persp_cam_pos_y,
+			        persp_cam_pos_z, persp_cam_targ_x, persp_cam_targ_y,
+			        persp_cam_targ_z);
 		} while ((persp_cam = persp_cam->NextSiblingElement("perspective"))
 		        != NULL);
 	} else {
@@ -276,7 +287,6 @@ bool XMLScene::parseCameras() {
 }
 
 bool XMLScene::parseLighting() {
-	bool valid_nr_lights = false;
 	unsigned int lights_counter = 0;
 	printf("Processing lights...\n\n");
 	char tmp_str[MAX_STRING_LEN];
@@ -342,7 +352,6 @@ bool XMLScene::parseLighting() {
 	TiXmlElement *omni = NULL, *spot = NULL;
 
 	if ((omni = lightingElement->FirstChildElement("omni")) != NULL) {
-		valid_nr_lights = true;
 		do {
 			lights_counter++;
 			char omni_id[MAX_STRING_LEN], tmp_str[MAX_STRING_LEN];
@@ -427,8 +436,6 @@ bool XMLScene::parseLighting() {
 	}
 
 	if ((spot = lightingElement->FirstChildElement("spot")) != NULL) {
-		valid_nr_lights = true;
-
 		do {
 			lights_counter++;
 			char spot_id[MAX_STRING_LEN], tmp_str[MAX_STRING_LEN];
@@ -537,7 +544,7 @@ bool XMLScene::parseLighting() {
 		printf("There are no omni lights.\n");
 	}
 
-	if (lights_counter > 8) {
+	if (lights_counter > 8 || lights_counter < 1) {
 		printf(
 		        "There are more lights than the ones that can be used. Exiting...\n");
 		return false;
@@ -693,66 +700,311 @@ bool XMLScene::parseAppearences() {
 }
 
 bool XMLScene::parseGraph() {
-	/*
-	 // graph section
-	 if (graphElement == NULL)
-	 printf("Graph block not found!\n");
-	 else {
-	 char *prefix = "  -";
-	 TiXmlElement *node = graphElement->FirstChildElement();
 
-	 while (node) {
-	 printf("Node id '%s' - Descendants:\n", node->Attribute("id"));
-	 TiXmlElement *child = node->FirstChildElement();
-	 while (child) {
-	 if (strcmp(child->Value(), "Node") == 0) {
-	 // access node data by searching for its id in the nodes section
+	printf("Processing graph...\n\n");
 
-	 TiXmlElement *noderef = findChildByAttribute(nodesElement,
-	 "id", child->Attribute("id"));
+	char root_id[MAX_STRING_LEN];
 
-	 if (noderef) {
-	 // print id
-	 printf("  - Node id: '%s'\n", child->Attribute("id"));
+	if (strcpy(root_id, graphElement->Attribute("rootid")) == NULL) {
+		printf("Error reading \"rootid\"\n");
+		return false;
+	}
 
-	 // prints some of the data
-	 printf("    - Material id: '%s' \n",
-	 noderef->FirstChildElement("material")->Attribute(
-	 "id"));
-	 printf("    - Texture id: '%s' \n",
-	 noderef->FirstChildElement("texture")->Attribute(
-	 "id"));
+	TiXmlElement *curr_node = NULL;
+	if ((curr_node = findChildByAttribute(graphElement, "id", root_id)) == NULL) {
+		printf("The root node is not declared in the file!\n");
+		return false;
+	}
 
-	 // repeat for other leaf details
-	 } else
-	 printf(
-	 "  - Node id: '%s': NOT FOUND IN THE NODES SECTION\n",
-	 child->Attribute("id"));
+	vector<string> nodes_processed;
 
-	 }
-	 if (strcmp(child->Value(), "Leaf") == 0) {
-	 // access leaf data by searching for its id in the leaves section
-	 TiXmlElement *leaf = findChildByAttribute(leavesElement,
-	 "id", child->Attribute("id"));
-
-	 if (leaf) {
-	 // it is a leaf and it is present in the leaves section
-	 printf("  - Leaf id: '%s' ; type: '%s'\n",
-	 child->Attribute("id"),
-	 leaf->Attribute("type"));
-
-	 // repeat for other leaf details
-	 } else
-	 printf(
-	 "  - Leaf id: '%s' - NOT FOUND IN THE LEAVES SECTION\n",
-	 child->Attribute("id"));
-	 }
-
-	 child = child->NextSiblingElement();
-	 }
-	 node = node->NextSiblingElement();
-	 }
-	 }
-	 */
+	if (!parseNode(curr_node, nodes_processed)) {
+		return false;
+	}
+	return true;
 }
 
+bool XMLScene::parseNode(TiXmlElement *curr_node,
+        vector<string> nodes_processed) {
+	char node_id[MAX_STRING_LEN];
+
+	if (strcpy(node_id, curr_node->Attribute("id")) == NULL) {
+		printf("Error reading \"id\" attribute!\n");
+		return false;
+	}
+
+	printf("id: %s\n", node_id);
+
+	nodes_processed.push_back(node_id);
+
+	printf("Processing transformations...\n");
+
+	TiXmlElement *transf_block = NULL;
+	if ((transf_block = curr_node->FirstChildElement("transforms")) == NULL) {
+		printf("Could not find \"transforms\" block on %s node!\n", node_id);
+		return false;
+	}
+
+	TiXmlElement *transf = NULL;
+	while ((transf = (TiXmlElement*) transf_block->IterateChildren(transf))) {
+		char t_type[MAX_STRING_LEN];
+		if (strcpy(t_type, transf->Value()) == NULL) {
+			printf("Invalid transformation on node %s\n", node_id);
+			return false;
+		}
+		if (strcmp(t_type, "translate") == 0) {
+			char tmp_str[MAX_STRING_LEN];
+			double t_x = 0, t_y = 0, t_z = 0;
+
+			if (strcpy(tmp_str, transf->Attribute("to")) == NULL) {
+				printf("Error on translate transformation on node %s!\n",
+				        node_id);
+				return false;
+			}
+
+			if (sscanf(tmp_str, "%lf %lf %lf", &t_x, &t_y, &t_z) != 3) {
+				printf("Error parsing translate transformation on node %s!\n",
+				        node_id);
+				return false;
+			}
+
+			printf("Translate\nto: (%f %f %f)\n", t_x, t_y, t_z);
+
+		} else if (strcmp(t_type, "rotate") == 0) {
+			char tmp_str[2];
+			char r_axis = '\0';
+			double r_angle;
+			if (strcpy(tmp_str, transf->Attribute("axis")) == NULL) {
+				printf("Error on rotate transformation on node %s!\n", node_id);
+				return false;
+			}
+			r_axis = tmp_str[0];
+
+			if (transf->QueryDoubleAttribute("angle", &r_angle)) {
+				printf("Error parsing rotate transformation on node %s!\n",
+				        node_id);
+				return false;
+			}
+			printf("Rotate\naxis: %c\nangle: %f\n", r_axis, r_angle);
+
+		} else if (strcmp(t_type, "scale") == 0) {
+			char tmp_str[MAX_STRING_LEN];
+			double f_x = 0, f_y = 0, f_z = 0;
+
+			if (strcpy(tmp_str, transf->Attribute("factor")) == NULL) {
+				printf("Error on scale transformation on node %s!\n", node_id);
+				return false;
+			}
+
+			if (sscanf(tmp_str, "%lf %lf %lf", &f_x, &f_y, &f_z) != 3) {
+				printf("Error parsing scale transformation on node %s!\n",
+				        node_id);
+				return false;
+			}
+
+			printf("Scale\nfactor: (%f %f %f)\n", f_x, f_y, f_z);
+
+		} else {
+			printf("Invalid transformation on node %s\n", node_id);
+			return false;
+		}
+	}
+
+	TiXmlElement *appearance = NULL;
+	if ((appearance = curr_node->FirstChildElement("appearanceref"))) {
+		char app_id[MAX_STRING_LEN];
+		if (strcpy(app_id, appearance->Attribute("id")) == NULL) {
+			printf("Error on \"appearanceref\" block on node %s!\n", node_id);
+			return false;
+		}
+		printf("Appearance\nid: %s\n", app_id);
+	} else {
+		printf("No \"appearanceref\" block found on node %s!\n", node_id);
+	}
+
+	printf("Processing children...\n");
+
+	TiXmlElement *children = NULL;
+
+	if ((children = curr_node->FirstChildElement("children")) == NULL) {
+		printf("Block \"children\" not found!\n");
+		return false;
+	}
+
+	TiXmlElement *child = NULL;
+	while ((child = (TiXmlElement *) children->IterateChildren(child))) {
+		char child_type[MAX_STRING_LEN];
+		strcpy(child_type, child->Value());
+
+		if (strcmp(child_type, "rectangle") == 0) {
+			char tmp_str[MAX_STRING_LEN];
+			double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+			if (strcpy(tmp_str, child->Attribute("xy1")) == NULL) {
+				printf("Error reading \"xy1\" attribute!\n");
+				return false;
+			}
+			if (sscanf(tmp_str, "%lf %lf", &x1, &y1) != 2) {
+				printf("Error parsing \"xy1\" attribute!\n");
+				return false;
+			}
+
+			if (strcpy(tmp_str, child->Attribute("xy2")) == NULL) {
+				printf("Error reading \"xy2\" attribute!\n");
+				return false;
+			}
+			if (sscanf(tmp_str, "%lf %lf", &x2, &y2) != 2) {
+				printf("Error parsing \"xy2\" attribute!\n");
+				return false;
+			}
+
+			printf("Rectangle\nxy1: (%f,%f)\nxy2: (%f,%f)\n", x1, y1, x2, y2);
+
+		} else if (strcmp(child_type, "triangle") == 0) {
+			char tmp_str[MAX_STRING_LEN];
+			double x1 = 0, x2 = 0, x3 = 0, y1 = 0, y2 = 0, y3 = 0, z1 = 0, z2 =
+			        0, z3 = 0;
+			if (strcpy(tmp_str, child->Attribute("xyz1")) == NULL) {
+				printf("Error reading \"xyz1\" attribute!\n");
+				return false;
+			}
+			if (sscanf(tmp_str, "%lf %lf %lf", &x1, &y1, &z1) != 3) {
+				printf("Error parsing \"xyz1\" attribute!\n");
+				return false;
+			}
+
+			if (strcpy(tmp_str, child->Attribute("xyz2")) == NULL) {
+				printf("Error reading \"xyz2\" attribute!\n");
+				return false;
+			}
+			if (sscanf(tmp_str, "%lf %lf %lf", &x2, &y2, &z2) != 3) {
+				printf("Error parsing \"xyz2\" attribute!\n");
+				return false;
+			}
+
+			if (strcpy(tmp_str, child->Attribute("xyz3")) == NULL) {
+				printf("Error reading \"xyz3\" attribute!\n");
+				return false;
+			}
+			if (sscanf(tmp_str, "%lf %lf %lf", &x3, &y3, &z3) != 3) {
+				printf("Error parsing \"xyz3\" attribute!\n");
+				return false;
+			}
+
+			printf(
+			        "Triangle\nxyz1: (%f,%f,%f)\nxyz2: (%f,%f,%f)\nxyz3: (%f,%f,%f)\n",
+			        x1, y1, z1, x2, y2, z2, x3, y3, z3);
+
+		} else if (strcmp(child_type, "cylinder") == 0) {
+			double cyl_base = 0, cyl_top = 0, cyl_height = 0;
+			unsigned int cyl_slices = 0, cyl_stacks = 0;
+
+			if (child->QueryDoubleAttribute("base", &cyl_base)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing base attribute!\n");
+				return false;
+			}
+
+			if (child->QueryDoubleAttribute("top", &cyl_top) != TIXML_SUCCESS) {
+				printf("Error parsing slices attribute!\n");
+				return false;
+			}
+
+			if (child->QueryDoubleAttribute("height", &cyl_height)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing slices attribute!\n");
+				return false;
+			}
+
+			if (child->QueryUnsignedAttribute("slices", &cyl_slices)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing slices attribute!\n");
+				return false;
+			}
+
+			if (child->QueryUnsignedAttribute("stacks", &cyl_stacks)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing stacks attribute!\n");
+				return false;
+			}
+
+			printf(
+			        "Cylinder\nbase: %f\ntop: %f\nheight: %f\nslices: %d\nstacks: %d\n",
+			        cyl_base, cyl_top, cyl_height, cyl_slices, cyl_stacks);
+
+		} else if (strcmp(child_type, "sphere") == 0) {
+			double sph_rad = 0;
+			unsigned int sph_slices = 0, sph_stacks = 0;
+
+			if (child->QueryDoubleAttribute("radius", &sph_rad)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing radius attribute!\n");
+			}
+
+			if (child->QueryUnsignedAttribute("slices", &sph_slices)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing slices attribute!\n");
+			}
+
+			if (child->QueryUnsignedAttribute("stacks", &sph_stacks)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing stacks attribute!\n");
+			}
+
+			printf("Sphere\nradius: %f\nslices: %d\nstacks: %d\n", sph_rad,
+			        sph_slices, sph_stacks);
+
+		} else if (strcmp(child_type, "torus") == 0) {
+			double tor_inner = 0, tor_out = 0;
+			unsigned int tor_slices = 0, tor_loops = 0;
+
+			if (child->QueryDoubleAttribute("inner", &tor_inner)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing inner attribute!\n");
+			}
+
+			if (child->QueryDoubleAttribute("outer", &tor_out)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing outer attribute!\n");
+			}
+
+			if (child->QueryUnsignedAttribute("slices", &tor_slices)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing slices attribute!\n");
+			}
+
+			if (child->QueryUnsignedAttribute("loops", &tor_loops)
+			        != TIXML_SUCCESS) {
+				printf("Error parsing loops attribute!\n");
+			}
+
+			printf("Torus\ninner: %f\nouter: %f\nslices: %d\nloops: %d\n",
+			        tor_inner, tor_out, tor_slices, tor_loops);
+
+		} else if (strcmp(child_type, "noderef") == 0) {
+			char next_node_id[MAX_STRING_LEN];
+			if (strcpy(next_node_id, child->Attribute("id")) == NULL) {
+				printf("Error reading noderef's id!\n");
+				return false;
+			}
+			if (find(nodes_processed.begin(), nodes_processed.end(),
+			        next_node_id) != nodes_processed.end()) {
+				printf("Node has already been processed.\n");
+				continue;
+			} else {
+				TiXmlElement *next_node = NULL;
+				if ((next_node = findChildByAttribute(graphElement, "id",
+				        next_node_id))) {
+					printf("\n\n");
+					parseNode(next_node, nodes_processed);
+				} else {
+					printf("Node %s does not exist!\n", next_node_id);
+					return false;
+				}
+			}
+		} else {
+			printf("Invalid block inside children of node %s\n", node_id);
+		}
+	}
+	printf("Finished processing %s node children.\n	n", node_id);
+	return true;
+}

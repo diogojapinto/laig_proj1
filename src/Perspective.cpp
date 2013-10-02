@@ -7,6 +7,7 @@
 
 #include "Perspective.h"
 #include "CGFapplication.h"
+#include "Scene.h"
 
 using namespace std;
 

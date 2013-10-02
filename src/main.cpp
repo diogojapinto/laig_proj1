@@ -9,9 +9,12 @@
 #include "CGFapplication.h"
 #include "LightingScene.h"
 #include "XMLScene.h"
+#include "Scene.h"
 
 using std::cout;
 using std::exception;
+
+Scene *scene;
 
 int main(int argc, char* argv[]) {
 

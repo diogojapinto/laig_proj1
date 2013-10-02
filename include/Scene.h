@@ -18,6 +18,10 @@
 
 using namespace std;
 
+/*
+ * acho que estão trocados...
+ */
+
 #define HEIGHT 1024
 #define WIDTH 768
 
@@ -70,7 +74,5 @@ public:
 	void initScene();
 	virtual ~Scene();
 };
-/////REMOVER
-Scene* scene;
 
 #endif /* SCENE_H_ */
