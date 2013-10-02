@@ -14,11 +14,16 @@
 #include "Lights.h"
 #include "Camera.h"
 #include "Node.h"
+#include "CGFappearance.h"
 
 using namespace std;
 
 #define HEIGHT 1024
 #define WIDTH 768
+
+typedef map<string, Node*> GraphElem;
+typedef map<string, string> TexElem;
+typedef map<string, CGFappearance*> AppearanceElem;
 
 class Scene {
 private:
@@ -30,7 +35,9 @@ private:
 	string rootId;
 	vector<Lights*> lights;
 	vector<Camera*> cameras;
-	map<string,Node*> graph;
+	TexElem textures;
+	AppearanceElem appearances;
+	GraphElem graph;
 	bool doublesided;
 	bool local;
 	bool enabled;
@@ -45,6 +52,8 @@ public:
 	void setRootId(string rootId);
 	void addLight(Lights* light);
 	void addCamera(Camera* camera);
+	bool addTexture(string key, string path);
+	void addAppearance(string key, CGFappearance* appearance);
 	void addNode(string key, Node* node);
 	void setLights(bool doublesided, bool local, bool enabled);
 	void setAmb(float amb_x, float amb_y, float amb_z, float amb_a);
@@ -55,9 +64,13 @@ public:
 	string getRootId();
 	Lights* getLight(int index);
 	Camera* getCamera(int index);
+	string getTexture(string key);
+	CGFappearance* getAppearance(string key);
 	Node* getNode(string key);
 	void initScene();
 	virtual ~Scene();
 };
+/////REMOVER
+Scene* scene;
 
 #endif /* SCENE_H_ */

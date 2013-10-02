@@ -5,6 +5,7 @@
  *      Author: wso277
  */
 
+#include <fstream>
 #include "Scene.h"
 #include "CGFapplication.h"
 
@@ -65,8 +66,26 @@ void Scene::addCamera(Camera* camera) {
 	cameras.push_back(camera);
 }
 
+bool Scene::addTexture(string key, string path) {
+	ifstream file;
+	file.open(path.c_str(), ios::out);
+	if (file.is_open()) {
+		textures.insert(TexElem::value_type(key, path));
+		file.close();
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
+
+void Scene::addAppearance(string key, CGFappearance* appearance) {
+	appearances.insert(AppearanceElem::value_type(key, appearance));
+}
+
 void Scene::addNode(string key, Node* node) {
-	graph[key] = node;
+	graph.insert(GraphElem::value_type(key, node));
 }
 
 void Scene::setLights(bool doublesided, bool local, bool enabled) {
@@ -110,6 +129,18 @@ Camera* Scene::getCamera(int index) {
 	return cameras[index];
 }
 
+string Scene::getTexture(string key) {
+	return textures[key];
+}
+
+CGFappearance* Scene::getAppearance(string key) {
+	return appearances[key];
+}
+
+Node* Scene::getNode(string key) {
+	return graph[key];
+}
+
 void applyDrawmode(string drawmode) {
 	if (drawmode == "fill") {
 		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
@@ -148,7 +179,21 @@ void applyCullorder(string cullorder) {
 
 }
 
-void applyLights(bool doublesided, bool local, bool enabled, float amb_x, float amb_y, float amb_z, float amb_a) {
+void applyLights(bool doublesided, bool local, bool enabled, float amb_x,
+		float amb_y, float amb_z, float amb_a) {
+	if (enabled) {
+		glEnable(GL_LIGHTING);
+		glEnable(GL_NORMALIZE);
+
+		glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesided);
+
+		float amb[4] = { amb_x, amb_y, amb_z, amb_a };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
+		glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, local);
+
+	} else {
+		glDisable(GL_LIGHTING);
+	}
 
 }
 
