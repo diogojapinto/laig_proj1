@@ -8,13 +8,14 @@
 
 #include "CGFapplication.h"
 #include "LightingScene.h"
+#include "XMLScene.h"
 
 using std::cout;
 using std::exception;
 
 int main(int argc, char* argv[]) {
 
-	XMLScene scene("bin/scene.yaf");
+	XMLScene scene("../scene.yaf");
 
 	CGFapplication app = CGFapplication();
 
