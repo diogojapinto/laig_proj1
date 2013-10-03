@@ -12,13 +12,14 @@
 #include "CGFapplication.h"
 
 class MySphere: public MyPrimitive {
+	float radius;
+	unsigned int slices, stacks;
+	GLUquadric *q;
 public:
 	MySphere();
+	MySphere(float radius,unsigned int slices,unsigned int stacks);
 	virtual ~MySphere();
 	void draw();
-
-protected:
-	GLUquadric *q;
 };
 
 #endif /* MYSPHERE_H_ */

@@ -8,6 +8,19 @@
 #include "MySphere.h"
 
 MySphere::MySphere() {
+	this->radius = 0.5;
+	this->slices = 10;
+	this->stacks = 10;
+
+	q = gluNewQuadric();
+	gluQuadricTexture(q, true);
+}
+
+MySphere::MySphere(float radius, unsigned int slices, unsigned int stacks) {
+	this->radius = radius;
+	this->slices = slices;
+	this->stacks = stacks;
+
 	q = gluNewQuadric();
 	gluQuadricTexture(q, true);
 }
@@ -17,5 +30,5 @@ MySphere::~MySphere() {
 }
 
 void MySphere::draw() {
-	gluSphere(q, 0.5, 10, 10);
+	gluSphere(q, radius, slices, stacks);
 }

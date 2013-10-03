@@ -11,15 +11,15 @@
 #include "MyPrimitive.h"
 #include "CGFapplication.h"
 
-
 class MyCylinder: public MyPrimitive {
+	GLUquadric *q;
+	float base, top, height;
+	unsigned int slices, stacks;
 public:
 	MyCylinder();
+	MyCylinder(float base,float top,float height,unsigned int slices,unsigned int stacks);
 	virtual ~MyCylinder();
 	void draw();
-
-private:
-	GLUquadric *q;
 	void drawCircle();
 };
 
