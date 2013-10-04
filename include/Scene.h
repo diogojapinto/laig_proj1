@@ -24,6 +24,19 @@ using namespace std;
 
 /*
  * acho que estão trocados...
+ *
+ *
+ * todo:
+ *
+ * finish torus (being done)
+ * store data on the parser (next thing I'll do)
+ *
+ * acrescentar transf ao nó original
+ * definir appearance default (white) -> fazer get e pop (const)
+ * usar aparencias com opengl e nao cgf ??
+ * estruturar o programa segundo o ficheiro com nome retardado
+ * criar interface para escolher pasta das texturas e ficheiro .yaf
+ *
  */
 
 #define HEIGHT 1024
