@@ -266,5 +266,4 @@ void Lights::toggleLight(int index) {
 }
 
 Lights::~Lights() {
-	// TODO Auto-generated destructor stub
 }

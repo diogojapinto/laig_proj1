@@ -128,7 +128,7 @@ void LightingScene::init() {
 	light_body_appearence->setTexture("../data/post.jpeg");
 	light_bulb_appearence = new CGFappearance(ambSpec, difSpec, specSpec,
 			shininessSpec);
-	//light_bulb_appearence->setTexture("../data/lamp.jpg");
+	light_bulb_appearence->setTexture("../data/lamp.jpg");
 
 	glShadeModel(GL_SMOOTH);
 	glutInitWindowSize(600, 800);
@@ -144,7 +144,6 @@ void LightingScene::display() {
 
 	// Initialize Model-View matrix as identity (no transformation
 
-	//gluLookAt(
 
 	// Apply transformations corresponding to the camera position relative to the origin
 
@@ -164,12 +163,16 @@ void LightingScene::display() {
 	 */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+
+	/*
+	 * where frustum plans are defined (znear or zfar)???
+	 */
 	//gluPerspective(60, 0.75, 0.0001, 100);
 	glOrtho(-10, 30, -5, 25, -1, 50);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//gluLookAt(15, 20, 40, 12, 10, 10, 0, 1, 0);
+	//gluLookAt(0, 0, 40, 0, 0, 0, 0, 1, 0);
 	//gluLookAt(
 
 	//CGFscene::activeCamera->applyView();

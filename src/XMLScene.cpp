@@ -1005,6 +1005,6 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			printf("Invalid block inside children of node %s\n", node_id);
 		}
 	}
-	printf("Finished processing %s node children.\n	n", node_id);
+	printf("Finished processing %s node children.\n\n", node_id);
 	return true;
 }

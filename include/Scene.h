@@ -19,6 +19,10 @@
 using namespace std;
 
 /*
+ * meter aqui constantes tipo ccw e assim
+ */
+
+/*
  * acho que estão trocados...
  */
 

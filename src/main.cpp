@@ -1,5 +1,5 @@
 /* 
- * G0_Base: projeto inicial de CGra
+ * criar forma de escolher yaf e pasta de texturas
  * 
  */
 
@@ -17,6 +17,9 @@ using std::exception;
 Scene *scene;
 
 int main(int argc, char* argv[]) {
+
+	scene = new Scene();
+	scene->setCullorder("CCW");
 
 	XMLScene scene("../scene.yaf");
 
