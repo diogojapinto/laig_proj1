@@ -28,19 +28,19 @@ using namespace std;
  *
  * todo:
  *
- * finish torus (being done)
+ * finish torus (being done)		ficou melhor, mas parece que tem aneis definidos ao contrario
  * store data on the parser (next thing I'll do)
  *
- * acrescentar transf ao nó original
- * definir appearance default (white) -> fazer get e pop (const)
+ * acrescentar transf ao nó original	-	done
+ * definir appearance default (white) -> fazer get e pop (const) -  done nao tenho a certeza se no yaf posso apagar os parametros da textura ou devo deixar em branco (procurar imagem da hello kitty)
  * usar aparencias com opengl e nao cgf ??
  * estruturar o programa segundo o ficheiro com nome retardado
- * criar interface para escolher pasta das texturas e ficheiro .yaf
+ * criar interface para escolher pasta das texturas e ficheiro .yaf  - versao inicial feita, nao testada. Funcao para ir buscar os paths da textura feita
  *
  */
 
-#define HEIGHT 1024
-#define WIDTH 768
+#define HEIGHT 768
+#define WIDTH 1024
 
 typedef map<string, Node*> GraphElem;
 typedef map<string, string> TexElem;

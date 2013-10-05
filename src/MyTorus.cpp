@@ -62,11 +62,13 @@ void MyTorus::draw() {
 	glPushMatrix();
 	glBegin(GL_TRIANGLE_STRIP);
 	for (unsigned int i = 0; i < loops; i++) {
+		glBegin(GL_TRIANGLE_STRIP);
 		for (unsigned int j = 0; j < slices; j++) {
 			glVertex3f(px[i + 1][j], py[i + 1][j], pz[i + 1]);
 			glVertex3f(px[i][j + 1], py[i][j + 1], pz[i]);
 		}
 		glVertex3f(px[i + 1][slices], py[i + 1][slices], pz[i + 1]);
+		glEnd();
 	}
 	glEnd();
 	glPopMatrix();

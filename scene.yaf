@@ -12,7 +12,7 @@
     <cameras initial="frontView" >
         <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
 
-        <perspective id="frontView" near="0.0001" far="100" angle="60.0" pos="15.0 20.0 40.0" target="12.0 10.0 10.0" />
+        <perspective id="frontView" near="0.0001" far="100" angle="60.0" pos="40.0 15.0 5.0" target="15.0 0.0 -15.0" />
         
         <ortho id="obliqueView" near="-1.0" far="50.0" left="-10.0" right="30.0" top="25.0" bottom="-5.0" />
 
@@ -91,6 +91,13 @@
         <!--   opcionais se for usada uma textura. -->
         <!--   ver topico 'Notas finais' no enunciado sobre os -->
         <!--   parametros texlength_...) --> 
+        <appearance id="default"
+            emissive="0.0 0.0 0.0 0.0"
+            ambient="1.0 1.0 1.0 1.0"
+            diffuse="1.0 1.0 1.0 1.0"
+            specular="1.0 1.0 1.0 1.0"
+            shininess="10.0" />
+
         <appearance id="house_walls_appearence"
             emissive="0.0 0.0 0.0 0.0"
             ambient="0.1 0.1 0.1 1.0"
@@ -229,6 +236,8 @@
         <node id="scene">
             <!-- bloco "transforms" obrigatorio -->
             <transforms>
+                <translate to="0.0 0.0 -20.0" />
+                <rotate axis="y" angle="30" />
             </transforms>
                               
              <!-- bloco "children" obrigatorio -->

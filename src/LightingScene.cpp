@@ -34,6 +34,12 @@ float difH[4] = { 0.1, 0.1, 0.1, 0.0 };
 float specH[4] = { 0.1, 0.1, 0.1, 0.0 };
 float shininessH = 10.0;
 
+/*	default
+float ambH[4] = { 1, 1, 1, 1.0 };
+float difH[4] = { 1, 1, 1, 1.0 };
+float specH[4] = { 1, 1, 1, 1 };
+float shininessH = 10.0;*/
+
 float ambDif[3] = { 0.1, 0.12, 0.11 };
 float difDif[3] = { 0.1, 0.12, 0.11 };
 float specDif[3] = { 0.1, 0.12, 0.11 };
@@ -148,21 +154,20 @@ void LightingScene::display() {
 	// Apply transformations corresponding to the camera position relative to the origin
 
 //	glViewport(0, 0, 600, 800);
-	/*
-	 * Perspective
-	 glMatrixMode(GL_PROJECTION);
+	 //Perspective
+	 /*glMatrixMode(GL_PROJECTION);
 	 glLoadIdentity();
 	 gluPerspective(60, 0.75, 0.0001, 100);
 	 glMatrixMode(GL_MODELVIEW);
 	 glLoadIdentity();
-	 gluLookAt(15, 20, 40, 10, 0, 10, 0, 1, 0); //CGFscene::activeCamera->applyView();
-	 */
+	 gluLookAt(40.0, 15.0, 5.0, 15.0, 0.0, -15.0, 0, 1, 0); //CGFscene::activeCamera->applyView();*/
+
 
 	/*
 	 * ortho
 	 */
-//	glMatrixMode(GL_PROJECTION);
-//	glLoadIdentity();
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
 
 	/*
 	 * where frustum plans are defined (znear or zfar)???
@@ -176,6 +181,10 @@ void LightingScene::display() {
 	//gluLookAt(
 
 	CGFscene::activeCamera->applyView();
+
+	glTranslatef(0,0,-20);
+	glRotatef(30,0.0,1.0,0.0);
+
 
 	glPushMatrix();
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
