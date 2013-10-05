@@ -147,7 +147,7 @@ void LightingScene::display() {
 
 	// Apply transformations corresponding to the camera position relative to the origin
 
-	glViewport(0, 0, 600, 800);
+//	glViewport(0, 0, 600, 800);
 	/*
 	 * Perspective
 	 glMatrixMode(GL_PROJECTION);
@@ -161,21 +161,21 @@ void LightingScene::display() {
 	/*
 	 * ortho
 	 */
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
 
 	/*
 	 * where frustum plans are defined (znear or zfar)???
 	 */
 	//gluPerspective(60, 0.75, 0.0001, 100);
-	glOrtho(-10, 30, -5, 25, -1, 50);
+	//glOrtho(-10, 30, -5, 25, -1, 50);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//gluLookAt(0, 0, 40, 0, 0, 0, 0, 1, 0);
 	//gluLookAt(
 
-	//CGFscene::activeCamera->applyView();
+	CGFscene::activeCamera->applyView();
 
 	glPushMatrix();
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);

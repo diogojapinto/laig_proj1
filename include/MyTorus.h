@@ -17,7 +17,7 @@ using namespace std;
 class MyTorus: public MyPrimitive {
 	float inner, outer;
 	unsigned int slices, loops;
-	vector<float> px, py, pz, nx, ny, nz, tx, ty, tz;
+	float **px, **py, *pz, **nx, **ny, **nz, **tx, **ty, **tz;
 public:
 	MyTorus();
 	MyTorus(float inner, float outer, unsigned int slices, unsigned int loops);
