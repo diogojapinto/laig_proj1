@@ -593,6 +593,8 @@ bool XMLScene::parseAppearences() {
 	if ((app = appearencesElement->FirstChildElement("appearance")) != NULL) {
 		valid_nr_appear = true;
 		do {
+
+			printf("kdkdk");
 			if (strcpy(app_id, app->Attribute("id")) == NULL) {
 				printf("Error in \"id\" attribute!\n");
 				return false;
@@ -661,26 +663,25 @@ bool XMLScene::parseAppearences() {
 				return false;
 			}
 
-			if (strcpy(app_text_ref, app->Attribute("textureref")) == NULL) {
-				printf("Error in \"textureref\" attribute of %s appearence!\n",
-				        app_id);
-				return false;
-			}
+			if (strcpy(app_text_ref, app->Attribute("textureref")) != NULL) {
+				if (app->Attribute("texlength_s", &app_text_len_s) == NULL) {
+					printf(
+					        "Error parsing \"texlength_s\" attribute of %s appearence!\n",
+					        app_id);
+					return false;
+				}
 
-			if (app->Attribute("texlength_s", &app_text_len_s) == NULL) {
-				printf(
-				        "Error parsing \"texlength_s\" attribute of %s appearence!\n",
-				        app_id);
-				return false;
+				if (app->Attribute("texlength_t", &app_text_len_t) == NULL) {
+					printf(
+					        "Error parsing \"texlength_t\" attribute of %s appearence!\n",
+					        app_id);
+					return false;
+				}
+			} else {
+				strcpy(app_text_ref, "none");
+				app_text_len_s = 0.0;
+				app_text_len_t = 0.0;
 			}
-
-			if (app->Attribute("texlength_t", &app_text_len_t) == NULL) {
-				printf(
-				        "Error parsing \"texlength_t\" attribute of %s appearence!\n",
-				        app_id);
-				return false;
-			}
-
 			printf(
 			        "id: %s\nemissive: (%f,%f,%f,%f)\nambient: (%f,%f,%f,%f)\ndiffuse: (%f,%f,%f,%f)\nspecular: (%f,%f,%f,%f)\nshininess: %f\ntextureref: %s\ntexlength_s: %f\ntextlength_t: %f\n\n",
 			        app_id, app_emiss_r, app_emiss_g, app_emiss_b, app_emiss_a,

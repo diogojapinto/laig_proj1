@@ -166,23 +166,25 @@ void LightingScene::display() {
 	/*
 	 * ortho
 	 */
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 
 	/*
 	 * where frustum plans are defined (znear or zfar)???
 	 */
-	//gluPerspective(60, 0.75, 0.0001, 100);
-	//glOrtho(-10, 30, -5, 25, -1, 50);
+	gluPerspective(60, 0.75, 0.001, 100);
+	//glOrtho(-10, 30, -5, 25, -10, 50);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//gluLookAt(0, 0, 40, 0, 0, 0, 0, 1, 0);
-	//gluLookAt(
+	//gluLookAt(20, 20, 30, 15, 10, 0, 0, 1, 0);
 
 	CGFscene::activeCamera->applyView();
 
-	glTranslatef(0,0,-20);
+	glPushMatrix();
+
+	glTranslatef(0,7,-15);
+	glRotatef(10,1.0,0.0,0.0);
 	glRotatef(30,0.0,1.0,0.0);
 
 
@@ -204,9 +206,12 @@ void LightingScene::display() {
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light1_spec);
 	glPopMatrix();
 
+	glFrontFace(GL_CW);
 	//light0->draw();
 	light2->draw();
 	light3->draw();
+
+	glFrontFace(GL_CCW);
 
 	// Draw axis
 	axis.draw();
@@ -440,6 +445,8 @@ void LightingScene::display() {
 	glRotatef(90, 1.0, 0.0, 0.0);
 	light_bulb_appearence->apply();
 	tor->draw();
+	glPopMatrix();
+
 	glPopMatrix();
 
 	// ---- END Primitive drawing section
