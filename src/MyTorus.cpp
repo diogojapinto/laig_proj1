@@ -31,9 +31,9 @@ MyTorus::MyTorus() {
 
 	pz = (float *) malloc(sizeof(float) * (loops + 1));
 
-	this->norm = (float ***) malloc(sizeof(float **) * loops);
-	for (unsigned int i = 0; i < loops; i++) {
-		norm[i] = (float **) malloc(sizeof(float *) * slices);
+	this->norm = (float ***) malloc(sizeof(float **) * (loops + 1));
+	for (unsigned int i = 0; i <= loops; i++) {
+		norm[i] = (float **) malloc(sizeof(float *) * (slices + 1));
 	}
 
 	this->ts = (float **) malloc(sizeof(float *) * (loops + 1));
@@ -71,9 +71,9 @@ MyTorus::MyTorus(float inner, float outer, unsigned int slices,
 
 	pz = (float *) malloc(sizeof(float) * (loops + 1));
 
-	this->norm = (float ***) malloc(sizeof(float **) * loops);
-	for (unsigned int i = 0; i < loops; i++) {
-		norm[i] = (float **) malloc(sizeof(float *) * slices);
+	this->norm = (float ***) malloc(sizeof(float **) * (loops + 1));
+	for (unsigned int i = 0; i <= loops; i++) {
+		norm[i] = (float **) malloc(sizeof(float *) * (slices + 1));
 	}
 
 	this->ts = (float **) malloc(sizeof(float *) * (loops + 1));
@@ -103,12 +103,14 @@ void MyTorus::draw() {
 		glTexCoord2f(ts[i][0], tt[i][0]);
 		glVertex3f(px[i][0], py[i][0], pz[i]);
 		for (unsigned int j = 0; j < slices; j++) {
-			glNormal3f(norm[i][j][0], norm[i][j][1], norm[i][j][2]);
+			glNormal3f(norm[i + 1][j][0], norm[i + 1][j][1], norm[i + 1][j][2]);
 			glTexCoord2f(ts[i + 1][j], tt[i + 1][j]);
 			glVertex3f(px[i + 1][j], py[i + 1][j], pz[i + 1]);
+			glNormal3f(norm[i][j + 1][0], norm[i][j + 1][1], norm[i][j + 1][2]);
 			glTexCoord2f(ts[i][j + 1], tt[i][j + 1]);
 			glVertex3f(px[i][j + 1], py[i][j + 1], pz[i]);
 		}
+		glNormal3f(norm[i + 1][slices][0], norm[i + 1][slices][1], norm[i + 1][slices][2]);
 		glVertex3f(px[i + 1][slices], py[i + 1][slices], pz[i + 1]);
 		glEnd();
 	}
@@ -139,18 +141,47 @@ void MyTorus::calcPoints() {
 }
 
 void MyTorus::calcNormals() {
-	for (unsigned int i = 0; i < loops; i++) {
-		for (unsigned int j = 0; j < slices; j++) {
+	for (unsigned int i = 0; i <= loops; i++) {
+		for (unsigned int j = 0; j <= slices; j++) {
+			int c_i = i;
+			int n_i = i + 1;
+			if (n_i > loops)
+				n_i = 1;
+			int b_i = i - 1;
+			if (b_i < 0)
+				b_i = loops - 1;
+			int c_j = j;
+			int n_j = j + 1;
+			if (n_j > loops)
+				n_j = 1;
+			int b_j = j - 1;
+			if (b_j < 0)
+				b_j = slices - 1;
+
 			vector<float> x, y, z;
-			x.push_back(px[i][j]);
-			x.push_back(px[i + 1][j]);
-			x.push_back(px[i][j + 1]);
-			y.push_back(py[i][j]);
-			y.push_back(py[i + 1][j]);
-			y.push_back(py[i][j + 1]);
-			z.push_back(pz[i]);
-			z.push_back(pz[i + 1]);
-			z.push_back(pz[i]);
+			x.push_back(px[c_i][c_j]);
+			x.push_back(px[c_i][n_j]);
+			x.push_back(px[n_i][c_j]);
+			x.push_back(px[n_i][b_j]);
+			x.push_back(px[c_i][b_j]);
+			x.push_back(px[b_i][c_j]);
+			x.push_back(px[b_i][n_j]);
+
+			y.push_back(py[c_i][c_j]);
+			y.push_back(py[c_i][n_j]);
+			y.push_back(py[n_i][c_j]);
+			y.push_back(py[n_i][b_j]);
+			y.push_back(py[c_i][b_j]);
+			y.push_back(py[b_i][c_j]);
+			y.push_back(py[b_i][n_j]);
+
+			z.push_back(pz[c_i]);
+			z.push_back(pz[c_i]);
+			z.push_back(pz[n_i]);
+			z.push_back(pz[n_i]);
+			z.push_back(pz[c_i]);
+			z.push_back(pz[b_i]);
+			z.push_back(pz[b_i]);
 
 			norm[i][j] = getNewellsMethod(x, y, z);
 		}
@@ -160,7 +191,11 @@ void MyTorus::calcNormals() {
 void MyTorus::calcTextCoords() {
 	for (unsigned int i = 0; i <= loops; i++) {
 		for (unsigned int j = 0; j <= slices; j++) {
-			ts[i][j] = (float) (j % (slices / 2)) * 2.0 / (float) slices;
+			float tmp = (float) j * 2.0 / (float) slices;
+			if (tmp > 1) {
+				tmp = 2 - tmp;
+			}
+			ts[i][j] = tmp;
 			tt[i][j] = (float) i / (float) loops;
 		}
 	}

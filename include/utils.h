@@ -1,12 +1,16 @@
 #ifndef UTILS_H
 #define UTILS_H
-
 #include <vector>
-
-using namespace std;
 
 float DegToRad(float i);
 
-float* getNewellsMethod(vector<float> x, vector<float> y, vector<float> z);
+float* getNewellsMethod(std::vector<float> x, std::vector<float> y,
+        std::vector<float> z);
+float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y,
+        std::vector<float> z, float x_center, float y_center,
+        float z_center);
+float* getNormalsAlternative(std::vector<float> x, std::vector<float> y,
+        std::vector<float> z, float x_center, float y_center,
+        float z_center);
 
 #endif
