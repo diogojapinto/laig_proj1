@@ -13,20 +13,20 @@ using namespace std;
 Node::Node() {
 
 	id = "";
-	nodeAppearance = new CGFappearance();
+	nodeAppearance = "default";
 }
 
 Node::Node(string id) {
 
 	this->id = id;
-	nodeAppearance = new CGFappearance();
+	nodeAppearance = "default";
 }
 
 Node::Node(string id, float transforms[16]) {
 
 	this->id = id;
 	copy(&transforms[0], &transforms[16], this->transforms);
-	nodeAppearance = new CGFappearance();
+	nodeAppearance = "default";
 }
 
 void Node::addRef(string ref) {
@@ -34,7 +34,7 @@ void Node::addRef(string ref) {
 	refs.push_back(ref);
 }
 
-void Node::addAppearance(CGFappearance* appearance) {
+void Node::addAppearance(string appearance) {
 
 	nodeAppearance = appearance;
 }
@@ -97,7 +97,7 @@ const float* Node::getTransform() {
 	return transforms;
 }
 
-CGFappearance* Node::getAppearance() {
+string Node::getAppearance() {
 
 	return nodeAppearance;
 }
