@@ -7,6 +7,7 @@
 
 #include "Node.h"
 #include <GL/glut.h>
+#include "Scene.h"
 
 using namespace std;
 
@@ -97,9 +98,8 @@ const float* Node::getTransform() {
 	return transforms;
 }
 
-string Node::getAppearance() {
-
-	return nodeAppearance;
+Appearance *Node::getAppearance() {
+	return Scene::getInstance()->getAppearance(nodeAppearance);
 }
 
 list<string> Node::getRefs() {
@@ -113,5 +113,4 @@ string Node::getId() {
 }
 
 Node::~Node() {
-	// TODO Auto-generated destructor stub
 }

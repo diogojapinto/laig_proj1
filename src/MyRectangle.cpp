@@ -35,7 +35,7 @@ void MyRectangle::draw() {
 	glBegin(GL_QUADS);
 
 	glNormal3f(normal[0], normal[1], normal[2]);
-	if (scene->getCullorder() == "CCW") {
+	if (Scene::getInstance()->getCullorder() == GL_CCW) {
 		glTexCoord2f(text_coords[0][0], text_coords[0][1]);
 		glVertex3f(x1, y1, 0.0);
 		glTexCoord2f(text_coords[1][0], text_coords[1][1]);
@@ -58,7 +58,7 @@ void MyRectangle::draw() {
 }
 
 const float *MyRectangle::calcNormal() {
-	if (scene->getCullorder() == "CCW") {
+	if (Scene::getInstance()->getCullorder() == GL_CCW) {
 		normal[0] = 0.0;
 		normal[1] = 0.0;
 		normal[2] = 1.0;
@@ -80,7 +80,7 @@ void MyRectangle::calcTextCoords() {
 	deltas = deltax / getAppearance()->getSWrap();
 	deltat = deltay / getAppearance()->getTWrap();
 
-	if (scene->getCullorder() == "CCW") {
+	if (Scene::getInstance()->getCullface() == GL_CCW) {
 		text_coords[0][0] = 0.0;
 		text_coords[0][1] = 0.0;
 		text_coords[1][0] = deltas;

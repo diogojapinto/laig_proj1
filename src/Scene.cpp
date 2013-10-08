@@ -1,57 +1,79 @@
-/*
- * Scene.cpp
- *
- *  Created on: Oct 1, 2013
- *      Author: wso277
- */
-
 #include <fstream>
 #include "Scene.h"
 #include "CGFapplication.h"
+#include "InvalidPreAttrException.h"
 
 using namespace std;
 
+Scene *Scene::instance = NULL;
+
 Scene::Scene() {
-	bckg_x = 0;
-	bckg_y = 0;
-	bckg_z = 0;
+	bckg_r = 0;
+	bckg_g = 0;
+	bckg_b = 0;
 	bckg_a = 0;
-	drawmode = "";
-	shading = "";
-	cullface = "";
-	cullorder = "";
+	drawmode = GL_FILL;
+	shading = GL_SMOOTH;
+	cullface = GL_CCW;
+	cullorder = GL_BACK;
 	doublesided = true;
 	local = true;
 	enabled = true;
-	amb_x = 0;
-	amb_y = 0;
-	amb_z = 0;
+	amb_r = 0;
+	amb_g = 0;
+	amb_b = 0;
 	amb_a = 0;
 
 }
 
-void Scene::setBackground(float bckg_x, float bckg_y, float bckg_z,
-		float bckg_a) {
-	this->bckg_x = bckg_x;
-	this->bckg_y = bckg_y;
-	this->bckg_z = bckg_z;
+void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
+        float bckg_a) {
+	this->bckg_r = bckg_r;
+	this->bckg_g = bckg_g;
+	this->bckg_b = bckg_b;
 	this->bckg_a = bckg_a;
 }
 
 void Scene::setDrawmode(string drawmode) {
-	this->drawmode = drawmode;
+	if (drawmode == "fill") {
+		this->drawmode = GL_FILL;
+	} else if (drawmode == "line") {
+		this->drawmode = GL_LINE;
+	} else if (drawmode == "point") {
+		this->drawmode = GL_POINT;
+	} else {
+		throw InvalidPreAttrException("drawmode");
+	}
 }
 
 void Scene::setShading(string shading) {
-	this->shading = shading;
+	if (shading == "flat") {
+		this->shading = GL_FLAT;
+	} else if (shading == "smooth"){
+		this->shading = GL_SMOOTH;
+	} else {
+		throw InvalidPreAttrException("shading");
+	}
 }
 
 void Scene::setCullface(string cullface) {
-	this->cullface = cullface;
+	if (cullface == "none") {
+		this->cullface = GL_NONE;
+	} else if (cullface == "back") {
+		this->cullface = GL_BACK;
+	} else if (cullface == "front") {
+		this->cullface = GL_FRONT;
+	} else {
+		this->cullface = GL_FRONT_AND_BACK;
+	}
 }
 
 void Scene::setCullorder(string cullorder) {
-	this->cullorder = cullorder;
+	if (cullorder == "CCW") {
+		this->cullorder = GL_CCW;
+	} else {
+		this->cullorder = GL_CW;
+	}
 }
 
 void Scene::setRootId(string rootId) {
@@ -70,17 +92,17 @@ bool Scene::addTexture(string key, string path) {
 	ifstream file;
 	file.open(path.c_str(), ios::out);
 	if (file.is_open()) {
-		textures.insert(TexElem::value_type(key, path));
+		CGFtexture *tex = new CGFtexture(path);
+		textures.insert(TexElem::value_type(key, tex));
 		file.close();
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 
 }
 
-void Scene::addAppearance(string key, CGFappearance* appearance) {
+void Scene::addAppearance(string key, Appearance* appearance) {
 	appearances.insert(AppearanceElem::value_type(key, appearance));
 }
 
@@ -94,26 +116,26 @@ void Scene::setLights(bool doublesided, bool local, bool enabled) {
 	this->enabled = enabled;
 }
 
-void Scene::setAmb(float amb_x, float amb_y, float amb_z, float amb_a) {
-	this->amb_x = amb_x;
-	this->amb_y = amb_y;
-	this->amb_z = amb_z;
+void Scene::setAmb(float amb_r, float amb_g, float amb_b, float amb_a) {
+	this->amb_r = amb_r;
+	this->amb_g = amb_g;
+	this->amb_b = amb_b;
 	this->amb_a = amb_a;
 }
 
-string Scene::getDrawmode() {
+unsigned int Scene::getDrawmode() {
 	return drawmode;
 }
 
-string Scene::getShading() {
+unsigned int Scene::getShading() {
 	return shading;
 }
 
-string Scene::getCullface() {
+const unsigned int Scene::getCullface() {
 	return cullface;
 }
 
-string Scene::getCullorder() {
+const unsigned int Scene::getCullorder() {
 	return cullorder;
 }
 
@@ -129,11 +151,11 @@ Camera* Scene::getCamera(int index) {
 	return cameras[index];
 }
 
-string Scene::getTexture(string key) {
+CGFtexture * Scene::getTexture(string key) {
 	return textures[key];
 }
 
-CGFappearance* Scene::getAppearance(string key) {
+Appearance* Scene::getAppearance(string key) {
 	return appearances[key];
 }
 
@@ -141,46 +163,8 @@ Node* Scene::getNode(string key) {
 	return graph[key];
 }
 
-void applyDrawmode(string drawmode) {
-	if (drawmode == "fill") {
-		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
-	} else if (drawmode == "line") {
-		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE);
-	} else {
-		glPolygonMode( GL_FRONT_AND_BACK, GL_POINT);
-	}
-}
-void applyShading(string shading) {
-	if (shading == "flat") {
-		glShadeModel(GL_FLAT);
-	} else {
-		glShadeModel(GL_SMOOTH);
-	}
-}
-
-void applyCullface(string cullface) {
-	if (cullface == "none") {
-		glCullFace(GL_NONE);
-	} else if (cullface == "back") {
-		glCullFace(GL_BACK);
-	} else if (cullface == "front") {
-		glCullFace(GL_FRONT);
-	} else {
-		glCullFace(GL_FRONT_AND_BACK);
-	}
-}
-
-void applyCullorder(string cullorder) {
-	if (cullorder == "CCW") {
-		glFrontFace(GL_CCW);
-	} else {
-		glFrontFace(GL_CW);
-	}
-
-}
-
 void applyLights(bool doublesided, bool local, bool enabled, float amb_x,
-		float amb_y, float amb_z, float amb_a) {
+        float amb_y, float amb_z, float amb_a) {
 	if (enabled) {
 		glEnable(GL_LIGHTING);
 		glEnable(GL_NORMALIZE);
@@ -199,19 +183,23 @@ void applyLights(bool doublesided, bool local, bool enabled, float amb_x,
 
 void Scene::initScene() {
 
-	glClearColor(bckg_x, bckg_y, bckg_z, bckg_a);
+	glClearColor(bckg_r, bckg_g, bckg_b, bckg_a);
 
-	applyDrawmode(drawmode);
+	glPolygonMode(cullface, drawmode);
 
-	applyShading(shading);
+	glShadeModel(shading);
 
-	applyCullface(cullface);
+	glCullFace(cullface);
+	glFrontFace(cullorder);
 
-	applyCullorder(cullorder);
-
-	applyLights(doublesided, local, enabled, amb_x, amb_y, amb_z, amb_a);
+	applyLights(doublesided, local, enabled, amb_r, amb_g, amb_b, amb_a);
 }
 
 Scene::~Scene() {
-// TODO Auto-generated destructor stub
+}
+
+Scene *Scene::getInstance() {
+	if (instance == NULL)
+		instance = new Scene();
+	return instance;
 }

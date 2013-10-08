@@ -11,7 +11,6 @@
 using namespace std;
 
 void setPaths() {
-
 	string yaf_path;
 	string texture_path;
 
@@ -19,7 +18,6 @@ void setPaths() {
 	cin >> yaf_path;
 	cout << endl << "Insert path to texture folder: ";
 	cin >> texture_path;
-
 }
 
 string getTexturePath(string texture_path, string texture_file) {

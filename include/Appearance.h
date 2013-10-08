@@ -9,23 +9,37 @@
 #define APPEARANCE_H_
 
 #include <string>
-#include "CGFappearance.h"
 
 using namespace std;
 
-class Appearance: public CGFappearance {
+class Appearance {
 protected:
 	string id;
-	float emi_x, emi_y, emi_z, emi_a;
+	float emi_r, emi_g, emi_b, emi_a;
+	float amb_r, amb_g, amb_b, amb_a;
+	float dif_r, dif_g, dif_b, dif_a;
+	float spec_r, spec_g, spec_b, spec_a;
+	float shin;
+	string textRef;
+	float sWrap, tWrap;
+	bool isTextDefined;
+
 public:
 	Appearance();
 	Appearance(string id);
-	Appearance(string id, string tex, int s, int t);
-	void setEmissive(float emi_x, float emi_y, float emi_z, float emi_a);
-	int getSWrap();
-	int getTWrap();
+	void setId(string id);
+	void setEmissivity(float emi_r, float emi_g, float emi_b, float emi_a);
+	void setAmbient(float amb_r, float amb_g, float amb_b, float amb_a);
+	void setDiffuse(float dif_r, float dif_g, float dif_b, float dif_a);
+	void setSpecular(float spec_r, float spec_g, float spec_b, float spec_a);
+	void setShinniness(float shin);
+	void setTextProp(string text_id, float s_wrap, float t_wrap);
+	float getSWrap();
+	float getTWrap();
 	void applyEmissive();
 	virtual ~Appearance();
+
+	void apply();
 };
 
 #endif /* APPEARANCE_H_ */

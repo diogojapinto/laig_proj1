@@ -14,12 +14,9 @@
 using std::cout;
 using std::exception;
 
-Scene *scene;
-
 int main(int argc, char* argv[]) {
 
-	scene = new Scene();
-	scene->setCullorder("CCW");
+	Scene::getInstance()->setCullorder("CCW");
 
 	XMLScene scene("../scene.yaf");
 

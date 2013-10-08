@@ -15,6 +15,7 @@
 #include "XMLScene.h"
 #include <iostream>
 #include <algorithm>
+#include "utils.h"
 
 #define MAX_STRING_LEN 256
 
@@ -120,7 +121,7 @@ bool XMLScene::parseGlobals() {
 	char background_str[9];
 	double back_r = 0, back_g = 0, back_b = 0, back_a = 0;
 
-	if ((strcpy(background_str, globalsElement->Attribute("background")))
+	if ((strdup(background_str, globalsElement->Attribute("background")))
 	        == NULL) {
 		printf("Error parsing background!\n");
 		return false;
@@ -142,7 +143,7 @@ bool XMLScene::parseCameras() {
 	bool valid_nr_cameras = false;
 	printf("Processing cameras...\n\n");
 	char init_camera[MAX_STRING_LEN];
-	if ((strcpy(init_camera, camerasElement->Attribute("initial"))) == NULL) {
+	if ((strdup(init_camera, camerasElement->Attribute("initial"))) == NULL) {
 		printf("Error parsing background!\n");
 		exit(-1);
 	}
@@ -163,7 +164,7 @@ bool XMLScene::parseCameras() {
 		        persp_cam_targ_z = 0;
 
 		do {
-			if ((strcpy(persp_cam_id, persp_cam->Attribute("id"))) == NULL) {
+			if ((strdup(persp_cam_id, persp_cam->Attribute("id"))) == NULL) {
 				printf("Error parsing perspective camera id!\n");
 				return false;
 			}
@@ -186,7 +187,7 @@ bool XMLScene::parseCameras() {
 				return false;
 			}
 
-			if ((strcpy(persp_cam_pos, persp_cam->Attribute("pos"))) == NULL) {
+			if ((strdup(persp_cam_pos, persp_cam->Attribute("pos"))) == NULL) {
 				printf("Error parsing \"%s\" camera pos field!\n",
 				        persp_cam_id);
 				return false;
@@ -199,7 +200,7 @@ bool XMLScene::parseCameras() {
 				return false;
 			}
 
-			if ((strcpy(persp_cam_targ, persp_cam->Attribute("target"))) == NULL) {
+			if ((strdup(persp_cam_targ, persp_cam->Attribute("target"))) == NULL) {
 				printf("Error parsing \"%s\" camera target field!\n",
 				        persp_cam_id);
 				return false;
@@ -230,7 +231,7 @@ bool XMLScene::parseCameras() {
 		        ortho_cam_right = 0, ortho_cam_top = 0, ortho_cam_bottom = 0;
 		do {
 
-			if ((strcpy(ortho_cam_id, ortho_cam->Attribute("id"))) == NULL) {
+			if ((strdup(ortho_cam_id, ortho_cam->Attribute("id"))) == NULL) {
 				printf("Error parsing ortho camera id!\n");
 				return false;
 			}
@@ -293,7 +294,7 @@ bool XMLScene::parseLighting() {
 	bool is_doublesided = false, is_local = true, is_enabled = true;
 	double light_amb_r = 0, light_amb_g = 0, light_amb_b = 0, light_amb_a = 0;
 
-	if (strcpy(tmp_str, lightingElement->Attribute("doublesided")) == NULL) {
+	if (strdup(tmp_str, lightingElement->Attribute("doublesided")) == NULL) {
 		printf("Invalid argument of doublesided!\n");
 		return false;
 	}
@@ -306,7 +307,7 @@ bool XMLScene::parseLighting() {
 		return false;
 	}
 
-	if (strcpy(tmp_str, lightingElement->Attribute("local")) == NULL) {
+	if (strdup(tmp_str, lightingElement->Attribute("local")) == NULL) {
 		printf("Invalid argument of local!\n");
 		return false;
 	}
@@ -319,7 +320,7 @@ bool XMLScene::parseLighting() {
 		return false;
 	}
 
-	if (strcpy(tmp_str, lightingElement->Attribute("enabled")) == NULL) {
+	if (strdup(tmp_str, lightingElement->Attribute("enabled")) == NULL) {
 		printf("Invalid argument of enabled!\n");
 		return false;
 	}
@@ -332,7 +333,7 @@ bool XMLScene::parseLighting() {
 		return false;
 	}
 
-	if (strcpy(tmp_str, lightingElement->Attribute("ambient")) == NULL) {
+	if (strdup(tmp_str, lightingElement->Attribute("ambient")) == NULL) {
 		printf("Invalid argument of ambient!\n");
 		return false;
 	}
@@ -361,12 +362,12 @@ bool XMLScene::parseLighting() {
 			        omni_amb_b = 0, omni_amb_a = 0, omni_dif_r = 0, omni_dif_g =
 			                0, omni_dif_b = 0, omni_dif_a = 0, omni_spec_r = 0,
 			        omni_spec_g = 0, omni_spec_b = 0, omni_spec_a = 0;
-			if (strcpy(omni_id, omni->Attribute("id")) == NULL) {
+			if (strdup(omni_id, omni->Attribute("id")) == NULL) {
 				printf("Invalid id argument!\n");
 				return false;
 			}
 
-			if (strcpy(tmp_str, omni->Attribute("enabled")) == NULL) {
+			if (strdup(tmp_str, omni->Attribute("enabled")) == NULL) {
 				printf("Error on atribute \"enabled\" of %s light!\n", omni_id);
 				return false;
 			}
@@ -380,7 +381,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, omni->Attribute("location")) == NULL) {
+			if (strdup(tmp_str, omni->Attribute("location")) == NULL) {
 				printf("No attribute \"location\" of %s light!\n", omni_id);
 				return false;
 			}
@@ -391,7 +392,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, omni->Attribute("ambient")) == NULL) {
+			if (strdup(tmp_str, omni->Attribute("ambient")) == NULL) {
 				printf("No attribute \"ambient\" of %s light!\n", omni_id);
 				return false;
 			}
@@ -402,7 +403,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, omni->Attribute("diffuse")) == NULL) {
+			if (strdup(tmp_str, omni->Attribute("diffuse")) == NULL) {
 				printf("No attribute \"diffuse\" of %s light!\n", omni_id);
 				return false;
 			}
@@ -413,7 +414,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, omni->Attribute("specular")) == NULL) {
+			if (strdup(tmp_str, omni->Attribute("specular")) == NULL) {
 				printf("No attribute \"specular\" of %s light!\n", omni_id);
 				return false;
 			}
@@ -448,12 +449,12 @@ bool XMLScene::parseLighting() {
 			        spot_angle = 0, spot_exp = 0, spot_dir_x = 0,
 			        spot_dir_y = 0, spot_dir_z = 0;
 
-			if (strcpy(spot_id, spot->Attribute("id")) == NULL) {
+			if (strdup(spot_id, spot->Attribute("id")) == NULL) {
 				printf("Invalid id argument!\n");
 				return false;
 			}
 
-			if (strcpy(tmp_str, spot->Attribute("enabled")) == NULL) {
+			if (strdup(tmp_str, spot->Attribute("enabled")) == NULL) {
 				printf("Error on atribute \"enabled\" of %s light!\n", spot_id);
 				return false;
 			}
@@ -467,7 +468,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, spot->Attribute("location")) == NULL) {
+			if (strdup(tmp_str, spot->Attribute("location")) == NULL) {
 				printf("No attribute \"location\" of %s light!\n", spot_id);
 				return false;
 			}
@@ -478,7 +479,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, spot->Attribute("ambient")) == NULL) {
+			if (strdup(tmp_str, spot->Attribute("ambient")) == NULL) {
 				printf("No attribute \"ambient\" of %s light!\n", spot_id);
 				return false;
 			}
@@ -489,7 +490,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, spot->Attribute("diffuse")) == NULL) {
+			if (strdup(tmp_str, spot->Attribute("diffuse")) == NULL) {
 				printf("No attribute \"diffuse\" of %s light!\n", spot_id);
 				return false;
 			}
@@ -500,7 +501,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, spot->Attribute("specular")) == NULL) {
+			if (strdup(tmp_str, spot->Attribute("specular")) == NULL) {
 				printf("No attribute \"specular\" of %s light!\n", spot_id);
 				return false;
 			}
@@ -521,7 +522,7 @@ bool XMLScene::parseLighting() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, spot->Attribute("direction")) == NULL) {
+			if (strdup(tmp_str, spot->Attribute("direction")) == NULL) {
 				printf("No attribute \"direction\" of %s light!\n", spot_id);
 				return false;
 			}
@@ -560,12 +561,12 @@ bool XMLScene::parseTextures() {
 	if ((text = texturesElement->FirstChildElement("texture")) != NULL) {
 		char text_id[MAX_STRING_LEN], text_file[MAX_STRING_LEN];
 		do {
-			if (strcpy(text_id, text->Attribute("id")) == NULL) {
+			if (strdup(text_id, text->Attribute("id")) == NULL) {
 				printf("Error in \"id\" attribute!\n");
 				return false;
 			}
 
-			if (strcpy(text_file, text->Attribute("file")) == NULL) {
+			if (strdup(text_file, text->Attribute("file")) == NULL) {
 				printf("Error in \"file\" attribute!\n");
 				return false;
 			}
@@ -580,7 +581,6 @@ bool XMLScene::parseTextures() {
 bool XMLScene::parseAppearences() {
 
 	printf("Processing appearences...\n\n");
-	printf("kdkdkdkkdk\n");
 
 	bool valid_nr_appear = false;
 	char tmp_str[MAX_STRING_LEN], app_id[MAX_STRING_LEN],
@@ -594,12 +594,12 @@ bool XMLScene::parseAppearences() {
 	if ((app = appearencesElement->FirstChildElement("appearance")) != NULL) {
 		valid_nr_appear = true;
 		do {
-			if (strcpy(app_id, app->Attribute("id")) == NULL) {
+			if (strdup(app_id, app->Attribute("id")) == NULL) {
 				printf("Error in \"id\" attribute!\n");
 				return false;
 			}
 
-			if (strcpy(tmp_str, app->Attribute("emissive")) == NULL) {
+			if (strdup(tmp_str, app->Attribute("emissive")) == NULL) {
 				printf("Error in \"emissive\" attribute of %s appearence!\n",
 				        app_id);
 				return false;
@@ -613,7 +613,7 @@ bool XMLScene::parseAppearences() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, app->Attribute("ambient")) == NULL) {
+			if (strdup(tmp_str, app->Attribute("ambient")) == NULL) {
 				printf("Error in \"ambient\" attribute of %s appearence!\n",
 				        app_id);
 				return false;
@@ -627,7 +627,7 @@ bool XMLScene::parseAppearences() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, app->Attribute("diffuse")) == NULL) {
+			if (strdup(tmp_str, app->Attribute("diffuse")) == NULL) {
 				printf("Error in \"diffuse\" attribute of %s appearence!\n",
 				        app_id);
 				return false;
@@ -641,7 +641,7 @@ bool XMLScene::parseAppearences() {
 				return false;
 			}
 
-			if (strcpy(tmp_str, app->Attribute("specular")) == NULL) {
+			if (strdup(tmp_str, app->Attribute("specular")) == NULL) {
 				printf("Error in \"specular\" attribute of %s appearence!\n",
 				        app_id);
 				return false;
@@ -662,7 +662,7 @@ bool XMLScene::parseAppearences() {
 				return false;
 			}
 
-			if (strcpy(app_text_ref, app->Attribute("textureref")) != NULL) {
+			if (strdup(app_text_ref, app->Attribute("textureref")) != NULL && strcmp(app_text_ref, "") != 0) {
 				if (app->Attribute("texlength_s", &app_text_len_s) == NULL) {
 					printf(
 					        "Error parsing \"texlength_s\" attribute of %s appearence!\n",
@@ -677,7 +677,7 @@ bool XMLScene::parseAppearences() {
 					return false;
 				}
 			} else {
-				strcpy(app_text_ref, "none");
+				strdup(app_text_ref, "none");
 				app_text_len_s = 0.0;
 				app_text_len_t = 0.0;
 			}
@@ -705,7 +705,7 @@ bool XMLScene::parseGraph() {
 
 	char root_id[MAX_STRING_LEN];
 
-	if (strcpy(root_id, graphElement->Attribute("rootid")) == NULL) {
+	if (strdup(root_id, graphElement->Attribute("rootid")) == NULL) {
 		printf("Error reading \"rootid\"\n");
 		return false;
 	}
@@ -728,7 +728,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
         vector<string> nodes_processed) {
 	char node_id[MAX_STRING_LEN];
 
-	if (strcpy(node_id, curr_node->Attribute("id")) == NULL) {
+	if (strdup(node_id, curr_node->Attribute("id")) == NULL) {
 		printf("Error reading \"id\" attribute!\n");
 		return false;
 	}
@@ -748,7 +748,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 	TiXmlElement *transf = NULL;
 	while ((transf = (TiXmlElement*) transf_block->IterateChildren(transf))) {
 		char t_type[MAX_STRING_LEN];
-		if (strcpy(t_type, transf->Value()) == NULL) {
+		if (strdup(t_type, transf->Value()) == NULL) {
 			printf("Invalid transformation on node %s\n", node_id);
 			return false;
 		}
@@ -756,7 +756,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			char tmp_str[MAX_STRING_LEN];
 			double t_x = 0, t_y = 0, t_z = 0;
 
-			if (strcpy(tmp_str, transf->Attribute("to")) == NULL) {
+			if (strdup(tmp_str, transf->Attribute("to")) == NULL) {
 				printf("Error on translate transformation on node %s!\n",
 				        node_id);
 				return false;
@@ -774,7 +774,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			char tmp_str[2];
 			char r_axis = '\0';
 			double r_angle;
-			if (strcpy(tmp_str, transf->Attribute("axis")) == NULL) {
+			if (strdup(tmp_str, transf->Attribute("axis")) == NULL) {
 				printf("Error on rotate transformation on node %s!\n", node_id);
 				return false;
 			}
@@ -791,7 +791,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			char tmp_str[MAX_STRING_LEN];
 			double f_x = 0, f_y = 0, f_z = 0;
 
-			if (strcpy(tmp_str, transf->Attribute("factor")) == NULL) {
+			if (strdup(tmp_str, transf->Attribute("factor")) == NULL) {
 				printf("Error on scale transformation on node %s!\n", node_id);
 				return false;
 			}
@@ -813,7 +813,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 	TiXmlElement *appearance = NULL;
 	if ((appearance = curr_node->FirstChildElement("appearanceref"))) {
 		char app_id[MAX_STRING_LEN];
-		if (strcpy(app_id, appearance->Attribute("id")) == NULL) {
+		if (strdup(app_id, appearance->Attribute("id")) == NULL) {
 			printf("Error on \"appearanceref\" block on node %s!\n", node_id);
 			return false;
 		}
@@ -834,12 +834,12 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 	TiXmlElement *child = NULL;
 	while ((child = (TiXmlElement *) children->IterateChildren(child))) {
 		char child_type[MAX_STRING_LEN];
-		strcpy(child_type, child->Value());
+		strdup(child_type, child->Value());
 
 		if (strcmp(child_type, "rectangle") == 0) {
 			char tmp_str[MAX_STRING_LEN];
 			double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
-			if (strcpy(tmp_str, child->Attribute("xy1")) == NULL) {
+			if (strdup(tmp_str, child->Attribute("xy1")) == NULL) {
 				printf("Error reading \"xy1\" attribute!\n");
 				return false;
 			}
@@ -848,7 +848,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 				return false;
 			}
 
-			if (strcpy(tmp_str, child->Attribute("xy2")) == NULL) {
+			if (strdup(tmp_str, child->Attribute("xy2")) == NULL) {
 				printf("Error reading \"xy2\" attribute!\n");
 				return false;
 			}
@@ -863,7 +863,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			char tmp_str[MAX_STRING_LEN];
 			double x1 = 0, x2 = 0, x3 = 0, y1 = 0, y2 = 0, y3 = 0, z1 = 0, z2 =
 			        0, z3 = 0;
-			if (strcpy(tmp_str, child->Attribute("xyz1")) == NULL) {
+			if (strdup(tmp_str, child->Attribute("xyz1")) == NULL) {
 				printf("Error reading \"xyz1\" attribute!\n");
 				return false;
 			}
@@ -872,7 +872,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 				return false;
 			}
 
-			if (strcpy(tmp_str, child->Attribute("xyz2")) == NULL) {
+			if (strdup(tmp_str, child->Attribute("xyz2")) == NULL) {
 				printf("Error reading \"xyz2\" attribute!\n");
 				return false;
 			}
@@ -881,7 +881,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 				return false;
 			}
 
-			if (strcpy(tmp_str, child->Attribute("xyz3")) == NULL) {
+			if (strdup(tmp_str, child->Attribute("xyz3")) == NULL) {
 				printf("Error reading \"xyz3\" attribute!\n");
 				return false;
 			}
@@ -982,7 +982,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 
 		} else if (strcmp(child_type, "noderef") == 0) {
 			char next_node_id[MAX_STRING_LEN];
-			if (strcpy(next_node_id, child->Attribute("id")) == NULL) {
+			if (strdup(next_node_id, child->Attribute("id")) == NULL) {
 				printf("Error reading noderef's id!\n");
 				return false;
 			}

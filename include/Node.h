@@ -10,7 +10,7 @@
 
 #include <string>
 #include <list>
-#include "CGFappearance.h"
+#include "Appearance.h"
 
 using namespace std;
 
@@ -33,7 +33,7 @@ public:
 	void addScale(float x, float y, float z);
 	void addRotation(float angle, char axis);
 	const float* getTransform();
-	string getAppearance();
+	Appearance *getAppearance();
 	list<string> getRefs();
 	string getId();
 	virtual ~Node();

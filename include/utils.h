@@ -13,4 +13,6 @@ float* getNormalsAlternative(std::vector<float> x, std::vector<float> y,
         std::vector<float> z, float x_center, float y_center,
         float z_center);
 
+char *strdup(char *str1, const char *str2);
+
 #endif
