@@ -580,6 +580,7 @@ bool XMLScene::parseTextures() {
 bool XMLScene::parseAppearences() {
 
 	printf("Processing appearences...\n\n");
+	printf("kdkdkdkkdk\n");
 
 	bool valid_nr_appear = false;
 	char tmp_str[MAX_STRING_LEN], app_id[MAX_STRING_LEN],
@@ -593,8 +594,6 @@ bool XMLScene::parseAppearences() {
 	if ((app = appearencesElement->FirstChildElement("appearance")) != NULL) {
 		valid_nr_appear = true;
 		do {
-
-			printf("kdkdk");
 			if (strcpy(app_id, app->Attribute("id")) == NULL) {
 				printf("Error in \"id\" attribute!\n");
 				return false;

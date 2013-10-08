@@ -82,7 +82,6 @@ void LightingScene::init() {
 	light2->setDiffuse(light2_dif);
 	light2->setSpecular(light2_spec);
 
-	light2->disable();
 	light2->enable();
 
 	light3 = new CGFlight(GL_LIGHT3, light3_pos);
@@ -94,7 +93,6 @@ void LightingScene::init() {
 	//background light
 	light4 = new CGFlight(GL_LIGHT4, light4_pos);
 	light4->setAmbient(ambientNull);
-	//light4->disable();
 	light4->enable();
 
 	rect = new MyRectangle();

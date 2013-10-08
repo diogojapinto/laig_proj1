@@ -97,10 +97,7 @@
             ambient="1.0 1.0 1.0 1.0"
             diffuse="1.0 1.0 1.0 1.0"
             specular="1.0 1.0 1.0 1.0"
-            shininess="10.0"
-            textureref="wall"
-            texlength_s="1"
-            texlength_t="1"  />
+            shininess="10.0"  />
 
         <appearance id="house_walls_appearence"
             emissive="0.0 0.0 0.0 0.0"
