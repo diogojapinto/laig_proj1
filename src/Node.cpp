@@ -29,7 +29,7 @@ Node::Node(string id, float transforms[16]) {
 	nodeAppearance = new CGFappearance();
 }
 
-void Node::addRef(Node* ref) {
+void Node::addRef(string ref) {
 
 	refs.push_back(ref);
 }
@@ -102,7 +102,7 @@ CGFappearance* Node::getAppearance() {
 	return nodeAppearance;
 }
 
-list<Node*> Node::getRefs() {
+list<string> Node::getRefs() {
 
 	return refs;
 }

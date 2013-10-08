@@ -18,14 +18,14 @@ class Node {
 private:
 	string id;
 	float transforms[16];
-	list<Node*> refs;
+	list<string> refs;
 	CGFappearance* nodeAppearance;
 
 public:
 	Node();
 	Node(string id);
 	Node(string id, float transforms[16]);
-	void addRef(Node* ref);
+	void addRef(string ref);
 	void addAppearance(CGFappearance* appearance);
 	void setTransform(float transforms[16]);
 	void resetTransform();
@@ -34,7 +34,7 @@ public:
 	void addRotation(float angle, char axis);
 	const float* getTransform();
 	CGFappearance* getAppearance();
-	list<Node*> getRefs();
+	list<string> getRefs();
 	string getId();
 	virtual ~Node();
 };

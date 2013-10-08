@@ -35,8 +35,6 @@ class CGFappearance
 		void setTexture(CGFtexture *tp);				///< Assigns a texture preloaded in a CGFtexture instance to this appearance instance. Useful to avoid multiple loading of the same texture for differente appearances (e.g. with different wrapping parameters or material properties)
 		void setTextureWrap(int, int);					///< Sets the texture wrapping mode
 
-		int getSWrap() { return sWrap;};
-		int getTWrap() { return tWrap;};
 	protected:
 
 		int materialType;
