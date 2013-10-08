@@ -1,30 +1,60 @@
 /*
  * Interface.cpp
  *
- *  Created on: Oct 5, 2013
+ *  Created on: Oct 8, 2013
  *      Author: wso277
  */
 
-#include <iostream>
-#include <string>
+#include "Interface.h"
 
-using namespace std;
-
-void setPaths() {
-	string yaf_path;
-	string texture_path;
-
-	cout << "Insert path to yaf file: ";
-	cin >> yaf_path;
-	cout << endl << "Insert path to texture folder: ";
-	cin >> texture_path;
+Interface::Interface() {
 }
 
-string getTexturePath(string texture_path, string texture_file) {
-	string tex_path;
+virtual Interface::~Interface() {
+}
 
-	tex_path = texture_path + "/" + texture_file;
+void Interface::init(int parent) {
+	glui_window = GLUI_Master.create_glui_subwindow(parent,
+	GLUI_SUBWINDOW_BOTTOM);
+	GLUI_Master.set_glutKeyboardFunc(Interface::preprocessKeyboard);
 
-	return tex_path;
+	GLUI_Master.set_glutMouseFunc(Interface::preprocessMouse);
+	glutMotionFunc(Interface::preprocessMouseMoved);
+	glutPassiveMotionFunc(Interface::preprocessPassiveMouseMoved);
+	displacementX = 0;
+	displacementY = 0;
+
+	pressing_left = false;
+	pressing_right = false;
+	pressing_middle = false;
+
+	prev_X = 0;
+	prev_Y = 0;
+}
+
+void Interface::initGUI() {
+
+}
+static void Interface::setActiveInterface(CGFinterface *gli) {
+	activeInterface = gli;
+}
+
+static void Interface::preprocessKeyboard(unsigned char key, int x, int y) {
+	modifiers = glutGetModifiers();
+}
+
+static void Interface::preprocessMouse(int button, int state, int x, int y) {
+	modifiers = glutGetModifiers();
+}
+static void Interface::preprocessMouseMoved(int x, int y) {
+
+}
+
+static void Interface::preprocessPassiveMouseMoved(int x, int y) {
+
+}
+
+static void Interface::preprocessGUI(GLUI_Control *ctrl) {
+	activeInterface->processGUI(ctrl);
 }
 
