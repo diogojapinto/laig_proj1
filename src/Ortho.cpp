@@ -63,9 +63,7 @@ void Ortho::setCamera() {
 	glOrtho(left, right, bottom, top, near, far);
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
-	//gluLookAt(15, 5, 40, 5, 0, 10, 0, 1, 0);
 }
 
 Ortho::~Ortho() {
-	// TODO Auto-generated destructor stub
 }

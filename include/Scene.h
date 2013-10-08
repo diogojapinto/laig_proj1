@@ -28,6 +28,7 @@ using namespace std;
 typedef map<string, Node*> GraphElem;
 typedef map<string, CGFtexture *> TexElem;
 typedef map<string, Appearance *> AppearanceElem;
+typedef map<string, Camera *> CameraElem;
 
 class Scene {
 private:
@@ -39,8 +40,9 @@ private:
 	unsigned int cullface;
 	unsigned int cullorder;
 	string rootId;
+	string init_camera;
 	vector<Lights*> lights;
-	vector<Camera*> cameras;
+	CameraElem cameras;
 	TexElem textures;
 	AppearanceElem appearances;
 	GraphElem graph;
@@ -59,8 +61,9 @@ public:
 	void setCullface(string cullface);
 	void setCullorder(string cullorder);
 	void setRootId(string rootId);
+	void setInitCamera(string init_camera);
 	void addLight(Lights* light);
-	void addCamera(Camera* camera);
+	void addCamera(string key, Camera* camera);
 	bool addTexture(string key, string path);
 	void addAppearance(string key, Appearance* appearance);
 	void addNode(string key, Node* node);
@@ -72,10 +75,12 @@ public:
 	const unsigned int getCullorder();
 	string getRootId();
 	Lights* getLight(int index);
-	Camera* getCamera(int index);
+	Camera* getCamera(string key);
 	CGFtexture *getTexture(string key);
 	Appearance* getAppearance(string key);
 	Node* getNode(string key);
+	void applyLights();
+	void initCamera();
 	void initScene();
 	virtual ~Scene();
 };

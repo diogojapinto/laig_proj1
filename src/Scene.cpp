@@ -80,12 +80,16 @@ void Scene::setRootId(string rootId) {
 	this->rootId = rootId;
 }
 
+void Scene::setInitCamera(string init_camera) {
+	this->init_camera = init_camera;
+}
+
 void Scene::addLight(Lights* light) {
 	lights.push_back(light);
 }
 
-void Scene::addCamera(Camera* camera) {
-	cameras.push_back(camera);
+void Scene::addCamera(string key, Camera* camera) {
+	cameras.insert(CameraElem::value_type(key, camera));
 }
 
 bool Scene::addTexture(string key, string path) {
@@ -147,8 +151,8 @@ Lights* Scene::getLight(int index) {
 	return lights[index];
 }
 
-Camera* Scene::getCamera(int index) {
-	return cameras[index];
+Camera* Scene::getCamera(string key) {
+	return cameras[key];
 }
 
 CGFtexture * Scene::getTexture(string key) {
@@ -163,22 +167,29 @@ Node* Scene::getNode(string key) {
 	return graph[key];
 }
 
-void applyLights(bool doublesided, bool local, bool enabled, float amb_x,
-        float amb_y, float amb_z, float amb_a) {
+void Scene::applyLights() {
 	if (enabled) {
 		glEnable(GL_LIGHTING);
 		glEnable(GL_NORMALIZE);
 
 		glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesided);
 
-		float amb[4] = { amb_x, amb_y, amb_z, amb_a };
+		float amb[4] = { amb_r, amb_g, amb_b, amb_a };
 		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
 		glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, local);
+
+		for (unsigned int i = 0; i < lights.size(); i++) {
+			lights[i]->toggleLight(i);
+		}
 
 	} else {
 		glDisable(GL_LIGHTING);
 	}
 
+}
+
+void Scene::initCamera() {
+	cameras[init_camera]->setCamera();
 }
 
 void Scene::initScene() {
@@ -192,7 +203,10 @@ void Scene::initScene() {
 	glCullFace(cullface);
 	glFrontFace(cullorder);
 
-	applyLights(doublesided, local, enabled, amb_r, amb_g, amb_b, amb_a);
+	applyLights();
+
+	initCamera();
+
 }
 
 Scene::~Scene() {
