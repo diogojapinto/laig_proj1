@@ -8,11 +8,7 @@
 using namespace std;
 
 class XMLScene {
-public:
-	XMLScene(char *filename);
-	~XMLScene();
-
-private:
+	bool valid;
 	TiXmlDocument* doc;
 	TiXmlElement* globalsElement;
 	TiXmlElement* camerasElement;
@@ -20,7 +16,13 @@ private:
 	TiXmlElement* texturesElement;
 	TiXmlElement* appearencesElement;
 	TiXmlElement* graphElement;
+	string yaf_path;
+	string texture_base_path;
 
+public:
+	XMLScene();
+	~XMLScene();
+	void loadFile();
 	TiXmlElement *findChildByAttribute(TiXmlElement *parent,
 	        const char * attr,
 	        const char *val);
@@ -31,6 +33,8 @@ private:
 	bool parseAppearences();
 	bool parseGraph();
 	bool parseNode(TiXmlElement *curr_node, vector<string> nodes_processed);
+	void setPaths();
+	string getTexturePath(string texture_path, string texture_file);
 };
 
 #endif

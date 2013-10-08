@@ -8,11 +8,11 @@
 #ifndef SPOTLIGHT_H_
 #define SPOTLIGHT_H_
 
-#include "Lights.h"
+#include "Light.h"
 
 using namespace std;
 
-class Spotlight: public Lights {
+class Spotlight: public Light {
 private:
 	float angle;
 	float exponent;
@@ -24,7 +24,7 @@ public:
 	void setAngle(float angle);
 	void setExponent(float exponent);
 	void setDir(float dir_x, float dir_y, float dir_z);
-	virtual void readyLights(int index);
+	virtual void readyLight(int index);
 	virtual ~Spotlight();
 };
 

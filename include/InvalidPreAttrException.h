@@ -18,6 +18,7 @@ public:
 	InvalidPreAttrException();
 	InvalidPreAttrException(string attr);
 	virtual ~InvalidPreAttrException();
+	string getErrMessg();
 };
 
 #endif /* INVALIDPREATTREXCEPTION_H_ */

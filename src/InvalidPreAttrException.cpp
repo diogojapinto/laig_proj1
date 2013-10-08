@@ -19,3 +19,6 @@ InvalidPreAttrException::InvalidPreAttrException(string attr) {
 InvalidPreAttrException::~InvalidPreAttrException() {
 }
 
+string InvalidPreAttrException::getErrMessg() {
+	return error_message;
+}

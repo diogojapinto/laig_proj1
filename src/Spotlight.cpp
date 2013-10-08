@@ -8,7 +8,7 @@
 #include "Spotlight.h"
 #include "CGFapplication.h"
 
-Spotlight::Spotlight():Lights() {
+Spotlight::Spotlight():Light() {
 	angle = 0;
 	exponent = 0;
 	dir_x = 0;
@@ -16,7 +16,7 @@ Spotlight::Spotlight():Lights() {
 	dir_z = 0;
 }
 
-Spotlight::Spotlight(string id):Lights(id) {
+Spotlight::Spotlight(string id):Light(id) {
 	angle = 0;
 	exponent = 0;
 	dir_x = 0;
@@ -24,7 +24,7 @@ Spotlight::Spotlight(string id):Lights(id) {
 	dir_z = 0;
 }
 
-Spotlight::Spotlight(string id, bool enabled):Lights(id, enabled) {
+Spotlight::Spotlight(string id, bool enabled):Light(id, enabled) {
 	angle = 0;
 	exponent = 0;
 	dir_x = 0;
@@ -46,7 +46,7 @@ void Spotlight::setDir(float dir_x, float dir_y, float dir_z) {
 	this->dir_z = dir_z;
 }
 
-void Spotlight::readyLights(int index) {
+void Spotlight::readyLight(int index) {
 	float loc[4] = { loc_x, loc_y, loc_z, 1 };
 	float amb[4] = { amb_x, amb_y, amb_z, amb_a };
 	float dif[4] = { dif_x, dif_y, dif_z, dif_a };
@@ -146,6 +146,5 @@ void Spotlight::readyLights(int index) {
 }
 
 Spotlight::~Spotlight() {
-	// TODO Auto-generated destructor stub
 }
 

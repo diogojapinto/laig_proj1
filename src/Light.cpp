@@ -1,16 +1,9 @@
-/*
- * Lights.cpp
- *
- *  Created on: Oct 2, 2013
- *      Author: wso277
- */
-
-#include "Lights.h"
+#include "Light.h"
 #include "CGFapplication.h"
 
 using namespace std;
 
-Lights::Lights() {
+Light::Light() {
 	id = "";
 	enabled = false;
 	ready = false;
@@ -31,7 +24,7 @@ Lights::Lights() {
 	spec_a = 0;
 }
 
-Lights::Lights(string id) {
+Light::Light(string id) {
 	this->id = id;
 	enabled = false;
 	ready = false;
@@ -52,7 +45,7 @@ Lights::Lights(string id) {
 	spec_a = 0;
 }
 
-Lights::Lights(string id, bool enabled) {
+Light::Light(string id, bool enabled) {
 	this->id = id;
 	this->enabled = enabled;
 	ready = false;
@@ -72,27 +65,27 @@ Lights::Lights(string id, bool enabled) {
 	spec_z = 0;
 	spec_a = 0;
 }
-void Lights::setLocation(float loc_x, float loc_y, float loc_z) {
+void Light::setLocation(float loc_x, float loc_y, float loc_z) {
 	this->loc_x = loc_x;
 	this->loc_y = loc_y;
 	this->loc_z = loc_z;
 }
 
-void Lights::setAmbient(float amb_x, float amb_y, float amb_z, float amb_a) {
+void Light::setAmbient(float amb_x, float amb_y, float amb_z, float amb_a) {
 	this->amb_x = amb_x;
 	this->amb_y = amb_y;
 	this->amb_z = amb_z;
 	this->amb_a = amb_a;
 }
 
-void Lights::setDiffuse(float dif_x, float dif_y, float dif_z, float dif_a) {
+void Light::setDiffuse(float dif_x, float dif_y, float dif_z, float dif_a) {
 	this->dif_x = dif_x;
 	this->dif_y = dif_y;
 	this->dif_z = dif_z;
 	this->dif_a = dif_a;
 }
 
-void Lights::setSpecular(float spec_x, float spec_y, float spec_z,
+void Light::setSpecular(float spec_x, float spec_y, float spec_z,
 		float spec_a) {
 	this->spec_x = spec_x;
 	this->spec_y = spec_y;
@@ -100,7 +93,7 @@ void Lights::setSpecular(float spec_x, float spec_y, float spec_z,
 	this->spec_a = spec_a;
 }
 
-void Lights::readyLights(int index) {
+void Light::readyLight(int index) {
 	float loc[4] = { loc_x, loc_y, loc_z, 1 };
 	float amb[4] = { amb_x, amb_y, amb_z, amb_a };
 	float dif[4] = { dif_x, dif_y, dif_z, dif_a };
@@ -174,10 +167,10 @@ void Lights::readyLights(int index) {
 
 }
 
-void Lights::toggleLight(int index) {
+void Light::toggleLight(int index) {
 
 	if (!ready) {
-		readyLights(index);
+		readyLight(index);
 	}
 
 	switch (index) {
@@ -265,5 +258,5 @@ void Lights::toggleLight(int index) {
 
 }
 
-Lights::~Lights() {
+Light::~Light() {
 }

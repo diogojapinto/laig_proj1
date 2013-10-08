@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "Lights.h"
+#include "Light.h"
 #include "Camera.h"
 #include "Node.h"
 #include "CGFappearance.h"
@@ -41,7 +41,7 @@ private:
 	unsigned int cullorder;
 	string rootId;
 	string init_camera;
-	vector<Lights*> lights;
+	vector<Light*> lights;
 	CameraElem cameras;
 	TexElem textures;
 	AppearanceElem appearances;
@@ -62,19 +62,19 @@ public:
 	void setCullorder(string cullorder);
 	void setRootId(string rootId);
 	void setInitCamera(string init_camera);
-	void addLight(Lights* light);
+	void addLight(Light* light);
 	void addCamera(string key, Camera* camera);
-	bool addTexture(string key, string path);
+	void addTexture(string key, string path);
 	void addAppearance(string key, Appearance* appearance);
 	void addNode(string key, Node* node);
-	void setLights(bool doublesided, bool local, bool enabled);
+	void setGlobalLights(bool doublesided, bool local, bool enabled);
 	void setAmb(float amb_r, float amb_g, float amb_b, float amb_a);
 	unsigned int getDrawmode();
 	unsigned int getShading();
 	const unsigned int getCullface();
 	const unsigned int getCullorder();
 	string getRootId();
-	Lights* getLight(int index);
+	Light* getLight(int index);
 	Camera* getCamera(string key);
 	CGFtexture *getTexture(string key);
 	Appearance* getAppearance(string key);

@@ -137,6 +137,7 @@ void LightingScene::init() {
 	glShadeModel(GL_SMOOTH);
 	glutInitWindowSize(600, 800);
 	glutInitWindowPosition(500, 500);
+	//glPolygonMode(GL_BACK, GL_LINE);
 
 }
 
@@ -170,7 +171,7 @@ void LightingScene::display() {
 	/*
 	 * where frustum plans are defined (znear or zfar)???
 	 */
-	gluPerspective(60, 0.75, 0.001, 100);
+	//gluPerspective(60, 0.75, 0.001, 100);
 	//glOrtho(-10, 30, -5, 25, -10, 50);
 
 	glMatrixMode(GL_MODELVIEW);
@@ -363,7 +364,6 @@ void LightingScene::display() {
 	table_leg_appearence->apply();
 	cyl->draw();
 	glPopMatrix();
-
 	// draw tree
 
 	glPushMatrix();

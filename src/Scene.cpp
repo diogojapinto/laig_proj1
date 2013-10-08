@@ -88,7 +88,7 @@ void Scene::setInitCamera(string init_camera) {
 	this->init_camera = init_camera;
 }
 
-void Scene::addLight(Lights* light) {
+void Scene::addLight(Light* light) {
 	lights.push_back(light);
 }
 
@@ -96,16 +96,15 @@ void Scene::addCamera(string key, Camera* camera) {
 	cameras.insert(CameraElem::value_type(key, camera));
 }
 
-bool Scene::addTexture(string key, string path) {
+void Scene::addTexture(string key, string path) {
 	ifstream file;
 	file.open(path.c_str(), ios::out);
 	if (file.is_open()) {
 		CGFtexture *tex = new CGFtexture(path);
 		textures.insert(TexElem::value_type(key, tex));
 		file.close();
-		return true;
 	} else {
-		return false;
+		throw InvalidTexFile(path);
 	}
 
 }
@@ -118,7 +117,7 @@ void Scene::addNode(string key, Node* node) {
 	graph.insert(GraphElem::value_type(key, node));
 }
 
-void Scene::setLights(bool doublesided, bool local, bool enabled) {
+void Scene::setGlobalLights(bool doublesided, bool local, bool enabled) {
 	this->doublesided = doublesided;
 	this->local = local;
 	this->enabled = enabled;
@@ -151,7 +150,7 @@ string Scene::getRootId() {
 	return rootId;
 }
 
-Lights* Scene::getLight(int index) {
+Light* Scene::getLight(int index) {
 	return lights[index];
 }
 
