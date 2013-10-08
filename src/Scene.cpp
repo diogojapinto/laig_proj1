@@ -63,16 +63,20 @@ void Scene::setCullface(string cullface) {
 		this->cullface = GL_BACK;
 	} else if (cullface == "front") {
 		this->cullface = GL_FRONT;
-	} else {
+	} else if (cullface == "both") {
 		this->cullface = GL_FRONT_AND_BACK;
+	} else {
+		throw InvalidPreAttrException("cullface");
 	}
 }
 
 void Scene::setCullorder(string cullorder) {
 	if (cullorder == "CCW") {
 		this->cullorder = GL_CCW;
-	} else {
+	} else if (cullorder == "CW") {
 		this->cullorder = GL_CW;
+	} else {
+		throw InvalidPreAttrException("cullorder");
 	}
 }
 
