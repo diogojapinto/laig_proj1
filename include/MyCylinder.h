@@ -20,7 +20,7 @@ public:
 	MyCylinder(float base,float top,float height,unsigned int slices,unsigned int stacks);
 	virtual ~MyCylinder();
 	void draw();
-	void drawCircle();
+	void drawCircle(float radius);
 };
 
 #endif /* MYCYLINDER_H_ */

@@ -10,7 +10,7 @@
 Interface::Interface() {
 }
 
-virtual Interface::~Interface() {
+Interface::~Interface() {
 }
 
 void Interface::init(int parent) {
@@ -35,26 +35,29 @@ void Interface::init(int parent) {
 void Interface::initGUI() {
 
 }
-static void Interface::setActiveInterface(CGFinterface *gli) {
+
+Interface* Interface::activeInterface;
+int Interface::modifiers;
+
+void Interface::setActiveInterface(Interface *gli) {
 	activeInterface = gli;
 }
 
-static void Interface::preprocessKeyboard(unsigned char key, int x, int y) {
+void Interface::preprocessKeyboard(unsigned char key, int x, int y) {
 	modifiers = glutGetModifiers();
 }
 
-static void Interface::preprocessMouse(int button, int state, int x, int y) {
+void Interface::preprocessMouse(int button, int state, int x, int y) {
 	modifiers = glutGetModifiers();
 }
-static void Interface::preprocessMouseMoved(int x, int y) {
+void Interface::preprocessMouseMoved(int x, int y) {
 
 }
 
-static void Interface::preprocessPassiveMouseMoved(int x, int y) {
+void Interface::preprocessPassiveMouseMoved(int x, int y) {
 
 }
 
-static void Interface::preprocessGUI(GLUI_Control *ctrl) {
-	activeInterface->processGUI(ctrl);
+void Interface::preprocessGUI(GLUI_Control *ctrl) {
 }
 

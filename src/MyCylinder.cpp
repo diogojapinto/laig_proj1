@@ -42,18 +42,18 @@ void MyCylinder::draw() {
 	gluCylinder(q, base, top, height, slices, stacks);
 
 	glPushMatrix();
-	glTranslatef(0.0, 0.0, 1.0);
+	glTranslatef(0.0, 0.0, height);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
-	drawCircle();
+	drawCircle(top);
 	glPopMatrix();
 
 	glPushMatrix();
 	glRotatef(-90.0, 1.0, 0.0, 0.0);
-	drawCircle();
+	drawCircle(base);
 	glPopMatrix();
 }
 
-void MyCylinder::drawCircle() {
+void MyCylinder::drawCircle(float radius) {
 
 	glNormal3f(0.0, 1.0, 0.0);
 
@@ -62,8 +62,8 @@ void MyCylinder::drawCircle() {
 	glBegin(GL_TRIANGLE_STRIP);
 
 	for (int i = 0; i <= 10; i++) {
-		float x = cos(((i * ang_slice) + 90.0) * deg2rad) / 2.0;
-		float y = sin(((i * ang_slice) + 90.0) * deg2rad) / 2.0;
+		float x = radius * cos(((i * ang_slice) + 90.0) * deg2rad);
+		float y = radius * sin(((i * ang_slice) + 90.0) * deg2rad);
 		glTexCoord2f(x + 0.5, y + 0.5);
 		glVertex3f(x, 0.0, y);
 		glTexCoord2f(0.5, 0.5);

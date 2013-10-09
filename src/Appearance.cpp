@@ -8,6 +8,7 @@
 #include "Appearance.h"
 #include "CGFapplication.h"
 #include "Scene.h"
+#include "InvalidTexRef.h"
 
 using namespace std;
 
@@ -103,6 +104,10 @@ void Appearance::setShinniness(float shin) {
 
 void Appearance::setTextProp(string text_id, float s_wrap, float t_wrap) {
 	this->textRef = text_id;
+
+	if (Scene::getInstance()->getTexture(textRef) == NULL) {
+		throw InvalidTexRef(textRef);
+	}
 	this->sWrap = s_wrap;
 	this->tWrap = t_wrap;
 

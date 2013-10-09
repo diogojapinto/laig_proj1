@@ -14,7 +14,7 @@
 class Interface {
 private:
 	static int modifiers; ///< Stores the state of modifier keys (CTRL, ALT, SHIFT) for use in mouse and keyboard event handlers
-	static CGFinterface * activeInterface;
+	static Interface * activeInterface;
 	GLUI* glui_window;
 	float displacementX;
 	float displacementY;
@@ -30,7 +30,7 @@ public:
 
 	void init(int parent);///< Initializes the interface, in terms of handler setup and other low-level operations. Should not be overriden by subclasses
 	void initGUI(); ///< Initializes the graphical interface itself, i.e. creating controls and establishing relations with the scene. Should be overriden by subclasses. Default is empty.
-	static void setActiveInterface(CGFinterface *gli);///< registers _gli_ as the active interface
+	static void setActiveInterface(Interface *gli);///< registers _gli_ as the active interface
 
 	/** @name Static input (keyboard, mouse) handlers to be registered with GLUT
 	 * These methods are global handlers that are registered by the application as the keyboard and mouse handlers.

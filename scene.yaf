@@ -79,7 +79,7 @@
           <texture id="tabletop" file="tabletop.jpg" />
           <texture id="tire" file="tire.jpg" />
           <texture id="tree" file="tree.jpg" />
-          <texture id="treetop" file="treetop.jpg" />
+          <texture id="treetop" file="treetop.jpeg" />
           <texture id="wall" file="wall.jpg" />
     </textures>
 

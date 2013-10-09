@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include "CGFapplication.h"
 #include "InvalidPreAttrException.h"
+#include "InvalidTexFile.h"
+#include <map>
 
 using namespace std;
 
@@ -24,6 +26,7 @@ Scene::Scene() {
 	amb_b = 0;
 	amb_a = 0;
 
+	appearances.insert(AppearanceElem::value_type("default", new Appearance()));
 }
 
 void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
@@ -49,7 +52,7 @@ void Scene::setDrawmode(string drawmode) {
 void Scene::setShading(string shading) {
 	if (shading == "flat") {
 		this->shading = GL_FLAT;
-	} else if (shading == "smooth"){
+	} else if (shading == "gouraud"){
 		this->shading = GL_SMOOTH;
 	} else {
 		throw InvalidPreAttrException("shading");
@@ -159,7 +162,12 @@ Camera* Scene::getCamera(string key) {
 }
 
 CGFtexture * Scene::getTexture(string key) {
-	return textures[key];
+	TexElem::iterator it = textures.find(key);
+	if (it == textures.end()) {
+		return NULL;
+	} else {
+		return it->second;
+	}
 }
 
 Appearance* Scene::getAppearance(string key) {

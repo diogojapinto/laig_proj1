@@ -12,13 +12,13 @@
 #include "Scene.h"
 #include "InvalidXMLException.h"
 #include "InvalidPreAttrException.h"
+#include "InvalidTexFile.h"
+#include "InvalidTexRef.h"
 
 using std::cout;
 using std::exception;
 
 int main(int argc, char* argv[]) {
-
-	Scene::getInstance()->setCullorder("CCW");
 
 	XMLScene parser;
 	parser.setPaths();
@@ -33,8 +33,10 @@ int main(int argc, char* argv[]) {
 	} catch (InvalidTexFile &e) {
 		cout << "Invalid path to texture file: " << e.getFilePath() << endl;
 		return -1;
-	} catch (exception) {
-		cout << "Unknown exception occured. Exiting...\n";
+	} catch (InvalidTexRef &e) {
+		cout << "Invalid reference to texture: " << e.getRef() << endl;
+	} catch (exception &e) {
+		cout << "Unknown exception occured. Exiting...\n" << e.what() << endl;
 		return -1;
 	}
 

@@ -35,7 +35,7 @@ void Node::addRef(string ref) {
 	refs.push_back(ref);
 }
 
-void Node::addAppearance(string appearance) {
+void Node::setAppearance(string appearance) {
 
 	nodeAppearance = appearance;
 }
@@ -102,7 +102,7 @@ Appearance *Node::getAppearance() {
 	return Scene::getInstance()->getAppearance(nodeAppearance);
 }
 
-list<string> Node::getRefs() {
+vector<string> Node::getRefs() {
 
 	return refs;
 }
@@ -113,4 +113,9 @@ string Node::getId() {
 }
 
 Node::~Node() {
+}
+
+
+void Node::addPrimitive(MyPrimitive *prim) {
+	prims.push_back(prim);
 }

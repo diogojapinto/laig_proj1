@@ -9,32 +9,38 @@
 #define NODE_H_
 
 #include <string>
-#include <list>
+#include <vector>
 #include "Appearance.h"
 
 using namespace std;
+
+class Node;
+
+class MyPrimitive;
 
 class Node {
 private:
 	string id;
 	float transforms[16];
-	list<string> refs;
+	vector<string> refs;
 	string nodeAppearance;
+	vector<MyPrimitive *> prims;
 
 public:
 	Node();
 	Node(string id);
 	Node(string id, float transforms[16]);
 	void addRef(string ref);
-	void addAppearance(string appearance);
+	void setAppearance(string appearance);
 	void setTransform(float transforms[16]);
 	void resetTransform();
 	void addTranslate(float x, float y, float z);
 	void addScale(float x, float y, float z);
 	void addRotation(float angle, char axis);
+	void addPrimitive(MyPrimitive *prim);
 	const float* getTransform();
 	Appearance *getAppearance();
-	list<string> getRefs();
+	vector<string> getRefs();
 	string getId();
 	virtual ~Node();
 };

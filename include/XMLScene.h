@@ -4,6 +4,7 @@
 #include "tinyxml.h"
 #include <vector>
 #include <string>
+#include <stack>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ public:
 	bool parseTextures();
 	bool parseAppearences();
 	bool parseGraph();
-	bool parseNode(TiXmlElement *curr_node, vector<string> nodes_processed);
+	bool parseNode(TiXmlElement *curr_node, vector<string> nodes_processed, stack<string> &app_stck);
 	void setPaths();
 	string getTexturePath(string texture_path, string texture_file);
 };
