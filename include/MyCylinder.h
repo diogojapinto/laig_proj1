@@ -9,7 +9,7 @@
 #define MYCYLINDER_H_
 
 #include "MyPrimitive.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 
 class MyCylinder: public MyPrimitive {
 	GLUquadric *q;

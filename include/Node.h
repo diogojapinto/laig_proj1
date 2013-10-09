@@ -14,12 +14,11 @@
 
 using namespace std;
 
-class Node;
-
 class MyPrimitive;
 
 class Node {
 private:
+
 	string id;
 	float transforms[16];
 	vector<string> refs;
@@ -43,6 +42,8 @@ public:
 	vector<string> getRefs();
 	string getId();
 	virtual ~Node();
+	void processNode();
+	void drawPrims();
 };
 
 #endif /* NODE_H_ */

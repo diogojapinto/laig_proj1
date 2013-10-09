@@ -6,13 +6,12 @@
  */
 
 #include "MyPrimitive.h"
+#include "Node.h"
 
-MyPrimitive::MyPrimitive(){
-	// TODO Auto-generated constructor stub
+MyPrimitive::MyPrimitive() : Node(){
 
 }
 
 MyPrimitive::~MyPrimitive() {
-	// TODO Auto-generated destructor stub
 }
 

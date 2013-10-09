@@ -9,7 +9,7 @@
 #define MYSPHERE_H_
 
 #include "MyPrimitive.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 
 class MySphere: public MyPrimitive {
 	float radius;

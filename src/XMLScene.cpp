@@ -967,6 +967,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			}
 
 			MyRectangle *rect = new MyRectangle(x1,y1,x2,y2);
+			rect->setAppearance(app_stck.top());
 			n->addPrimitive(rect);
 
 			printf("Rectangle\nxy1: (%f,%f)\nxy2: (%f,%f)\n", x1, y1, x2, y2);
@@ -1003,6 +1004,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			}
 
 			MyTriangle *tri = new MyTriangle(x1,y1,z1,x2,y2,z2,x3,y3,z3);
+			tri->setAppearance(app_stck.top());
 			n->addPrimitive(tri);
 
 			printf(
@@ -1043,6 +1045,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			}
 
 			MyCylinder *cyl = new MyCylinder(cyl_base, cyl_top, cyl_height, cyl_slices, cyl_stacks);
+			cyl->setAppearance(app_stck.top());
 			n->addPrimitive(cyl);
 
 			printf(
@@ -1069,6 +1072,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			}
 
 			MySphere *sph = new MySphere(sph_rad, sph_slices, sph_stacks);
+			sph->setAppearance(app_stck.top());
 			n->addPrimitive(sph);
 
 			printf("Sphere\nradius: %f\nslices: %d\nstacks: %d\n", sph_rad,
@@ -1099,6 +1103,8 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			}
 
 			MyTorus *tor = new MyTorus(tor_inner, tor_out, tor_slices, tor_loops);
+			tor->setAppearance(app_stck.top());
+			n->addPrimitive(tor);
 
 			printf("Torus\ninner: %f\nouter: %f\nslices: %d\nloops: %d\n",
 					tor_inner, tor_out, tor_slices, tor_loops);

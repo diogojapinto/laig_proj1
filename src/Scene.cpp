@@ -1,13 +1,17 @@
 #include <fstream>
 #include "Scene.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 #include "InvalidPreAttrException.h"
 #include "InvalidTexFile.h"
 #include <map>
+#include "MyTorus.h"
+#include "CGFcamera.h"
 
 using namespace std;
 
 Scene *Scene::instance = NULL;
+unsigned int Scene::HEIGHT = 768;
+unsigned int Scene::WIDTH = 1024;
 
 Scene::Scene() {
 	bckg_r = 0;
@@ -30,7 +34,7 @@ Scene::Scene() {
 }
 
 void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
-        float bckg_a) {
+		float bckg_a) {
 	this->bckg_r = bckg_r;
 	this->bckg_g = bckg_g;
 	this->bckg_b = bckg_b;
@@ -52,7 +56,7 @@ void Scene::setDrawmode(string drawmode) {
 void Scene::setShading(string shading) {
 	if (shading == "flat") {
 		this->shading = GL_FLAT;
-	} else if (shading == "gouraud"){
+	} else if (shading == "gouraud") {
 		this->shading = GL_SMOOTH;
 	} else {
 		throw InvalidPreAttrException("shading");
@@ -205,6 +209,8 @@ void Scene::initCamera() {
 
 void Scene::initScene() {
 
+	glEnable(GL_DEPTH_TEST);
+
 	glClearColor(bckg_r, bckg_g, bckg_b, bckg_a);
 
 	glPolygonMode(cullface, drawmode);
@@ -227,4 +233,35 @@ Scene *Scene::getInstance() {
 	if (instance == NULL)
 		instance = new Scene();
 	return instance;
+}
+
+void Scene::drawScene() {
+	Node *ptr = getNode(rootId);
+	ptr->processNode();
+}
+
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glColor3f(0.0, 0.0, 0.0);
+
+	Scene::getInstance()->initCamera();
+
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	MyTorus tri;
+	glPushMatrix();
+	tri.draw();
+	glPopMatrix();
+	Scene::getInstance()->drawScene();
+
+	glutSwapBuffers();
+}
+
+void reshape(int w, int h) {
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+	Scene::WIDTH = w;
+	Scene::HEIGHT = h;
+	Scene::getInstance()->initCamera();
 }

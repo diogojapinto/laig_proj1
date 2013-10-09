@@ -6,6 +6,7 @@
  */
 
 #include "MySphere.h"
+#include "GL/glut.h"
 
 MySphere::MySphere() {
 	this->radius = 0.5;

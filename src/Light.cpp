@@ -1,5 +1,5 @@
 #include "Light.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 
 using namespace std;
 

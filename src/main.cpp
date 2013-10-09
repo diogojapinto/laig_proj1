@@ -6,17 +6,18 @@
 #include <iostream>
 #include <exception>
 
-#include "CGFapplication.h"
-#include "LightingScene.h"
 #include "XMLScene.h"
 #include "Scene.h"
 #include "InvalidXMLException.h"
 #include "InvalidPreAttrException.h"
 #include "InvalidTexFile.h"
 #include "InvalidTexRef.h"
+#include "Interface.h"
 
 using std::cout;
 using std::exception;
+
+int main_window;
 
 int main(int argc, char* argv[]) {
 
@@ -40,22 +41,24 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	CGFapplication app = CGFapplication();
+	//Application window
 
-	try {
-		app.init(&argc, argv);
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+	glutInitWindowSize(Scene::WIDTH, Scene::HEIGHT);
+	glutInitWindowPosition(100, 100);
+	main_window = glutCreateWindow (Scene::getInstance()->getRootId().c_str());
 
-		app.setScene(new LightingScene());
-		app.setInterface(new CGFinterface());
+	Scene::getInstance()->initScene();
 
-		app.run();
-	} catch (GLexception& ex) {
-		cout << "Erro: " << ex.what();
-		return -1;
-	} catch (exception& ex) {
-		cout << "Erro inesperado: " << ex.what();
-		return -1;
-	}
+	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+
+	Interface interface;
+
+	interface.init(main_window);
+	display();
+	glutMainLoop();
 
 	return 0;
 }

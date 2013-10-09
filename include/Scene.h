@@ -22,13 +22,13 @@ using namespace std;
  *
  */
 
-#define HEIGHT 768
-#define WIDTH 1024
-
 typedef map<string, Node*> GraphElem;
 typedef map<string, CGFtexture *> TexElem;
 typedef map<string, Appearance *> AppearanceElem;
 typedef map<string, Camera *> CameraElem;
+
+void display();
+void reshape(int h, int w);
 
 class Scene {
 private:
@@ -50,11 +50,12 @@ private:
 	bool local;
 	bool enabled;
 	float amb_r, amb_g, amb_b, amb_a;
-public:
 	Scene();
+public:
 
+	static unsigned int HEIGHT;
+	static unsigned int WIDTH;
 	static Scene *getInstance();
-
 	void setBackground(float bckg_r, float bckg_g, float bckg_b, float bckg_a);
 	void setDrawmode(string drawmode);
 	void setShading(string shading);
@@ -82,7 +83,10 @@ public:
 	void applyLights();
 	void initCamera();
 	void initScene();
+	friend void display();
+	friend void reshape(int, int);
 	virtual ~Scene();
+	void drawScene();
 };
 
 #endif /* SCENE_H_ */

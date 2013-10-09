@@ -6,8 +6,9 @@
  */
 
 #include "MyTriangle.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 #include <math.h>
+#include <stdio.h>
 
 MyTriangle::MyTriangle() {
 	this->x1 = -0.5;

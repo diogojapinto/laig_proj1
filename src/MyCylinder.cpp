@@ -6,6 +6,7 @@
  */
 
 #include "MyCylinder.h"
+#include "GL/glut.h"
 #include <math.h>
 
 float pi = acos(-1.0);

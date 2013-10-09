@@ -6,7 +6,7 @@
  */
 
 #include "MyRectangle.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 #include "Scene.h"
 
 extern Scene *scene;

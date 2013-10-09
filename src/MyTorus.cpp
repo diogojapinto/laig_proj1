@@ -6,7 +6,7 @@
  */
 
 #include "MyTorus.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 #include <math.h>
 #include "utils.h"
 #include <vector>

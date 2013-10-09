@@ -8,6 +8,7 @@
 #include "Node.h"
 #include <GL/glut.h>
 #include "Scene.h"
+#include "MyPrimitive.h"
 
 using namespace std;
 
@@ -118,4 +119,32 @@ Node::~Node() {
 
 void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
+}
+
+void Node::processNode() {
+	glPushMatrix();
+
+	glMultMatrixf(transforms);
+
+	drawPrims();
+
+	vector<string>:: iterator it;
+
+	for (it = refs.begin(); it != refs.end(); it++) {
+		Node *ptr = Scene::getInstance()->getNode((*it));
+		ptr->processNode();
+	}
+	glPopMatrix();
+}
+
+void Node::drawPrims() {
+	vector<MyPrimitive *>::const_iterator it;
+
+	Appearance *app = Scene::getInstance()->getAppearance(nodeAppearance);
+
+	app->apply();
+
+	for (it = prims.begin(); it != prims.end(); it++) {
+		(*it)->draw();
+	}
 }

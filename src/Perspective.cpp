@@ -6,7 +6,7 @@
  */
 
 #include "Perspective.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 #include "Scene.h"
 
 using namespace std;
@@ -80,7 +80,7 @@ void Perspective::setCamera() {
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(angle, HEIGHT / WIDTH, near, far);  //setting up Perspective
+	gluPerspective(angle, Scene::HEIGHT / Scene::WIDTH, near, far);  //setting up Perspective
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(px, py, pz, tx, ty, tz, 0, 1, 0); //vector direction is always up

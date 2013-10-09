@@ -6,7 +6,7 @@
  */
 
 #include "Spotlight.h"
-#include "CGFapplication.h"
+#include "GL/glut.h"
 
 Spotlight::Spotlight():Light() {
 	angle = 0;

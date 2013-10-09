@@ -6,6 +6,7 @@
  */
 
 #include "Interface.h"
+#include "Scene.h"
 
 Interface::Interface() {
 }
@@ -16,6 +17,7 @@ Interface::~Interface() {
 void Interface::init(int parent) {
 	glui_window = GLUI_Master.create_glui_subwindow(parent,
 	GLUI_SUBWINDOW_BOTTOM);
+	GLUI_Master.set_glutReshapeFunc(reshape);
 	GLUI_Master.set_glutKeyboardFunc(Interface::preprocessKeyboard);
 
 	GLUI_Master.set_glutMouseFunc(Interface::preprocessMouse);
@@ -36,8 +38,8 @@ void Interface::initGUI() {
 
 }
 
-Interface* Interface::activeInterface;
-int Interface::modifiers;
+Interface* Interface::activeInterface=NULL;
+int Interface::modifiers=0;
 
 void Interface::setActiveInterface(Interface *gli) {
 	activeInterface = gli;

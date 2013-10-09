@@ -9,7 +9,6 @@
 #define MYTORUS_H_
 
 #include "MyPrimitive.h"
-#include "CGFapplication.h"
 #include <vector>
 
 using namespace std;

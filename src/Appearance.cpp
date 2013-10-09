@@ -6,9 +6,9 @@
  */
 
 #include "Appearance.h"
-#include "CGFapplication.h"
 #include "Scene.h"
 #include "InvalidTexRef.h"
+#include "GL/glut.h"
 
 using namespace std;
 
