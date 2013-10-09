@@ -49,15 +49,15 @@ int main(int argc, char* argv[]) {
 	glutInitWindowPosition(100, 100);
 	main_window = glutCreateWindow (Scene::getInstance()->getRootId().c_str());
 
-	Scene::getInstance()->initScene();
-
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 
 	Interface interface;
 
 	interface.init(main_window);
-	display();
+
+	Scene::getInstance()->initScene();
+
 	glutMainLoop();
 
 	return 0;

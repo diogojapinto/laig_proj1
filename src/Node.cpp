@@ -9,6 +9,7 @@
 #include <GL/glut.h>
 #include "Scene.h"
 #include "MyPrimitive.h"
+#include <iostream>
 
 using namespace std;
 
@@ -22,6 +23,12 @@ Node::Node(string id) {
 
 	this->id = id;
 	nodeAppearance = "default";
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+	glPopMatrix();
 }
 
 Node::Node(string id, float transforms[16]) {
@@ -49,7 +56,7 @@ void Node::resetTransform() {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glGetFloatv(GL_MODELVIEW, transforms);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 }
 
 void Node::addTranslate(float x, float y, float z) {
@@ -59,7 +66,7 @@ void Node::addTranslate(float x, float y, float z) {
 	glLoadIdentity();
 	glMultMatrixf(this->transforms);
 	glTranslatef(x, y, z);
-	glGetFloatv(GL_MODELVIEW, transforms);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 	glPopMatrix();
 
 }
@@ -71,7 +78,7 @@ void Node::addScale(float x, float y, float z) {
 	glLoadIdentity();
 	glMultMatrixf(this->transforms);
 	glScalef(x, y, z);
-	glGetFloatv(GL_MODELVIEW, transforms);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 	glPopMatrix();
 }
 void Node::addRotation(float angle, char axis) {
@@ -91,7 +98,7 @@ void Node::addRotation(float angle, char axis) {
 	glLoadIdentity();
 	glMultMatrixf(this->transforms);
 	glRotatef(angle, x, y, z);
-	glGetFloatv(GL_MODELVIEW, transforms);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 	glPopMatrix();
 }
 const float* Node::getTransform() {
@@ -116,7 +123,6 @@ string Node::getId() {
 Node::~Node() {
 }
 
-
 void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
 }
@@ -124,15 +130,17 @@ void Node::addPrimitive(MyPrimitive *prim) {
 void Node::processNode() {
 	glPushMatrix();
 
+	glMatrixMode(GL_MODELVIEW);
 	glMultMatrixf(transforms);
 
 	drawPrims();
 
-	vector<string>:: iterator it;
+	vector<string>::iterator it;
 
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
 		ptr->processNode();
+		//glPopMatrix();
 	}
 	glPopMatrix();
 }

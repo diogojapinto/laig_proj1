@@ -80,7 +80,7 @@ void MyRectangle::calcTextCoords() {
 	deltas = deltax / getAppearance()->getSWrap();
 	deltat = deltay / getAppearance()->getTWrap();
 
-	if (Scene::getInstance()->getCullface() == GL_CCW) {
+	if (Scene::getInstance()->getCullorder() == GL_CCW) {
 		text_coords[0][0] = 0.0;
 		text_coords[0][1] = 0.0;
 		text_coords[1][0] = deltas;

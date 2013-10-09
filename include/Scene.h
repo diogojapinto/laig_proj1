@@ -29,6 +29,7 @@ typedef map<string, Camera *> CameraElem;
 
 void display();
 void reshape(int h, int w);
+void idle();
 
 class Scene {
 private:
@@ -85,6 +86,7 @@ public:
 	void initScene();
 	friend void display();
 	friend void reshape(int, int);
+	friend void idle();
 	virtual ~Scene();
 	void drawScene();
 };

@@ -6,12 +6,15 @@
 #include <map>
 #include "MyTorus.h"
 #include "CGFcamera.h"
+#include <iostream>
 
 using namespace std;
 
 Scene *Scene::instance = NULL;
 unsigned int Scene::HEIGHT = 768;
 unsigned int Scene::WIDTH = 1024;
+
+extern int main_window;
 
 Scene::Scene() {
 	bckg_r = 0;
@@ -241,22 +244,23 @@ void Scene::drawScene() {
 }
 
 void display() {
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glColor3f(0.0, 0.0, 0.0);
+	glColor3f(0.0, 0.0, 0.0);
 
 	Scene::getInstance()->initCamera();
-
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
 	MyTorus tri;
 	glPushMatrix();
 	tri.draw();
 	glPopMatrix();
+
 	Scene::getInstance()->drawScene();
 
 	glutSwapBuffers();
+
+	glFlush();
+
 }
 
 void reshape(int w, int h) {
@@ -264,4 +268,13 @@ void reshape(int w, int h) {
 	Scene::WIDTH = w;
 	Scene::HEIGHT = h;
 	Scene::getInstance()->initCamera();
+
+	glutPostRedisplay();
+}
+
+void idle(void) {
+	if (glutGetWindow() != main_window)
+		glutSetWindow(main_window);
+
+	glutPostRedisplay();
 }

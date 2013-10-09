@@ -44,7 +44,7 @@ MyTriangle::MyTriangle(float x1, float y1, float z1, float x2, float y2,
 MyTriangle::~MyTriangle() {
 }
 
-void MyTriangle::draw() {
+void MyTriangle::draw() {			///missing cullorder
 	glNormal3f(normal[0], normal[1], normal[2]);
 	glBegin(GL_TRIANGLE_STRIP);
 	glTexCoord2f(text_coords[0][0], text_coords[0][1]);
@@ -54,6 +54,7 @@ void MyTriangle::draw() {
 	glTexCoord2f(text_coords[2][0], text_coords[2][1]);
 	glVertex3f(x3, y3, z3);
 	glEnd();
+
 }
 
 const float *MyTriangle::calcNormal() {

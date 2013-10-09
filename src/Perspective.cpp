@@ -80,7 +80,7 @@ void Perspective::setCamera() {
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(angle, Scene::HEIGHT / Scene::WIDTH, near, far);  //setting up Perspective
+	gluPerspective(angle, Scene::WIDTH / Scene::HEIGHT, near, far);  //setting up Perspective
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(px, py, pz, tx, ty, tz, 0, 1, 0); //vector direction is always up

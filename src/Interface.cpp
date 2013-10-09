@@ -8,6 +8,9 @@
 #include "Interface.h"
 #include "Scene.h"
 
+extern int main_window;
+
+
 Interface::Interface() {
 }
 
@@ -18,6 +21,8 @@ void Interface::init(int parent) {
 	glui_window = GLUI_Master.create_glui_subwindow(parent,
 	GLUI_SUBWINDOW_BOTTOM);
 	GLUI_Master.set_glutReshapeFunc(reshape);
+	GLUI_Master.set_glutIdleFunc( idle );
+	glui_window->set_main_gfx_window( main_window );
 	GLUI_Master.set_glutKeyboardFunc(Interface::preprocessKeyboard);
 
 	GLUI_Master.set_glutMouseFunc(Interface::preprocessMouse);
