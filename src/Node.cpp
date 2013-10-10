@@ -128,31 +128,33 @@ void Node::addPrimitive(MyPrimitive *prim) {
 }
 
 void Node::processNode() {
+
 	glPushMatrix();
 
-	glMatrixMode(GL_MODELVIEW);
 	glMultMatrixf(transforms);
 
-	drawPrims();
+	if (prims.size() != 0)
+		drawPrims();
 
 	vector<string>::iterator it;
 
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
 		ptr->processNode();
-		//glPopMatrix();
 	}
 	glPopMatrix();
 }
 
+#include <stdio.h>
+
 void Node::drawPrims() {
 	vector<MyPrimitive *>::const_iterator it;
 
-	Appearance *app = Scene::getInstance()->getAppearance(nodeAppearance);
-
-	app->apply();
+	Appearance *app = getAppearance();
 
 	for (it = prims.begin(); it != prims.end(); it++) {
+		(*it)->setAppearance(nodeAppearance);
+		app->apply();
 		(*it)->draw();
 	}
 }

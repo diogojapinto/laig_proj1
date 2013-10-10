@@ -11,6 +11,7 @@ public:
 	MyPrimitive();
 	virtual void draw() = 0;
 	virtual ~MyPrimitive();
+	virtual void setAppearance(string appearance);
 };
 
 #endif /* MYPRIMITIVE_H_ */

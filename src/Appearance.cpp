@@ -140,10 +140,15 @@ void Appearance::apply() {
 	if (isTextDefined) {
 		glEnable(GL_TEXTURE_2D);
 		Scene::getInstance()->getTexture(textRef)->apply();
-	} else
+	} else {
 		glDisable(GL_TEXTURE_2D);
+	}
 }
 
 Appearance::~Appearance() {
 }
 
+
+string Appearance::getId() {
+	return id;
+}

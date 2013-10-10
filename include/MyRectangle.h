@@ -22,6 +22,7 @@ public:
 	virtual ~MyRectangle();
 	const float *calcNormal();
 	void calcTextCoords();
+	virtual void setAppearance(string appearance);
 };
 
 #endif /* MYRECTANGLE_H_ */

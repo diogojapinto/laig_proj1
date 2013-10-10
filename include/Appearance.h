@@ -38,6 +38,7 @@ public:
 	float getTWrap();
 	void applyEmissive();
 	virtual ~Appearance();
+	string getId();
 
 	void apply();
 };

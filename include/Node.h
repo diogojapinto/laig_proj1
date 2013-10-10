@@ -30,7 +30,7 @@ public:
 	Node(string id);
 	Node(string id, float transforms[16]);
 	void addRef(string ref);
-	void setAppearance(string appearance);
+	virtual void setAppearance(string appearance);
 	void setTransform(float transforms[16]);
 	void resetTransform();
 	void addTranslate(float x, float y, float z);

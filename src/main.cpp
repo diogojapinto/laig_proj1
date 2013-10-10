@@ -21,8 +21,24 @@ int main_window;
 
 int main(int argc, char* argv[]) {
 
+
 	XMLScene parser;
 	parser.setPaths();
+
+	//Application window
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+	glutInitWindowSize(Scene::WIDTH, Scene::HEIGHT);
+	glutInitWindowPosition(100, 100);
+	main_window = glutCreateWindow(Scene::getInstance()->getRootId().c_str());
+
+	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+
+	Interface interface;
+
+	interface.init(main_window);
 
 	try {
 		parser.loadFile();
@@ -40,21 +56,6 @@ int main(int argc, char* argv[]) {
 		cout << "Unknown exception occured. Exiting...\n" << e.what() << endl;
 		return -1;
 	}
-
-	//Application window
-
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(Scene::WIDTH, Scene::HEIGHT);
-	glutInitWindowPosition(100, 100);
-	main_window = glutCreateWindow (Scene::getInstance()->getRootId().c_str());
-
-	glutDisplayFunc(display);
-	glutReshapeFunc(reshape);
-
-	Interface interface;
-
-	interface.init(main_window);
 
 	Scene::getInstance()->initScene();
 

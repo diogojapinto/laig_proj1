@@ -37,7 +37,7 @@ Scene::Scene() {
 }
 
 void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
-		float bckg_a) {
+        float bckg_a) {
 	this->bckg_r = bckg_r;
 	this->bckg_g = bckg_g;
 	this->bckg_b = bckg_b;
@@ -220,7 +220,12 @@ void Scene::initScene() {
 
 	glShadeModel(shading);
 
-	glCullFace(cullface);
+	if (cullface == GL_NONE) {
+		glDisable(GL_CULL_FACE);
+	} else {
+		glEnable(GL_CULL_FACE);
+		glCullFace(cullface);
+	}
 	glFrontFace(cullorder);
 
 	applyLights();
@@ -250,12 +255,9 @@ void display() {
 
 	Scene::getInstance()->initCamera();
 
-	MyTorus tri;
 	glPushMatrix();
-	tri.draw();
-	glPopMatrix();
-
 	Scene::getInstance()->drawScene();
+	glPopMatrix();
 
 	glutSwapBuffers();
 

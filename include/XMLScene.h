@@ -1,7 +1,7 @@
 #ifndef _XMLSCENE_H_
 #define _XMLSCENE_H_
 
-#include "tinyxml.h"
+#include "TinyXML/tinyxml.h"
 #include <vector>
 #include <string>
 #include <stack>

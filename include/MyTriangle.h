@@ -21,6 +21,7 @@ public:
 	void draw();
 	const float *calcNormal();
 	void calcTextCoords();
+	virtual void setAppearance(string appearance);
 };
 
 #endif /* MYTRIANGLE_H_ */

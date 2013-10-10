@@ -9,6 +9,7 @@
 #include "GL/glut.h"
 #include <math.h>
 #include <stdio.h>
+#include <iostream>
 
 MyTriangle::MyTriangle() {
 	this->x1 = -0.5;
@@ -22,7 +23,6 @@ MyTriangle::MyTriangle() {
 	this->z3 = 0.0;
 
 	calcNormal();
-	calcTextCoords();
 }
 
 MyTriangle::MyTriangle(float x1, float y1, float z1, float x2, float y2,
@@ -38,6 +38,10 @@ MyTriangle::MyTriangle(float x1, float y1, float z1, float x2, float y2,
 	this->z3 = z3;
 
 	calcNormal();
+}
+
+void MyTriangle::setAppearance(string appearance) {
+	MyPrimitive::setAppearance(appearance);
 	calcTextCoords();
 }
 
@@ -54,7 +58,6 @@ void MyTriangle::draw() {			///missing cullorder
 	glTexCoord2f(text_coords[2][0], text_coords[2][1]);
 	glVertex3f(x3, y3, z3);
 	glEnd();
-
 }
 
 const float *MyTriangle::calcNormal() {
@@ -72,9 +75,9 @@ void MyTriangle::calcTextCoords() {
 	float teta = acos((x1 * x2 + y1 * y2 + z1 * z2) / (base1 * hipot));
 	float base2 = hipot * cos(teta);
 	float hight = sqrt(exp2(hipot) - exp2f(base2));
-	float deltas1 = base1 / getAppearance()->getSWrap();
-	float deltas2 = base2 / getAppearance()->getSWrap();
-	float deltat = hight / getAppearance()->getTWrap();
+	float deltas1 = base1;
+	float deltas2 = base2;
+	float deltat = hight;
 
 	text_coords[0][0] = 0.0;
 	text_coords[0][1] = 0.0;

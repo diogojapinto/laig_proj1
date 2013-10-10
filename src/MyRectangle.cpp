@@ -9,6 +9,8 @@
 #include "GL/glut.h"
 #include "Scene.h"
 
+#include <stdio.h>
+
 extern Scene *scene;
 
 MyRectangle::MyRectangle() {
@@ -18,7 +20,6 @@ MyRectangle::MyRectangle() {
 	y2 = 0.5;
 
 	calcNormal();
-	calcTextCoords();
 }
 
 MyRectangle::MyRectangle(float x1, float y1, float x2, float y2) {
@@ -26,14 +27,20 @@ MyRectangle::MyRectangle(float x1, float y1, float x2, float y2) {
 	this->y1 = y1;
 	this->x2 = x2;
 	this->y2 = y2;
+
+	calcNormal();
+}
+
+void MyRectangle::setAppearance(string appearance) {
+	MyPrimitive::setAppearance(appearance);
+	calcTextCoords();
 }
 
 MyRectangle::~MyRectangle() {
 }
 
-void MyRectangle::draw() {
+void MyRectangle::draw() {		// acho que ficam os dois cullorder iguais
 	glBegin(GL_QUADS);
-
 	glNormal3f(normal[0], normal[1], normal[2]);
 	if (Scene::getInstance()->getCullorder() == GL_CCW) {
 		glTexCoord2f(text_coords[0][0], text_coords[0][1]);
@@ -74,8 +81,15 @@ const float *MyRectangle::calcNormal() {
 void MyRectangle::calcTextCoords() {
 	float deltax, deltay, deltas, deltat;
 
-	deltax = x2 - x1;
-	deltay = y2 - y1;
+	if (x2 > x1)
+		deltax = x2 - x1;
+	else
+		deltax = x1 - x2;
+
+	if (y2 > y1)
+		deltay = y2 - y1;
+	else
+		deltay = y1 - y2;
 
 	deltas = deltax / getAppearance()->getSWrap();
 	deltat = deltay / getAppearance()->getTWrap();
@@ -99,4 +113,5 @@ void MyRectangle::calcTextCoords() {
 		text_coords[3][0] = deltas;
 		text_coords[3][1] = 0.0;
 	}
+
 }
