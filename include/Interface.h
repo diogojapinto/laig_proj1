@@ -12,6 +12,8 @@
 #include <map>
 #include <string>
 
+#define MAX_CAMS 100
+
 using namespace std;
 
 //Based on CGFinterface. Simpler version
@@ -30,10 +32,13 @@ private:
 
 	// 1-> live_var
 	// 2-> id
-	map<string, int[2]> cams_rb;
-	map<string, int[2]> lights_cb;
+	static map<string, int*> cams_rb;
+	static map<string, int*> lights_cb;
+	static int *cams_vars;
+	static int radio_id;
+	static GLUI_RadioGroup *cams_group;
 
-	int id_counter = 0;
+	static int id_counter;
 
 public:
 	Interface();

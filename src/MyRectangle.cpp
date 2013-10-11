@@ -13,7 +13,7 @@
 
 extern Scene *scene;
 
-MyRectangle::MyRectangle() {
+MyRectangle::MyRectangle() : MyPrimitive()  {
 	x1 = -0.5;
 	y1 = -0.5;
 	x2 = 0.5;
@@ -22,7 +22,7 @@ MyRectangle::MyRectangle() {
 	calcNormal();
 }
 
-MyRectangle::MyRectangle(float x1, float y1, float x2, float y2) {
+MyRectangle::MyRectangle(float x1, float y1, float x2, float y2) : MyPrimitive()  {
 	this->x1 = x1;
 	this->y1 = y1;
 	this->x2 = x2;
@@ -93,8 +93,6 @@ void MyRectangle::calcTextCoords() {
 
 	deltas = deltax / getAppearance()->getSWrap();
 	deltat = deltay / getAppearance()->getTWrap();
-
-	printf("%f %f\n", getAppearance()->getSWrap(), getAppearance()->getTWrap());
 
 	if (Scene::getInstance()->getCullorder() == GL_CCW) {
 		text_coords[0][0] = 0.0;

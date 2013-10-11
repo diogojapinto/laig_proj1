@@ -12,7 +12,7 @@
 
 class MyRectangle: public MyPrimitive {
 private:
-	float x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+	float x1, y1, x2, y2;
 	float normal[3];
 	float text_coords[4][2];
 public:

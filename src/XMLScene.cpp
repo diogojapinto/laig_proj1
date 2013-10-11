@@ -819,14 +819,14 @@ bool XMLScene::parseGraph() {
 
 	app_stck.push("default");
 
-	if (!parseNode(curr_node, nodes_processed, app_stck)) {
+	if (!parseNode(curr_node, nodes_processed)) {
 		throw InvalidXMLException();
 	}
 	return true;
 }
 
 bool XMLScene::parseNode(TiXmlElement *curr_node,
-        vector<string> nodes_processed, stack<string> &app_stck) {
+        vector<string> nodes_processed) {
 
 	char node_id[MAX_STRING_LEN];
 
@@ -929,16 +929,9 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 			throw InvalidXMLException();
 		}
 
-		app_stck.push(app_id);
 		n->setAppearance(app_id);
 
 		printf("Appearance\nid: %s\n", app_id);
-	} else {
-		string app_id = app_stck.top();
-		app_stck.push(app_id);
-		n->setAppearance(app_id);
-
-		printf("No \"appearanceref\" block found on node %s!\n", node_id);
 	}
 
 	printf("Processing children...\n");
@@ -1055,7 +1048,6 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 
 			MyCylinder *cyl = new MyCylinder(cyl_base, cyl_top, cyl_height,
 			        cyl_slices, cyl_stacks);
-			cyl->setAppearance(app_stck.top());
 			n->addPrimitive(cyl);
 
 			printf(
@@ -1134,7 +1126,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 				        next_node_id))) {
 					printf("\n\n");
 					n->addRef(next_node_id);
-					parseNode(next_node, nodes_processed, app_stck);
+					parseNode(next_node, nodes_processed);
 				} else {
 					printf("Node %s does not exist!\n", next_node_id);
 					throw InvalidXMLException();
@@ -1146,7 +1138,6 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 	}
 	printf("Finished processing %s node children.\n\n", node_id);
 
-	app_stck.pop();
 	Scene::getInstance()->addNode(node_id, n);
 	return true;
 }

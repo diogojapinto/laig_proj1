@@ -11,13 +11,15 @@
 #include <string>
 #include <vector>
 #include "Appearance.h"
+#include <map>
+#include <stack>
 
 using namespace std;
 
 class MyPrimitive;
 
 class Node {
-private:
+protected:
 
 	string id;
 	float transforms[16];
@@ -42,8 +44,8 @@ public:
 	vector<string> getRefs();
 	string getId();
 	virtual ~Node();
-	void processNode();
-	void drawPrims();
+	void processNode(stack<string> apps_stack);
+	void drawPrims(stack<string> apps_stack);
 };
 
 #endif /* NODE_H_ */

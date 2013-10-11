@@ -18,3 +18,7 @@ MyPrimitive::~MyPrimitive() {
 void MyPrimitive::setAppearance(string appearance) {
 	Node::setAppearance(appearance);
 }
+
+void MyPrimitive::clearAppearance() {
+	this->nodeAppearance = "default";
+}

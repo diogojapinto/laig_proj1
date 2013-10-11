@@ -12,7 +12,7 @@
 float pi = acos(-1.0);
 float deg2rad = pi / 180.0;
 
-MyCylinder::MyCylinder() {
+MyCylinder::MyCylinder() : MyPrimitive()  {
 	this->base = 0.5;
 	this->top = 0.5;
 	this->height = 1.0;
@@ -24,7 +24,7 @@ MyCylinder::MyCylinder() {
 }
 
 MyCylinder::MyCylinder(float base, float top, float height, unsigned int slices,
-        unsigned int stacks) {
+        unsigned int stacks) : MyPrimitive()  {
 	this->base = base;
 	this->top = top;
 	this->height = height;

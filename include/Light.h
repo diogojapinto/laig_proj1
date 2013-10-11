@@ -14,7 +14,8 @@ protected:
 	float amb_r, amb_g, amb_b, amb_a;
 	float dif_r, dif_g, dif_b, dif_a;
 	float spec_r, spec_g, spec_b, spec_a;
-	int index;
+	static int index;
+	int light_flag;
 public:
 	Light();
 	Light(string id);
@@ -24,13 +25,14 @@ public:
 	void setAmbient(float amb_r, float amb_g, float amb_b, float amb_a);
 	void setDiffuse(float dif_r, float dif_g, float dif_b, float dif_a);
 	void setSpecular(float spec_r, float spec_g, float spec_b, float spec_a);
-	virtual void readyLight(int index);
-	void toggleLight(int index);
+	virtual void readyLight();
+	void toggleLight();
+	void displayLight();
 	virtual ~Light();
 	bool isEnabled();
 	string getId();
 	void setIndex(int i);
-	int getIndex()
+	int getIndex();
 };
 
 #endif /* LIGHT_H_ */

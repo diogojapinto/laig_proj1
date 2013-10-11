@@ -13,7 +13,7 @@
 
 extern float deg2rad;
 
-MyTorus::MyTorus() {
+MyTorus::MyTorus() : MyPrimitive()  {
 	this->inner = 0.5;
 	this->outer = 1.5;
 	this->slices = 10;
@@ -53,7 +53,7 @@ MyTorus::MyTorus() {
 }
 
 MyTorus::MyTorus(float inner, float outer, unsigned int slices,
-        unsigned int loops) {
+        unsigned int loops) : MyPrimitive()  {
 	this->inner = inner;
 	this->outer = outer;
 	this->slices = slices;

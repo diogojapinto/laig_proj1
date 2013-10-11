@@ -13,6 +13,7 @@
 #include "InvalidTexFile.h"
 #include "InvalidTexRef.h"
 #include "Interface.h"
+#include "InvalidNumLights.h"
 
 using std::cout;
 using std::exception;
@@ -20,7 +21,6 @@ using std::exception;
 int main_window;
 
 int main(int argc, char* argv[]) {
-
 
 	XMLScene parser;
 	parser.setPaths();
@@ -36,10 +36,6 @@ int main(int argc, char* argv[]) {
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 
-	Interface interface;
-
-	interface.init(main_window);
-
 	try {
 		parser.loadFile();
 	} catch (InvalidXMLException &e) {
@@ -52,12 +48,19 @@ int main(int argc, char* argv[]) {
 		return -1;
 	} catch (InvalidTexRef &e) {
 		cout << "Invalid reference to texture: " << e.getRef() << endl;
+	} catch (InvalidNumLights &e) {
+		cout << "Excessive number of lights defined!" << endl;
 	} catch (exception &e) {
 		cout << "Unknown exception occured. Exiting...\n" << e.what() << endl;
 		return -1;
 	}
 
 	Scene::getInstance()->initScene();
+
+	Interface interface;
+
+	interface.init(main_window);
+	interface.initGUI();
 
 	glutMainLoop();
 

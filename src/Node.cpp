@@ -10,6 +10,8 @@
 #include "Scene.h"
 #include "MyPrimitive.h"
 #include <iostream>
+#include "Appearance.h"
+#include <stack>
 
 using namespace std;
 
@@ -127,34 +129,39 @@ void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
 }
 
-void Node::processNode() {
+void Node::processNode(stack<string> apps_stack) {
 
 	glPushMatrix();
 
 	glMultMatrixf(transforms);
 
+	if (getAppearance()->getId() == "default") {
+		apps_stack.push(apps_stack.top());
+	} else {
+		apps_stack.push(getAppearance()->getId());
+	}
+
 	if (prims.size() != 0)
-		drawPrims();
+		drawPrims(apps_stack);
 
 	vector<string>::iterator it;
 
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
-		ptr->processNode();
+		ptr->processNode(apps_stack);
 	}
+	apps_stack.pop();
 	glPopMatrix();
 }
 
-#include <stdio.h>
-
-void Node::drawPrims() {
+void Node::drawPrims(stack<string> apps_stack) {
 	vector<MyPrimitive *>::const_iterator it;
 
-	Appearance *app = getAppearance();
-
 	for (it = prims.begin(); it != prims.end(); it++) {
-		(*it)->setAppearance(nodeAppearance);
+		Appearance *app = Scene::getInstance()->getAppearance(apps_stack.top());
 		app->apply();
+		(*it)->setAppearance(apps_stack.top());
 		(*it)->draw();
+		(*it)->clearAppearance();
 	}
 }

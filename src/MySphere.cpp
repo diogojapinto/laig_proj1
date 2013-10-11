@@ -8,7 +8,7 @@
 #include "MySphere.h"
 #include "GL/glut.h"
 
-MySphere::MySphere() {
+MySphere::MySphere() : MyPrimitive()  {
 	this->radius = 0.5;
 	this->slices = 10;
 	this->stacks = 10;
@@ -17,7 +17,7 @@ MySphere::MySphere() {
 	gluQuadricTexture(q, true);
 }
 
-MySphere::MySphere(float radius, unsigned int slices, unsigned int stacks) {
+MySphere::MySphere(float radius, unsigned int slices, unsigned int stacks) : MyPrimitive()  {
 	this->radius = radius;
 	this->slices = slices;
 	this->stacks = stacks;

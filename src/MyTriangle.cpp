@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <iostream>
 
-MyTriangle::MyTriangle() {
+MyTriangle::MyTriangle() : MyPrimitive() {
 	this->x1 = -0.5;
 	this->y1 = -0.5;
 	this->z1 = 0.0;
@@ -26,7 +26,7 @@ MyTriangle::MyTriangle() {
 }
 
 MyTriangle::MyTriangle(float x1, float y1, float z1, float x2, float y2,
-        float z2, float x3, float y3, float z3) {
+        float z2, float x3, float y3, float z3) : MyPrimitive()  {
 	this->x1 = x1;
 	this->y1 = y1;
 	this->z1 = z1;

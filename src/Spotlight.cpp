@@ -48,9 +48,9 @@ void Spotlight::setDir(float dir_x, float dir_y, float dir_z) {
 
 void Spotlight::readyLight(int index) {
 	float loc[4] = { loc_x, loc_y, loc_z, 1 };
-	float amb[4] = { amb_x, amb_y, amb_z, amb_a };
-	float dif[4] = { dif_x, dif_y, dif_z, dif_a };
-	float spec[4] = { spec_x, spec_y, spec_z, spec_a };
+	float amb[4] = { amb_r, amb_g, amb_b, amb_a };
+	float dif[4] = { dif_r, dif_g, dif_b, dif_a };
+	float spec[4] = { spec_r, spec_g, spec_b, spec_a };
 	float dir[3] = { dir_x, dir_y, dir_z};
 	switch (index) {
 	case 0:

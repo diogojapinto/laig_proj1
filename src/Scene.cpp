@@ -99,7 +99,6 @@ void Scene::setInitCamera(string init_camera) {
 }
 
 void Scene::addLight(Light* light) {
-	lig
 	lights.push_back(light);
 }
 
@@ -190,15 +189,14 @@ void Scene::applyLights() {
 	if (enabled) {
 		glEnable(GL_LIGHTING);
 		glEnable(GL_NORMALIZE);
-
 		glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesided);
 
 		float amb[4] = { amb_r, amb_g, amb_b, amb_a };
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
 		glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, local);
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
 
 		for (unsigned int i = 0; i < lights.size(); i++) {
-			lights[i]->toggleLight(i);
+			lights[i]->displayLight();
 		}
 
 	} else {
@@ -229,7 +227,6 @@ void Scene::initScene() {
 	}
 	glFrontFace(cullorder);
 
-	applyLights();
 
 	initCamera();
 
@@ -246,7 +243,9 @@ Scene *Scene::getInstance() {
 
 void Scene::drawScene() {
 	Node *ptr = getNode(rootId);
-	ptr->processNode();
+	stack<string> apps_stack;
+	apps_stack.push("default");
+	ptr->processNode(apps_stack);
 }
 
 void display() {
@@ -255,6 +254,9 @@ void display() {
 	glColor3f(0.0, 0.0, 0.0);
 
 	Scene::getInstance()->initCamera();
+
+
+	Scene::getInstance()->applyLights();
 
 	glPushMatrix();
 	Scene::getInstance()->drawScene();
