@@ -10,17 +10,17 @@ Light::Light() {
 	loc_x = 0;
 	loc_y = 0;
 	loc_z = 0;
-	amb_x = 0;
-	amb_y = 0;
-	amb_z = 0;
+	amb_r = 0;
+	amb_g = 0;
+	amb_b = 0;
 	amb_a = 0;
-	dif_x = 0;
-	dif_y = 0;
-	dif_z = 0;
+	dif_r = 0;
+	dif_g = 0;
+	dif_b = 0;
 	dif_a = 0;
-	spec_x = 0;
-	spec_y = 0;
-	spec_z = 0;
+	spec_r = 0;
+	spec_g = 0;
+	spec_b = 0;
 	spec_a = 0;
 }
 
@@ -31,17 +31,17 @@ Light::Light(string id) {
 	loc_x = 0;
 	loc_y = 0;
 	loc_z = 0;
-	amb_x = 0;
-	amb_y = 0;
-	amb_z = 0;
+	amb_r = 0;
+	amb_g = 0;
+	amb_b = 0;
 	amb_a = 0;
-	dif_x = 0;
-	dif_y = 0;
-	dif_z = 0;
+	dif_r = 0;
+	dif_g = 0;
+	dif_b = 0;
 	dif_a = 0;
-	spec_x = 0;
-	spec_y = 0;
-	spec_z = 0;
+	spec_r = 0;
+	spec_g = 0;
+	spec_b = 0;
 	spec_a = 0;
 }
 
@@ -52,17 +52,17 @@ Light::Light(string id, bool enabled) {
 	loc_x = 0;
 	loc_y = 0;
 	loc_z = 0;
-	amb_x = 0;
-	amb_y = 0;
-	amb_z = 0;
+	amb_r = 0;
+	amb_g = 0;
+	amb_b = 0;
 	amb_a = 0;
-	dif_x = 0;
-	dif_y = 0;
-	dif_z = 0;
+	dif_r = 0;
+	dif_g = 0;
+	dif_b = 0;
 	dif_a = 0;
-	spec_x = 0;
-	spec_y = 0;
-	spec_z = 0;
+	spec_r = 0;
+	spec_g = 0;
+	spec_b = 0;
 	spec_a = 0;
 }
 void Light::setLocation(float loc_x, float loc_y, float loc_z) {
@@ -71,33 +71,33 @@ void Light::setLocation(float loc_x, float loc_y, float loc_z) {
 	this->loc_z = loc_z;
 }
 
-void Light::setAmbient(float amb_x, float amb_y, float amb_z, float amb_a) {
-	this->amb_x = amb_x;
-	this->amb_y = amb_y;
-	this->amb_z = amb_z;
+void Light::setAmbient(float amb_r, float amb_g, float amb_b, float amb_a) {
+	this->amb_r = amb_r;
+	this->amb_g = amb_g;
+	this->amb_b = amb_b;
 	this->amb_a = amb_a;
 }
 
-void Light::setDiffuse(float dif_x, float dif_y, float dif_z, float dif_a) {
-	this->dif_x = dif_x;
-	this->dif_y = dif_y;
-	this->dif_z = dif_z;
+void Light::setDiffuse(float dif_r, float dif_g, float dif_b, float dif_a) {
+	this->dif_r = dif_r;
+	this->dif_g = dif_g;
+	this->dif_b = dif_b;
 	this->dif_a = dif_a;
 }
 
-void Light::setSpecular(float spec_x, float spec_y, float spec_z,
-		float spec_a) {
-	this->spec_x = spec_x;
-	this->spec_y = spec_y;
-	this->spec_z = spec_z;
+void Light::setSpecular(float spec_r, float spec_g, float spec_b,
+        float spec_a) {
+	this->spec_r = spec_r;
+	this->spec_g = spec_g;
+	this->spec_b = spec_b;
 	this->spec_a = spec_a;
 }
 
 void Light::readyLight(int index) {
 	float loc[4] = { loc_x, loc_y, loc_z, 1 };
-	float amb[4] = { amb_x, amb_y, amb_z, amb_a };
-	float dif[4] = { dif_x, dif_y, dif_z, dif_a };
-	float spec[4] = { spec_x, spec_y, spec_z, spec_a };
+	float amb[4] = { amb_r, amb_g, amb_b, amb_a };
+	float dif[4] = { dif_r, dif_g, dif_b, dif_a };
+	float spec[4] = { spec_r, spec_g, spec_b, spec_a };
 	switch (index) {
 	case 0:
 		glPushMatrix();
@@ -178,8 +178,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT0);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT0);
 			enabled = true;
 		}
@@ -188,8 +187,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT1);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT1);
 			enabled = true;
 		}
@@ -198,8 +196,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT2);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT2);
 			enabled = true;
 		}
@@ -208,8 +205,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT3);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT3);
 			enabled = true;
 		}
@@ -218,8 +214,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT4);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT4);
 			enabled = true;
 		}
@@ -228,8 +223,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT5);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT5);
 			enabled = true;
 		}
@@ -238,8 +232,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT6);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT6);
 			enabled = true;
 		}
@@ -248,8 +241,7 @@ void Light::toggleLight(int index) {
 		if (enabled) {
 			glEnable(GL_LIGHT7);
 			enabled = false;
-		}
-		else {
+		} else {
 			glDisable(GL_LIGHT7);
 			enabled = true;
 		}
@@ -259,4 +251,12 @@ void Light::toggleLight(int index) {
 }
 
 Light::~Light() {
+}
+
+bool Light::isEnabled() {
+	return enabled;
+}
+
+string Light::getId() {
+	return id;
 }

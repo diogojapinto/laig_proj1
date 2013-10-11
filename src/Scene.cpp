@@ -99,6 +99,7 @@ void Scene::setInitCamera(string init_camera) {
 }
 
 void Scene::addLight(Light* light) {
+	lig
 	lights.push_back(light);
 }
 
@@ -279,4 +280,17 @@ void idle(void) {
 		glutSetWindow(main_window);
 
 	glutPostRedisplay();
+}
+
+string Scene::getInitCamera() {
+	return init_camera;
+}
+
+Light* Scene::getLight(string id) {
+	vector<Light *>::iterator it;
+	for (it = lights.begin(); it != lights.end(); it++) {
+		if ((*it)->getId() == id)
+			return *it;
+	}
+	return NULL;
 }

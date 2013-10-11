@@ -9,6 +9,10 @@
 #define INTERFACE_H_
 
 #include <GL/glui.h>
+#include <map>
+#include <string>
+
+using namespace std;
 
 //Based on CGFinterface. Simpler version
 class Interface {
@@ -23,6 +27,13 @@ private:
 	bool pressing_right;
 	float prev_X;
 	float prev_Y;
+
+	// 1-> live_var
+	// 2-> id
+	map<string, int[2]> cams_rb;
+	map<string, int[2]> lights_cb;
+
+	int id_counter = 0;
 
 public:
 	Interface();

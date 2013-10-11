@@ -77,6 +77,7 @@ public:
 	const unsigned int getCullorder();
 	string getRootId();
 	Light* getLight(int index);
+	Light* getLight(string id);
 	Camera* getCamera(string key);
 	CGFtexture *getTexture(string key);
 	Appearance* getAppearance(string key);
@@ -89,6 +90,8 @@ public:
 	friend void idle();
 	virtual ~Scene();
 	void drawScene();
+	friend class Interface;
+	string getInitCamera();
 };
 
 #endif /* SCENE_H_ */

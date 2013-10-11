@@ -11,20 +11,26 @@ protected:
 	bool ready;
 	bool enabled;
 	float loc_x, loc_y, loc_z;
-	float amb_x, amb_y, amb_z, amb_a;
-	float dif_x, dif_y, dif_z, dif_a;
-	float spec_x, spec_y, spec_z, spec_a;
+	float amb_r, amb_g, amb_b, amb_a;
+	float dif_r, dif_g, dif_b, dif_a;
+	float spec_r, spec_g, spec_b, spec_a;
+	int index;
 public:
 	Light();
 	Light(string id);
 	Light(string id, bool enabled);
+	Light(string id, bool enabled, int index);
 	void setLocation(float loc_x, float loc_y, float loc_z);
-	void setAmbient(float amb_x, float amb_y, float amb_z, float amb_a);
-	void setDiffuse(float dif_x, float dif_y, float dif_z, float dif_a);
-	void setSpecular(float spec_x, float spec_y, float spec_z, float spec_a);
+	void setAmbient(float amb_r, float amb_g, float amb_b, float amb_a);
+	void setDiffuse(float dif_r, float dif_g, float dif_b, float dif_a);
+	void setSpecular(float spec_r, float spec_g, float spec_b, float spec_a);
 	virtual void readyLight(int index);
 	void toggleLight(int index);
 	virtual ~Light();
+	bool isEnabled();
+	string getId();
+	void setIndex(int i);
+	int getIndex()
 };
 
 #endif /* LIGHT_H_ */
