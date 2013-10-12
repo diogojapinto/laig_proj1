@@ -21,6 +21,9 @@ int *Interface::cams_vars = new int[MAX_CAMS];
 int Interface::id_counter = 0;
 int Interface::radio_id = 0;
 GLUI_RadioGroup *Interface::cams_group = NULL;
+int Interface::drawmd_id = 0;
+GLUI_RadioGroup *Interface::drawmd_grp = NULL;
+int *Interface::drawmode_vars = new int[3];
 
 Interface::Interface() {
 }
@@ -33,11 +36,11 @@ void Interface::init(int parent) {
 	GLUI_Master.set_glutReshapeFunc(reshape);
 	GLUI_Master.set_glutIdleFunc(idle);
 	glui_window->set_main_gfx_window(main_window);
-	GLUI_Master.set_glutKeyboardFunc(Interface::preprocessKeyboard);
+	GLUI_Master.set_glutKeyboardFunc(Interface::processKeyboard);
 
-	GLUI_Master.set_glutMouseFunc(Interface::preprocessMouse);
-	glutMotionFunc(Interface::preprocessMouseMoved);
-	glutPassiveMotionFunc(Interface::preprocessPassiveMouseMoved);
+	GLUI_Master.set_glutMouseFunc(Interface::processMouse);
+	glutMotionFunc(Interface::processMouseMoved);
+	glutPassiveMotionFunc(Interface::processPassiveMouseMoved);
 	displacementX = 0;
 	displacementY = 0;
 
@@ -56,7 +59,7 @@ void Interface::initGUI() {
 	int i = 0;
 	int init_camera_pos = 0;
 	for (cam_it = Scene::getInstance()->cameras.begin();
-			cam_it != Scene::getInstance()->cameras.end(); cam_it++) {
+	        cam_it != Scene::getInstance()->cameras.end(); cam_it++) {
 		int live_var = 0;
 		int id = id_counter++;
 		if (cam_it->first == Scene::getInstance()->getInitCamera()) {
@@ -70,10 +73,10 @@ void Interface::initGUI() {
 		cams_rb.insert(map<string, int*>::value_type(cam_it->first, ptr));
 	}
 
-	GLUI_Panel *camsPanel = glui_window->add_panel("Cameras", 1);
+	GLUI_Panel *camsPanel = glui_window->add_panel("Cameras");
 	radio_id = id_counter++;
-	cams_group = glui_window->add_radiogroup_to_panel(
-			camsPanel, cams_vars, radio_id, Interface::preprocessGUI);
+	cams_group = glui_window->add_radiogroup_to_panel(camsPanel, cams_vars,
+	        radio_id, Interface::processGUI);
 
 	map<string, int*>::iterator cb_it;
 	for (cb_it = cams_rb.begin(); cb_it != cams_rb.end(); cb_it++) {
@@ -82,12 +85,12 @@ void Interface::initGUI() {
 
 	cams_group->set_int_val(init_camera_pos);
 
-	glui_window->add_separator();
+	glui_window->add_column(true);
 
 	// create lights panel
 	vector<Light *>::iterator light_it;
 	for (light_it = Scene::getInstance()->lights.begin();
-			light_it != Scene::getInstance()->lights.end(); light_it++) {
+	        light_it != Scene::getInstance()->lights.end(); light_it++) {
 		int live_var = 0;
 		int id = id_counter++;
 		if ((*light_it)->isEnabled())
@@ -97,38 +100,70 @@ void Interface::initGUI() {
 		ptrL[0] = live_var;
 		ptrL[1] = id;
 		lights_cb.insert(
-				map<string, int*>::value_type((*light_it)->getId(), ptrL));
+		        map<string, int*>::value_type((*light_it)->getId(), ptrL));
 	}
 
-	GLUI_Panel *lightsPanel = glui_window->add_panel("Lights", 1);
+	GLUI_Panel *lightsPanel = glui_window->add_panel("Lights");
 
 	map<string, int*>::iterator rb_it;
 	for (rb_it = lights_cb.begin(); rb_it != lights_cb.end(); rb_it++) {
 		glui_window->add_checkbox_to_panel(lightsPanel, rb_it->first.c_str(),
-				&rb_it->second[0], rb_it->second[1], Interface::preprocessGUI);
+		        &rb_it->second[0], rb_it->second[1], Interface::processGUI);
 	}
+
+	glui_window->add_column(true);
+
+	// create drawmode panel
+
+	switch (Scene::getInstance()->getDrawmode()) {
+	case GL_FILL:
+		drawmode_vars[0] = 1;
+		drawmode_vars[1] = 0;
+		drawmode_vars[2] = 0;
+		break;
+	case GL_LINE:
+		drawmode_vars[0] = 0;
+		drawmode_vars[1] = 1;
+		drawmode_vars[2] = 0;
+		break;
+	case GL_POINT:
+		drawmode_vars[0] = 0;
+		drawmode_vars[1] = 0;
+		drawmode_vars[2] = 1;
+		break;
+	}
+
+	GLUI_Panel *drawmodePanel = glui_window->add_panel("Drawmode");
+	drawmd_id = id_counter++;
+	drawmd_grp = glui_window->add_radiogroup_to_panel(drawmodePanel,
+	        drawmode_vars, drawmd_id, Interface::processGUI);
+	glui_window->add_radiobutton_to_group(drawmd_grp, "Fill");
+	glui_window->add_radiobutton_to_group(drawmd_grp, "Wireframe");
+	glui_window->add_radiobutton_to_group(drawmd_grp, "Points");
+	drawmd_grp->set_int_val(0);
+
 }
 
 void Interface::setActiveInterface(Interface *gli) {
 	activeInterface = gli;
 }
 
-void Interface::preprocessKeyboard(unsigned char key, int x, int y) {
+void Interface::processKeyboard(unsigned char key, int x, int y) {
 	modifiers = glutGetModifiers();
 }
 
-void Interface::preprocessMouse(int button, int state, int x, int y) {
+void Interface::processMouse(int button, int state, int x, int y) {
 	modifiers = glutGetModifiers();
 }
-void Interface::preprocessMouseMoved(int x, int y) {
+void Interface::processMouseMoved(int x, int y) {
 
 }
 
-void Interface::preprocessPassiveMouseMoved(int x, int y) {
+void Interface::processPassiveMouseMoved(int x, int y) {
 
 }
 
-void Interface::preprocessGUI(GLUI_Control *ctrl) {
+void Interface::processGUI(GLUI_Control *ctrl) {
 	int id = ctrl->user_id;
 	map<string, int*>::iterator it;
 
@@ -140,6 +175,20 @@ void Interface::preprocessGUI(GLUI_Control *ctrl) {
 				return;
 			}
 		}
+	}
+	if (id == drawmd_id) {
+		switch (drawmd_grp->get_int_val()) {
+		case 0:
+			Scene::getInstance()->setDrawmode("fill");
+			break;
+		case 1:
+			Scene::getInstance()->setDrawmode("line");
+			break;
+		case 2:
+			Scene::getInstance()->setDrawmode("point");
+			break;
+		}
+
 	}
 
 	for (it = lights_cb.begin(); it != lights_cb.end(); it++) {

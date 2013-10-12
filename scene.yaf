@@ -6,7 +6,7 @@
     <!-- Valores para shading: "flat", "gouraud" ) -->
     <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
     <!-- Valores para cullorder : "CCW" ou "CW" -->
-    <globals background="0.25 0.73 0.92 1" drawmode="fill" shading="gouraud" cullface="back" cullorder="CCW" />
+    <globals background="0.25 0.73 0.92 1" drawmode="fill" shading="gouraud" cullface="none" cullorder="CCW" />
     
     <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial -->
     <cameras initial="obliqueView" >

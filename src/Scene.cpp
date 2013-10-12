@@ -215,7 +215,7 @@ void Scene::initScene() {
 
 	glClearColor(bckg_r, bckg_g, bckg_b, bckg_a);
 
-	glPolygonMode(cullface, drawmode);
+	glPolygonMode(GL_FRONT_AND_BACK, drawmode);
 
 	glShadeModel(shading);
 
@@ -252,6 +252,8 @@ void display() {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(0.0, 0.0, 0.0);
+
+	glPolygonMode(GL_FRONT_AND_BACK, Scene::getInstance()->drawmode);
 
 	Scene::getInstance()->initCamera();
 
