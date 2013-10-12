@@ -9,7 +9,6 @@
 #include <GL/glut.h>
 #include "Scene.h"
 #include "MyPrimitive.h"
-#include <iostream>
 #include "Appearance.h"
 #include <stack>
 
@@ -129,6 +128,9 @@ void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
 }
 
+/**
+ * function that processes a node's children
+ */
 void Node::processNode(stack<string> apps_stack) {
 
 	glPushMatrix();
@@ -154,6 +156,9 @@ void Node::processNode(stack<string> apps_stack) {
 	glPopMatrix();
 }
 
+/**
+ * funtion responsible for drawing a node's primitive
+ */
 void Node::drawPrims(stack<string> apps_stack) {
 	vector<MyPrimitive *>::const_iterator it;
 

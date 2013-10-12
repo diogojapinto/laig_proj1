@@ -13,6 +13,9 @@
 
 namespace std {
 
+/**
+ * class used to define an ortographic camera
+ */
 class Ortho: public Camera {
 private:
 	float left, right, top, bottom;

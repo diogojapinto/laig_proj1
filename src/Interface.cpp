@@ -7,7 +7,6 @@
 
 #include "Interface.h"
 #include "Scene.h"
-#include <iostream>
 
 extern int main_window;
 

@@ -5,7 +5,9 @@
 
 #include "Node.h"
 
-
+/**
+ * super class for all the primitives used by the program
+ */
 class MyPrimitive : public Node {
 public:
 	MyPrimitive();

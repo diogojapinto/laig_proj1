@@ -11,6 +11,9 @@
 #include "MyPrimitive.h"
 #include "GL/glut.h"
 
+/**
+ * class used to define a cylinder
+ */
 class MyCylinder: public MyPrimitive {
 	GLUquadric *q;
 	float base, top, height;

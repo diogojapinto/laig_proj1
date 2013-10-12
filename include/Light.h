@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/**
+ * class used to define an opengl light
+ */
 class Light {
 protected:
 	string id;

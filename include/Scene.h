@@ -7,30 +7,28 @@
 #include "Light.h"
 #include "Camera.h"
 #include "Node.h"
-#include "CGFappearance.h"
+#include "CGFtexture.h"
 
 using namespace std;
-/*
- *
- * todo:
- *
- * store data on the parser (next thing I'll do)
- *
- * definir appearance default (white) -> fazer get e pop (const) -  done nao tenho a certeza se no yaf posso apagar os parametros da textura ou devo deixar em branco (procurar imagem da hello kitty)
- * estruturar o programa segundo o ficheiro com nome retardado
- * criar interface para escolher pasta das texturas e ficheiro .yaf  - versao inicial feita, nao testada. Funcao para ir buscar os paths da textura feita
- *
- */
 
+/**
+ * definition of the maps types
+ */
 typedef map<string, Node*> GraphElem;
 typedef map<string, CGFtexture *> TexElem;
 typedef map<string, Appearance *> AppearanceElem;
 typedef map<string, Camera *> CameraElem;
 
+/**
+ * main glut and glui functions
+ */
 void display();
 void reshape(int h, int w);
 void idle();
 
+/**
+ * class containing all the information needed for a scene, lights, cameras, global variables...
+ */
 class Scene {
 private:
 	static Scene *instance;

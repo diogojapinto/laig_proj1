@@ -13,6 +13,9 @@
 
 using namespace std;
 
+/**
+ * class used to define a torus
+ */
 class MyTorus: public MyPrimitive {
 	float inner, outer;
 	unsigned int slices, loops;

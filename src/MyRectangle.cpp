@@ -9,11 +9,8 @@
 #include "GL/glut.h"
 #include "Scene.h"
 
-#include <stdio.h>
-
-extern Scene *scene;
-
-MyRectangle::MyRectangle() : MyPrimitive()  {
+MyRectangle::MyRectangle() :
+		MyPrimitive() {
 	x1 = -0.5;
 	y1 = -0.5;
 	x2 = 0.5;
@@ -22,7 +19,8 @@ MyRectangle::MyRectangle() : MyPrimitive()  {
 	calcNormal();
 }
 
-MyRectangle::MyRectangle(float x1, float y1, float x2, float y2) : MyPrimitive()  {
+MyRectangle::MyRectangle(float x1, float y1, float x2, float y2) :
+		MyPrimitive() {
 	this->x1 = x1;
 	this->y1 = y1;
 	this->x2 = x2;
@@ -39,28 +37,17 @@ void MyRectangle::setAppearance(string appearance) {
 MyRectangle::~MyRectangle() {
 }
 
-void MyRectangle::draw() {		// acho que ficam os dois cullorder iguais
+void MyRectangle::draw() {
 	glBegin(GL_QUADS);
 	glNormal3f(normal[0], normal[1], normal[2]);
-	if (Scene::getInstance()->getCullorder() == GL_CCW) {
-		glTexCoord2f(text_coords[0][0], text_coords[0][1]);
-		glVertex3f(x1, y1, 0.0);
-		glTexCoord2f(text_coords[1][0], text_coords[1][1]);
-		glVertex3f(x2, y1, 0.0);
-		glTexCoord2f(text_coords[2][0], text_coords[2][1]);
-		glVertex3f(x2, y2, 0.0);
-		glTexCoord2f(text_coords[3][0], text_coords[3][1]);
-		glVertex3f(x1, y2, 0.0);
-	} else {
-		glTexCoord2f(text_coords[0][0], text_coords[0][1]);
-		glVertex3f(x1, y1, 0.0);
-		glTexCoord2f(text_coords[1][0], text_coords[1][1]);
-		glVertex3f(x1, y2, 0.0);
-		glTexCoord2f(text_coords[2][0], text_coords[2][1]);
-		glVertex3f(x2, y2, 0.0);
-		glTexCoord2f(text_coords[3][0], text_coords[3][1]);
-		glVertex3f(x2, y1, 0.0);
-	}
+	glTexCoord2f(text_coords[0][0], text_coords[0][1]);
+	glVertex3f(x1, y1, 0.0);
+	glTexCoord2f(text_coords[1][0], text_coords[1][1]);
+	glVertex3f(x2, y1, 0.0);
+	glTexCoord2f(text_coords[2][0], text_coords[2][1]);
+	glVertex3f(x2, y2, 0.0);
+	glTexCoord2f(text_coords[3][0], text_coords[3][1]);
+	glVertex3f(x1, y2, 0.0);
 	glEnd();
 }
 

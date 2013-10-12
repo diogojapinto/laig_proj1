@@ -4,6 +4,9 @@
 
 #include "Light.h"
 
+/**
+ * class used to define a omnilight
+ */
 class Omnilight: public Light {
 public:
 	Omnilight();

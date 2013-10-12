@@ -11,6 +11,9 @@
 #include "MyPrimitive.h"
 #include "GL/glut.h"
 
+/**
+ * class used to define a cylinder
+ */
 class MySphere: public MyPrimitive {
 	float radius;
 	unsigned int slices, stacks;

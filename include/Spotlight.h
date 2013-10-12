@@ -12,6 +12,9 @@
 
 using namespace std;
 
+/**
+ * class used to define a spotlight
+ */
 class Spotlight: public Light {
 private:
 	float angle;

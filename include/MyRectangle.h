@@ -10,6 +10,9 @@
 
 #include "MyPrimitive.h"
 
+/**
+ * class used to define a rectangle
+ */
 class MyRectangle: public MyPrimitive {
 private:
 	float x1, y1, x2, y2;

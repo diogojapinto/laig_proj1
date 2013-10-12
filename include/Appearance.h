@@ -12,6 +12,9 @@
 
 using namespace std;
 
+/**
+ * class used to define objects appearance
+ */
 class Appearance {
 protected:
 	string id;

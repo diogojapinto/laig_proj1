@@ -8,8 +8,6 @@
 #include "MyTriangle.h"
 #include "GL/glut.h"
 #include <math.h>
-#include <stdio.h>
-#include <iostream>
 
 MyTriangle::MyTriangle() : MyPrimitive() {
 	this->x1 = -0.5;
@@ -48,7 +46,7 @@ void MyTriangle::setAppearance(string appearance) {
 MyTriangle::~MyTriangle() {
 }
 
-void MyTriangle::draw() {			///missing cullorder
+void MyTriangle::draw() {
 	glNormal3f(normal[0], normal[1], normal[2]);
 	glBegin(GL_TRIANGLE_STRIP);
 	glTexCoord2f(text_coords[0][0], text_coords[0][1]);

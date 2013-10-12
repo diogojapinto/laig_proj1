@@ -139,6 +139,9 @@ void Light::toggleLight() {
 
 }
 
+/**
+ * function used in display function to maintain the lights
+ */
 void Light::displayLight() {
 
 	if (!ready) {

@@ -13,6 +13,9 @@
 
 using namespace std;
 
+/**
+ * call used to define a perspective camera
+ */
 class Perspective: public Camera {
 private:
 	float angle;

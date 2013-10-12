@@ -12,6 +12,9 @@
 
 using namespace std;
 
+/**
+ * class containing the general attributes of a camera
+ */
 class Camera {
 protected:
 	string id;
