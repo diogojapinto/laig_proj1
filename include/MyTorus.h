@@ -1,10 +1,3 @@
-/*
- * MyTorus.h
- *
- *  Created on: Sep 25, 2013
- *      Author: wso277
- */
-
 #ifndef MYTORUS_H_
 #define MYTORUS_H_
 

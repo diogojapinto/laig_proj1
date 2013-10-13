@@ -1,10 +1,3 @@
-/*
- * Interface.cpp
- *
- *  Created on: Oct 8, 2013
- *      Author: wso277
- */
-
 #include "Interface.h"
 #include "Scene.h"
 

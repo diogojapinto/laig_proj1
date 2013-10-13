@@ -1,10 +1,3 @@
-/*
- * Spotlight.h
- *
- *  Created on: Oct 2, 2013
- *      Author: wso277
- */
-
 #ifndef SPOTLIGHT_H_
 #define SPOTLIGHT_H_
 

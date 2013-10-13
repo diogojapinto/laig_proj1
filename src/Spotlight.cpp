@@ -1,9 +1,3 @@
-/*
- * Spotlight.cpp
- *
- *  Created on: Oct 2, 2013
- *      Author: wso277
- */
 
 #include "Spotlight.h"
 #include "GL/glut.h"

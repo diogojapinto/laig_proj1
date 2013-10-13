@@ -1,10 +1,3 @@
-/*
- * Ortho.h
- *
- *  Created on: Oct 1, 2013
- *      Author: wso277
- */
-
 #ifndef ORTHO_H_
 #define ORTHO_H_
 

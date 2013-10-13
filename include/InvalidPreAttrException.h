@@ -1,10 +1,3 @@
-/*
- * InvalidPreAttrException.h
- *
- *  Created on: Oct 8, 2013
- *      Author: knoweat
- */
-
 #ifndef INVALIDPREATTREXCEPTION_H_
 #define INVALIDPREATTREXCEPTION_H_
 

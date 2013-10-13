@@ -1,10 +1,3 @@
-/*
- * Ortho.cpp
- *
- *  Created on: Oct 1, 2013
- *      Author: wso277
- */
-
 #include "Ortho.h"
 #include "GL/glut.h"
 
@@ -61,7 +54,7 @@ void Ortho::setCamera() {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(left, right, bottom, top, near, far);
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 

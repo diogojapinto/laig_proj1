@@ -1,7 +1,3 @@
-/* 
- * criar forma de escolher yaf e pasta de texturas
- * 
- */
 
 #include <iostream>
 #include <exception>

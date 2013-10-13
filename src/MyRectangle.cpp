@@ -1,10 +1,3 @@
-/*
- * MyRectangle.cpp
- *
- *  Created on: Sep 24, 2013
- *      Author: knoweat
- */
-
 #include "MyRectangle.h"
 #include "GL/glut.h"
 #include "Scene.h"

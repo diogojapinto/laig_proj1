@@ -1,16 +1,3 @@
-/*
- * ao juntar com o criador da estrutura de dados adicionar as verificações de se
- * a textura está definida e no final de se todos os nós foram definidos
- *
- * e se o ficheiro da textura existe
- *
- * e se noderef já tinha sido percorrido ou não
- *
- *
- * conisses: usar excecões em vez de return _bool_ e usar queryBool
- *
- * confirmar com o Wilson o como ele pôs as primitivas no grafo : testar Node has already been processed
- */
 
 #include "XMLScene.h"
 #include <iostream>

@@ -1,10 +1,3 @@
-/*
- * InvalidNumLights.h
- *
- *  Created on: Oct 11, 2013
- *      Author: wso277
- */
-
 #ifndef INVALIDNUMLIGHTS_H_
 #define INVALIDNUMLIGHTS_H_
 
