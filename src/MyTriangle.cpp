@@ -8,8 +8,10 @@
 #include "MyTriangle.h"
 #include "GL/glut.h"
 #include <math.h>
+#include "Scene.h"
 
-MyTriangle::MyTriangle() : MyPrimitive() {
+MyTriangle::MyTriangle() :
+		MyPrimitive() {
 	this->x1 = -0.5;
 	this->y1 = -0.5;
 	this->z1 = 0.0;
@@ -24,7 +26,8 @@ MyTriangle::MyTriangle() : MyPrimitive() {
 }
 
 MyTriangle::MyTriangle(float x1, float y1, float z1, float x2, float y2,
-        float z2, float x3, float y3, float z3) : MyPrimitive()  {
+        float z2, float x3, float y3, float z3) :
+		MyPrimitive() {
 	this->x1 = x1;
 	this->y1 = y1;
 	this->z1 = z1;
@@ -59,9 +62,15 @@ void MyTriangle::draw() {
 }
 
 const float *MyTriangle::calcNormal() {
-	normal[0] = y1 * z2 - z1 * y2;
-	normal[1] = z1 * x2 - x1 * z2;
-	normal[2] = x1 * y2 - y1 * x2;
+	if (Scene::getInstance()->getCullorder() == GL_CCW) {
+		normal[0] = (y2 - y1) * (z3 - z1) - (z2 - z1) * (y3 - y1);
+		normal[1] = (z2 - z1) * (x3 - x1) - (x2 - x1) * (z3 - z1);
+		normal[2] = (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
+	} else {
+		normal[0] = (y3 - y1) * (z2 - z1) - (z3 - z1) * (y2 - y1);
+		normal[1] = (z3 - z1) * (x2 - x1) - (x3 - x1) * (z2 - z1);
+		normal[2] = (x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1);
+	}
 
 	return normal;
 }

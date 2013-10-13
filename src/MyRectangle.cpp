@@ -53,13 +53,13 @@ void MyRectangle::draw() {
 
 const float *MyRectangle::calcNormal() {
 	if (Scene::getInstance()->getCullorder() == GL_CCW) {
-		normal[0] = 0.0;
-		normal[1] = 0.0;
-		normal[2] = 1.0;
+		normal[0] = 0;
+		normal[1] = 0;
+		normal[2] = (x2 - x1) * (y2 - y1) - (y1 - y1) * (x2 - x1);
 	} else {
-		normal[0] = 0.0;
-		normal[1] = 0.0;
-		normal[2] = -1.0;
+		normal[0] = 0;
+		normal[1] = 0;
+		normal[2] = (x2 - x1) * (y1 - y1) - (y2 - y1) * (x2 - x1);
 	}
 
 	return normal;
