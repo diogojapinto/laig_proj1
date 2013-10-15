@@ -1,6 +1,6 @@
 <yaf>
 
-    <globals background="0.25 0.73 0.92 1" drawmode="fill" shading="gouraud" cullface="back" cullorder="CW" />
+    <globals background="0.25 0.73 0.92 1" drawmode="fill" shading="gouraud" cullface="back" cullorder="CCW" />
 
     <cameras initial="obliqueView" >
         <perspective id="frontView" near="0.0001" far="1000.0" angle="45.0" pos="50.0 15.0 10.0" target="30.0 10.0 0.0" />
