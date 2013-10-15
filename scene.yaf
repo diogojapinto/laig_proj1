@@ -76,8 +76,8 @@
                                 specular="0.1 0.1 0.1 0.0"
                                 shininess="10.0"
                                 textureref="wall"
-                                texlength_s="1"
-                                texlength_t="1" />
+                                texlength_s="4"
+                                texlength_t="4" />
                                 <appearance id="floor_appearence"
                                     emissive="0.0 0.0 0.0 0.0"
                                     ambient="0.1 0.12 0.11 0.0"

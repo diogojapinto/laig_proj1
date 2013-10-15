@@ -82,9 +82,9 @@ void MyTriangle::calcTextCoords() {
 	float teta = acos((x1 * x2 + y1 * y2 + z1 * z2) / (base1 * hipot));
 	float base2 = hipot * cos(teta);
 	float hight = sqrt(exp2(hipot) - exp2f(base2));
-	float deltas1 = base1;
-	float deltas2 = base2;
-	float deltat = hight;
+	float deltas1 = base1 / getAppearance()->getSWrap();
+	float deltas2 = base2 / getAppearance()->getSWrap();
+	float deltat = hight / getAppearance()->getTWrap();
 
 	text_coords[0][0] = 0.0;
 	text_coords[0][1] = 0.0;
