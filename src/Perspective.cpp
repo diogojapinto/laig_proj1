@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Perspective::Perspective()
+Perspective::Perspective() {
 angle = 0;
 px = 0;
 py = 0;
