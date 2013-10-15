@@ -47,7 +47,7 @@ MyTorus::MyTorus() :
 }
 
 MyTorus::MyTorus(float inner, float outer, unsigned int slices,
-        unsigned int loops) :
+		unsigned int loops) :
 		MyPrimitive() {
 	this->inner = inner;
 	this->outer = outer;
@@ -106,7 +106,7 @@ void MyTorus::draw() {
 			glVertex3f(px[i][j + 1], py[i][j + 1], pz[i]);
 		}
 		glNormal3f(norm[i + 1][slices][0], norm[i + 1][slices][1],
-		        norm[i + 1][slices][2]);
+				norm[i + 1][slices][2]);
 		glVertex3f(px[i + 1][slices], py[i + 1][slices], pz[i + 1]);
 		glEnd();
 	}
@@ -127,9 +127,9 @@ void MyTorus::calcPoints() {
 		pz[i] = sec_radius * cosf(phi * deg2rad);
 		for (unsigned int j = 0; j <= slices; j++) {
 			px[i][j] = (main_radius + sec_radius * sinf(phi * deg2rad))
-			        * cosf(teta * deg2rad);
+					* cosf(teta * deg2rad);
 			py[i][j] = (main_radius + sec_radius * sinf(phi * deg2rad))
-			        * sinf(teta * deg2rad);
+					* sinf(teta * deg2rad);
 			teta += teta_step;
 		}
 		phi += phi_step;
@@ -156,30 +156,19 @@ void MyTorus::calcNormals() {
 
 			vector<float> x, y, z;
 			x.push_back(px[c_i][c_j]);
-			x.push_back(px[c_i][n_j]);
 			x.push_back(px[n_i][c_j]);
-			x.push_back(px[n_i][b_j]);
-			x.push_back(px[c_i][b_j]);
-			x.push_back(px[b_i][c_j]);
-			x.push_back(px[b_i][n_j]);
+			x.push_back(px[c_i][n_j]);
 
 			y.push_back(py[c_i][c_j]);
-			y.push_back(py[c_i][n_j]);
 			y.push_back(py[n_i][c_j]);
-			y.push_back(py[n_i][b_j]);
-			y.push_back(py[c_i][b_j]);
-			y.push_back(py[b_i][c_j]);
-			y.push_back(py[b_i][n_j]);
+			y.push_back(py[c_i][n_j]);
 
 			z.push_back(pz[c_i]);
-			z.push_back(pz[c_i]);
-			z.push_back(pz[n_i]);
 			z.push_back(pz[n_i]);
 			z.push_back(pz[c_i]);
-			z.push_back(pz[b_i]);
-			z.push_back(pz[b_i]);
 
 			norm[i][j] = getNewellsMethod(x, y, z);
+
 		}
 	}
 }

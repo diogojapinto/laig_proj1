@@ -51,7 +51,6 @@ private:
 	float amb_r, amb_g, amb_b, amb_a;
 	Scene();
 public:
-
 	static unsigned int HEIGHT;
 	static unsigned int WIDTH;
 	static Scene *getInstance();

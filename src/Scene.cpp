@@ -227,8 +227,8 @@ void Scene::initScene() {
 	}
 	glFrontFace(cullorder);
 
-
 	initCamera();
+
 
 }
 
@@ -257,8 +257,10 @@ void display() {
 
 	Scene::getInstance()->initCamera();
 
-
+	glPushMatrix();
+	glMultMatrixf(Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
 	Scene::getInstance()->applyLights();
+	glPopMatrix();
 
 	glPushMatrix();
 	Scene::getInstance()->drawScene();

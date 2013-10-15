@@ -28,7 +28,7 @@ float* getNewellsMethod(std::vector<float> x, std::vector<float> y,
 		        * (z[i] + z[indiceNextVertex]);
 		normal[1] += (z[i] - z[indiceNextVertex])
 		        * (x[i] + x[indiceNextVertex]);
-		normal[2] -= (x[i] - x[indiceNextVertex])
+		normal[2] += (x[i] - x[indiceNextVertex])
 		        * (y[i] + y[indiceNextVertex]);
 
 	}
