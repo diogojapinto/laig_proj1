@@ -1,5 +1,4 @@
 
-
 #ifndef MYPRIMITIVE_H_
 #define MYPRIMITIVE_H_
 
@@ -8,7 +7,7 @@
 /**
  * super class for all the primitives used by the program
  */
-class MyPrimitive : public Node {
+class MyPrimitive: public Node {
 public:
 	MyPrimitive();
 	virtual void draw() = 0;

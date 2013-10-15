@@ -1,10 +1,3 @@
-/*
- * MyTorus.cpp
- *
- *  Created on: Sep 25, 2013
- *      Author: wso277
- */
-
 #include "MyTorus.h"
 #include "GL/glut.h"
 #include <math.h>
@@ -13,7 +6,8 @@
 
 extern float deg2rad;
 
-MyTorus::MyTorus() : MyPrimitive()  {
+MyTorus::MyTorus() :
+		MyPrimitive() {
 	this->inner = 0.5;
 	this->outer = 1.5;
 	this->slices = 10;
@@ -53,7 +47,8 @@ MyTorus::MyTorus() : MyPrimitive()  {
 }
 
 MyTorus::MyTorus(float inner, float outer, unsigned int slices,
-        unsigned int loops) : MyPrimitive()  {
+        unsigned int loops) :
+		MyPrimitive() {
 	this->inner = inner;
 	this->outer = outer;
 	this->slices = slices;
@@ -110,7 +105,8 @@ void MyTorus::draw() {
 			glTexCoord2f(ts[i][j + 1], tt[i][j + 1]);
 			glVertex3f(px[i][j + 1], py[i][j + 1], pz[i]);
 		}
-		glNormal3f(norm[i + 1][slices][0], norm[i + 1][slices][1], norm[i + 1][slices][2]);
+		glNormal3f(norm[i + 1][slices][0], norm[i + 1][slices][1],
+		        norm[i + 1][slices][2]);
 		glVertex3f(px[i + 1][slices], py[i + 1][slices], pz[i + 1]);
 		glEnd();
 	}

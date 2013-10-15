@@ -1,10 +1,3 @@
-/*
- * Appearance.cpp
- *
- *  Created on: Oct 8, 2013
- *      Author: wso277
- */
-
 #include "Appearance.h"
 #include "Scene.h"
 #include "InvalidTexRef.h"
@@ -147,7 +140,6 @@ void Appearance::apply() {
 
 Appearance::~Appearance() {
 }
-
 
 string Appearance::getId() {
 	return id;

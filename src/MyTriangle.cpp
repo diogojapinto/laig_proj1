@@ -1,10 +1,3 @@
-/*
- * MyTriangle.cpp
- *
- *  Created on: Sep 24, 2013
- *      Author: knoweat
- */
-
 #include "MyTriangle.h"
 #include "GL/glut.h"
 #include <math.h>

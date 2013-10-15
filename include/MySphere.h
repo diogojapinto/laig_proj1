@@ -1,10 +1,3 @@
-/*
- * MySphere.h
- *
- *  Created on: Sep 25, 2013
- *      Author: wso277
- */
-
 #ifndef MYSPHERE_H_
 #define MYSPHERE_H_
 
@@ -20,7 +13,7 @@ class MySphere: public MyPrimitive {
 	GLUquadric *q;
 public:
 	MySphere();
-	MySphere(float radius,unsigned int slices,unsigned int stacks);
+	MySphere(float radius, unsigned int slices, unsigned int stacks);
 	virtual ~MySphere();
 	void draw();
 };

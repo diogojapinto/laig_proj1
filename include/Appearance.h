@@ -1,10 +1,3 @@
-/*
- * Appearance.h
- *
- *  Created on: Oct 8, 2013
- *      Author: wso277
- */
-
 #ifndef APPEARANCE_H_
 #define APPEARANCE_H_
 

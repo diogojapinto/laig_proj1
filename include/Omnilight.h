@@ -1,4 +1,3 @@
-
 #ifndef OMNILIGHT_H_
 #define OMNILIGHT_H_
 

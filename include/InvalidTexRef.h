@@ -1,10 +1,3 @@
-/*
- * InvalidTexRef.h
- *
- *  Created on: Oct 9, 2013
- *      Author: wso277
- */
-
 #ifndef INVALIDTEXREF_H_
 #define INVALIDTEXREF_H_
 

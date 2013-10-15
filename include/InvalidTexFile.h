@@ -1,10 +1,3 @@
-/*
- * InvalidTexFile.h
- *
- *  Created on: Oct 8, 2013
- *      Author: knoweat
- */
-
 #ifndef INVALIDTEXFILE_H_
 #define INVALIDTEXFILE_H_
 

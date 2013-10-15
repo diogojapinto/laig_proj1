@@ -1,10 +1,3 @@
-/*
- * Node.h
- *
- *  Created on: Sep 29, 2013
- *      Author: wso277
- */
-
 #ifndef NODE_H_
 #define NODE_H_
 

@@ -1,10 +1,3 @@
-/*
- * Perspective.h
- *
- *  Created on: Oct 1, 2013
- *      Author: wso277
- */
-
 #ifndef PERSPECTIVE_H_
 #define PERSPECTIVE_H_
 

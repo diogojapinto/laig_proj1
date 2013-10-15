@@ -1,10 +1,3 @@
-/*
- * MyCylinder.h
- *
- *  Created on: Sep 25, 2013
- *      Author: wso277
- */
-
 #ifndef MYCYLINDER_H_
 #define MYCYLINDER_H_
 
@@ -20,7 +13,8 @@ class MyCylinder: public MyPrimitive {
 	unsigned int slices, stacks;
 public:
 	MyCylinder();
-	MyCylinder(float base,float top,float height,unsigned int slices,unsigned int stacks);
+	MyCylinder(float base, float top, float height, unsigned int slices,
+	        unsigned int stacks);
 	virtual ~MyCylinder();
 	void draw();
 	void drawCircle(float radius);

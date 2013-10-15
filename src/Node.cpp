@@ -1,10 +1,3 @@
-/*
- * Node.cpp
- *
- *  Created on: Sep 29, 2013
- *      Author: wso277
- */
-
 #include "Node.h"
 #include <GL/glut.h>
 #include "Scene.h"

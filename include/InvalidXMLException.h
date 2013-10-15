@@ -1,10 +1,3 @@
-/*
- * InvalidXMLException.h
- *
- *  Created on: Oct 8, 2013
- *      Author: knoweat
- */
-
 #ifndef INVALIDXMLEXCEPTION_H_
 #define INVALIDXMLEXCEPTION_H_
 

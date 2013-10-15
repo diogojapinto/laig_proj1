@@ -1,10 +1,3 @@
-/*
- * Interface.h
- *
- *  Created on: Oct 8, 2013
- *      Author: wso277
- */
-
 #ifndef INTERFACE_H_
 #define INTERFACE_H_
 
@@ -58,7 +51,7 @@ public:
 	//@{
 	static void processKeyboard(unsigned char key, int x, int y); ///< Called when a key is pressed. Receives as parameters the key pressed, and the mouse coordinates at the time of the press.
 	static void processMouse(int button, int state, int x, int y); ///< Called when a mouse button event occurs.
-	static void processMouseMoved(int x, int y);///< Called when the mouse moves while *some* mouse button is pressed
+	static void processMouseMoved(int x, int y); ///< Called when the mouse moves while *some* mouse button is pressed
 	static void processPassiveMouseMoved(int x, int y);	///< Called when the mouse moves while *no* mouse button is pressed
 	//@}
 

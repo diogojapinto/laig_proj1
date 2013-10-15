@@ -101,7 +101,7 @@ void Light::setDiffuse(float dif_r, float dif_g, float dif_b, float dif_a) {
 }
 
 void Light::setSpecular(float spec_r, float spec_g, float spec_b,
-		float spec_a) {
+        float spec_a) {
 	this->spec_r = spec_r;
 	this->spec_g = spec_g;
 	this->spec_b = spec_b;

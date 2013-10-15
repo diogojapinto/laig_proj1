@@ -1,10 +1,3 @@
-/*
- * MyRectangle.h
- *
- *  Created on: Sep 24, 2013
- *      Author: knoweat
- */
-
 #ifndef MYRECTANGLE_H_
 #define MYRECTANGLE_H_
 

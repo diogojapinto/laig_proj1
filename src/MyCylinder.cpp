@@ -1,10 +1,3 @@
-/*
- * MyCylinder.cpp
- *
- *  Created on: Sep 25, 2013
- *      Author: wso277
- */
-
 #include "MyCylinder.h"
 #include "GL/glut.h"
 #include <math.h>
@@ -12,7 +5,8 @@
 float pi = acos(-1.0);
 float deg2rad = pi / 180.0;
 
-MyCylinder::MyCylinder() : MyPrimitive()  {
+MyCylinder::MyCylinder() :
+		MyPrimitive() {
 	this->base = 0.5;
 	this->top = 0.5;
 	this->height = 1.0;
@@ -24,7 +18,8 @@ MyCylinder::MyCylinder() : MyPrimitive()  {
 }
 
 MyCylinder::MyCylinder(float base, float top, float height, unsigned int slices,
-        unsigned int stacks) : MyPrimitive()  {
+        unsigned int stacks) :
+		MyPrimitive() {
 	this->base = base;
 	this->top = top;
 	this->height = height;

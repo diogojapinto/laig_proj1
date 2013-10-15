@@ -1,10 +1,3 @@
-/*
- * Camera.h
- *
- *  Created on: Oct 1, 2013
- *      Author: wso277
- */
-
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
@@ -32,6 +25,5 @@ public:
 	virtual void setCamera();
 	virtual ~Camera();
 };
-
 
 #endif /* CAMERA_H_ */
