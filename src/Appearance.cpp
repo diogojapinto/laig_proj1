@@ -117,18 +117,18 @@ float Appearance::getTWrap() {
 
 void Appearance::apply() {
 	float emissive[4] = { emi_r, emi_g, emi_b, emi_a };
-	glMaterialfv(Scene::getInstance()->getCullface(), GL_EMISSION, emissive);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emissive);
 
 	float ambient[4] = { amb_r, amb_g, amb_b, amb_a };
-	glMaterialfv(Scene::getInstance()->getCullface(), GL_AMBIENT, ambient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
 
 	float diffuse[4] = { emi_r, emi_g, emi_b, emi_a };
-	glMaterialfv(Scene::getInstance()->getCullface(), GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
 
 	float specular[4] = { spec_r, spec_g, spec_b, spec_a };
-	glMaterialfv(Scene::getInstance()->getCullface(), GL_SPECULAR, specular);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
 
-	glMaterialfv(Scene::getInstance()->getCullface(), GL_SHININESS, &shin);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shin);
 
 	if (isTextDefined) {
 		glEnable(GL_TEXTURE_2D);
