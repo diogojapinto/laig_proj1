@@ -16,6 +16,7 @@ class XMLScene {
 	TiXmlElement* lightingElement;
 	TiXmlElement* texturesElement;
 	TiXmlElement* appearencesElement;
+	TiXmlElement* animationsElement;
 	TiXmlElement* graphElement;
 	string yaf_path;
 	string texture_base_path;
@@ -32,6 +33,7 @@ public:
 	bool parseLighting();
 	bool parseTextures();
 	bool parseAppearences();
+	bool parseAnimations();
 	bool parseGraph();
 	bool parseNode(TiXmlElement *curr_node, vector<string> nodes_processed);
 	void setPaths();

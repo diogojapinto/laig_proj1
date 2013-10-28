@@ -123,6 +123,10 @@ void Scene::addAppearance(string key, Appearance* appearance) {
 	appearances.insert(AppearanceElem::value_type(key, appearance));
 }
 
+void Scene::addAnimation(string key, Animation* animation) {
+	animations.insert(AnimationElem::value_type(key, animation));
+}
+
 void Scene::addNode(string key, Node* node) {
 	graph.insert(GraphElem::value_type(key, node));
 }
@@ -181,6 +185,11 @@ Appearance* Scene::getAppearance(string key) {
 	return appearances[key];
 }
 
+Animation* Scene::getAnimation(string key) {
+	return animations[key];
+}
+
+
 Node* Scene::getNode(string key) {
 	return graph[key];
 }
@@ -228,6 +237,8 @@ void Scene::initScene() {
 	glFrontFace(cullorder);
 
 	initCamera();
+
+
 
 
 }

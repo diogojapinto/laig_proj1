@@ -21,6 +21,7 @@ protected:
 	float transforms[16];
 	vector<string> refs;
 	string nodeAppearance;
+	string nodeAnimation;
 	vector<MyPrimitive *> prims;
 
 public:
@@ -29,6 +30,7 @@ public:
 	Node(string id, float transforms[16]);
 	void addRef(string ref);
 	virtual void setAppearance(string appearance);
+	void setAnimation(string animation);
 	void setTransform(float transforms[16]);
 	void resetTransform();
 	void addTranslate(float x, float y, float z);

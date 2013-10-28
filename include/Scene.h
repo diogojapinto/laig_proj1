@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "Node.h"
 #include "CGFtexture.h"
+#include "Animation.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ typedef map<string, Node*> GraphElem;
 typedef map<string, CGFtexture *> TexElem;
 typedef map<string, Appearance *> AppearanceElem;
 typedef map<string, Camera *> CameraElem;
+typedef map<string, Animation *> AnimationElem;
 
 /**
  * main glut and glui functions
@@ -44,6 +46,7 @@ private:
 	CameraElem cameras;
 	TexElem textures;
 	AppearanceElem appearances;
+	AnimationElem animations;
 	GraphElem graph;
 	bool doublesided;
 	bool local;
@@ -65,6 +68,7 @@ public:
 	void addCamera(string key, Camera* camera);
 	void addTexture(string key, string path);
 	void addAppearance(string key, Appearance* appearance);
+	void addAnimation(string key, Animation* animation);
 	void addNode(string key, Node* node);
 	void setGlobalLights(bool doublesided, bool local, bool enabled);
 	void setAmb(float amb_r, float amb_g, float amb_b, float amb_a);
@@ -78,6 +82,7 @@ public:
 	Camera* getCamera(string key);
 	CGFtexture *getTexture(string key);
 	Appearance* getAppearance(string key);
+	Animation* getAnimation(string key);
 	Node* getNode(string key);
 	void applyLights();
 	void initCamera();

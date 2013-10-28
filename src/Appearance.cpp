@@ -116,6 +116,7 @@ float Appearance::getTWrap() {
 }
 
 void Appearance::apply() {
+
 	float emissive[4] = { emi_r, emi_g, emi_b, emi_a };
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emissive);
 
@@ -132,6 +133,8 @@ void Appearance::apply() {
 
 	if (isTextDefined) {
 		glEnable(GL_TEXTURE_2D);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		Scene::getInstance()->getTexture(textRef)->apply();
 	} else {
 		glDisable(GL_TEXTURE_2D);

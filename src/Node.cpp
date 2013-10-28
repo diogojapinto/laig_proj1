@@ -41,6 +41,11 @@ void Node::setAppearance(string appearance) {
 
 	nodeAppearance = appearance;
 }
+
+void Node::setAnimation(string animation) {
+	nodeAnimation = animation;
+}
+
 void Node::setTransform(float transforms[16]) {
 
 	copy(&transforms[0], &transforms[16], this->transforms);
