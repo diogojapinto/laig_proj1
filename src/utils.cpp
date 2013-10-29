@@ -131,3 +131,11 @@ char *strdup(char *str1, const char *str2) {
 		return strcpy(str1, str2);
 	}
 }
+
+float distanceTwoPoints(Point* p1, Point* p2) {
+	float dist;
+
+	dist = sqrt( exp2(p1->getX() - p2->getX()) + exp2(p1->getY() - p2->getY()) + exp2(p1->getZ() - p2->getZ()));
+
+	return dist;
+}

@@ -15,4 +15,6 @@ float* getNormalsAlternative(std::vector<float> x, std::vector<float> y,
 
 char *strdup(char *str1, const char *str2);
 
+float distanceTwoPoints(Point* p1, Point* p2);
+
 #endif
