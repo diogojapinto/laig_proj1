@@ -40,6 +40,8 @@ public:
 	const float* getTransform();
 	Appearance *getAppearance();
 	vector<string> getRefs();
+	string getAnimation();
+	void updateAnimation();
 	string getId();
 	virtual ~Node();
 	void processNode(stack<string> apps_stack);

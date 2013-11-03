@@ -7,6 +7,8 @@
 
 #include "Animation.h"
 #include "utils.h"
+#include <GL/glut.h>
+#include <math.h>
 
 Animation::Animation() {
 
@@ -17,6 +19,8 @@ Animation::Animation(string id, float span, string type) {
 	this->span = span;
 	this->type = type;
 	counter = 0;
+	vec_index = 0;
+	time_passed = 0;
 }
 
 void Animation::addPoint(float x, float y, float z) {
@@ -27,7 +31,7 @@ void Animation::addPoint(float x, float y, float z) {
 void Animation::calculateDelta() {
 	float deltax, deltay, deltaz;
 	float t_dist = 0;
-	float time_tmp;
+	unsigned int time_tmp;
 	vector<float> dist;
 	vector<Point*> delta_tmp;
 
@@ -49,6 +53,7 @@ void Animation::calculateDelta() {
 		deltay = delta_tmp[i]->getY() / time_tmp;
 		deltaz = delta_tmp[i]->getZ() / time_tmp;
 
+		time.push_back(time_tmp);
 		increments.push_back(dist[i] / deltax);
 
 		delta.push_back(new Point(deltax, deltay, deltaz));
@@ -66,6 +71,27 @@ float Animation::getSpan() {
 	return span;
 }
 
+unsigned int Animation::getTime() {
+	return time[vec_index];
+}
+
+Point* Animation::getDelta() {
+	return delta[vec_index];
+}
+void Animation::updateValues() {
+
+	time_passed+=time[vec_index];
+	if (time_passed < floor(span)) {
+		if (counter <= increments[vec_index]) {
+			counter++;
+		}
+		else {
+			vec_index++;
+			counter=1;
+		}
+
+	}
+}
 Animation::~Animation() {
 	// TODO Auto-generated destructor stub
 }

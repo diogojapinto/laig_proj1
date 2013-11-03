@@ -11,12 +11,14 @@ Node::Node() {
 
 	id = "";
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 }
 
 Node::Node(string id) {
 
 	this->id = id;
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -30,6 +32,7 @@ Node::Node(string id, float transforms[16]) {
 	this->id = id;
 	copy(&transforms[0], &transforms[16], this->transforms);
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 }
 
 void Node::addRef(string ref) {
@@ -114,6 +117,10 @@ vector<string> Node::getRefs() {
 	return refs;
 }
 
+string Node::getAnimation() {
+	return nodeAnimation;
+}
+
 string Node::getId() {
 
 	return id;
@@ -124,6 +131,13 @@ Node::~Node() {
 
 void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
+}
+
+void Node::updateAnimation() {
+	Scene::getInstance()->getAnimation(nodeAnimation)->updateValues();
+	Point* pt = Scene::getInstance()->getAnimation(nodeAnimation)->getDelta();
+
+	addTranslate(pt->getX(), pt->getY(), pt->getZ());
 }
 
 /**
