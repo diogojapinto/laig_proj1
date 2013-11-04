@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 float DegToRad(float i) {
 	float pi = 3.14159265359;

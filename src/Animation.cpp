@@ -10,6 +10,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
+#include <sys/time.h>
 
 Animation::Animation() {
 
@@ -21,19 +22,23 @@ Animation::Animation(string id, float span, string type) {
 	this->type = type;
 	vec_index = 0;
 	time_passed = 0;
-	time(&time_last);
-	//points.push_back(new Point(0, 0, 0));
+	time_line = 0;
+	printf("kldgkdf\n");
+	struct timeval t;
+	gettimeofday(&t, 0);
+	time_last = t.tv_usec * 0.000001;
+	printf("kldgkdf\n");
 	direction.push_back(new Point(0, 0, 1));
 }
 
 void Animation::addPoint(float x, float y, float z) {
 
 	if (points.size() != 0) {
-		Point *pt = new Point(points.back()->getX() + x, points.back()->getY() + y, points.back()->getZ() + z);
+		Point *pt = new Point(x, y, z);
 
 		direction.push_back(
-		 new Point(pt->getX() - points.back()->getX(), pt->getY() - points.back()->getY(),
-		 pt->getZ() - points.back()->getZ()));
+				new Point(pt->getX() - points.back()->getX(), pt->getY() - points.back()->getY(),
+						pt->getZ() - points.back()->getZ()));
 		points.push_back(pt);
 	} else {
 		points.push_back(new Point(x, y, z));
@@ -49,8 +54,6 @@ void Animation::calculateDelta() {
 	float t_dist = 0;
 	float time_tmp;
 	vector<float> dist;
-	vector<float> increments;
-	vector<Point*> delta_tmp;
 
 	for (int i = 1; i < points.size(); i++) {
 		dist.push_back(distanceTwoPoints(points[i], points[i - 1]));
@@ -61,34 +64,20 @@ void Animation::calculateDelta() {
 		deltay = points[i]->getY() - points[i - 1]->getY();
 		deltaz = points[i]->getZ() - points[i - 1]->getZ();
 
-		delta_tmp.push_back(new Point(deltax, deltay, deltaz));
+		delta.push_back(new Point(deltax, deltay, deltaz));
 
 		float angle = 0;
 
-		 angle = acos(
-		 crossProduct(direction[i], direction[i - 1])
-		 / (vectorSize(direction[i]) * vectorSize(direction[i - 1])));
+		angle = acos(
+				crossProduct(direction[i], direction[i - 1])
+						/ (vectorSize(direction[i]) * vectorSize(direction[i - 1])));
 
-		 rotations.push_back(RadToDeg(angle));
+		rotations.push_back(RadToDeg(angle));
 	}
 
 	for (int i = 0; i < dist.size(); i++) {
-		time_tmp = dist[i] / t_dist * span;
-		deltax = delta_tmp[i]->getX() / time_tmp;
-		deltay = delta_tmp[i]->getY() / time_tmp;
-		deltaz = delta_tmp[i]->getZ() / time_tmp;
-
-		if (deltax != 0) {
-			increments.push_back(fabs(dist[i] / deltax));
-		} else if (deltay != 0) {
-			increments.push_back(fabs(dist[i] / deltay));
-		} else {
-			increments.push_back(fabs(dist[i] / deltaz));
-		}
-
-		time_exp.push_back(time_tmp / increments[i]);
-
-		delta.push_back(new Point(deltax, deltay, deltaz));
+		time_tmp = dist[i] * span / t_dist;
+		time_exp.push_back(time_tmp);
 	}
 
 }
@@ -118,19 +107,24 @@ Point Animation::getPoint() {
 
 float Animation::updateValues() {
 
-	time_t timer;
-	float sub = time(&timer) - time_last;
+	struct timeval t;
+	gettimeofday(&t, 0);
+	float timer = t.tv_usec * 0.000001;
+	float sub = fabs(timer - time_last);
 	float ratio = sub / time_exp[vec_index];
 	time_last = timer;
 	time_passed += sub;
-	if ((point.getX() != points.back()->getX()) || (point.getY() != points.back()->getY())
-					|| (point.getZ() != points.back()->getZ())) {
+	time_line += sub;
+	/*printf("sub: %lf\n", sub);
+	printf("time_exp: %lf\n", time_exp[vec_index]);
+	printf("ratio: %lf\n", ratio);*/
+	if (time_passed < span) {
 		point.setX(point.getX() + (delta[vec_index]->getX() * ratio));
 		point.setY(point.getY() + (delta[vec_index]->getY() * ratio));
 		point.setZ(point.getZ() + (delta[vec_index]->getZ() * ratio));
 
-		if ((point.getX() == points[vec_index+1]->getX()) && (point.getY() == points[vec_index+1]->getY())
-				&& (point.getZ() == points[vec_index+1]->getZ())) {
+		if (time_line >= time_exp[vec_index]) {
+			time_line = 0;
 			vec_index++;
 		}
 		return ratio;

@@ -28,7 +28,8 @@ private:
 	int vec_index;
 	float time_passed;
 	Point point;
-	time_t time_last;
+	float time_last;
+	float time_line;
 
 public:
 	Animation();
