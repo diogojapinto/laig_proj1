@@ -186,7 +186,7 @@
 	<animations>
 		<animation id="teste1" span="30.0" type="linear">
 
-			<controlpoint xx="-3" yy="0" zz="0" />
+			<controlpoint xx="-3" yy="0" zz="-2" />
 			<controlpoint xx="0" yy="0" zz="2" />
 			<!-- <controlpoint xx="0" yy="-5" zz="-2" /> -->
 

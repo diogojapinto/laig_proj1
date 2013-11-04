@@ -8,7 +8,9 @@
 #include "Point.h"
 
 Point::Point() {
-	// TODO Auto-generated constructor stub
+	x = 0;
+	y = 0;
+	z = 0;
 
 }
 
@@ -30,6 +32,17 @@ float Point::getZ() {
 	return z;
 }
 
+void Point::setX(float x) {
+	this->x = x;
+}
+
+void Point::setY(float y) {
+	this->y = y;
+}
+
+void Point::setZ(float z) {
+	this->z = z;
+}
 Point::~Point() {
 	// TODO Auto-generated destructor stub
 }
