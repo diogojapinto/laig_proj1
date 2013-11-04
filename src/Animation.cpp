@@ -22,12 +22,24 @@ Animation::Animation(string id, float span, string type) {
 	counter = 1;
 	vec_index = 0;
 	time_passed = 0;
-	points.push_back(new Point(0,0,0));
+	//points.push_back(new Point(0, 0, 0));
+	//direction.push_back(new Point(0, 0, 1));
 }
 
 void Animation::addPoint(float x, float y, float z) {
 
-	points.push_back(new Point(points.back()->getX() + x, points.back()->getY() + y, points.back()->getZ() + z));
+	if (points.size() != 0) {
+		Point *pt = new Point(points.back()->getX() + x, points.back()->getY() + y, points.back()->getZ() + z);
+
+		/*direction.push_back(
+		 new Point(pt->getX() - points.back()->getX(), pt->getY() - points.back()->getY(),
+		 pt->getZ() - points.back()->getZ()));*/
+		points.push_back(pt);
+	}
+	else {
+		points.push_back(new Point(x,y,z));
+	}
+
 }
 
 void Animation::calculateDelta() {
@@ -47,6 +59,14 @@ void Animation::calculateDelta() {
 		deltaz = points[i]->getZ() - points[i - 1]->getZ();
 
 		delta_tmp.push_back(new Point(deltax, deltay, deltaz));
+
+		/*float angle = 0;
+
+		 angle = acos(
+		 crossProduct(direction[i], direction[i - 1])
+		 / (vectorSize(direction[i]) * vectorSize(direction[i - 1])));
+
+		 rotations.push_back(angle);*/
 	}
 
 	for (int i = 0; i < dist.size(); i++) {
@@ -57,27 +77,24 @@ void Animation::calculateDelta() {
 
 		if (deltax != 0) {
 			increments.push_back(abs(dist[i] / deltax));
-		}
-		else if (deltay != 0) {
+		} else if (deltay != 0) {
 			increments.push_back(abs(dist[i] / deltay));
-		}
-		else {
+		} else {
 			increments.push_back(abs(dist[i] / deltaz));
 		}
 
 		printf("\n\ndist: %lf", dist[i]);
 		printf("\n\nincrements: %d", increments[i]);
-		time.push_back(ceil((float)time_tmp / (float)increments[i]));
+		time.push_back(ceil((float) time_tmp / (float) increments[i]));
 
 		delta.push_back(new Point(deltax, deltay, deltaz));
+
+		float angle = 0;
 	}
+
 }
 vector<Point*> Animation::getPoints() {
 	return points;
-}
-
-Point Animation::getPoint() {
-	return point;
 }
 
 float Animation::getSpan() {
@@ -91,25 +108,29 @@ int Animation::getTime() {
 Point* Animation::getDelta() {
 	return delta[vec_index];
 }
-bool Animation::updateValues() {
+
+float Animation::getRotation() {
+	return rotations[vec_index];
+}
+
+int Animation::updateValues() {
 
 	time_passed += time[vec_index];
 	if (time_passed < floor(span)) {
 		if (counter < increments[vec_index]) {
 
 			counter++;
-			printf("counter: %d\n", counter);
 		} else {
 			vec_index++;
 			counter = 1;
-			printf("vec: %d\n", vec_index);
+			return 2;
 		}
-		return true;
+		return 1;
 	} else {
-		return false;
+		return 0;
 	}
 
-	return false;
+	return 0;
 }
 Animation::~Animation() {
 	// TODO Auto-generated destructor stub

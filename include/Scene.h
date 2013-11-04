@@ -49,7 +49,7 @@ private:
 	AppearanceElem appearances;
 	AnimationElem animations;
 	GraphElem graph;
-	vector<string> nodes_index;
+	vector<string> animation_index;
 	bool doublesided;
 	bool local;
 	bool enabled;
@@ -95,7 +95,7 @@ public:
 	virtual ~Scene();
 	void drawScene();
 	friend void updateValues(int index);
-	string getNodesIndex(int index);
+	string getAnimationIndex(int index);
 	friend class Interface;
 	string getInitCamera();
 };

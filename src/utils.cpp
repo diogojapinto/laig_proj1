@@ -10,8 +10,7 @@ float DegToRad(float i) {
 	return i * pi / 180;
 }
 
-float* getNewellsMethod(std::vector<float> x, std::vector<float> y,
-        std::vector<float> z) {
+float* getNewellsMethod(std::vector<float> x, std::vector<float> y, std::vector<float> z) {
 	if (x.size() != y.size() || x.size() != z.size())
 		return NULL;
 
@@ -25,17 +24,13 @@ float* getNewellsMethod(std::vector<float> x, std::vector<float> y,
 	for (unsigned int i = 0; i < nVertices; i++) {
 		int indiceNextVertex = (i + 1) % nVertices;
 
-		normal[0] += (y[i] - y[indiceNextVertex])
-		        * (z[i] + z[indiceNextVertex]);
-		normal[1] += (z[i] - z[indiceNextVertex])
-		        * (x[i] + x[indiceNextVertex]);
-		normal[2] += (x[i] - x[indiceNextVertex])
-		        * (y[i] + y[indiceNextVertex]);
+		normal[0] += (y[i] - y[indiceNextVertex]) * (z[i] + z[indiceNextVertex]);
+		normal[1] += (z[i] - z[indiceNextVertex]) * (x[i] + x[indiceNextVertex]);
+		normal[2] += (x[i] - x[indiceNextVertex]) * (y[i] + y[indiceNextVertex]);
 
 	}
 
-	float norma = sqrt(
-	        pow(normal[0], 2) + pow(normal[1], 2) + pow(normal[2], 2));
+	float norma = sqrt(pow(normal[0], 2) + pow(normal[1], 2) + pow(normal[2], 2));
 
 	for (unsigned int i = 0; i < 3; i++) {
 		normal[i] = normal[i] / norma;
@@ -44,8 +39,8 @@ float* getNewellsMethod(std::vector<float> x, std::vector<float> y,
 	return normal;
 }
 
-float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y,
-        std::vector<float> z, float x_center, float y_center, float z_center) {
+float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y, std::vector<float> z, float x_center,
+		float y_center, float z_center) {
 	if (x.size() != y.size() || x.size() != z.size())
 		return NULL;
 
@@ -59,10 +54,9 @@ float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y,
 
 	for (unsigned int i = 0; i < nVertices; i++) {
 		int indiceNextVertex = (i + 1) % nVertices;
-		float Ux = (x[i] - x_center), Uy = (y[i] - y_center), Uz = (z[i]
-		        - z_center);
-		float Vx = (x[indiceNextVertex] - x_center), Vy = (y[indiceNextVertex]
-		        - y_center), Vz = (z[indiceNextVertex] - z_center);
+		float Ux = (x[i] - x_center), Uy = (y[i] - y_center), Uz = (z[i] - z_center);
+		float Vx = (x[indiceNextVertex] - x_center), Vy = (y[indiceNextVertex] - y_center), Vz = (z[indiceNextVertex]
+				- z_center);
 		normais_x.push_back((Uy * Vz) - (Uz * Vy));
 		normais_y.push_back((Uz * Vx) - (Ux * Vz));
 		normais_z.push_back((Ux * Vy) - (Uy * Vx));
@@ -74,8 +68,7 @@ float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y,
 		normal[2] += normais_z[i];
 	}
 
-	float norma = sqrt(
-	        pow(normal[0], 2) + pow(normal[1], 2) + pow(normal[2], 2));
+	float norma = sqrt(pow(normal[0], 2) + pow(normal[1], 2) + pow(normal[2], 2));
 
 	for (unsigned int i = 0; i < 3; i++) {
 		normal[i] = normal[i] / norma;
@@ -85,8 +78,8 @@ float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y,
 
 }
 
-float* getNormalsAlternative(std::vector<float> x, std::vector<float> y,
-        std::vector<float> z, float x_center, float y_center, float z_center) {
+float* getNormalsAlternative(std::vector<float> x, std::vector<float> y, std::vector<float> z, float x_center,
+		float y_center, float z_center) {
 	if (x.size() != y.size() || x.size() != z.size())
 		return NULL;
 
@@ -115,8 +108,7 @@ float* getNormalsAlternative(std::vector<float> x, std::vector<float> y,
 
 	}
 
-	float norma = sqrt(
-	        pow(normal[0], 2) + pow(normal[1], 2) + pow(normal[2], 2));
+	float norma = sqrt(pow(normal[0], 2) + pow(normal[1], 2) + pow(normal[2], 2));
 
 	for (unsigned int i = 0; i < 3; i++) {
 		normal[i] = normal[i] / norma;
@@ -136,7 +128,20 @@ char *strdup(char *str1, const char *str2) {
 float distanceTwoPoints(Point* p1, Point* p2) {
 	float dist;
 
-	dist = sqrt( pow(abs(p1->getX() - p2->getX()), 2) + pow(abs(p1->getY() - p2->getY()), 2) + pow(abs(p1->getZ() - p2->getZ()), 2));
+	dist = sqrt(
+			pow(abs(p1->getX() - p2->getX()), 2) + pow(abs(p1->getY() - p2->getY()), 2)
+					+ pow(abs(p1->getZ() - p2->getZ()), 2));
 
 	return dist;
+}
+
+float crossProduct(Point* p1, Point* p2) {
+
+	float product = p1->getX() * p2->getX() + p1->getY() * p2->getY() + p1->getZ() * p2->getZ();
+
+	return product;
+}
+
+float vectorSize(Point* p1) {
+	return sqrt(pow(p1->getX(), 1) + pow(p1->getY(), 2) + pow(p1->getZ(), 2));
 }
