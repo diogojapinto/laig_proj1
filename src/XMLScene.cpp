@@ -19,6 +19,7 @@
 #include <string.h>
 #include <stack>
 #include "Animation.h"
+#include "DisplayList.h"
 
 #define MAX_STRING_LEN 256
 
