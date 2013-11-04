@@ -18,4 +18,8 @@ char *strdup(char *str1, const char *str2);
 
 float distanceTwoPoints(Point* p1, Point* p2);
 
+float crossProduct(Point* p1, Point* p2);
+
+float vectorSize(Point* p1);
+
 #endif

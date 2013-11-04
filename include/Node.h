@@ -41,10 +41,9 @@ public:
 	Appearance *getAppearance();
 	vector<string> getRefs();
 	string getAnimation();
-	void updateAnimation();
 	string getId();
 	virtual ~Node();
-	void processNode(stack<string> apps_stack);
+	void processNode(stack<string> apps_stack, stack<string> ani_stack);
 	void drawPrims(stack<string> apps_stack);
 };
 

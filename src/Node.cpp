@@ -134,21 +134,10 @@ void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
 }
 
-void Node::updateAnimation() {
-	bool animate = Scene::getInstance()->getAnimation(nodeAnimation)->updateValues();
-
-	if (animate) {
-		Point* pt = Scene::getInstance()->getAnimation(nodeAnimation)->getDelta();
-
-		printf("x: %lf y: %lf z: %lf\n", pt->getX(), pt->getY(), pt->getZ());
-		addTranslate(pt->getX(), pt->getY(), pt->getZ());
-	}
-}
-
 /**
  * function that processes a node's children
  */
-void Node::processNode(stack<string> apps_stack) {
+void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 
 	glPushMatrix();
 
@@ -160,14 +149,31 @@ void Node::processNode(stack<string> apps_stack) {
 		apps_stack.push(getAppearance()->getId());
 	}
 
+	if (getAnimation() == "default") {
+		ani_stack.push(ani_stack.top());
+	} else {
+		ani_stack.push(getAnimation());
+	}
+
+	glPushMatrix();
+
+	if (ani_stack.top() != "default") {
+		printf("if\n");
+		Point* pt = Scene::getInstance()->getAnimation(ani_stack.top())->getDelta();
+		glTranslatef(pt->getX(), pt->getY(), pt->getZ());
+		//glRotatef(Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(),0,1,0);
+		printf("if1\n");
+	}
+
 	if (prims.size() != 0)
 		drawPrims(apps_stack);
 
+	glPopMatrix();
 	vector<string>::iterator it;
 
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
-		ptr->processNode(apps_stack);
+		ptr->processNode(apps_stack, ani_stack);
 	}
 	apps_stack.pop();
 	glPopMatrix();

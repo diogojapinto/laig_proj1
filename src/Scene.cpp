@@ -36,8 +36,7 @@ Scene::Scene() {
 	appearances.insert(AppearanceElem::value_type("default", new Appearance()));
 }
 
-void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
-        float bckg_a) {
+void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b, float bckg_a) {
 	this->bckg_r = bckg_r;
 	this->bckg_g = bckg_g;
 	this->bckg_b = bckg_b;
@@ -189,7 +188,6 @@ Animation* Scene::getAnimation(string key) {
 	return animations[key];
 }
 
-
 Node* Scene::getNode(string key) {
 	return graph[key];
 }
@@ -238,25 +236,14 @@ void Scene::initScene() {
 
 	initCamera();
 
-	printf("anim\n");
-	GraphElem::iterator it = graph.begin();
+	AnimationElem::iterator it = animations.begin();
 	int i = 0;
 	string id;
-	printf("for\n");
-	for (; it != graph.end(); it++) {
-		if ( (id = it->second->getAnimation()) != "default") {
-			printf("animation\n");
-			nodes_index.push_back(it->first);
-			printf("timer\n");
-			printf("%d\n", getAnimation(id)->getTime());
-			printf("time\n");
-			glutTimerFunc(getAnimation(id)->getTime() * 1000, updateValues, i);
-			i++;
-			printf("after\n");
-		}
+	for (; it != animations.end(); it++) {
+		animation_index.push_back(it->first);
+		glutTimerFunc(it->second->getTime() * 1000, updateValues, i);
+		i++;
 	}
-
-
 }
 
 Scene::~Scene() {
@@ -272,7 +259,9 @@ void Scene::drawScene() {
 	Node *ptr = getNode(rootId);
 	stack<string> apps_stack;
 	apps_stack.push("default");
-	ptr->processNode(apps_stack);
+	stack<string> ani_stack;
+	ani_stack.push("default");
+	ptr->processNode(apps_stack, ani_stack);
 }
 
 void display() {
@@ -328,14 +317,14 @@ Light* Scene::getLight(string id) {
 	return NULL;
 }
 
-string Scene::getNodesIndex(int index) {
-	return nodes_index[index];
+string Scene::getAnimationIndex(int index) {
+	return animation_index[index];
 }
 
 void updateValues(int index) {
-	string id = Scene::getInstance()->getNodesIndex(index);
-	Node *nd = Scene::getInstance()->getNode(id);
-	nd->updateAnimation();
-	glutTimerFunc(Scene::getInstance()->getAnimation(nd->getAnimation())->getTime() * 1000, updateValues, index);
+	string id = Scene::getInstance()->getAnimationIndex(index);
+	Animation *ani = Scene::getInstance()->getAnimation(id);
+	ani->updateValues();
+	glutTimerFunc(Scene::getInstance()->getAnimation(id)->getTime() * 1000, updateValues, index);
 
 }
