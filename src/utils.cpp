@@ -10,6 +10,12 @@ float DegToRad(float i) {
 	return i * pi / 180;
 }
 
+float RadToDeg(float i) {
+	float pi = 3.14159265359;
+
+	return i * 180 / pi;
+}
+
 float* getNewellsMethod(std::vector<float> x, std::vector<float> y, std::vector<float> z) {
 	if (x.size() != y.size() || x.size() != z.size())
 		return NULL;

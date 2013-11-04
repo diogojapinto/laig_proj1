@@ -184,11 +184,11 @@
 		texlength_t="2" />
 	</appearances>
 	<animations>
-		<animation id="teste1" span="30.0" type="linear">
+		<animation id="teste1" span="10.0" type="linear">
 
-			<controlpoint xx="-3" yy="0" zz="-2" />
-			<controlpoint xx="0" yy="0" zz="2" />
-			<!-- <controlpoint xx="0" yy="-5" zz="-2" /> -->
+			<controlpoint xx="-1" yy="0" zz="0" />
+			<controlpoint xx="0" yy="0" zz="1" />
+			<controlpoint xx="0" yy="-1" zz="0" />
 
 		</animation>
 

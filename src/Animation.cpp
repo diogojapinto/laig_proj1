@@ -24,7 +24,7 @@ Animation::Animation(string id, float span, string type) {
 	time_passed = 0;
 	time(&time_last);
 	//points.push_back(new Point(0, 0, 0));
-	//direction.push_back(new Point(0, 0, 1));
+	direction.push_back(new Point(0, 0, 1));
 }
 
 void Animation::addPoint(float x, float y, float z) {
@@ -32,13 +32,12 @@ void Animation::addPoint(float x, float y, float z) {
 	if (points.size() != 0) {
 		Point *pt = new Point(points.back()->getX() + x, points.back()->getY() + y, points.back()->getZ() + z);
 
-		/*direction.push_back(
+		direction.push_back(
 		 new Point(pt->getX() - points.back()->getX(), pt->getY() - points.back()->getY(),
-		 pt->getZ() - points.back()->getZ()));*/
+		 pt->getZ() - points.back()->getZ()));
 		points.push_back(pt);
-	}
-	else {
-		points.push_back(new Point(x,y,z));
+	} else {
+		points.push_back(new Point(x, y, z));
 		point.setX(x);
 		point.setY(y);
 		point.setZ(z);
@@ -49,7 +48,7 @@ void Animation::addPoint(float x, float y, float z) {
 void Animation::calculateDelta() {
 	float deltax, deltay, deltaz;
 	float t_dist = 0;
-	unsigned int time_tmp;
+	float time_tmp;
 	vector<float> dist;
 	vector<Point*> delta_tmp;
 
@@ -64,13 +63,13 @@ void Animation::calculateDelta() {
 
 		delta_tmp.push_back(new Point(deltax, deltay, deltaz));
 
-		/*float angle = 0;
+		float angle = 0;
 
 		 angle = acos(
 		 crossProduct(direction[i], direction[i - 1])
 		 / (vectorSize(direction[i]) * vectorSize(direction[i - 1])));
 
-		 rotations.push_back(angle);*/
+		 rotations.push_back(RadToDeg(angle));
 	}
 
 	for (int i = 0; i < dist.size(); i++) {
@@ -87,7 +86,7 @@ void Animation::calculateDelta() {
 			increments.push_back(abs(dist[i] / deltaz));
 		}
 
-		time_exp.push_back(ceil((float) time_tmp / (float) increments[i]));
+		time_exp.push_back(time_tmp / increments[i]);
 
 		delta.push_back(new Point(deltax, deltay, deltaz));
 	}
@@ -124,15 +123,15 @@ float Animation::updateValues() {
 	float ratio = sub / time_exp[vec_index];
 	time_last = timer;
 	time_passed += sub;
-	if (time_passed < span) {
-		if (counter < increments[vec_index]) {
-			point.setX(point.getX()+(delta[vec_index]->getX() * ratio));
-			point.setY(point.getY()+(delta[vec_index]->getY() * ratio));
-			point.setZ(point.getZ()+(delta[vec_index]->getZ() * ratio));
-			counter++;
-		} else {
+	if ((point.getX() != points.back()->getX()) || (point.getY() != points.back()->getY())
+					|| (point.getZ() != points.back()->getZ())) {
+		point.setX(point.getX() + (delta[vec_index]->getX() * ratio));
+		point.setY(point.getY() + (delta[vec_index]->getY() * ratio));
+		point.setZ(point.getZ() + (delta[vec_index]->getZ() * ratio));
+
+		if ((point.getX() == points[vec_index+1]->getX()) && (point.getY() == points[vec_index+1]->getY())
+				&& (point.getZ() == points[vec_index+1]->getZ())) {
 			vec_index++;
-			counter = 1;
 		}
 		return ratio;
 	} else {

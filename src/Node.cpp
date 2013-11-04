@@ -161,7 +161,8 @@ void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 		printf("if\n");
 		Point pt = Scene::getInstance()->getAnimation(ani_stack.top())->getPoint();
 		glTranslatef(pt.getX(), pt.getY(), pt.getZ());
-		//glRotatef(Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(),0,1,0);
+		printf("angle: %lf", Scene::getInstance()->getAnimation(ani_stack.top())->getRotation());
+		glRotatef(Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(),0,1,0);
 		printf("if1\n");
 	}
 

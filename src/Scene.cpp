@@ -241,7 +241,7 @@ void Scene::initScene() {
 	string id;
 	for (; it != animations.end(); it++) {
 		animation_index.push_back(it->first);
-		glutTimerFunc(it->second->getTime() * 1000, updateValues, i);
+		glutTimerFunc(ANIMATION_TIME, updateValues, i);
 		i++;
 	}
 }
@@ -324,7 +324,7 @@ string Scene::getAnimationIndex(int index) {
 void updateValues(int index) {
 	string id = Scene::getInstance()->getAnimationIndex(index);
 	Animation *ani = Scene::getInstance()->getAnimation(id);
-	float ratio = ani->updateValues();
-	glutTimerFunc(Scene::getInstance()->getAnimation(id)->getTime() * 1000, updateValues, index);
+	ani->updateValues();
+	glutTimerFunc(ANIMATION_TIME, updateValues, index);
 
 }

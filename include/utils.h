@@ -5,6 +5,8 @@
 
 float DegToRad(float i);
 
+float RadToDeg(float i);
+
 float* getNewellsMethod(std::vector<float> x, std::vector<float> y,
         std::vector<float> z);
 float* getNewellsMethodSecondForm(std::vector<float> x, std::vector<float> y,

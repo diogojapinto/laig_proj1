@@ -23,7 +23,7 @@ private:
 	vector<Point*> points;
 	vector<Point*> delta;
 	vector<int> increments;
-	vector<int> time_exp;
+	vector<float> time_exp;
 	vector<Point*> direction;
 	vector<float> rotations;
 	int vec_index;

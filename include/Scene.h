@@ -12,6 +12,7 @@
 
 using namespace std;
 
+#define ANIMATION_TIME 16
 /**
  * definition of the maps types
  */
