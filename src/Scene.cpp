@@ -324,7 +324,7 @@ string Scene::getAnimationIndex(int index) {
 void updateValues(int index) {
 	string id = Scene::getInstance()->getAnimationIndex(index);
 	Animation *ani = Scene::getInstance()->getAnimation(id);
-	ani->updateValues();
+	float ratio = ani->updateValues();
 	glutTimerFunc(Scene::getInstance()->getAnimation(id)->getTime() * 1000, updateValues, index);
 
 }
