@@ -344,3 +344,17 @@ string Scene::findNextNameAvail(string id) {
 	} while (graph.find(ss.str()));
 	return ss.str();
 }
+
+string Scene::findLastNameAvail(string id) {
+	int i = 0;
+	stringstream ss;
+	string tmp;
+
+	do {
+		tmp = ss.str();
+		i++;
+		ss = "";
+		ss << id << i;
+	} while (graph.find(ss.str()));
+	return tmp;
+}

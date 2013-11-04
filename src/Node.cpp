@@ -158,9 +158,12 @@ void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 	glPushMatrix();
 
 	if (ani_stack.top() != "default") {
-		Point pt = Scene::getInstance()->getAnimation(ani_stack.top())->getPoint();
+		Point pt =
+				Scene::getInstance()->getAnimation(ani_stack.top())->getPoint();
 		glTranslatef(pt.getX(), pt.getY(), pt.getZ());
-		glRotatef(Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(),0,1,0);
+		glRotatef(
+				Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(),
+				0, 1, 0);
 	}
 
 	if (prims.size() != 0)
@@ -190,4 +193,8 @@ void Node::drawPrims(string appearance) {
 		(*it)->draw();
 		(*it)->clearAppearance();
 	}
+}
+
+int Node::getType() {
+	return NONE;
 }

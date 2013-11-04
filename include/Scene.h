@@ -100,6 +100,7 @@ public:
 	friend class Interface;
 	string getInitCamera();
 	string findNextNameAvail(string id);
+	string findLastNameAvail(string id);
 };
 
 #endif /* SCENE_H_ */

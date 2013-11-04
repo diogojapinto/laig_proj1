@@ -11,6 +11,8 @@ using namespace std;
 
 class MyPrimitive;
 
+enum nodeTypes { NONE, DISPLAY_LIST};
+
 /**
  * super class containing all the information about one node, including appearance, children, and primitives
  */
@@ -46,6 +48,7 @@ public:
 	virtual void processNode(stack<string> apps_stack, stack<string> ani_stack);
 	virtual void drawPrims(string appearance);
 	virtual void closeDefinition(stack<string> apps_stack);
+	virtual int getType();
 };
 
 #endif /* NODE_H_ */

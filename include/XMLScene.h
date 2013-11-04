@@ -20,6 +20,9 @@ class XMLScene {
 	TiXmlElement* graphElement;
 	string yaf_path;
 	string texture_base_path;
+	stack<string> app_stck;
+	vector<string> nodes_being_processed;
+	vector<string> nodes_finished_processing;
 
 public:
 	XMLScene();
@@ -35,7 +38,7 @@ public:
 	bool parseAppearences();
 	bool parseAnimations();
 	bool parseGraph();
-	bool parseNode(TiXmlElement *curr_node, vector<string> nodes_processed);
+	bool parseNode(TiXmlElement *curr_node, bool is_inside_dl);
 	void setPaths();
 	string getTexturePath(string texture_path, string texture_file);
 };
