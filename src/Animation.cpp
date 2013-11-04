@@ -19,7 +19,6 @@ Animation::Animation(string id, float span, string type) {
 	this->id = id;
 	this->span = span;
 	this->type = type;
-	counter = 1;
 	vec_index = 0;
 	time_passed = 0;
 	time(&time_last);
@@ -80,11 +79,11 @@ void Animation::calculateDelta() {
 		deltaz = delta_tmp[i]->getZ() / time_tmp;
 
 		if (deltax != 0) {
-			increments.push_back(abs(dist[i] / deltax));
+			increments.push_back(fabs(dist[i] / deltax));
 		} else if (deltay != 0) {
-			increments.push_back(abs(dist[i] / deltay));
+			increments.push_back(fabs(dist[i] / deltay));
 		} else {
-			increments.push_back(abs(dist[i] / deltaz));
+			increments.push_back(fabs(dist[i] / deltaz));
 		}
 
 		time_exp.push_back(time_tmp / increments[i]);

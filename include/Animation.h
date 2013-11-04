@@ -26,7 +26,6 @@ private:
 	vector<Point*> direction;
 	vector<float> rotations;
 	int vec_index;
-	int counter;
 	float time_passed;
 	Point point;
 	time_t time_last;
