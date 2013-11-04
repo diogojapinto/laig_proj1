@@ -2,6 +2,7 @@
 #include <math.h>
 #include <iostream>
 #include <string.h>
+#include <stdlib.h>
 
 float DegToRad(float i) {
 	float pi = 3.14159265359;
@@ -135,7 +136,7 @@ char *strdup(char *str1, const char *str2) {
 float distanceTwoPoints(Point* p1, Point* p2) {
 	float dist;
 
-	dist = sqrt( exp2(p1->getX() - p2->getX()) + exp2(p1->getY() - p2->getY()) + exp2(p1->getZ() - p2->getZ()));
+	dist = sqrt( pow(abs(p1->getX() - p2->getX()), 2) + pow(abs(p1->getY() - p2->getY()), 2) + pow(abs(p1->getZ() - p2->getZ()), 2));
 
 	return dist;
 }

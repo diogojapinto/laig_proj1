@@ -4,6 +4,7 @@
 #include "MyPrimitive.h"
 #include "Appearance.h"
 #include <stack>
+#include <stdio.h>
 
 using namespace std;
 
@@ -134,10 +135,14 @@ void Node::addPrimitive(MyPrimitive *prim) {
 }
 
 void Node::updateAnimation() {
-	Scene::getInstance()->getAnimation(nodeAnimation)->updateValues();
-	Point* pt = Scene::getInstance()->getAnimation(nodeAnimation)->getDelta();
+	bool animate = Scene::getInstance()->getAnimation(nodeAnimation)->updateValues();
 
-	addTranslate(pt->getX(), pt->getY(), pt->getZ());
+	if (animate) {
+		Point* pt = Scene::getInstance()->getAnimation(nodeAnimation)->getDelta();
+
+		printf("x: %lf y: %lf z: %lf\n", pt->getX(), pt->getY(), pt->getZ());
+		addTranslate(pt->getX(), pt->getY(), pt->getZ());
+	}
 }
 
 /**

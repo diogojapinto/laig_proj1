@@ -22,7 +22,7 @@ private:
 	vector<Point*> points;
 	vector<Point*> delta;
 	vector<int> increments;
-	vector<unsigned int> time;
+	vector<int> time;
 	int vec_index;
 	int counter;
 	int time_passed;
@@ -37,8 +37,8 @@ public:
 	Point getPoint();
 	Point* getDelta();
 	void calculateDelta();
-	unsigned int getTime();
-	void updateValues();
+	int getTime();
+	bool updateValues();
 	virtual ~Animation();
 };
 

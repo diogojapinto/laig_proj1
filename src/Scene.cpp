@@ -247,9 +247,12 @@ void Scene::initScene() {
 		if ( (id = it->second->getAnimation()) != "default") {
 			printf("animation\n");
 			nodes_index.push_back(it->first);
-			printf("timer");
-			glutTimerFunc(getAnimation(id)->getTime(), updateValues, i);
+			printf("timer\n");
+			printf("%d\n", getAnimation(id)->getTime());
+			printf("time\n");
+			glutTimerFunc(getAnimation(id)->getTime() * 1000, updateValues, i);
 			i++;
+			printf("after\n");
 		}
 	}
 
@@ -333,6 +336,6 @@ void updateValues(int index) {
 	string id = Scene::getInstance()->getNodesIndex(index);
 	Node *nd = Scene::getInstance()->getNode(id);
 	nd->updateAnimation();
-	glutTimerFunc(Scene::getInstance()->getAnimation(nd->getAnimation())->getTime(), updateValues, index);
+	glutTimerFunc(Scene::getInstance()->getAnimation(nd->getAnimation())->getTime() * 1000, updateValues, index);
 
 }
