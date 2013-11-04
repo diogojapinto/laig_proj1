@@ -796,6 +796,7 @@ bool XMLScene::parseAnimations() {
 	printf("Processing animations...\n\n");
 
 	char ani_id[MAX_STRING_LEN], tmp_str[MAX_STRING_LEN];
+	char ani_type[MAX_STRING_LEN];
 	double ani_span;
 	TiXmlElement * ani = NULL;
 	if ((ani = animationsElement->FirstChildElement("animation")) != NULL) {
@@ -817,13 +818,13 @@ bool XMLScene::parseAnimations() {
 				throw InvalidXMLException();
 			}
 
-			if (strdup(tmp_str, ani->Attribute("type")) == NULL) {
+			if (strdup(ani_type, ani->Attribute("type")) == NULL) {
 				printf("Error in \"type\" attribute of %s animation!\n",
 						ani_id);
 				throw InvalidXMLException();
 			}
 
-			Animation *animation = new Animation(ani_id, ani_span, tmp_str);
+			Animation *animation = new Animation(ani_id, ani_span, ani_type);
 
 			TiXmlElement *ctrl_point = NULL;
 
@@ -875,6 +876,8 @@ bool XMLScene::parseAnimations() {
 
 			} while ((ctrl_point = ctrl_point->NextSiblingElement(
 					"controlpoint")) != NULL);
+
+			animation->calculateDelta();
 
 			Scene::getInstance()->addAnimation(ani_id, animation);
 

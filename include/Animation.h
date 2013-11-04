@@ -20,6 +20,13 @@ private:
 	float span;
 	string type;
 	vector<Point*> points;
+	vector<Point*> delta;
+	vector<int> increments;
+	vector<int> time;
+	int vec_index;
+	int counter;
+	int time_passed;
+	Point point;
 
 public:
 	Animation();
@@ -27,6 +34,11 @@ public:
 	void addPoint(float x, float y, float z);
 	vector<Point*> getPoints();
 	float getSpan();
+	Point getPoint();
+	Point* getDelta();
+	void calculateDelta();
+	int getTime();
+	bool updateValues();
 	virtual ~Animation();
 };
 

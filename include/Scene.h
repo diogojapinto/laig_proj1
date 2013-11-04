@@ -26,6 +26,7 @@ typedef map<string, Animation *> AnimationElem;
  */
 void display();
 void reshape(int h, int w);
+void updateValues(int index);
 void idle();
 
 /**
@@ -48,6 +49,7 @@ private:
 	AppearanceElem appearances;
 	AnimationElem animations;
 	GraphElem graph;
+	vector<string> nodes_index;
 	bool doublesided;
 	bool local;
 	bool enabled;
@@ -92,6 +94,8 @@ public:
 	friend void idle();
 	virtual ~Scene();
 	void drawScene();
+	friend void updateValues(int index);
+	string getNodesIndex(int index);
 	friend class Interface;
 	string getInitCamera();
 };

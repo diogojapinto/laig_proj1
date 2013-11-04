@@ -1,6 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <vector>
+#include "Point.h"
 
 float DegToRad(float i);
 
@@ -14,5 +15,7 @@ float* getNormalsAlternative(std::vector<float> x, std::vector<float> y,
         float z_center);
 
 char *strdup(char *str1, const char *str2);
+
+float distanceTwoPoints(Point* p1, Point* p2);
 
 #endif

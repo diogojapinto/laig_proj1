@@ -238,7 +238,23 @@ void Scene::initScene() {
 
 	initCamera();
 
-
+	printf("anim\n");
+	GraphElem::iterator it = graph.begin();
+	int i = 0;
+	string id;
+	printf("for\n");
+	for (; it != graph.end(); it++) {
+		if ( (id = it->second->getAnimation()) != "default") {
+			printf("animation\n");
+			nodes_index.push_back(it->first);
+			printf("timer\n");
+			printf("%d\n", getAnimation(id)->getTime());
+			printf("time\n");
+			glutTimerFunc(getAnimation(id)->getTime() * 1000, updateValues, i);
+			i++;
+			printf("after\n");
+		}
+	}
 
 
 }
@@ -310,4 +326,16 @@ Light* Scene::getLight(string id) {
 			return *it;
 	}
 	return NULL;
+}
+
+string Scene::getNodesIndex(int index) {
+	return nodes_index[index];
+}
+
+void updateValues(int index) {
+	string id = Scene::getInstance()->getNodesIndex(index);
+	Node *nd = Scene::getInstance()->getNode(id);
+	nd->updateAnimation();
+	glutTimerFunc(Scene::getInstance()->getAnimation(nd->getAnimation())->getTime() * 1000, updateValues, index);
+
 }

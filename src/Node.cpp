@@ -4,6 +4,7 @@
 #include "MyPrimitive.h"
 #include "Appearance.h"
 #include <stack>
+#include <stdio.h>
 
 using namespace std;
 
@@ -11,12 +12,14 @@ Node::Node() {
 
 	id = "";
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 }
 
 Node::Node(string id) {
 
 	this->id = id;
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -30,6 +33,7 @@ Node::Node(string id, float transforms[16]) {
 	this->id = id;
 	copy(&transforms[0], &transforms[16], this->transforms);
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 }
 
 void Node::addRef(string ref) {
@@ -114,6 +118,10 @@ vector<string> Node::getRefs() {
 	return refs;
 }
 
+string Node::getAnimation() {
+	return nodeAnimation;
+}
+
 string Node::getId() {
 
 	return id;
@@ -124,6 +132,17 @@ Node::~Node() {
 
 void Node::addPrimitive(MyPrimitive *prim) {
 	prims.push_back(prim);
+}
+
+void Node::updateAnimation() {
+	bool animate = Scene::getInstance()->getAnimation(nodeAnimation)->updateValues();
+
+	if (animate) {
+		Point* pt = Scene::getInstance()->getAnimation(nodeAnimation)->getDelta();
+
+		printf("x: %lf y: %lf z: %lf\n", pt->getX(), pt->getY(), pt->getZ());
+		addTranslate(pt->getX(), pt->getY(), pt->getZ());
+	}
 }
 
 /**
