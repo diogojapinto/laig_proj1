@@ -43,8 +43,9 @@ public:
 	string getAnimation();
 	string getId();
 	virtual ~Node();
-	void processNode(stack<string> apps_stack, stack<string> ani_stack);
-	void drawPrims(stack<string> apps_stack);
+	virtual void processNode(stack<string> apps_stack, stack<string> ani_stack);
+	virtual void drawPrims(string appearance);
+	virtual void closeDefinition(stack<string> apps_stack);
 };
 
 #endif /* NODE_H_ */

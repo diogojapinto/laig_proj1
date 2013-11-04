@@ -167,7 +167,7 @@ void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 	}
 
 	if (prims.size() != 0)
-		drawPrims(apps_stack);
+		drawPrims(apps_stack.top());
 
 	glPopMatrix();
 	vector<string>::iterator it;
@@ -183,13 +183,13 @@ void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 /**
  * funtion responsible for drawing a node's primitive
  */
-void Node::drawPrims(stack<string> apps_stack) {
+void Node::drawPrims(string appearance) {
 	vector<MyPrimitive *>::const_iterator it;
 
 	for (it = prims.begin(); it != prims.end(); it++) {
-		Appearance *app = Scene::getInstance()->getAppearance(apps_stack.top());
+		Appearance *app = Scene::getInstance()->getAppearance(appearance);
 		app->apply();
-		(*it)->setAppearance(apps_stack.top());
+		(*it)->setAppearance(appearance);
 		(*it)->draw();
 		(*it)->clearAppearance();
 	}

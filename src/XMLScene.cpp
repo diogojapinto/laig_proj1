@@ -928,11 +928,24 @@ bool XMLScene::parseNode(TiXmlElement *curr_node,
 		throw InvalidXMLException();
 	}
 
-	Node *n = new Node(node_id);
-
 	printf("id: %s\n", node_id);
 
-	nodes_processed.push_back(node_id);
+	bool is_dl = false;
+
+	if (curr_node->QueryBoolAttribute("displaylist", &is_dl) != TIXML_SUCCESS) {
+
+	}
+
+	Node *n;
+
+	if (is_dl) {
+		node_id = Scene::getInstance()->findNextNameAvail(node_id);
+		n = new DisplayList(node_id);
+	} else {
+		n = new Node(node_id);
+		nodes_processed.push_back(node_id);
+	}
+
 
 	printf("Processing transformations...\n");
 

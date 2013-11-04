@@ -99,6 +99,7 @@ public:
 	string getAnimationIndex(int index);
 	friend class Interface;
 	string getInitCamera();
+	string findNextNameAvail(string id);
 };
 
 #endif /* SCENE_H_ */

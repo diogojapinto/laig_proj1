@@ -7,6 +7,8 @@
 #include "MyTorus.h"
 #include "CGFcamera.h"
 #include <iostream>
+#include <sstream>
+#include <string.h>
 
 using namespace std;
 
@@ -36,7 +38,8 @@ Scene::Scene() {
 	appearances.insert(AppearanceElem::value_type("default", new Appearance()));
 }
 
-void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b, float bckg_a) {
+void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
+		float bckg_a) {
 	this->bckg_r = bckg_r;
 	this->bckg_g = bckg_g;
 	this->bckg_b = bckg_b;
@@ -274,7 +277,8 @@ void display() {
 	Scene::getInstance()->initCamera();
 
 	glPushMatrix();
-	glMultMatrixf(Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
+	glMultMatrixf(
+			Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
 	Scene::getInstance()->applyLights();
 	glPopMatrix();
 
@@ -327,4 +331,16 @@ void updateValues(int index) {
 	ani->updateValues();
 	glutTimerFunc(ANIMATION_TIME, updateValues, index);
 
+}
+
+string Scene::findNextNameAvail(string id) {
+	int i = 0;
+	stringstream ss;
+
+	do {
+		i++;
+		ss = "";
+		ss << id << i;
+	} while (graph.find(ss.str()));
+	return ss.str();
 }
