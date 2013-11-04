@@ -22,7 +22,6 @@ private:
 	string type;
 	vector<Point*> points;
 	vector<Point*> delta;
-	vector<int> increments;
 	vector<float> time_exp;
 	vector<Point*> direction;
 	vector<float> rotations;

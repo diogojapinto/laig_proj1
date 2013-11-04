@@ -50,6 +50,7 @@ void Animation::calculateDelta() {
 	float t_dist = 0;
 	float time_tmp;
 	vector<float> dist;
+	vector<float> increments;
 	vector<Point*> delta_tmp;
 
 	for (int i = 1; i < points.size(); i++) {
