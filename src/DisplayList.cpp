@@ -9,6 +9,7 @@
 #include <GL/gl.h>
 #include "Scene.h"
 #include "MyPrimitive.h"
+#include <stdio.h>
 
 DisplayList::DisplayList() :
 		Node() {
@@ -49,7 +50,7 @@ void DisplayList::drawPrims(string appearance) {
 void DisplayList::closeDefinition(stack<string> apps_stack) {
 	glNewList(list_id, GL_COMPILE);
 	glPushMatrix();
-
+	printf("fksfk\n");
 	glMultMatrixf(transforms);
 
 	if (getAppearance()->getId() == "default") {
@@ -59,18 +60,22 @@ void DisplayList::closeDefinition(stack<string> apps_stack) {
 	}
 
 	glPushMatrix();
-
+	printf("fksfk\n");
 	if (prims.size() != 0)
 		drawPrims(apps_stack.top());
 
 	glPopMatrix();
 	vector<string>::iterator it;
-
+	printf("fksfk\n");
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
 		stack<string> tmp;
+		tmp.push("default");	//stack tem que ter o primeiro elemento
+		printf("1\n");
 		ptr->processNode(apps_stack, tmp);
+		printf("2\n");
 	}
+	printf("fksfk\n");
 	apps_stack.pop();
 	glPopMatrix();
 	glEndList();

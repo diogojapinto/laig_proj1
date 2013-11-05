@@ -138,11 +138,9 @@ void Node::addPrimitive(MyPrimitive *prim) {
  * function that processes a node's children
  */
 void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
-
 	glPushMatrix();
 
 	glMultMatrixf(transforms);
-
 	if (getAppearance()->getId() == "default") {
 		apps_stack.push(apps_stack.top());
 	} else {
@@ -156,27 +154,22 @@ void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 	}
 
 	glPushMatrix();
-
 	if (ani_stack.top() != "default") {
-		Point pt =
-				Scene::getInstance()->getAnimation(ani_stack.top())->getPoint();
+		Point pt = Scene::getInstance()->getAnimation(ani_stack.top())->getPoint();
 		glTranslatef(pt.getX(), pt.getY(), pt.getZ());
-		glRotatef(
-				Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(),
-				0, 1, 0);
+		glRotatef(Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(), 0, 1, 0);
 	}
-
 	if (prims.size() != 0)
 		drawPrims(apps_stack.top());
 
 	glPopMatrix();
 	vector<string>::iterator it;
-
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
 		ptr->processNode(apps_stack, ani_stack);
 	}
 	apps_stack.pop();
+	ani_stack.pop();
 	glPopMatrix();
 }
 
@@ -200,5 +193,5 @@ int Node::getType() {
 }
 
 void Node::closeDefinition(stack<string> apps_stack) {
-    
+
 }

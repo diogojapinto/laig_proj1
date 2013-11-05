@@ -23,11 +23,9 @@ Animation::Animation(string id, float span, string type) {
 	vec_index = 0;
 	time_passed = 0;
 	time_line = 0;
-	printf("kldgkdf\n");
 	struct timeval t;
 	gettimeofday(&t, 0);
 	time_last = t.tv_usec * 0.000001;
-	printf("kldgkdf\n");
 	direction.push_back(new Point(0, 0, 1));
 }
 
@@ -115,9 +113,6 @@ float Animation::updateValues() {
 	time_last = timer;
 	time_passed += sub;
 	time_line += sub;
-	/*printf("sub: %lf\n", sub);
-	printf("time_exp: %lf\n", time_exp[vec_index]);
-	printf("ratio: %lf\n", ratio);*/
 	if (time_passed < span) {
 		point.setX(point.getX() + (delta[vec_index]->getX() * ratio));
 		point.setY(point.getY() + (delta[vec_index]->getY() * ratio));

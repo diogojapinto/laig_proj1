@@ -191,13 +191,13 @@
 			<controlpoint xx="-1" yy="-1" zz="1" />
 
 		</animation>
-		<!-- <animation id="teste2" span="5.0" type="linear">
+		<animation id="teste2" span="5.0" type="linear">
 
 			<controlpoint xx="-1" yy="0" zz="0" />
 			<controlpoint xx="-1" yy="0" zz="1" />
 			<controlpoint xx="-1" yy="-1" zz="1" />
 
-	</animation> -->
+	</animation>
 	</animations>
 	<graph rootid="scene">
 
