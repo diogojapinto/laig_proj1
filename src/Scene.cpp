@@ -350,8 +350,11 @@ string Scene::findLastNameAvail(string id) {
 	int i = 1;
 	stringstream ss;
 	ss << id << i;
-	string tmp;
-
+	string tmp = ss.str();
+	if (graph.find(ss.str()) == graph.end()) // if it is a normal node
+											 // or hasn't been defined
+											 // "" is returned
+		return "";
 	do {
 		tmp = ss.str();
 		i++;
