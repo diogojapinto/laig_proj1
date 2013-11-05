@@ -80,10 +80,9 @@ void Plane::draw() {
 	glDisable(GL_MAP2_TEXTURE_COORD_2);
 }
 void Plane::setAppearance(string appearance) {
-
+	MyPrimitive::setAppearance(appearance);
 }
 
 Plane::~Plane() {
-// TODO Auto-generated destructor stub
 }
 

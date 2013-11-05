@@ -21,6 +21,7 @@
 #include <iterator>
 #include "Animation.h"
 #include "DisplayList.h"
+#include "Plane.h"
 
 #define MAX_STRING_LEN 256
 
@@ -1246,6 +1247,25 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 
 			printf("Torus\ninner: %f\nouter: %f\nslices: %d\nloops: %d\n",
 					tor_inner, tor_out, tor_slices, tor_loops);
+		} else if (strcmp(child_type, "plane") == 0) {
+			int parts = 0;
+
+			if (child->QueryIntAttribute("parts", &parts) != TIXML_SUCCESS) {
+				printf("Error parsing \"parts\" attribute on plane!\n");
+				throw InvalidXMLException();
+			}
+
+			if (parts <= 0) {
+				printf("Invalid value on parts attribute of plane!\n");
+				throw InvalidXMLException();
+			}
+
+			Plane *p = new Plane(parts);
+			n->addPrimitive(p);
+		} else if (strcmp(child_type, "patch") == 0) {
+			int order = 0;
+			int parts_u = 0;
+			int parts_v = 0;
 
 		} else if (strcmp(child_type, "noderef") == 0) {
 			char next_node_id[MAX_STRING_LEN];
@@ -1262,7 +1282,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 					string last_node_name =
 							Scene::getInstance()->findLastNameAvail(
 									next_node_id);
-					if (last_node_name == "") {
+					if (last_node_name == "") { // normal node
 						n->addRef(next_node_id);
 					} else {
 						TiXmlElement *next_node = NULL;
