@@ -932,18 +932,19 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 		throw InvalidXMLException();
 	}
 
+	printf("id: %s\n", node_id);
+
 	bool is_dl = false;
 	string dl_node_id;
 	if (curr_node->QueryBoolAttribute("displaylist", &is_dl) != TIXML_SUCCESS) {
-		printf("Error parsing \"displaylist\" attribute!\n");
-		throw InvalidXMLException();
+		printf("No \"displaylist\" attribute\n");
 	}
 
 	if (is_dl) {
+		printf("Node \"%s\" defined as a display list.\n", node_id);
 		dl_node_id = Scene::getInstance()->findNextNameAvail(node_id);
+		printf("dl_node_id: %s\n", dl_node_id);
 	}
-
-	printf("id: %s\n", node_id);
 
 	Node *n;
 
@@ -1068,6 +1069,8 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 		n->setAnimation(ani_id);
 
 		printf("Animation\nid: %s\n", ani_id);
+	} else {
+		printf("No animation defined on node \"%s\".\n", node_id);
 	}
 
 	printf("Processing children...\n");
