@@ -198,3 +198,7 @@ void Node::drawPrims(string appearance) {
 int Node::getType() {
 	return NONE;
 }
+
+void Node::closeDefinition(stack<string> apps_stack) {
+    
+}
