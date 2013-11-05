@@ -9,9 +9,9 @@
 
 using namespace std;
 
-class MyPrimitive;
-
 enum nodeTypes { NONE, DISPLAY_LIST};
+
+class MyPrimitive;
 
 /**
  * super class containing all the information about one node, including appearance, children, and primitives

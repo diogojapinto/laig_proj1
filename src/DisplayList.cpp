@@ -7,6 +7,8 @@
 
 #include "DisplayList.h"
 #include <GL/gl.h>
+#include "Scene.h"
+#include "MyPrimitive.h"
 
 DisplayList::DisplayList() :
 		Node() {
@@ -17,12 +19,12 @@ DisplayList::~DisplayList() {
 	glDeleteLists(list_id, 1);
 }
 
-DisplayList::Node(string id) :
+DisplayList::DisplayList(string id) :
 		Node(id) {
 	list_id = glGenLists(1);
 }
 
-DisplayList::Node(string id, float transforms[16]) :
+DisplayList::DisplayList(string id, float transforms[16]) :
 		Node(id, transforms) {
 	list_id = glGenLists(1);
 }
@@ -74,6 +76,6 @@ void DisplayList::closeDefinition(stack<string> apps_stack) {
 	glEndList();
 }
 
-virtual int getType() {
+int DisplayList::getType() {
 	return DISPLAY_LIST;
 }

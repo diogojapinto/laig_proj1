@@ -18,6 +18,7 @@
 #include "Node.h"
 #include <string.h>
 #include <stack>
+#include <iterator>
 #include "Animation.h"
 #include "DisplayList.h"
 
@@ -1053,7 +1054,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 	TiXmlElement *animation = NULL;
 	if ((animation = curr_node->FirstChildElement("animationref"))) {
 		if (is_inside_dl) {
-			printf("Animation defined in \"%d\" is inside a display list!\n",
+			printf("Animation defined in \"%s\" is inside a display list!\n",
 					node_id);
 			throw InvalidXMLException();
 		}
@@ -1254,7 +1255,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 			if (find(nodes_being_processed.begin(), nodes_being_processed.end(),
 					next_node_id) != nodes_being_processed.end()) {
 				if (find(nodes_finished_processing.begin(),
-						nodes_finished_processing.end(), next_node_id)) {
+						nodes_finished_processing.end(), next_node_id) != nodes_finished_processing.end()) {
 					printf("Node has already been processed.\n");
 					continue;
 				} else {
