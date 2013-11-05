@@ -943,7 +943,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 	if (is_dl) {
 		printf("Node \"%s\" defined as a display list.\n", node_id);
 		dl_node_id = Scene::getInstance()->findNextNameAvail(node_id);
-		printf("dl_node_id: %s\n", dl_node_id);
+		printf("dl_node_id: %s\n", dl_node_id.c_str());
 	}
 
 	Node *n;
@@ -1272,9 +1272,13 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 						next_node_id))) {
 					printf("\n\n");
 					parseNode(next_node, is_dl || is_inside_dl);
+					if (is_dl) {
 					n->addRef(
 							Scene::getInstance()->findLastNameAvail(
 									next_node_id));
+					} else {
+					    n->addRef(next_node_id);
+					}
 				} else {
 					printf("Node %s does not exist!\n", next_node_id);
 					throw InvalidXMLException();
