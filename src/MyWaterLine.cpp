@@ -1,7 +1,6 @@
 #include "MyWaterLine.h"
 #include "GL/gl.h"
 #include <GL/glew.h>
-#include <GL/gl.h>
 #include <GL/glut.h>
 #include "Scene.h"
 #include <time.h>
@@ -20,7 +19,7 @@ MyWaterLine::MyWaterLine(string heightmap, string texturemap, string vert_shader
 	text.setTextProp("wl_height", 1, 1);
 	delta = 0;
 	prev_delta = 0;
-	glutTimerFunc(ANIMATION_TIME, MyWaterLine::update, 0);
+	glutTimerFunc(ANIMATION_TIME, updateWaterLine, 0);
 }
 
 MyWaterLine::~MyWaterLine() {

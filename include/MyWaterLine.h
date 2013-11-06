@@ -8,7 +8,6 @@
 #ifndef MYWATERLINE_H_
 #define MYWATERLINE_H_
 
-#include "MyPrimitive.h"
 #include "CGFshader.h"
 #include <string>
 #include "Appearance.h"
