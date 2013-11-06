@@ -17,7 +17,7 @@ private:
 	int compute;
 	vector<float> ctrlPoints;
 	int nrCtrlPoints;
-	float textPoints[4][2];
+	vector<float> textPoints;
 
 public:
 	MyPatch();

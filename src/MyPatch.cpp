@@ -23,17 +23,17 @@ MyPatch::MyPatch() :
 	//ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 
-	textPoints[0][0] = 0.0;
-	textPoints[0][1] = 1.0;
+	textPoints.push_back(0.0);
+	textPoints.push_back(1.0);
 
-	textPoints[1][0] = 1.0;
-	textPoints[1][1] = 1.0;
+	textPoints.push_back(1.0);
+	textPoints.push_back(1.0);
 
-	textPoints[2][0] = 0.0;
-	textPoints[2][1] = 0.0;
+	textPoints.push_back(0.0);
+	textPoints.push_back(0.0);
 
-	textPoints[3][0] = 1.0;
-	textPoints[3][1] = 0.0;
+	textPoints.push_back(1.0);
+	textPoints.push_back(0.0);
 }
 
 MyPatch::~MyPatch() {
@@ -63,6 +63,18 @@ MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 	//int nr = pow(order + 1, 2);
 	//ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
+
+	textPoints.push_back(0.0);
+	textPoints.push_back(1.0);
+
+	textPoints.push_back(1.0);
+	textPoints.push_back(1.0);
+
+	textPoints.push_back(0.0);
+	textPoints.push_back(0.0);
+
+	textPoints.push_back(1.0);
+	textPoints.push_back(0.0);
 }
 
 void MyPatch::addControlPoint(float x, float y, float z) {
@@ -75,23 +87,17 @@ void MyPatch::addControlPoint(float x, float y, float z) {
 }
 
 void MyPatch::draw() {
-	printf("sdfs\n");
 	if (nrCtrlPoints == pow(order + 1, 2)) {
-		printf("something is done\n");
 		if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
 		}
 
-		printf("coiso\n");
-
-		glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order + 1, 0.0, 1.0,
-				(order + 1) * 3, order + 1, &ctrlPoints[0]);
-		glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2,
-				&textPoints[0][0]);
-
 		glEnable(GL_MAP2_VERTEX_3);
 		glEnable(GL_AUTO_NORMAL);
 		glEnable(GL_MAP2_TEXTURE_COORD_2);
+
+		glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order + 1, 0.0, 1.0, (order + 1) * 3, order + 1, &ctrlPoints[0]);
+		glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2, &textPoints[0]);
 
 		glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0);
 

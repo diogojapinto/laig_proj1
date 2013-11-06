@@ -514,12 +514,11 @@
 
 			<transforms>
 				<translate to="10.0 0.0 10.0" />
-				<rotate axis="x" angle="-90" />
-				<scale factor="10 0 10" />
+				<scale factor="20 1 20"/>
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
-				<plane parts="5" />
+				<plane parts="20"/>
 			</children>
 
 		</node>
