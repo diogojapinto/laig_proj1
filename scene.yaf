@@ -191,6 +191,7 @@
 				<rotate axis="y" angle="30" />
 			</transforms>
 			<children>
+				<vehicle />
 				<noderef id="home" />
 				<noderef id="garden" />
 				<noderef id="street" />

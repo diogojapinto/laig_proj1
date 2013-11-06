@@ -564,6 +564,7 @@
 		<node id="tree">
 
 			<transforms></transforms>
+			
 			<children>
 				<noderef id="treeTop" />
 				<noderef id="log" />
