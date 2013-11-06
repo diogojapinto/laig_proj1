@@ -10,7 +10,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
-#include <sys/time.h>
+#include <time.h>
 
 Animation::Animation() {
 
@@ -23,9 +23,9 @@ Animation::Animation(string id, float span, string type) {
 	vec_index = 0;
 	time_passed = 0;
 	time_line = 0;
-	struct timeval t;
-	gettimeofday(&t, 0);
-	time_last = t.tv_usec * 0.000001;
+	struct timespec t;
+	clock_gettime(CLOCK_MONOTONIC, &t);
+	time_last = t.tv_nsec * 0.000000001;
 	direction.push_back(new Point(0, 0, 1));
 }
 
@@ -105,11 +105,22 @@ Point Animation::getPoint() {
 
 float Animation::updateValues() {
 
-	struct timeval t;
-	gettimeofday(&t, 0);
-	float timer = t.tv_usec * 0.000001;
-	float sub = fabs(timer - time_last);
-	float ratio = sub / time_exp[vec_index];
+	struct timespec t;
+	float timer;
+	float ratio;
+	float sub;
+
+	clock_gettime(CLOCK_MONOTONIC, &t);
+	timer = t.tv_nsec * 0.000000001;
+
+	if (timer < time_last) {
+		time_last = timer;
+		sub = timer - time_last + 0.02;
+	} else {
+		sub = timer - time_last;
+	}
+
+	ratio = sub / time_exp[vec_index];
 	time_last = timer;
 	time_passed += sub;
 	time_line += sub;
@@ -132,5 +143,4 @@ float Animation::updateValues() {
 Animation::~Animation() {
 	// TODO Auto-generated destructor stub
 }
-
 

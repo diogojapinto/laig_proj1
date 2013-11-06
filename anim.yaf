@@ -184,7 +184,7 @@
 		texlength_t="2" />
 	</appearances>
 	<animations>
-		<animation id="teste1" span="5.0" type="linear">
+		<animation id="teste1" span="10.0" type="linear">
 
 			<controlpoint xx="-1" yy="0" zz="0" />
 			<controlpoint xx="-1" yy="0" zz="1" />
