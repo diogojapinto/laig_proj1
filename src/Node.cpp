@@ -5,6 +5,7 @@
 #include "Appearance.h"
 #include <stack>
 #include <stdio.h>
+#include <iostream>
 
 using namespace std;
 

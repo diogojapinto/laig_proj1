@@ -1295,6 +1295,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 					order, parts_u, parts_v, compute);
 
 			MyPatch *patch = new MyPatch(order, parts_u, parts_v, compute);
+			n->addPrimitive(patch);
 
 			TiXmlElement *ctrl_p = child->FirstChildElement("controlpoint");
 			do {
@@ -1320,9 +1321,8 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 
 				patch->addControlPoint(x, y, z);
 
-			} while ((ctrl_p = ctrl_p->NextSiblingElement("controlpoint")) != NULL);
-
-			n->addPrimitive(patch);
+			} while ((ctrl_p = ctrl_p->NextSiblingElement("controlpoint"))
+					!= NULL);
 
 		} else if (strcmp(child_type, "noderef") == 0) {
 			char next_node_id[MAX_STRING_LEN];

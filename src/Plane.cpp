@@ -9,12 +9,13 @@
 #include "GL/glut.h"
 #include "Scene.h"
 
-Plane::Plane() {
-	// TODO Auto-generated constructor stub
+Plane::Plane() :
+		MyPrimitive() {
 
 }
 
-Plane::Plane(unsigned int parts) {
+Plane::Plane(unsigned int parts) :
+		MyPrimitive() {
 	this->parts = parts;
 
 	ctrl_pts[0][0] = -0.5;
@@ -65,13 +66,14 @@ void Plane::draw() {
 
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, 2, 0.0, 1.0, 6, 2, &ctrl_pts[0][0]);
 	glMap2f(GL_MAP2_NORMAL, 0.0, 1.0, 3, 2, 0.0, 1.0, 6, 2, &nrml_pts[0][0]);
-	glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2, &text_pts[0][0]);
+	glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2,
+			&text_pts[0][0]);
 
 	glEnable(GL_MAP2_VERTEX_3);
 	glEnable(GL_MAP2_NORMAL);
 	glEnable(GL_MAP2_TEXTURE_COORD_2);
 
-	glMapGrid2f(parts, 0.0,1.0, parts, 0.0,1.0);
+	glMapGrid2f(parts, 0.0, 1.0, parts, 0.0, 1.0);
 
 	glEvalMesh2(Scene::getInstance()->getDrawmode(), 0.0, parts, 0.0, parts);
 

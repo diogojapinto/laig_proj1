@@ -24,7 +24,7 @@ public:
 	virtual ~MyPatch();
 	virtual void draw();
 	virtual void setAppearance(string appearance);
-	void addControlPoint(int x, int y, int z);
+	void addControlPoint(float x, float y, float z);
 };
 
 #endif /* MYPATCH_H_ */

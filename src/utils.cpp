@@ -136,8 +136,8 @@ float distanceTwoPoints(Point* p1, Point* p2) {
 	float dist;
 
 	dist = sqrt(
-			pow(abs(p1->getX() - p2->getX()), 2) + pow(abs(p1->getY() - p2->getY()), 2)
-					+ pow(abs(p1->getZ() - p2->getZ()), 2));
+			pow(fabs(p1->getX() - p2->getX()), 2) + pow(fabs(p1->getY() - p2->getY()), 2)
+					+ pow(fabs(p1->getZ() - p2->getZ()), 2));
 
 	return dist;
 }

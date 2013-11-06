@@ -10,6 +10,8 @@
 #include <math.h>
 #include "InvalidPreAttrException.h"
 #include "Scene.h"
+#include <iostream>
+#include <stdio.h>
 
 MyPatch::MyPatch() :
 		MyPrimitive() {
@@ -35,6 +37,7 @@ MyPatch::MyPatch() :
 }
 
 MyPatch::~MyPatch() {
+	delete (ctrlPoints);
 }
 
 MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
@@ -63,7 +66,7 @@ MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 	nrCtrlPoints = 0;
 }
 
-void MyPatch::addControlPoint(int x, int y, int z) {
+void MyPatch::addControlPoint(float x, float y, float z) {
 	if (nrCtrlPoints < pow(order + 1, 2)) {
 		ctrlPoints[nrCtrlPoints * 3] = x;
 		ctrlPoints[nrCtrlPoints * 3 + 1] = y;
@@ -72,19 +75,17 @@ void MyPatch::addControlPoint(int x, int y, int z) {
 	}
 }
 
-#include <stdio.h>
-
 void MyPatch::draw() {
-	printf("%d\n", nrCtrlPoints);
 	/*if (nrCtrlPoints == pow(order + 1, 2)) {
-		printf("retret\n");
 		printf("something is done\n");
 		if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
 		}
 
+		printf("coiso\n");
+
 		glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order + 1, 0.0, 1.0,
-				order * 3, order + 1, &ctrlPoints[0]);
+				(order + 1) * 3, order + 1, &ctrlPoints[0]);
 		glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2,
 				&textPoints[0][0]);
 
@@ -97,7 +98,7 @@ void MyPatch::draw() {
 		glEvalMesh2(compute, 0.0, partsU, 0, partsV);
 
 		glDisable(GL_MAP2_VERTEX_3);
-		glDisable(GL_MAP2_NORMAL);
+		glDisable(GL_AUTO_NORMAL);
 		glDisable(GL_MAP2_TEXTURE_COORD_2);
 
 		glDisable(GL_AUTO_NORMAL);
