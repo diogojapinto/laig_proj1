@@ -8,6 +8,8 @@
 #include <MyPatch.h>
 #include <GL/gl.h>
 #include <math.h>
+#include "InvalidPreAttrException.h"
+#include "Scene.h"
 
 MyPatch::MyPatch() :
 		MyPrimitive() {
@@ -15,7 +17,8 @@ MyPatch::MyPatch() :
 	this->partsU = 1;
 	this->partsV = 1;
 	this->compute = GL_FILL;
-	ctrlPoints = new int[pow(order + 1, 2)];
+	int nr = pow(order + 1, 2);
+	ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 }
 
@@ -38,7 +41,8 @@ MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 		throw InvalidPreAttrException("compute");
 	}
 
-	ctrlPoints = new int[pow(order + 1, 2)];
+	int nr = pow(order + 1, 2);
+	ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 }
 
@@ -51,7 +55,7 @@ void MyPatch::addControlPoint(int x, int y, int z) {
 	}
 }
 
-virtual void MyPatch::draw() {
+void MyPatch::draw() {
 	if (nrCtrlPoints == pow(order + 1, 2)) {
 		glPolygonMode(GL_FRONT_AND_BACK, compute);
 		/*
