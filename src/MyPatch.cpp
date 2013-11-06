@@ -64,7 +64,7 @@ MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 }
 
 void MyPatch::addControlPoint(int x, int y, int z) {
-	if (nrCtrlPoints <= pow(order + 1, 2)) {
+	if (nrCtrlPoints < pow(order + 1, 2)) {
 		ctrlPoints[nrCtrlPoints * 3] = x;
 		ctrlPoints[nrCtrlPoints * 3 + 1] = y;
 		ctrlPoints[nrCtrlPoints * 3 + 2] = z;
@@ -75,8 +75,9 @@ void MyPatch::addControlPoint(int x, int y, int z) {
 #include <stdio.h>
 
 void MyPatch::draw() {
-	printf("kdkdkd\n");
+	printf("%d\n", nrCtrlPoints);
 	/*if (nrCtrlPoints == pow(order + 1, 2)) {
+		printf("retret\n");
 		printf("something is done\n");
 		if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
@@ -103,4 +104,8 @@ void MyPatch::draw() {
 
 		glFrontFace(Scene::getInstance()->getCullorder());
 	}*/
+}
+
+void MyPatch::setAppearance(string appearance) {
+	MyPrimitive::setAppearance(appearance);
 }

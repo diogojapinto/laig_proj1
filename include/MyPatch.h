@@ -23,6 +23,7 @@ public:
 	MyPatch(int order, int partsU, int partsV, string compute);
 	virtual ~MyPatch();
 	virtual void draw();
+	virtual void setAppearance(string appearance);
 	void addControlPoint(int x, int y, int z);
 };
 

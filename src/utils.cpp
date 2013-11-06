@@ -14,7 +14,7 @@ float DegToRad(float i) {
 float RadToDeg(float i) {
 	float pi = 3.14159265359;
 
-	return i * 180 / pi;
+	return i * 180.0 / pi;
 }
 
 float* getNewellsMethod(std::vector<float> x, std::vector<float> y, std::vector<float> z) {
