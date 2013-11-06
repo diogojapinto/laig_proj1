@@ -183,6 +183,22 @@
 		texlength_s="2"
 		texlength_t="2" />
 	</appearances>
+	<animations>
+		<animation id="teste1" span="5.0" type="linear">
+
+			<controlpoint xx="-1" yy="0" zz="0" />
+			<controlpoint xx="-1" yy="0" zz="1" />
+			<controlpoint xx="-1" yy="-1" zz="1" />
+
+		</animation>
+		<animation id="teste2" span="5.0" type="linear">
+
+			<controlpoint xx="-1" yy="0" zz="0" />
+			<controlpoint xx="-1" yy="0" zz="1" />
+			<controlpoint xx="-1" yy="-1" zz="1" />
+
+	</animation>
+	</animations>
 	<graph rootid="scene">
 
 		<node id="scene">
@@ -196,7 +212,7 @@
 				<noderef id="street" />
 			</children>
 		</node>
-		<node id="home" displaylist="true" >
+		<node id="home">
 			<transforms></transforms>
 			<children>
 				<noderef id="wall" />
@@ -561,6 +577,7 @@
 				<translate to="16.0 6.2 13.0" />
 				<scale factor="9.0 3.0 9.0" />
 			</transforms>
+			<animationref id="teste1" />
 			<appearanceref id="tree_leafs_appearence" />
 			<children>
 				<sphere radius="0.5" slices="10" stacks="10" />

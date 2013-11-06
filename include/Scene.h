@@ -12,6 +12,7 @@
 
 using namespace std;
 
+#define ANIMATION_TIME 16
 /**
  * definition of the maps types
  */
@@ -26,6 +27,7 @@ typedef map<string, Animation *> AnimationElem;
  */
 void display();
 void reshape(int h, int w);
+void updateValues(int index);
 void idle();
 
 /**
@@ -48,6 +50,7 @@ private:
 	AppearanceElem appearances;
 	AnimationElem animations;
 	GraphElem graph;
+	vector<string> animation_index;
 	bool doublesided;
 	bool local;
 	bool enabled;
@@ -92,8 +95,12 @@ public:
 	friend void idle();
 	virtual ~Scene();
 	void drawScene();
+	friend void updateValues(int index);
+	string getAnimationIndex(int index);
 	friend class Interface;
 	string getInitCamera();
+	string findNextNameAvail(string id);
+	string findLastNameAvail(string id);
 };
 
 #endif /* SCENE_H_ */

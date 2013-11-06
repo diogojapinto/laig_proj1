@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include "Point.h"
+#include <time.h>
 
 using namespace std;
 
@@ -21,9 +22,14 @@ private:
 	string type;
 	vector<Point*> points;
 	vector<Point*> delta;
-	vector<int> increments;
-	int counter;
+	vector<float> time_exp;
+	vector<Point*> direction;
+	vector<float> rotations;
+	int vec_index;
+	float time_passed;
 	Point point;
+	float time_last;
+	float time_line;
 
 public:
 	Animation();
@@ -31,8 +37,12 @@ public:
 	void addPoint(float x, float y, float z);
 	vector<Point*> getPoints();
 	float getSpan();
-	Point getPoint();
+	Point* getDelta();
 	void calculateDelta();
+	int getTime();
+	float updateValues();
+	float getRotation();
+	Point getPoint();
 	virtual ~Animation();
 };
 

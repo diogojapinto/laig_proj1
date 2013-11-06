@@ -4,6 +4,7 @@
 #include "MyPrimitive.h"
 #include "Appearance.h"
 #include <stack>
+#include <stdio.h>
 
 using namespace std;
 
@@ -11,12 +12,14 @@ Node::Node() {
 
 	id = "";
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 }
 
 Node::Node(string id) {
 
 	this->id = id;
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -30,6 +33,7 @@ Node::Node(string id, float transforms[16]) {
 	this->id = id;
 	copy(&transforms[0], &transforms[16], this->transforms);
 	nodeAppearance = "default";
+	nodeAnimation = "default";
 }
 
 void Node::addRef(string ref) {
@@ -114,6 +118,10 @@ vector<string> Node::getRefs() {
 	return refs;
 }
 
+string Node::getAnimation() {
+	return nodeAnimation;
+}
+
 string Node::getId() {
 
 	return id;
@@ -129,42 +137,61 @@ void Node::addPrimitive(MyPrimitive *prim) {
 /**
  * function that processes a node's children
  */
-void Node::processNode(stack<string> apps_stack) {
-
+void Node::processNode(stack<string> apps_stack, stack<string> ani_stack) {
 	glPushMatrix();
 
 	glMultMatrixf(transforms);
-
 	if (getAppearance()->getId() == "default") {
 		apps_stack.push(apps_stack.top());
 	} else {
 		apps_stack.push(getAppearance()->getId());
 	}
 
+	if (getAnimation() == "default") {
+		ani_stack.push(ani_stack.top());
+	} else {
+		ani_stack.push(getAnimation());
+	}
+
+	glPushMatrix();
+	if (ani_stack.top() != "default") {
+		Point pt = Scene::getInstance()->getAnimation(ani_stack.top())->getPoint();
+		glTranslatef(pt.getX(), pt.getY(), pt.getZ());
+		glRotatef(Scene::getInstance()->getAnimation(ani_stack.top())->getRotation(), 0, 1, 0);
+	}
 	if (prims.size() != 0)
-		drawPrims(apps_stack);
+		drawPrims(apps_stack.top());
 
+	glPopMatrix();
 	vector<string>::iterator it;
-
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
-		ptr->processNode(apps_stack);
+		ptr->processNode(apps_stack, ani_stack);
 	}
 	apps_stack.pop();
+	ani_stack.pop();
 	glPopMatrix();
 }
 
 /**
  * funtion responsible for drawing a node's primitive
  */
-void Node::drawPrims(stack<string> apps_stack) {
+void Node::drawPrims(string appearance) {
 	vector<MyPrimitive *>::const_iterator it;
 
 	for (it = prims.begin(); it != prims.end(); it++) {
-		Appearance *app = Scene::getInstance()->getAppearance(apps_stack.top());
+		Appearance *app = Scene::getInstance()->getAppearance(appearance);
 		app->apply();
-		(*it)->setAppearance(apps_stack.top());
+		(*it)->setAppearance(appearance);
 		(*it)->draw();
 		(*it)->clearAppearance();
 	}
+}
+
+int Node::getType() {
+	return NONE;
+}
+
+void Node::closeDefinition(stack<string> apps_stack) {
+
 }

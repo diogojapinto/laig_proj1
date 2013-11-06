@@ -7,6 +7,8 @@
 #include "MyTorus.h"
 #include "CGFcamera.h"
 #include <iostream>
+#include <sstream>
+#include <string.h>
 
 using namespace std;
 
@@ -37,7 +39,7 @@ Scene::Scene() {
 }
 
 void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
-        float bckg_a) {
+		float bckg_a) {
 	this->bckg_r = bckg_r;
 	this->bckg_g = bckg_g;
 	this->bckg_b = bckg_b;
@@ -189,7 +191,6 @@ Animation* Scene::getAnimation(string key) {
 	return animations[key];
 }
 
-
 Node* Scene::getNode(string key) {
 	return graph[key];
 }
@@ -238,9 +239,14 @@ void Scene::initScene() {
 
 	initCamera();
 
-
-
-
+	AnimationElem::iterator it = animations.begin();
+	int i = 0;
+	string id;
+	for (; it != animations.end(); it++) {
+		animation_index.push_back(it->first);
+		glutTimerFunc(ANIMATION_TIME, updateValues, i);
+		i++;
+	}
 }
 
 Scene::~Scene() {
@@ -256,7 +262,9 @@ void Scene::drawScene() {
 	Node *ptr = getNode(rootId);
 	stack<string> apps_stack;
 	apps_stack.push("default");
-	ptr->processNode(apps_stack);
+	stack<string> ani_stack;
+	ani_stack.push("default");
+	ptr->processNode(apps_stack, ani_stack);
 }
 
 void display() {
@@ -269,7 +277,8 @@ void display() {
 	Scene::getInstance()->initCamera();
 
 	glPushMatrix();
-	glMultMatrixf(Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
+	glMultMatrixf(
+			Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
 	Scene::getInstance()->applyLights();
 	glPopMatrix();
 
@@ -310,4 +319,48 @@ Light* Scene::getLight(string id) {
 			return *it;
 	}
 	return NULL;
+}
+
+string Scene::getAnimationIndex(int index) {
+	return animation_index[index];
+}
+
+void updateValues(int index) {
+	string id = Scene::getInstance()->getAnimationIndex(index);
+	Animation *ani = Scene::getInstance()->getAnimation(id);
+	ani->updateValues();
+	glutTimerFunc(ANIMATION_TIME, updateValues, index);
+
+}
+
+string Scene::findNextNameAvail(string id) {
+	int i = 0;
+	stringstream ss;
+
+	do {
+		i++;
+		ss.str("");
+		ss.clear();
+		ss << id << i;
+	} while (graph.find(ss.str()) != graph.end());
+	return ss.str();
+}
+
+string Scene::findLastNameAvail(string id) {
+	int i = 1;
+	stringstream ss;
+	ss << id << i;
+	string tmp = ss.str();
+	if (graph.find(ss.str()) == graph.end()) // if it is a normal node
+											 // or hasn't been defined
+											 // "" is returned
+		return "";
+	do {
+		tmp = ss.str();
+		i++;
+		ss.str("");
+		ss.clear();
+		ss << id << i;
+	} while (graph.find(ss.str()) != graph.end());
+	return tmp;
 }
