@@ -351,8 +351,10 @@ string Scene::findLastNameAvail(string id) {
 	stringstream ss;
 	ss << id << i;
 	string tmp = ss.str();
-	if (graph.find(ss.str()) == graph.end()) // if it is a normal node
-											 // or hasn't been defined
+	if (graph.find(id) != graph.end()) {
+		return id;
+	}
+	if (graph.find(ss.str()) == graph.end()) // if it hasn't been defined
 											 // "" is returned
 		return "";
 	do {

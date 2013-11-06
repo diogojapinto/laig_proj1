@@ -22,6 +22,7 @@
 #include "Animation.h"
 #include "DisplayList.h"
 #include "Plane.h"
+#include "MyPatch.h"
 
 #define MAX_STRING_LEN 256
 
@@ -1260,12 +1261,66 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
+			printf("Plane\nparts: %f\n", parts);
+
 			Plane *p = new Plane(parts);
 			n->addPrimitive(p);
 		} else if (strcmp(child_type, "patch") == 0) {
 			int order = 0;
 			int parts_u = 0;
 			int parts_v = 0;
+			char compute[MAX_STRING_LEN];
+
+			if (child->QueryIntAttribute("order", &order) != TIXML_SUCCESS) {
+				printf("Error parsing \"order\" attribute on patch!\n");
+				throw InvalidXMLException();
+			}
+
+			if (child->QueryIntAttribute("partsU", &parts_u) != TIXML_SUCCESS) {
+				printf("Error parsing \"partsU\" attribute on patch!\n");
+				throw InvalidXMLException();
+			}
+
+			if (child->QueryIntAttribute("partsV", &parts_v) != TIXML_SUCCESS) {
+				printf("Error parsing \"partsV\" attribute on patch!\n");
+				throw InvalidXMLException();
+			}
+
+			if (strdup(compute, child->Attribute("compute")) == NULL) {
+				printf("Error parsing \"compute\" attribute on patch!\n");
+				throw InvalidXMLException();
+			}
+
+			printf("Plane\norder: %d\npartsU: %d\npartsV: %d\ncompute: %s\n",
+					order, parts_u, parts_v, compute);
+
+			MyPatch *patch = new MyPatch(order, parts_u, parts_v, compute);
+
+			TiXmlElement *ctrl_p = child->FirstChildElement("controlpoint");
+			do {
+				float x = 0;
+				float y = 0;
+				float z = 0;
+
+				if (ctrl_p->QueryFloatAttribute("x", &x) != TIXML_SUCCESS) {
+					printf("Error parsing \"x\" attribute on patch!\n");
+					throw InvalidXMLException();
+				}
+
+				if (ctrl_p->QueryFloatAttribute("y", &y) != TIXML_SUCCESS) {
+					printf("Error parsing \"y\" attribute on patch!\n");
+					throw InvalidXMLException();
+				}
+				if (ctrl_p->QueryFloatAttribute("z", &z) != TIXML_SUCCESS) {
+					printf("Error parsing \"z\" attribute on patch!\n");
+					throw InvalidXMLException();
+				}
+
+				patch->addControlPoint(x, y, z);
+
+			} while (ctrl_p->NextSibling("controlpoint") != NULL);
+
+			n->addPrimitive(patch);
 
 		} else if (strcmp(child_type, "noderef") == 0) {
 			char next_node_id[MAX_STRING_LEN];
@@ -1282,7 +1337,8 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 					string last_node_name =
 							Scene::getInstance()->findLastNameAvail(
 									next_node_id);
-					if (last_node_name == "") { // normal node
+					if (Scene::getInstance()->getNode(last_node_name)->getType()
+												!= DISPLAY_LIST) { // normal node
 						n->addRef(next_node_id);
 					} else {
 						TiXmlElement *next_node = NULL;
@@ -1310,7 +1366,8 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 					string last_node_name =
 							Scene::getInstance()->findLastNameAvail(
 									next_node_id);
-					if (Scene::getInstance()->getNode(last_node_name)->getType() == DISPLAY_LIST) {
+					if (Scene::getInstance()->getNode(last_node_name)->getType()
+							== DISPLAY_LIST) {
 						n->addRef(last_node_name);
 					} else {
 						n->addRef(next_node_id);
@@ -1332,8 +1389,9 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 	} else {
 		Scene::getInstance()->addNode(node_id, n);
 	}
+	printf("closing %s\n", node_id);
 	n->closeDefinition(app_stck);
-	printf("fksfk\n");
+	printf("closed %s\n", node_id);
 	app_stck.pop();
 	nodes_finished_processing.push_back(node_id);
 	return true;
