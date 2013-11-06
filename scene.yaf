@@ -191,6 +191,10 @@
 				<rotate axis="y" angle="30" />
 			</transforms>
 			<children>
+<<<<<<< HEAD
+=======
+				<vehicle />
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 				<noderef id="home" />
 				<noderef id="garden" />
 				<noderef id="street" />
@@ -428,6 +432,11 @@
 
 			<transforms>
 				<translate to="1.5 1.5 0.0" />
+<<<<<<< HEAD
+=======
+				<scale factor="3 3 1"/>
+				<rotate axis="x" angle="90" />
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</transforms>
 			<children>
 				<noderef id="brushSquare1" />
@@ -438,6 +447,11 @@
 
 			<transforms>
 				<translate to="18.5 1.5 0.0" />
+<<<<<<< HEAD
+=======
+				<scale factor="3 3 1"/>
+				<rotate axis="x" angle="90" />
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</transforms>
 			<children>
 				<noderef id="brushSquare1" />
@@ -448,7 +462,11 @@
 
 			<transforms></transforms>
 			<children>
+<<<<<<< HEAD
 				<rectangle xy1="-1.5 -1.5" xy2="1.5 1.5" />
+=======
+				<plane parts="5"/>
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</children>
 
 		</node>
@@ -456,7 +474,13 @@
 
 			<transforms>
 				<translate to="0.0 1.5 10.0" />
+<<<<<<< HEAD
 				<rotate axis="y" angle="90" />
+=======
+				<scale factor="1 3 20"/>
+				<rotate axis="y" angle="90" />
+				<rotate axis="x" angle="90" />
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</transforms>
 			<children>
 				<noderef id="brushSquare2" />
@@ -467,7 +491,13 @@
 
 			<transforms>
 				<translate to="20.0 1.5 10.0" />
+<<<<<<< HEAD
 				<rotate axis="y" angle="-90" />
+=======
+				<scale factor="1 3 20"/>
+				<rotate axis="y" angle="-90" />
+				<rotate axis="x" angle="90" />
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</transforms>
 			<children>
 				<noderef id="brushSquare2" />
@@ -478,7 +508,11 @@
 
 			<transforms></transforms>
 			<children>
+<<<<<<< HEAD
 				<rectangle xy1="-10.0 -1.5" xy2="10.0 1.5" />
+=======
+				<plane parts="10"/>
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</children>
 
 		</node>
@@ -498,11 +532,46 @@
 
 			<transforms>
 				<translate to="10.0 0.0 10.0" />
+<<<<<<< HEAD
 				<rotate axis="x" angle="-90" />
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
 				<rectangle xy1="-10.0 -10.0" xy2="10.0 10.0" />
+=======
+				<scale factor="20 1 20"/>
+				<rotate axis="x" angle="180" />
+			</transforms>
+			<appearanceref id="floor_appearence" />
+			<!--<patch order="3" partsU="20" partsV="20" compute="fill">
+
+				<controlpoint x="-1.5" y="-1.5" z="4.0" />
+				<controlpoint x="-0.5" y="-1.5" z="2.0" />
+				<controlpoint x="0.5" y="-1.5" z="-1.0" />
+				<controlpoint x="1.5" y="-1.5" z="2.0" />
+				<controlpoint x="-1.5" y="-0.5" z="1.0" />
+				<controlpoint x="-0.5" y="-0.5" z="3.0" />
+				<controlpoint x="0.5" y="-0.5" z="0.0" />
+				<controlpoint x="1.5" y="-0.5" z="-1.0" />
+				<controlpoint x="-1.5" y="0.5" z="4.0" />
+				<controlpoint x="-0.5" y="0.5" z="0.0" />
+				<controlpoint x="0.5" y="0.5" z="3.0" />
+				<controlpoint x="1.5" y="0.5" z="4.0" />
+				<controlpoint x="-1.5" y="1.5" z="-2.0" />
+				<controlpoint x="-0.5" y="1.5" z="-2.0" />
+				<controlpoint x="0.5" y="1.5" z="0.0" />
+				<controlpoint x="1.5" y="1.5" z="-1.0" />
+				</patch> -->
+			<children>
+				<patch order="1" partsU="20" partsV="20" compute="fill">
+					<controlpoint x="-0.5" y="0" z="-0.5" />
+					<controlpoint x="0.5" y="0" z="-0.5" />
+					<controlpoint x="-0.5" y="0" z="0.5" />
+					<controlpoint x="0.5" y="0" z="0.5" />
+				</patch>
+
+				
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</children>
 
 		</node>

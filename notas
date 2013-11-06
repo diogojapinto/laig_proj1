@@ -1,0 +1,34 @@
+    Display lists e questões de herança
+        Quando um nó C do tipo display list não tem uma aparência definida, e for descendente de dois nós diferentes A e B, terá de ser garantido que nas suas invocações será usada a aparência correta (A ou B). Dependendo da forma como implementaram a herança de aparências, para garantirem isto poderão ter de criar duas display lists diferentes, uma para cada instanciação de C (como filho de A ou como filho de B).
+
+ 
+
+    Display lists aninhadas
+        Se tiverem um nó do tipo display list E que é descendente (direta ou indireta) de outro nó do tipo dislay list D, não podem criar as display lists recursivamente (ou seja, criar a de E enquanto estão no processo de criação da de D). Podem no entanto incluir uma chamada a uma display list quando estão a criar outra.
+
+        Duas soluções possíveis: 
+              Quando começam a criar a de D, não criam a de E, os seus comandos vão ser incluídos diretamente na de D (nesta opção, têm de ter cuidado, pois E pode ser filho de outro nó que não é display list, e vão acabar por ter de a criar de qualquer forma);
+            Criarem as display lists na finalização da recursividade, ou seja, "descem" no grafo até às folhas, e ao fecharem a recursividade, quando encontrarem um nó tipo display list criam a lista, "desenham" o conteúdo dos nós e descendentes, e fecham a lista. Desta forma garantem que qualquer nó do tipo display list terá descendentes sem display lists, ou com display lists já criadas.
+
+ 
+
+    Evaluators e cálculo automático das normais (GL_AUTO_NORMAL)
+        Para os patches, as normais podem ser calculadas automaticamente ativando o modo GL_AUTO_NORMAL. No entanto, as normais geradas desta forma assumem que a face visível dos triângulos é a correspondente ao modo GL_CW, mesmo que o modo ativo seja o GL_CCW. Sendo o modo GL_CCW o que temos usado por omissão, as normais geradas assim ficam invertidas relativamente à superfície. Sugerimos, de forma a causar o menor impacto possível, que imediatamente antes da invocação dos evaluators ativem o modo GL_CW, para que a face visível do patch seja consistente com as normais geradas automaticamente, e que imediatamente após reponham o modo GL_CCW, para que a restante geometria se mantenha inalterada.
+
+ 
+
+    Animação e posição e orientação dos objetos animados
+        As transformações relacionadas com a animação de um nó devem ser vistas como transformações adicionais às já definidas para esse nó. Ou seja, se p.ex. um nó sem animação colocar o seu conteúdo centrado na posição (10,20,30) (sem rotações ou escalas associadas), e lhe for acrescentada uma animação cujo primeiro ponto de controlo é o ponto (5, 6, 7), o seu conteúdo no início da animação deverá estar centrado no ponto (15, 26, 37). Na prática, apenas têm que aplicar no código as transformações da animação imediatamente após as transformações de base do nó. 
+        Adicionalmente, para efeitos de definição da orientação dos objetos e consequente rotação, devem considerar o eixo dos ZZ como aquele que define a direção ("frente") do objeto
+
+ 
+
+    Shaders
+        Implementem primeiro as alíneas a) e b), ignorando a alínea c), e introduzam o tempo só quando tiverem a geometria corretamente modificada de forma estática. Para um exemplo de como usar o tempo nos shaders, vejam o exemplo de base da distribuição da CGFlib (o que anima as duas "metaballs" brancas num fundo preto)
+
+<patch order="1" partsU="20" partsV="20" compute="fill">
+            		<controlpoint x="-0.5" y="0" z="-0.5" />
+            		<controlpoint x="0.5" y="0" z="-0.5" />
+            		<controlpoint x="-0.5" y="0" z="0.5" />
+            		<controlpoint x="0.5" y="0" z="0.5" />
+    			</patch>

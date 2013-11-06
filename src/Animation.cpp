@@ -10,7 +10,11 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
+<<<<<<< HEAD
 #include <sys/time.h>
+=======
+#include <time.h>
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 Animation::Animation() {
 
@@ -23,9 +27,15 @@ Animation::Animation(string id, float span, string type) {
 	vec_index = 0;
 	time_passed = 0;
 	time_line = 0;
+<<<<<<< HEAD
 	struct timeval t;
 	gettimeofday(&t, 0);
 	time_last = t.tv_usec * 0.000001;
+=======
+	struct timespec t;
+	clock_gettime(CLOCK_MONOTONIC, &t);
+	time_last = t.tv_nsec * 0.000000001;
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	direction.push_back(new Point(0, 0, 1));
 }
 
@@ -104,6 +114,7 @@ Point Animation::getPoint() {
 }
 
 float Animation::updateValues() {
+<<<<<<< HEAD
 
 	struct timeval t;
 	gettimeofday(&t, 0);
@@ -127,6 +138,41 @@ float Animation::updateValues() {
 		return 0;
 	}
 
+=======
+
+	struct timespec t;
+	float timer;
+	float ratio;
+	float sub;
+
+	clock_gettime(CLOCK_MONOTONIC, &t);
+	timer = t.tv_nsec * 0.000000001;
+
+	if (timer < time_last) {
+		sub = (1 - time_last) + timer;
+	} else {
+		sub = timer - time_last;
+	}
+
+	ratio = sub / time_exp[vec_index];
+	time_last = timer;
+	time_passed += sub;
+	time_line += sub;
+	if (time_passed < span) {
+		point.setX(point.getX() + (delta[vec_index]->getX() * ratio));
+		point.setY(point.getY() + (delta[vec_index]->getY() * ratio));
+		point.setZ(point.getZ() + (delta[vec_index]->getZ() * ratio));
+
+		if (time_line >= time_exp[vec_index]) {
+			time_line = 0;
+			vec_index++;
+		}
+		return ratio;
+	} else {
+		return 0;
+	}
+
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	return 0;
 }
 Animation::~Animation() {

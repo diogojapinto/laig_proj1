@@ -50,7 +50,10 @@ void DisplayList::drawPrims(string appearance) {
 void DisplayList::closeDefinition(stack<string> apps_stack) {
 	glNewList(list_id, GL_COMPILE);
 	glPushMatrix();
+<<<<<<< HEAD
 	printf("fksfk\n");
+=======
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	glMultMatrixf(transforms);
 
 	if (getAppearance()->getId() == "default") {
@@ -60,22 +63,33 @@ void DisplayList::closeDefinition(stack<string> apps_stack) {
 	}
 
 	glPushMatrix();
+<<<<<<< HEAD
 	printf("fksfk\n");
+=======
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	if (prims.size() != 0)
 		drawPrims(apps_stack.top());
 
 	glPopMatrix();
 	vector<string>::iterator it;
+<<<<<<< HEAD
 	printf("fksfk\n");
+=======
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	for (it = refs.begin(); it != refs.end(); it++) {
 		Node *ptr = Scene::getInstance()->getNode((*it));
 		stack<string> tmp;
 		tmp.push("default");	//stack tem que ter o primeiro elemento
+<<<<<<< HEAD
 		printf("1\n");
 		ptr->processNode(apps_stack, tmp);
 		printf("2\n");
 	}
 	printf("fksfk\n");
+=======
+		ptr->processNode(apps_stack, tmp);
+	}
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	apps_stack.pop();
 	glPopMatrix();
 	glEndList();

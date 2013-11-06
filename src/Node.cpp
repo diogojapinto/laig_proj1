@@ -5,6 +5,10 @@
 #include "Appearance.h"
 #include <stack>
 #include <stdio.h>
+<<<<<<< HEAD
+=======
+#include <iostream>
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 using namespace std;
 

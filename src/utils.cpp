@@ -14,7 +14,11 @@ float DegToRad(float i) {
 float RadToDeg(float i) {
 	float pi = 3.14159265359;
 
+<<<<<<< HEAD
 	return i * 180 / pi;
+=======
+	return i * 180.0 / pi;
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 }
 
 float* getNewellsMethod(std::vector<float> x, std::vector<float> y, std::vector<float> z) {
@@ -136,8 +140,13 @@ float distanceTwoPoints(Point* p1, Point* p2) {
 	float dist;
 
 	dist = sqrt(
+<<<<<<< HEAD
 			pow(abs(p1->getX() - p2->getX()), 2) + pow(abs(p1->getY() - p2->getY()), 2)
 					+ pow(abs(p1->getZ() - p2->getZ()), 2));
+=======
+			pow(fabs(p1->getX() - p2->getX()), 2) + pow(fabs(p1->getY() - p2->getY()), 2)
+					+ pow(fabs(p1->getZ() - p2->getZ()), 2));
+>>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 	return dist;
 }
