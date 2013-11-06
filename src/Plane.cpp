@@ -18,20 +18,20 @@ Plane::Plane(unsigned int parts) {
 	this->parts = parts;
 
 	ctrl_pts[0][0] = -0.5;
-	ctrl_pts[0][1] = 0;
-	ctrl_pts[0][2] = 0.5;
+	ctrl_pts[0][1] = 0.0;
+	ctrl_pts[0][2] = -0.5;
 
 	ctrl_pts[1][0] = 0.5;
-	ctrl_pts[1][1] = 0;
-	ctrl_pts[1][2] = 0.5;
+	ctrl_pts[1][1] = 0.0;
+	ctrl_pts[1][2] = -0.5;
 
 	ctrl_pts[2][0] = -0.5;
-	ctrl_pts[2][1] = 0;
-	ctrl_pts[2][2] = -0.5;
+	ctrl_pts[2][1] = 0.0;
+	ctrl_pts[2][2] = 0.5;
 
 	ctrl_pts[3][0] = 0.5;
-	ctrl_pts[3][1] = 0;
-	ctrl_pts[3][2] = -0.5;
+	ctrl_pts[3][1] = 0.0;
+	ctrl_pts[3][2] = 0.5;
 
 	nrml_pts[0][0] = 0;
 	nrml_pts[0][1] = 1;
@@ -73,7 +73,7 @@ void Plane::draw() {
 
 	glMapGrid2f(parts, 0.0,1.0, parts, 0.0,1.0);
 
-	glEvalMesh2(Scene::getInstance()->getDrawmode(), 0.0, parts, 0, parts);
+	glEvalMesh2(Scene::getInstance()->getDrawmode(), 0.0, parts, 0.0, parts);
 
 	glDisable(GL_MAP2_VERTEX_3);
 	glDisable(GL_MAP2_NORMAL);

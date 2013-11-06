@@ -428,6 +428,8 @@
 
 			<transforms>
 				<translate to="1.5 1.5 0.0" />
+				<scale factor="3 3 1"/>
+				<rotate axis="x" angle="90" />
 			</transforms>
 			<children>
 				<noderef id="brushSquare1" />
@@ -438,6 +440,8 @@
 
 			<transforms>
 				<translate to="18.5 1.5 0.0" />
+				<scale factor="3 3 1"/>
+				<rotate axis="x" angle="90" />
 			</transforms>
 			<children>
 				<noderef id="brushSquare1" />
@@ -448,7 +452,7 @@
 
 			<transforms></transforms>
 			<children>
-				<rectangle xy1="-1.5 -1.5" xy2="1.5 1.5" />
+				<plane parts="5"/>
 			</children>
 
 		</node>
@@ -456,7 +460,9 @@
 
 			<transforms>
 				<translate to="0.0 1.5 10.0" />
+				<scale factor="1 3 20"/>
 				<rotate axis="y" angle="90" />
+				<rotate axis="x" angle="90" />
 			</transforms>
 			<children>
 				<noderef id="brushSquare2" />
@@ -467,7 +473,9 @@
 
 			<transforms>
 				<translate to="20.0 1.5 10.0" />
+				<scale factor="1 3 20"/>
 				<rotate axis="y" angle="-90" />
+				<rotate axis="x" angle="90" />
 			</transforms>
 			<children>
 				<noderef id="brushSquare2" />
@@ -478,7 +486,7 @@
 
 			<transforms></transforms>
 			<children>
-				<rectangle xy1="-10.0 -1.5" xy2="10.0 1.5" />
+				<plane parts="10"/>
 			</children>
 
 		</node>
@@ -498,11 +506,11 @@
 
 			<transforms>
 				<translate to="10.0 0.0 10.0" />
-				<rotate axis="x" angle="-90" />
+				<scale factor="20 1 20"/>
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
-				<rectangle xy1="-10.0 -10.0" xy2="10.0 10.0" />
+				<plane parts="20"/>
 			</children>
 
 		</node>
