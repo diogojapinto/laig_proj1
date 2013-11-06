@@ -1190,7 +1190,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 			} while ((ctrl_p = ctrl_p->NextSiblingElement("controlpoint")) != NULL);
 		} else if (strcmp(child_type, "waterline") == 0) {
 			char heightmap[MAX_STRING_LEN];
-			char bumpmap[MAX_STRING_LEN];
+			char texturemap[MAX_STRING_LEN];
 			char vert_shader[MAX_STRING_LEN];
 			char frag_shader[MAX_STRING_LEN];
 
@@ -1199,8 +1199,8 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
-			if (strdup(bumpmap, child->Attribute("bumpmap")) == NULL) {
-				printf("Error parsing \"bumpmap\" attribute of waterline!");
+			if (strdup(texturemap, child->Attribute("texturemap")) == NULL) {
+				printf("Error parsing \"texturemap\" attribute of waterline!");
 				throw InvalidXMLException();
 			}
 
@@ -1214,7 +1214,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
-			MyWaterLine *wl = new MyWaterLine(heightmap, bumpmap, vert_shader, frag_shader);
+			MyWaterLine *wl = new MyWaterLine(heightmap, texturemap, vert_shader, frag_shader);
 			n->addPrimitive(wl);
 
 		} else if (strcmp(child_type, "vehicle") == 0) {

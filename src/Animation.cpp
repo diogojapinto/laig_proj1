@@ -140,6 +140,5 @@ float Animation::updateValues() {
 	return 0;
 }
 Animation::~Animation() {
-	// TODO Auto-generated destructor stub
 }
 
