@@ -51,16 +51,16 @@ Plane::Plane(unsigned int parts) :
 	nrml_pts[3][2] = 0;
 
 	text_pts[0][0] = 0;
-	text_pts[0][1] = 0;
+	text_pts[0][1] = 1;
 
 	text_pts[1][0] = 1;
-	text_pts[1][1] = 0;
+	text_pts[1][1] = 1;
 
 	text_pts[2][0] = 0;
-	text_pts[2][1] = 1;
+	text_pts[2][1] = 0;
 
 	text_pts[3][0] = 1;
-	text_pts[3][1] = 1;
+	text_pts[3][1] = 0;
 }
 void Plane::draw() {
 

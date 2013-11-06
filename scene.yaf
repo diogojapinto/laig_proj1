@@ -507,10 +507,16 @@
 			<transforms>
 				<translate to="10.0 0.0 10.0" />
 				<scale factor="20 1 20"/>
+				<rotate axis="x" angle="180" />
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
-				<plane parts="20" />
+				<patch order="1" partsU="20" partsV="20" compute="fill">
+            		<controlpoint x="-0.5" y="0" z="-0.5" />
+            		<controlpoint x="0.5" y="0" z="-0.5" />
+            		<controlpoint x="-0.5" y="0" z="0.5" />
+            		<controlpoint x="0.5" y="0" z="0.5" />
+    			</patch>
 			</children>
 
 		</node>

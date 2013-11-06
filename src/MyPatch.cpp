@@ -19,25 +19,24 @@ MyPatch::MyPatch() :
 	this->partsU = 1;
 	this->partsV = 1;
 	this->compute = GL_FILL;
-	int nr = pow(order + 1, 2);
-	ctrlPoints = new float[nr];
+	//int nr = pow(order + 1, 2);
+	//ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 
-	textPoints[0][0] = 0;
-	textPoints[0][1] = 0;
+	textPoints[0][0] = 0.0;
+	textPoints[0][1] = 1.0;
 
-	textPoints[1][0] = 1;
-	textPoints[1][1] = 0;
+	textPoints[1][0] = 1.0;
+	textPoints[1][1] = 1.0;
 
-	textPoints[2][0] = 0;
-	textPoints[2][1] = 1;
+	textPoints[2][0] = 0.0;
+	textPoints[2][1] = 0.0;
 
-	textPoints[3][0] = 1;
-	textPoints[3][1] = 1;
+	textPoints[3][0] = 1.0;
+	textPoints[3][1] = 0.0;
 }
 
 MyPatch::~MyPatch() {
-	delete (ctrlPoints);
 }
 
 MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
@@ -61,22 +60,23 @@ MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 		throw InvalidPreAttrException("compute");
 	}
 
-	int nr = pow(order + 1, 2);
-	ctrlPoints = new float[nr];
+	//int nr = pow(order + 1, 2);
+	//ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 }
 
 void MyPatch::addControlPoint(float x, float y, float z) {
 	if (nrCtrlPoints < pow(order + 1, 2)) {
-		ctrlPoints[nrCtrlPoints * 3] = x;
-		ctrlPoints[nrCtrlPoints * 3 + 1] = y;
-		ctrlPoints[nrCtrlPoints * 3 + 2] = z;
+		ctrlPoints.push_back(x);
+		ctrlPoints.push_back(y);
+		ctrlPoints.push_back(z);
 		nrCtrlPoints++;
 	}
 }
 
 void MyPatch::draw() {
-	/*if (nrCtrlPoints == pow(order + 1, 2)) {
+	printf("sdfs\n");
+	if (nrCtrlPoints == pow(order + 1, 2)) {
 		printf("something is done\n");
 		if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
@@ -95,16 +95,14 @@ void MyPatch::draw() {
 
 		glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0);
 
-		glEvalMesh2(compute, 0.0, partsU, 0, partsV);
+		glEvalMesh2(compute, 0.0, partsU, 0.0, partsV);
 
 		glDisable(GL_MAP2_VERTEX_3);
 		glDisable(GL_AUTO_NORMAL);
 		glDisable(GL_MAP2_TEXTURE_COORD_2);
 
-		glDisable(GL_AUTO_NORMAL);
-
 		glFrontFace(Scene::getInstance()->getCullorder());
-	}*/
+	}
 }
 
 void MyPatch::setAppearance(string appearance) {

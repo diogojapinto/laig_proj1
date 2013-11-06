@@ -1324,7 +1324,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 
 			} while ((ctrl_p = ctrl_p->NextSiblingElement("controlpoint"))
 					!= NULL);
-		} else if (strcmp(child_type, "waterline")) {
+		} else if (strcmp(child_type, "waterline") == 0) {
 			char heightmap[MAX_STRING_LEN];
 			char bumpmap[MAX_STRING_LEN];
 			char vert_shader[MAX_STRING_LEN];

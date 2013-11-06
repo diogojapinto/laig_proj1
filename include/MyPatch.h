@@ -9,12 +9,13 @@
 #define MYPATCH_H_
 
 #include "MyPrimitive.h"
+#include <vector>
 
 class MyPatch: public MyPrimitive {
 private:
 	int order, partsU, partsV;
 	int compute;
-	float *ctrlPoints;
+	vector<float> ctrlPoints;
 	int nrCtrlPoints;
 	float textPoints[4][2];
 
