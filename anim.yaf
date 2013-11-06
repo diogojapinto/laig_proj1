@@ -184,11 +184,7 @@
 		texlength_t="2" />
 	</appearances>
 	<animations>
-<<<<<<< HEAD
-		<animation id="teste1" span="5.0" type="linear">
-=======
 		<animation id="teste1" span="10.0" type="linear">
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 			<controlpoint xx="-1" yy="0" zz="0" />
 			<controlpoint xx="-1" yy="0" zz="1" />
@@ -518,19 +514,11 @@
 
 			<transforms>
 				<translate to="10.0 0.0 10.0" />
-<<<<<<< HEAD
-				<rotate axis="x" angle="-90" />
-			</transforms>
-			<appearanceref id="floor_appearence" />
-			<children>
-				<rectangle xy1="-10.0 -10.0" xy2="10.0 10.0" />
-=======
 				<scale factor="20 1 20"/>
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
 				<plane parts="20"/>
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			</children>
 
 		</node>
@@ -576,10 +564,7 @@
 		<node id="tree">
 
 			<transforms></transforms>
-<<<<<<< HEAD
-=======
 			
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			<children>
 				<noderef id="treeTop" />
 				<noderef id="log" />

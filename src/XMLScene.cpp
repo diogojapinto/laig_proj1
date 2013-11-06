@@ -22,12 +22,9 @@
 #include "Animation.h"
 #include "DisplayList.h"
 #include "Plane.h"
-<<<<<<< HEAD
-=======
 #include "MyPatch.h"
 #include "MyWaterLine.h"
 #include "MyVehicle.h"
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 #define MAX_STRING_LEN 256
 
@@ -727,12 +724,7 @@ bool XMLScene::parseAnimations() {
 			}
 
 			if (strdup(ani_type, ani->Attribute("type")) == NULL) {
-<<<<<<< HEAD
-				printf("Error in \"type\" attribute of %s animation!\n",
-						ani_id);
-=======
 				printf("Error in \"type\" attribute of %s animation!\n", ani_id);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 				throw InvalidXMLException();
 			}
 			Animation *animation = new Animation(ani_id, ani_span, ani_type);
@@ -778,25 +770,14 @@ bool XMLScene::parseAnimations() {
 
 				animation->addPoint(xx, yy, zz);
 				num_pt++;
-<<<<<<< HEAD
-			} while ((ctrl_point = ctrl_point->NextSiblingElement(
-					"controlpoint")) != NULL);
-=======
 			} while ((ctrl_point = ctrl_point->NextSiblingElement("controlpoint")) != NULL);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 			if (num_pt >= 2) {
 				animation->calculateDelta();
 				printf("delta\n");
 				Scene::getInstance()->addAnimation(ani_id, animation);
 			} else {
-<<<<<<< HEAD
-				printf(
-						"Error! Animation %s doesn't have enought control points!",
-						ani_id);
-=======
 				printf("Error! Animation %s doesn't have enought control points!", ani_id);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 				throw InvalidXMLException();
 			}
 
@@ -961,12 +942,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 	TiXmlElement *animation = NULL;
 	if ((animation = curr_node->FirstChildElement("animationref"))) {
 		if (is_inside_dl) {
-<<<<<<< HEAD
-			printf("Animation defined in \"%s\" is inside a display list!\n",
-					node_id);
-=======
 			printf("Animation defined in \"%s\" is inside a display list!\n", node_id);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			throw InvalidXMLException();
 		}
 
@@ -1138,12 +1114,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 			MyTorus *tor = new MyTorus(tor_inner, tor_out, tor_slices, tor_loops);
 			n->addPrimitive(tor);
 
-<<<<<<< HEAD
-			printf("Torus\ninner: %f\nouter: %f\nslices: %d\nloops: %d\n",
-					tor_inner, tor_out, tor_slices, tor_loops);
-=======
 			printf("Torus\ninner: %f\nouter: %f\nslices: %d\nloops: %d\n", tor_inner, tor_out, tor_slices, tor_loops);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 		} else if (strcmp(child_type, "plane") == 0) {
 			int parts = 0;
 
@@ -1157,21 +1128,15 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
-<<<<<<< HEAD
-=======
 			printf("Plane\nparts: %i\n", parts);
 
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 			Plane *p = new Plane(parts);
 			n->addPrimitive(p);
 		} else if (strcmp(child_type, "patch") == 0) {
 			int order = 0;
 			int parts_u = 0;
 			int parts_v = 0;
-<<<<<<< HEAD
-=======
 			char compute[MAX_STRING_LEN];
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 
 			if (child->QueryIntAttribute("order", &order) != TIXML_SUCCESS) {
 				printf("Error parsing \"order\" attribute on patch!\n");
@@ -1249,38 +1214,19 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
-		} else if (strcmp(child_type, "vehicle") == 0) {
+			MyWaterLine *wl = new MyWaterLine(heightmap, bumpmap, vert_shader, frag_shader);
+			n->addPrimitive(wl);
 
+		} else if (strcmp(child_type, "vehicle") == 0) {
 			MyVehicle *v = new MyVehicle();
 			n->addPrimitive(v);
+
 		} else if (strcmp(child_type, "noderef") == 0) {
 			char next_node_id[MAX_STRING_LEN];
 			if (strdup(next_node_id, child->Attribute("id")) == NULL) {
 				printf("Error reading noderef's id!\n");
 				throw InvalidXMLException();
 			}
-<<<<<<< HEAD
-			if (find(nodes_being_processed.begin(), nodes_being_processed.end(),
-					next_node_id) != nodes_being_processed.end()) {
-				if (find(nodes_finished_processing.begin(),
-						nodes_finished_processing.end(), next_node_id)
-						!= nodes_finished_processing.end()) {
-					printf("Node has already been processed.\n");
-					string last_node_name =
-							Scene::getInstance()->findLastNameAvail(
-									next_node_id);
-					if (last_node_name == "") { // normal node
-						n->addRef(next_node_id);
-					} else {
-						TiXmlElement *next_node = NULL;
-						if ((next_node = findChildByAttribute(graphElement,
-								"id", next_node_id))) {
-							printf("\n\n");
-							parseNode(next_node, is_dl || is_inside_dl);
-							n->addRef(
-									Scene::getInstance()->findLastNameAvail(
-											next_node_id));
-=======
 			if (find(nodes_being_processed.begin(), nodes_being_processed.end(), next_node_id)
 					!= nodes_being_processed.end()) {
 				if (find(nodes_finished_processing.begin(), nodes_finished_processing.end(), next_node_id)
@@ -1295,17 +1241,11 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 							printf("\n\n");
 							parseNode(next_node, is_dl || is_inside_dl);
 							n->addRef(Scene::getInstance()->findLastNameAvail(next_node_id));
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 						}
 					}
 					continue;
 				} else {
-<<<<<<< HEAD
-					printf("Cyclic definition found in node \"%s\"",
-							next_node_id);
-=======
 					printf("Cyclic definition found in node \"%s\"", next_node_id);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 					throw InvalidXMLException();
 				}
 			} else {
@@ -1313,13 +1253,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				if ((next_node = findChildByAttribute(graphElement, "id", next_node_id))) {
 					printf("\n\n");
 					parseNode(next_node, is_dl || is_inside_dl);
-<<<<<<< HEAD
-					string last_node_name =
-							Scene::getInstance()->findLastNameAvail(
-									next_node_id);
-=======
 					string last_node_name = Scene::getInstance()->findLastNameAvail(next_node_id);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 					if (Scene::getInstance()->getNode(last_node_name)->getType() == DISPLAY_LIST) {
 						n->addRef(last_node_name);
 					} else {
@@ -1343,14 +1277,9 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 	} else {
 		Scene::getInstance()->addNode(node_id, n);
 	}
-<<<<<<< HEAD
-	n->closeDefinition(app_stck);
-	printf("fksfk\n");
-=======
 	printf("closing %s\n", node_id);
 	n->closeDefinition(app_stck);
 	printf("closed %s\n", node_id);
->>>>>>> ce56f48cb58fa4338920a12aa4daee027f3d7ed4
 	app_stck.pop();
 	nodes_finished_processing.push_back(node_id);
 	return true;

@@ -12,6 +12,8 @@
 #include "CGFshader.h"
 #include <string>
 
+using namespace std;
+
 class MyWaterLine: public MyPrimitive {
 	CGFshader shader;
 	string heightmap;
