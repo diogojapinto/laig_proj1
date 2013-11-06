@@ -23,6 +23,7 @@
 #include "DisplayList.h"
 #include "Plane.h"
 #include "MyPatch.h"
+#include "MyWaterLine.h"
 
 #define MAX_STRING_LEN 256
 
@@ -1323,6 +1324,31 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 
 			} while ((ctrl_p = ctrl_p->NextSiblingElement("controlpoint"))
 					!= NULL);
+		} else if (strcmp(child_type, "waterline")) {
+			char heightmap[MAX_STRING_LEN];
+			char bumpmap[MAX_STRING_LEN];
+			char vert_shader[MAX_STRING_LEN];
+			char frag_shader[MAX_STRING_LEN];
+
+			if (strdup(heightmap, child->Attribute("heightmap")) == NULL) {
+				printf("Error parsing \"heightmap\" attribute of waterline!");
+				throw InvalidXMLException();
+			}
+
+			if (strdup(bumpmap, child->Attribute("bumpmap")) == NULL) {
+				printf("Error parsing \"bumpmap\" attribute of waterline!");
+				throw InvalidXMLException();
+			}
+
+			if (strdup(frag_shader, child->Attribute("fragmentshader")) == NULL) {
+				printf("Error parsing \"fragmentshader\" attribute of waterline!");
+				throw InvalidXMLException();
+			}
+
+			if (strdup(vert_shader, child->Attribute("vertexshader")) == NULL) {
+				printf("Error parsing \"vertexshader\" attribute of waterline!");
+				throw InvalidXMLException();
+			}
 
 		} else if (strcmp(child_type, "noderef") == 0) {
 			char next_node_id[MAX_STRING_LEN];
