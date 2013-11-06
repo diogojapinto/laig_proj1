@@ -1,6 +1,6 @@
 #include "MyWaterLine.h"
-#include "GL/gl.h"
 #include <GL/glew.h>
+#include "GL/gl.h"
 #include <GL/glut.h>
 #include "Scene.h"
 #include <time.h>
