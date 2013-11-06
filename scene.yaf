@@ -195,6 +195,7 @@
 				<noderef id="home" />
 				<noderef id="garden" />
 				<noderef id="street" />
+				<noderef id="water" />
 			</children>
 		</node>
 		<node id="home" displaylist="true" >
@@ -743,6 +744,15 @@
 			<appearanceref id="light_body_appearence" />
 			<children>
 				<cylinder base="0.5" top="0.5" height="1" slices="10" stacks="10" />
+			</children>
+		</node>
+		<node id="water">
+			<transforms>
+				<translate to="0.0 7.0 -15.0" />
+				<scale factor="10 1 10" />
+			</transforms>
+			<children>
+				<waterline heightmap="../data/watermap.jpg" texturemap="../data/water.jpg" fragmentshader="../shaders/wl.frag" vertexshader="../shaders/wl.frag" />
 			</children>
 		</node>
 	</graph>
