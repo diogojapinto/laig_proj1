@@ -20,7 +20,7 @@ MyWaterLine::MyWaterLine(string heightmap, string texturemap, string vert_shader
 	text.setTextProp("wl_height", 1, 1);
 	delta = 0;
 	prev_delta = 0;
-	glutTimerFunc(ANIMATION_TIME, update, 0);
+	glutTimerFunc(ANIMATION_TIME, MyWaterLine::update, 0);
 }
 
 MyWaterLine::~MyWaterLine() {
@@ -51,13 +51,13 @@ void MyWaterLine::draw() {
 	glActiveTexture(GL_TEXTURE0);
 }
 
-void MyWaterLine::update(int i) {
+void updateWaterLine(int i) {
 	struct timespec t;
 
 	clock_gettime(CLOCK_MONOTONIC, &t);
-	prev_delta = delta;
-	delta = prev_delta + (t.tv_nsec * 0.000000001) / 10.0;
-	if (delta > 1) {
-		delta - 1;
+	MyWaterLine::prev_delta = MyWaterLine::delta;
+	MyWaterLine::delta = MyWaterLine::prev_delta + (t.tv_nsec * 0.000000001) / 10.0;
+	if (MyWaterLine::delta > 1) {
+		MyWaterLine::delta -= 1;
 	}
 }

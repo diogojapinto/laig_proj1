@@ -12,13 +12,16 @@
 #include "CGFshader.h"
 #include <string>
 #include "Appearance.h"
+#include "Plane.h"
 
 using namespace std;
 
+void updateWaterLine(int i);
+
 class MyWaterLine: public Plane {
 	CGFshader shader;
-	float prev_delta;
-	float delta;
+	static float prev_delta;
+	static float delta;
 	Appearance height, text;
 public:
 	MyWaterLine();
@@ -26,7 +29,7 @@ public:
 	virtual ~MyWaterLine();
 	virtual void setAppearance(string appearance);
 	virtual void draw();
-	void update(int i);
+	friend void updateWaterLine(int i);
 };
 
 #endif /* MYWATERLINE_H_ */
