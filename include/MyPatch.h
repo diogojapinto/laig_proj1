@@ -16,6 +16,7 @@ private:
 	int compute;
 	float *ctrlPoints;
 	int nrCtrlPoints;
+	float textPoints[4][2];
 
 public:
 	MyPatch();

@@ -114,8 +114,7 @@ float Animation::updateValues() {
 	timer = t.tv_nsec * 0.000000001;
 
 	if (timer < time_last) {
-		time_last = timer;
-		sub = timer - time_last + 0.02;
+		sub = (1 - time_last) + timer;
 	} else {
 		sub = timer - time_last;
 	}

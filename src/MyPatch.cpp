@@ -20,6 +20,18 @@ MyPatch::MyPatch() :
 	int nr = pow(order + 1, 2);
 	ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
+
+	textPoints[0][0] = 0;
+	textPoints[0][1] = 0;
+
+	textPoints[1][0] = 1;
+	textPoints[1][1] = 0;
+
+	textPoints[2][0] = 0;
+	textPoints[2][1] = 1;
+
+	textPoints[3][0] = 1;
+	textPoints[3][1] = 1;
 }
 
 MyPatch::~MyPatch() {
@@ -27,6 +39,11 @@ MyPatch::~MyPatch() {
 
 MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 		MyPrimitive() {
+
+	if (order < 1 || order > 3) {
+		throw InvalidPreAttrException("order");
+	}
+
 	this->order = order;
 	this->partsU = partsU;
 	this->partsV = partsV;
@@ -55,31 +72,35 @@ void MyPatch::addControlPoint(int x, int y, int z) {
 	}
 }
 
+#include <stdio.h>
+
 void MyPatch::draw() {
-	if (nrCtrlPoints == pow(order + 1, 2)) {
-		glPolygonMode(GL_FRONT_AND_BACK, compute);
+	printf("kdkdkd\n");
+	/*if (nrCtrlPoints == pow(order + 1, 2)) {
+		printf("something is done\n");
 		if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
 		}
-		//glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, order, 0, 1, 6, order, &ctrlPoints[0]);
-		//glMap2f(GL_MAP2_TEXTURE_COORD_2, 0, 1, 2, 2, 0, 1, 4, 2,
-		//		&text_pts[0][0]);
+
+		glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order + 1, 0.0, 1.0,
+				order * 3, order + 1, &ctrlPoints[0]);
+		glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2,
+				&textPoints[0][0]);
 
 		glEnable(GL_MAP2_VERTEX_3);
-		glEnable(GL_MAP2_NORMAL);
-		//glEnable(GL_MAP2_TEXTURE_COORD_2);
+		glEnable(GL_AUTO_NORMAL);
+		glEnable(GL_MAP2_TEXTURE_COORD_2);
 
 		glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0);
 
-		glEnable(GL_AUTO_NORMAL);
-		glEvalMesh2(Scene::getInstance()->getDrawmode(), 0, 1, 0, 1);
+		glEvalMesh2(compute, 0.0, partsU, 0, partsV);
 
 		glDisable(GL_MAP2_VERTEX_3);
-		glDisable(GL_AUTO_NORMAL);
 		glDisable(GL_MAP2_NORMAL);
-		//glDisable(GL_MAP2_TEXTURE_COORD_2);
+		glDisable(GL_MAP2_TEXTURE_COORD_2);
+
+		glDisable(GL_AUTO_NORMAL);
 
 		glFrontFace(Scene::getInstance()->getCullorder());
-		glPolygonMode(GL_FRONT_AND_BACK, Scene::getInstance()->getDrawmode());
-	}
+	}*/
 }

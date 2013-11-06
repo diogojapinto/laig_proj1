@@ -510,7 +510,7 @@
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
-				<plane parts="20"/>
+				<plane parts="20" />
 			</children>
 
 		</node>

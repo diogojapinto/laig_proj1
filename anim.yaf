@@ -519,7 +519,6 @@
 			</transforms>
 			<appearanceref id="floor_appearence" />
 			<children>
-				<!-- <rectangle xy1="-10.0 -10.0" xy2="10.0 10.0" /> -->
 				<plane parts="5" />
 			</children>
 

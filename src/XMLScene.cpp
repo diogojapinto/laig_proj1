@@ -1261,7 +1261,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
-			printf("Plane\nparts: %f\n", parts);
+			printf("Plane\nparts: %i\n", parts);
 
 			Plane *p = new Plane(parts);
 			n->addPrimitive(p);
@@ -1291,7 +1291,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 				throw InvalidXMLException();
 			}
 
-			printf("Plane\norder: %d\npartsU: %d\npartsV: %d\ncompute: %s\n",
+			printf("Patch\norder: %d\npartsU: %d\npartsV: %d\ncompute: %s\n",
 					order, parts_u, parts_v, compute);
 
 			MyPatch *patch = new MyPatch(order, parts_u, parts_v, compute);
@@ -1316,9 +1316,11 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 					throw InvalidXMLException();
 				}
 
+				printf("controlpoint: (%f %f %f)\n", x, y, z);
+
 				patch->addControlPoint(x, y, z);
 
-			} while (ctrl_p->NextSibling("controlpoint") != NULL);
+			} while ((ctrl_p = ctrl_p->NextSiblingElement("controlpoint")) != NULL);
 
 			n->addPrimitive(patch);
 
@@ -1338,7 +1340,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 							Scene::getInstance()->findLastNameAvail(
 									next_node_id);
 					if (Scene::getInstance()->getNode(last_node_name)->getType()
-												!= DISPLAY_LIST) { // normal node
+							!= DISPLAY_LIST) { // normal node
 						n->addRef(next_node_id);
 					} else {
 						TiXmlElement *next_node = NULL;
@@ -1380,6 +1382,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 			}
 		} else {
 			printf("Invalid block inside children of node %s\n", node_id);
+			throw InvalidXMLException();
 		}
 	}
 	printf("Finished processing %s node children.\n\n", node_id);
