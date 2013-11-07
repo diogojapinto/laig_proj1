@@ -15,24 +15,24 @@ MyVehicle::MyVehicle() :
 	top = new MyPatch(3, 20, 20, "fill");
 
 	top->addControlPoint(-1.0, 0, -1.0);
-	top->addControlPoint(-0.5, 0.5, -1.0);
-	top->addControlPoint(0.5, 0.5, -1.0);
+	top->addControlPoint(-0.5, 1, -1.0);
+	top->addControlPoint(0.5, 1, -1.0);
 	top->addControlPoint(1.0, 0, -1.0);
 
-	top->addControlPoint(-1.5, -0.5, 1.0);
-	top->addControlPoint(-0.5, -0.5, 3.0);
-	top->addControlPoint(0.5, -0.5, 0.0);
-	top->addControlPoint(1.5, -0.5, -1.0);
+	top->addControlPoint(1.0, 0, 1.0);
+	top->addControlPoint(1.0, 1, 0.5);
+	top->addControlPoint(1.0, 1, -0.5);
+	top->addControlPoint(1.0, 0, -1.0);
 
-	top->addControlPoint(-1.5, 0.5, 4.0);
-	top->addControlPoint(-0.5, 0.5, 0.0);
-	top->addControlPoint(0.5, 0.5, 3.0);
-	top->addControlPoint(1.5, 0.5, 4.0);
+	top->addControlPoint(1.0, 0, 1.0);
+	top->addControlPoint(0.5, 1, 1.0);
+	top->addControlPoint(-0.5, 1, 1.0);
+	top->addControlPoint(-1.0, 0, 1.0);
 
-	top->addControlPoint(-1.5, 1.5, -2.0);
-	top->addControlPoint(-0.5, 1.5, -2.0);
-	top->addControlPoint(0.5, 1.5, 0.0);
-	top->addControlPoint(1.5, 1.5, -1.0);
+	top->addControlPoint(-1.0, 0, -1.0);
+	top->addControlPoint(-1.0, 1, -0.5);
+	top->addControlPoint(-1.0, 1, 0.5);
+	top->addControlPoint(-1.0, 0, 1.0);
 
 }
 
@@ -42,9 +42,10 @@ MyVehicle::~MyVehicle() {
 void MyVehicle::draw() {
 
 	glPushMatrix();
-	glTranslatef(10,2,10);
-	center->draw();
-	//top->draw();
+	glTranslatef(10,2,20);
+	glRotatef(50,1,0,0);
+	//center->draw();
+	top->draw();
 
 	glPopMatrix();
 }

@@ -23,16 +23,16 @@ MyPatch::MyPatch() :
 	//ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 
-	textPoints.push_back(0.0);
-	textPoints.push_back(1.0);
-
 	textPoints.push_back(1.0);
 	textPoints.push_back(1.0);
 
 	textPoints.push_back(0.0);
-	textPoints.push_back(0.0);
+	textPoints.push_back(1.0);
 
 	textPoints.push_back(1.0);
+	textPoints.push_back(0.0);
+
+	textPoints.push_back(0.0);
 	textPoints.push_back(0.0);
 }
 
@@ -64,16 +64,16 @@ MyPatch::MyPatch(int order, int partsU, int partsV, string compute) :
 	//ctrlPoints = new float[nr];
 	nrCtrlPoints = 0;
 
-	textPoints.push_back(0.0);
-	textPoints.push_back(1.0);
-
 	textPoints.push_back(1.0);
 	textPoints.push_back(1.0);
 
 	textPoints.push_back(0.0);
-	textPoints.push_back(0.0);
+	textPoints.push_back(1.0);
 
 	textPoints.push_back(1.0);
+	textPoints.push_back(0.0);
+
+	textPoints.push_back(0.0);
 	textPoints.push_back(0.0);
 }
 
@@ -88,7 +88,7 @@ void MyPatch::addControlPoint(float x, float y, float z) {
 
 void MyPatch::draw() {
 	if (nrCtrlPoints == pow(order + 1, 2)) {
-		if (Scene::getInstance()->getCullorder() == GL_CCW) {
+		/*if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
 		}
 
@@ -107,7 +107,7 @@ void MyPatch::draw() {
 		glDisable(GL_AUTO_NORMAL);
 		glDisable(GL_MAP2_TEXTURE_COORD_2);
 
-		glFrontFace(Scene::getInstance()->getCullorder());
+		glFrontFace(Scene::getInstance()->getCullorder());*/
 	}
 }
 
