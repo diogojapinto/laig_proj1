@@ -190,8 +190,9 @@
 				<translate to="0.0 7.0 -15.0" />
 				<rotate axis="y" angle="30" />
 			</transforms>
+			<!-- <vehicle /> -->
 			<children>
-				<vehicle />
+				
 				<noderef id="home" />
 				<noderef id="garden" />
 				<noderef id="street" />
@@ -748,11 +749,12 @@
 		</node>
 		<node id="water">
 			<transforms>
-				<translate to="0.0 7.0 -15.0" />
-				<scale factor="10 1 10" />
+				<translate to="10.0 1.0 10.0" />
+				<scale factor="15 1 15" />
+				
 			</transforms>
 			<children>
-				<waterline heightmap="../data/watermap.jpg" texturemap="../data/water.jpg" fragmentshader="../shaders/wl.frag" vertexshader="../shaders/wl.frag" />
+				<waterline heightmap="../data/watermap.jpg" texturemap="../data/water.jpg" fragmentshader="../shaders/wl.frag" vertexshader="../shaders/wl.vert" />
 			</children>
 		</node>
 	</graph>

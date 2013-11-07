@@ -21,6 +21,7 @@ class MyWaterLine: public Plane {
 	CGFshader shader;
 	static float prev_delta;
 	static float delta;
+	static float time;
 	Appearance height, text;
 public:
 	MyWaterLine();
