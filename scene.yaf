@@ -534,10 +534,10 @@
 			</patch> -->
 			<children>
 				<patch order="1" partsU="20" partsV="20" compute="fill">
-					<controlpoint x="0.5" y="0" z="-0.5" />
 					<controlpoint x="-0.5" y="0" z="-0.5" />
-					<controlpoint x="0.5" y="0" z="0.5" />
+					<controlpoint x="0.5" y="0" z="-0.5" />
 					<controlpoint x="-0.5" y="0" z="0.5" />
+					<controlpoint x="0.5" y="0" z="0.5" />
 				</patch>
 
 			</children>
