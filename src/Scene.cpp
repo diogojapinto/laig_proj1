@@ -17,10 +17,7 @@ unsigned int Scene::HEIGHT = 768;
 unsigned int Scene::WIDTH = 1024;
 
 extern int main_window;
-float view_rotate[16] =	{ 1,0,0,0,
-						  0,1,0,0,
-						  0,0,1,0,
-						  0,0,0,1 };
+float view_rotate[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
 
 float obj_pos[] = { 0.0, 0.0, 0.0 };
 
@@ -44,8 +41,7 @@ Scene::Scene() {
 	appearances.insert(AppearanceElem::value_type("default", new Appearance()));
 }
 
-void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b,
-		float bckg_a) {
+void Scene::setBackground(float bckg_r, float bckg_g, float bckg_b, float bckg_a) {
 	this->bckg_r = bckg_r;
 	this->bckg_g = bckg_g;
 	this->bckg_b = bckg_b;
@@ -253,6 +249,7 @@ void Scene::initScene() {
 		glutTimerFunc(ANIMATION_TIME, updateValues, i);
 		i++;
 	}
+
 }
 
 Scene::~Scene() {
@@ -281,12 +278,11 @@ void display() {
 	glPolygonMode(GL_FRONT_AND_BACK, Scene::getInstance()->getDrawmode());
 
 	Scene::getInstance()->initCamera();
-	glTranslatef( obj_pos[0], obj_pos[1], -obj_pos[2] );
+	glTranslatef(obj_pos[0], obj_pos[1], -obj_pos[2]);
 	glMultMatrixf(view_rotate);
 
 	glPushMatrix();
-	glMultMatrixf(
-			Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
+	glMultMatrixf(Scene::getInstance()->getNode(Scene::getInstance()->getRootId())->getTransform());
 	Scene::getInstance()->applyLights();
 	glPopMatrix();
 

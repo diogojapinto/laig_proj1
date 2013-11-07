@@ -941,7 +941,7 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 
 	TiXmlElement *animation = NULL;
 	if ((animation = curr_node->FirstChildElement("animationref"))) {
-		if (is_inside_dl) {
+		if (is_inside_dl || is_dl) {
 			printf("Animation defined in \"%s\" is inside a display list!\n", node_id);
 			throw InvalidXMLException();
 		}
@@ -1193,6 +1193,11 @@ bool XMLScene::parseNode(TiXmlElement *curr_node, bool is_inside_dl) {
 			char texturemap[MAX_STRING_LEN];
 			char vert_shader[MAX_STRING_LEN];
 			char frag_shader[MAX_STRING_LEN];
+
+			if (is_inside_dl || is_dl) {
+				printf("Waterline defined in \"%s\" is inside a display list!\n", node_id);
+				throw InvalidXMLException();
+			}
 
 			if (strdup(heightmap, child->Attribute("heightmap")) == NULL) {
 				printf("Error parsing \"heightmap\" attribute of waterline!");

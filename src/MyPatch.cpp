@@ -87,17 +87,18 @@ void MyPatch::addControlPoint(float x, float y, float z) {
 }
 
 void MyPatch::draw() {
+	glPushMatrix();
 	if (nrCtrlPoints == pow(order + 1, 2)) {
 		if (Scene::getInstance()->getCullorder() == GL_CCW) {
 			glFrontFace(GL_CW);
 		}
 
+		glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order + 1, 0.0, 1.0, (order + 1) * 3, order + 1, &ctrlPoints[0]);
+		glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2, &textPoints[0]);
+
 		glEnable(GL_MAP2_VERTEX_3);
 		glEnable(GL_AUTO_NORMAL);
 		glEnable(GL_MAP2_TEXTURE_COORD_2);
-
-		glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order + 1, 0.0, 1.0, (order + 1) * 3, order + 1, &ctrlPoints[0]);
-		glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2, &textPoints[0]);
 
 		glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0);
 
@@ -108,7 +109,9 @@ void MyPatch::draw() {
 		glDisable(GL_MAP2_TEXTURE_COORD_2);
 
 		glFrontFace(Scene::getInstance()->getCullorder());
+
 	}
+	glPopMatrix();
 }
 
 void MyPatch::setAppearance(string appearance) {

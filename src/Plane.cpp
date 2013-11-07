@@ -63,7 +63,7 @@ Plane::Plane(unsigned int parts) :
 	text_pts.push_back(0);
 }
 void Plane::draw() {
-
+	glPushMatrix();
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, 2, 0.0, 1.0, 6, 2, &ctrl_pts[0]);
 	glMap2f(GL_MAP2_NORMAL, 0.0, 1.0, 3, 2, 0.0, 1.0, 6, 2, &nrml_pts[0]);
 	glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, 2, 0.0, 1.0, 4, 2, &text_pts[0]);
@@ -79,7 +79,7 @@ void Plane::draw() {
 	glDisable(GL_MAP2_VERTEX_3);
 	glDisable(GL_MAP2_NORMAL);
 	glDisable(GL_MAP2_TEXTURE_COORD_2);
-
+	glPopMatrix();
 }
 void Plane::setAppearance(string appearance) {
 	MyPrimitive::setAppearance(appearance);

@@ -191,12 +191,13 @@
 				<rotate axis="y" angle="30" />
 			</transforms>
 			<!-- <vehicle /> -->
+			<!-- <noderef id="water" /> -->
 			<children>
 
 				<noderef id="home" />
 				<noderef id="garden" />
 				<noderef id="street" />
-				<noderef id="water" />
+				<noderef id="water" /> 
 				<noderef id="vehicle"/>
 			</children>
 		</node>
@@ -208,7 +209,7 @@
 				<noderef id="roof" />
 			</children>
 		</node>
-		<node id="wall">
+		<node id="wall" >
 			<transforms></transforms>
 			<appearanceref id="house_walls_appearence" />
 			<children>
@@ -246,7 +247,7 @@
 			</children>
 
 		</node>
-		<node id="wallSquare1">
+		<node id="wallSquare1" >
 			<transforms></transforms>
 			<children>
 
@@ -537,10 +538,10 @@
 			</patch> -->
 			<children>
 				<patch order="1" partsU="20" partsV="20" compute="fill">
-					<controlpoint x="-0.5" y="0" z="-0.5" />
 					<controlpoint x="0.5" y="0" z="-0.5" />
-					<controlpoint x="-0.5" y="0" z="0.5" />
+					<controlpoint x="-0.5" y="0" z="-0.5" />
 					<controlpoint x="0.5" y="0" z="0.5" />
+					<controlpoint x="-0.5" y="0" z="0.5" />
 				</patch>
 
 			</children>
