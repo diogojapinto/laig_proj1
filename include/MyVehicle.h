@@ -10,9 +10,11 @@
 
 #include "MyPrimitive.h"
 #include "MyPatch.h"
+#include "MySphere.h"
 
 class MyVehicle: public MyPrimitive {
 	vector<float> ctrl_pts;
+	MySphere *center;
 	MyPatch *top;
 public:
 	MyVehicle();

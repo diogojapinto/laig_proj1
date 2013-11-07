@@ -58,6 +58,7 @@ void MyWaterLine::draw() {
 	text.apply();
 	glActiveTexture(GL_TEXTURE1);
 	height.apply();
+	glDisable(GL_TEXTURE_2D);	//used to prevent the scene from going dark
 	Plane::draw();
 	shader.unbind();
 	glActiveTexture(tex_unit);
