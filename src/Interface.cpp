@@ -5,6 +5,11 @@ extern int main_window;
 
 using namespace std;
 
+extern float view_rotate[16];
+
+extern float obj_pos[3];
+
+
 Interface* Interface::activeInterface = NULL;
 int Interface::modifiers = 0;
 map<string, int*> Interface::cams_rb;
@@ -133,6 +138,15 @@ void Interface::initGUI() {
 	glui_window->add_radiobutton_to_group(drawmd_grp, "Wireframe");
 	glui_window->add_radiobutton_to_group(drawmd_grp, "Points");
 	drawmd_grp->set_int_val(0);
+
+	glui_window->add_column( true );
+	GLUI_Rotation *view_rot = glui_window->add_rotation( "Rotacao", view_rotate );
+	view_rot->set_spin( 1.0 );
+
+
+	GLUI_Translation *trans_z =
+			glui_window->add_translation( "Zoom", GLUI_TRANSLATION_Z, &obj_pos[2] );
+	trans_z->set_speed( .02 );
 
 }
 

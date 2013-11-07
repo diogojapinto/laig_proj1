@@ -17,6 +17,12 @@ unsigned int Scene::HEIGHT = 768;
 unsigned int Scene::WIDTH = 1024;
 
 extern int main_window;
+float view_rotate[16] =	{ 1,0,0,0,
+						  0,1,0,0,
+						  0,0,1,0,
+						  0,0,0,1 };
+
+float obj_pos[] = { 0.0, 0.0, 0.0 };
 
 Scene::Scene() {
 	bckg_r = 0;
@@ -275,6 +281,8 @@ void display() {
 	glPolygonMode(GL_FRONT_AND_BACK, Scene::getInstance()->getDrawmode());
 
 	Scene::getInstance()->initCamera();
+	glTranslatef( obj_pos[0], obj_pos[1], -obj_pos[2] );
+	glMultMatrixf(view_rotate);
 
 	glPushMatrix();
 	glMultMatrixf(

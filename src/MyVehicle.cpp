@@ -24,15 +24,21 @@ MyVehicle::MyVehicle() :
 	top->addControlPoint(1.0, 1, -0.5);
 	top->addControlPoint(1.0, 0, -1.0);
 
+	top->addControlPoint(-1.0, 0, -1.0);
+	top->addControlPoint(-1.0, 1, -0.5);
+	top->addControlPoint(-1.0, 1, 0.5);
+	top->addControlPoint(-1.0, 0, 1.0);
+
 	top->addControlPoint(1.0, 0, 1.0);
 	top->addControlPoint(0.5, 1, 1.0);
 	top->addControlPoint(-0.5, 1, 1.0);
 	top->addControlPoint(-1.0, 0, 1.0);
 
-	top->addControlPoint(-1.0, 0, -1.0);
-	top->addControlPoint(-1.0, 1, -0.5);
-	top->addControlPoint(-1.0, 1, 0.5);
-	top->addControlPoint(-1.0, 0, 1.0);
+
+
+
+
+
 
 }
 
@@ -43,7 +49,8 @@ void MyVehicle::draw() {
 
 	glPushMatrix();
 	glTranslatef(10,2,20);
-	glRotatef(50,1,0,0);
+	glScalef(5,5,5);
+	//glRotatef(50,1,0,0);
 	//center->draw();
 	top->draw();
 
