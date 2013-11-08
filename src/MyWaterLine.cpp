@@ -54,13 +54,14 @@ void MyWaterLine::draw() {
 
 	glGetIntegerv(GL_ACTIVE_TEXTURE, &tex_unit);
 
-	glActiveTexture(GL_TEXTURE0);
-	text.apply();
 	glActiveTexture(GL_TEXTURE1);
 	height.apply();
+	glDisable(GL_TEXTURE_2D);	//used to prevent the scene from going dark
+	glActiveTexture(GL_TEXTURE0);
+	text.apply();
 	Plane::draw();
 	shader.unbind();
-	glDisable(GL_TEXTURE_2D);	//used to prevent the scene from going dark
+
 	glActiveTexture(tex_unit);
 }
 
