@@ -70,7 +70,13 @@ void Animation::calculateDelta() {
 				crossProduct(direction[i], direction[i - 1])
 						/ (vectorSize(direction[i]) * vectorSize(direction[i - 1])));
 
-		rotations.push_back(RadToDeg(angle));
+		if (rotations.size() != 0) {
+			rotations.push_back(RadToDeg(angle) + rotations.back());
+		}
+		else {
+			rotations.push_back(RadToDeg(angle));
+		}
+
 	}
 
 	for (int i = 0; i < dist.size(); i++) {

@@ -10,42 +10,29 @@
 
 MyVehicle::MyVehicle() :
 		MyPrimitive() {
-	center = new MySphere(0.8, 20, 20);
+	center = new MySphere(0.5, 20, 20);
 
-	top = new MyPatch(3, 20, 20, "fill");
+	top = new MyPatch(3, 30, 30, "fill");
 
-	top->addControlPoint(-1.0, 0, -1.0);
-	top->addControlPoint(-0.5, 1, -1.0);
-	top->addControlPoint(0.5, 1, -1.0);
-	top->addControlPoint(1.0, 0, -1.0);
+	top->addControlPoint(-1.0, 0.2, 1);
+	top->addControlPoint(-0.5, 0.2, 1);
+	top->addControlPoint(0.5, 0.2, 1);
+	top->addControlPoint(1.0, 0.2, 1);
 
-	top->addControlPoint(-1.0, 0, 1.0);
 	top->addControlPoint(-1.0, 1, 0.5);
-	top->addControlPoint(-1.0, 1, -0.5);
-	top->addControlPoint(-1.0, 0, -1.0);
-
-	top->addControlPoint(1.0, 0, -1.0);
-	top->addControlPoint(1.0, 1, -0.5);
+	top->addControlPoint(-0.5, 1, 0.5);
+	top->addControlPoint(0.5, 1, 0.5);
 	top->addControlPoint(1.0, 1, 0.5);
-	top->addControlPoint(1.0, 0, 1.0);
 
-	top->addControlPoint(1.0, 0, 1.0);
-	top->addControlPoint(0.5, 1, 1.0);
-	top->addControlPoint(-0.5, 1, 1.0);
-	top->addControlPoint(-1.0, 0, 1.0);
+	top->addControlPoint(-1.0, 1, -0.5);
+	top->addControlPoint(-0.5, 1, -0.5);
+	top->addControlPoint(0.5, 1, -0.5);
+	top->addControlPoint(1.0, 1, -0.5);
 
-
-
-
-	/*top->addControlPoint(-1.0, 0, -1.0);
-	 top->addControlPoint(-1.0, 1, -0.5);
-	 top->addControlPoint(-1.0, 1, 0.5);
-	 top->addControlPoint(-1.0, 0, 1.0);
-
-	 top->addControlPoint(1.0, 0, 1.0);
-	 top->addControlPoint(0.5, 1, 1.0);
-	 top->addControlPoint(-0.5, 1, 1.0);
-	 top->addControlPoint(-1.0, 0, 1.0);*/
+	top->addControlPoint(-1.0, 0.2, -1.0);
+	top->addControlPoint(-0.5, 0.2, -1.0);
+	top->addControlPoint(0.5, 0.2, -1.0);
+	top->addControlPoint(1.0, 0.2, -1.0);
 
 }
 
@@ -55,11 +42,21 @@ MyVehicle::~MyVehicle() {
 void MyVehicle::draw() {
 
 	glPushMatrix();
-	glTranslatef(10, 2, 20);
-	glScalef(5, 5, 5);
-	glRotatef(180,1,0,0);
-	//center->draw();
+	glScalef(2, 2, 2);
+	center->draw();
 	top->draw();
+
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	top->draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0, 0, 0.5);
+	glScalef(1, 0.5, 1);
+	glRotatef(90, 1, 0, 0);
+	top->draw();
+	glPopMatrix();
 
 	glPopMatrix();
 }

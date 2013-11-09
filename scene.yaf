@@ -183,6 +183,16 @@
 		texlength_s="2"
 		texlength_t="2" />
 	</appearances>
+	<animations>
+		<animation id="vehicle" span="20.0" type="linear">
+
+			<controlpoint xx="0" yy="5" zz="0" />
+			<controlpoint xx="10" yy="5" zz="20" />
+			<controlpoint xx="10" yy="0" zz="20" />
+			<controlpoint xx="-30" yy="20" zz="-5" />
+
+		</animation>
+	</animations>
 	<graph rootid="scene">
 
 		<node id="scene">
@@ -197,7 +207,7 @@
 				<noderef id="home" />
 				<noderef id="garden" />
 				<noderef id="street" />
-				<noderef id="water" /> 
+				<noderef id="water" />
 				<noderef id="vehicle"/>
 			</children>
 		</node>
@@ -516,25 +526,25 @@
 			<appearanceref id="floor_appearence" />
 			<!--<patch order="3" partsU="20" partsV="20" compute="fill">
 
-			<controlpoint x="-1.5" y="-1.5" z="4.0" />
-			<controlpoint x="-0.5" y="-1.5" z="2.0" />
-			<controlpoint x="0.5" y="-1.5" z="-1.0" />
-			<controlpoint x="1.5" y="-1.5" z="2.0" />
-			
-			<controlpoint x="-1.5" y="-0.5" z="1.0" />
-			<controlpoint x="-0.5" y="-0.5" z="3.0" />
-			<controlpoint x="0.5" y="-0.5" z="0.0" />
-			<controlpoint x="1.5" y="-0.5" z="-1.0" />
-			
-			<controlpoint x="-1.5" y="0.5" z="4.0" />
-			<controlpoint x="-0.5" y="0.5" z="0.0" />
-			<controlpoint x="0.5" y="0.5" z="3.0" />
-			<controlpoint x="1.5" y="0.5" z="4.0" />
-			
-			<controlpoint x="-1.5" y="1.5" z="-2.0" />
-			<controlpoint x="-0.5" y="1.5" z="-2.0" />
-			<controlpoint x="0.5" y="1.5" z="0.0" />
-			<controlpoint x="1.5" y="1.5" z="-1.0" />
+			<controlpoint x="-1.0" y="0" z="-1.0" />
+			<controlpoint x="-0.5" y="1" z="-1.0" />
+			<controlpoint x="0.5" y="1" z="-1.0" />
+			<controlpoint x="1.0" y="0" z="-1.0" />
+
+			<controlpoint x="-1.0" y="0" z="1.0" />
+			<controlpoint x="-1.0" y="1" z="0.5" />
+			<controlpoint x="-1.0" y="1" z="-0.5" />
+			<controlpoint x="-1.0" y="0" z="-1.0" />
+
+			<controlpoint x="1.0" y="0" z="-1.0" />
+			<controlpoint x="1.0" y="1" z="-0.5" />
+			<controlpoint x="1.0" y="1" z="0.5" />
+			<controlpoint x="1.0" y="0" z="1.0" />
+
+			<controlpoint x="1.0" y="0" z="-1.0" />
+			<controlpoint x="0.5" y="1" z="1.0" />
+			<controlpoint x="-0.5" y="1" z="1.0" />
+			<controlpoint x="-1.0" y="0" z="1.0" />
 			</patch> -->
 			<children>
 				<patch order="1" partsU="20" partsV="20" compute="fill">
@@ -761,6 +771,7 @@
 		</node>
 		<node id="vehicle">
 			<transforms></transforms>
+			<animationref id="vehicle" />
 			<children>
 				<vehicle />
 			</children>
